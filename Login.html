@@ -36,7 +36,7 @@
         gap: 15px;
       }
       label {
-        text-align: left; /* Align label text to the left */
+        text-align: left;
         font-weight: bold;
       }
       input,
@@ -46,21 +46,21 @@
         border: 2px solid #ccc;
         border-radius: 4px;
         color: #333;
-        text-align: left; /* Align input and select text to the left */
+        text-align: left;
         transition: border-color 0.3s;
       }
       input:focus,
       select:focus {
-        border-color: #1f2937; /* Change border color on focus */
-        outline: none; /* Remove default outline */
+        border-color: #1f2937;
+        outline: none;
       }
       #staffNumberSection {
-        margin-top: 15px; /* Space above the Staff Number section */
-        display: none; /* Initially hidden */
+        margin-top: 15px;
+        display: none;
       }
       #staffNumberSection label {
-        margin-top: 10px; /* Space above the label */
-        padding-left: 5px; /* Add padding to the left of the label */
+        margin-top: 10px;
+        padding-left: 5px;
       }
       .submit-btn {
         padding: 10px;
@@ -87,13 +87,14 @@
       .error {
         color: red;
         font-size: 12px;
-        display: none; /* Hidden by default */
+        display: none;
       }
-      .text-version {
-        display: none; /* Initially hidden */
-      }
-      .text-version.show {
-        display: block; /* Show when toggled */
+      .toggle-password {
+        cursor: pointer;
+        margin-left: -30px;
+        background: none;
+        border: none;
+        color: #1f2937;
       }
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -101,91 +102,86 @@
   <body>
     <div class="container">
       <h2>Create Your Account</h2>
-      <button id="toggleTextVersion" class="submit-btn">Show Text Version</button>
-      
-      <div id="formVersion">
-        <form id="registrationForm" action="" method="POST">
-          <label for="userType">Register As:</label>
-          <select id="userType" name="userType" required>
-            <option value="" disabled selected>Select your role</option>
-            <option value="customer">Customer</option>
-            <option value="vehicleSales">Vehicle Sales Personnel</option>
-            <option value="insuranceSales">Insurance Sales Personnel</option>
-          </select>
-  
-          <label for="name">Name:</label>
+      <form id="registrationForm" action="" method="POST">
+        <label for="userType">Register As:</label>
+        <select id="userType" name="userType" required>
+          <option value="" disabled selected>Select your role</option>
+          <option value="customer">Customer</option>
+          <option value="vehicleSales">Vehicle Sales Personnel</option>
+          <option value="insuranceSales">Insurance Sales Personnel</option>
+        </select>
+
+        <label for="name">Name:</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          placeholder="Your full name"
+          required
+        />
+        <div class="error" id="nameError">Please enter your name.</div>
+
+        <label for="email">Email Address:</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="example@domain.com"
+          required
+        />
+        <div class="error" id="emailError">Please enter a valid email.</div>
+
+        <label for="phone">Phone Number:</label>
+        <input
+          type="tel"
+          id="phone"
+          name="phone"
+          placeholder="91234678"
+          required
+        />
+        <div class="error" id="phoneError">Please enter your phone number.</div>
+
+        <div id="staffNumberSection">
+          <label for="staffNumber">Staff Number:</label>
           <input
             type="text"
-            id="name"
-            name="name"
-            placeholder="Your full name"
-            required
+            id="staffNumber"
+            name="staffNumber"
+            placeholder="Your staff number"
           />
-          <div class="error" id="nameError">Please enter your name.</div>
-  
-          <label for="email">Email Address:</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            placeholder="example@domain.com"
-            required
-          />
-          <div class="error" id="emailError">Please enter a valid email.</div>
-  
-          <label for="phone">Phone Number:</label>
-          <input
-            type="tel"
-            id="phone"
-            name="phone"
-            placeholder="91234678"
-            required
-          />
-          <div class="error" id="phoneError">Please enter your phone number.</div>
-  
-          <div id="staffNumberSection">
-            <label for="staffNumber">Staff Number:</label>
-            <input
-              type="text"
-              id="staffNumber"
-              name="staffNumber"
-              placeholder="Your staff number"
-            />
-            <div class="error" id="staffNumberError">Please enter your staff number.</div>
-          </div>
-  
-          <label for="password">Password:</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            placeholder="Create a password"
-            required
-          />
-          <div class="error" id="passwordError">Please enter a password.</div>
-  
-          <label class="terms">
-            <input type="checkbox" name="terms" required />
-            I agree to the
-            <a href="http://www.google.com" target="_blank">terms and conditions</a>.
-          </label>
-  
-          <button type="submit" class="submit-btn">Register</button>
-        </form>
-      </div>
-      
-      <div id="textVersion" class="text-version">
-        <h3>Text Version</h3>
-        <p><strong>Register As:</strong> Customer / Vehicle Sales Personnel / Insurance Sales Personnel</p>
-        <p><strong>Name:</strong> Your full name</p>
-        <p><strong>Email Address:</strong> example@domain.com</p>
-        <p><strong>Phone Number:</strong> 91234678</p>
-        <p><strong>Staff Number:</strong> Your staff number (if applicable)</p>
-        <p><strong>Password:</strong> Create a password</p>
-        <p><strong>Terms and Conditions:</strong> You must agree to the terms to register.</p>
-      </div>
-    </div>
+          <div class="error" id="staffNumberError">Please enter your staff number.</div>
+        </div>
 
+        <label for="password">Password:</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          placeholder="Create a password"
+          required
+        />
+        <button type="button" class="toggle-password" id="togglePassword">Show</button>
+        <div class="error" id="passwordError">Please enter a password.</div>
+
+        <label for="confirmPassword">Re-enter Password:</label>
+        <input
+          type="password"
+          id="confirmPassword"
+          name="confirmPassword"
+          placeholder="Re-enter your password"
+          required
+        />
+        <div class="error" id="confirmPasswordError">Passwords do not match.</div>
+
+        <label class="terms">
+          <input type="checkbox" name="terms" required />
+          I agree to the
+          <a href="http://www.google.com" target="_blank">terms and conditions</a>.
+        </label>
+
+        <button type="submit" class="submit-btn">Register</button>
+      </form>
+    </div>
     <script>
       $(document).ready(function () {
         $("#userType").change(function () {
@@ -196,6 +192,15 @@
             $("#staffNumberSection").slideUp();
             $("#staffNumber").prop("required", false);
           }
+        });
+
+        $("#togglePassword").click(function() {
+          const passwordField = $("#password");
+          const confirmPasswordField = $("#confirmPassword");
+          const type = passwordField.attr("type") === "password" ? "text" : "password";
+          passwordField.attr("type", type);
+          confirmPasswordField.attr("type", type);
+          $(this).text($(this).text() === "Show" ? "Hide" : "Show");
         });
 
         $("#registrationForm").on("submit", function(event) {
@@ -223,16 +228,14 @@
             $("#passwordError").show();
             valid = false;
           }
+          if ($("#password").val() !== $("#confirmPassword").val()) {
+            $("#confirmPasswordError").show();
+            valid = false;
+          }
 
           if (!valid) {
             event.preventDefault(); // Prevent form submission
           }
-        });
-
-        $("#toggleTextVersion").click(function() {
-          $("#formVersion").toggle();
-          $("#textVersion").toggleClass("show");
-          $(this).text($(this).text() === "Show Text Version" ? "Show Form Version" : "Show Text Version");
         });
       });
     </script>
