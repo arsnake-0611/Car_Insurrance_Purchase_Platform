@@ -21,10 +21,10 @@
       .container {
         width: 90%;
         max-width: 400px;
-        background: #c9ddf4;
+        background: rgba(255, 255, 255, 0.9);
         border-radius: 10px;
         padding: 20px;
-        box-shadow: 0 4px 10px #00000080;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
         text-align: center;
       }
       h2 {
@@ -33,22 +33,38 @@
       form {
         display: flex;
         flex-direction: column;
-        gap: 10px;
+        gap: 15px;
       }
       label {
-        text-align: justify; 
+        text-align: left; /* Align label text to the left */
+        font-weight: bold;
       }
       input,
       select {
-        padding: 8px;
-        border: none;
+        padding: 10px;
+        background-color: rgba(255, 255, 255, 0.9);
+        border: 2px solid #ccc;
         border-radius: 4px;
-        color: #212b4a;
-        text-align: justify; 
+        color: #333;
+        text-align: left; /* Align input and select text to the left */
+        transition: border-color 0.3s;
+      }
+      input:focus,
+      select:focus {
+        border-color: #1f2937; /* Change border color on focus */
+        outline: none; /* Remove default outline */
+      }
+      #staffNumberSection {
+        margin-top: 15px; /* Space above the Staff Number section */
+        display: none; /* Initially hidden */
+      }
+      #staffNumberSection label {
+        margin-top: 10px; /* Space above the label */
+        padding-left: 5px; /* Add padding to the left of the label */
       }
       .submit-btn {
         padding: 10px;
-        background-color: #3b5fba;
+        background-color: #1f2937;
         border: none;
         color: white;
         border-radius: 4px;
@@ -56,7 +72,7 @@
         transition: background-color 0.3s;
       }
       .submit-btn:hover {
-        background-color: #4c77cd;
+        background-color: #3b3f47;
       }
       .terms {
         display: flex;
@@ -68,89 +84,155 @@
         text-decoration: underline;
         margin-left: 5px;
       }
+      .error {
+        color: red;
+        font-size: 12px;
+        display: none; /* Hidden by default */
+      }
+      .text-version {
+        display: none; /* Initially hidden */
+      }
+      .text-version.show {
+        display: block; /* Show when toggled */
+      }
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   </head>
   <body>
     <div class="container">
       <h2>Create Your Account</h2>
-      <form action="" method="POST">
-        <label for="userType">Register As:</label>
-        <select id="userType" name="userType" required>
-          <option value="" disabled selected>Select your role</option>
-          <option value="customer">Customer</option>
-          <option value="vehicleSales">Vehicle Sales Personnel</option>
-          <option value="insuranceSales">Insurance Sales Personnel</option>
-        </select>
-
-        <label for="name">Name:</label>
-        <input
-          type="text"
-          id="name"
-          name="name"
-          placeholder="Your full name"
-          required
-        />
-
-        <label for="email">Email Address:</label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          placeholder="StaffNo@LegendMotor.com"
-          required
-        />
-
-        <label for="phone">Phone Number:</label>
-        <input
-          type="tel"
-          id="phone"
-          name="phone"
-          placeholder="91234678"
-          required
-        />
-
-        <div id="staffNumberSection">
-          <label for="staffNumber">Staff Number:</label>
+      <button id="toggleTextVersion" class="submit-btn">Show Text Version</button>
+      
+      <div id="formVersion">
+        <form id="registrationForm" action="" method="POST">
+          <label for="userType">Register As:</label>
+          <select id="userType" name="userType" required>
+            <option value="" disabled selected>Select your role</option>
+            <option value="customer">Customer</option>
+            <option value="vehicleSales">Vehicle Sales Personnel</option>
+            <option value="insuranceSales">Insurance Sales Personnel</option>
+          </select>
+  
+          <label for="name">Name:</label>
           <input
             type="text"
-            id="staffNumber"
-            name="staffNumber"
-            placeholder="Your staff number"
+            id="name"
+            name="name"
+            placeholder="Your full name"
+            required
           />
-        </div>
-
-        <label for="password">Password:</label>
-        <input
-          type="password"
-          id="password"
-          name="password"
-          placeholder="Create a password"
-          required
-        />
-
-        <label class="terms">
-          <input type="checkbox" name="terms" required />
-          I agree to the
-          <a href="http://www.google.com" target="_blank">terms and conditions</a>.
-        </label>
-
-        <button type="submit" class="submit-btn">Register</button>
-      </form>
+          <div class="error" id="nameError">Please enter your name.</div>
+  
+          <label for="email">Email Address:</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="example@domain.com"
+            required
+          />
+          <div class="error" id="emailError">Please enter a valid email.</div>
+  
+          <label for="phone">Phone Number:</label>
+          <input
+            type="tel"
+            id="phone"
+            name="phone"
+            placeholder="91234678"
+            required
+          />
+          <div class="error" id="phoneError">Please enter your phone number.</div>
+  
+          <div id="staffNumberSection">
+            <label for="staffNumber">Staff Number:</label>
+            <input
+              type="text"
+              id="staffNumber"
+              name="staffNumber"
+              placeholder="Your staff number"
+            />
+            <div class="error" id="staffNumberError">Please enter your staff number.</div>
+          </div>
+  
+          <label for="password">Password:</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Create a password"
+            required
+          />
+          <div class="error" id="passwordError">Please enter a password.</div>
+  
+          <label class="terms">
+            <input type="checkbox" name="terms" required />
+            I agree to the
+            <a href="http://www.google.com" target="_blank">terms and conditions</a>.
+          </label>
+  
+          <button type="submit" class="submit-btn">Register</button>
+        </form>
+      </div>
+      
+      <div id="textVersion" class="text-version">
+        <h3>Text Version</h3>
+        <p><strong>Register As:</strong> Customer / Vehicle Sales Personnel / Insurance Sales Personnel</p>
+        <p><strong>Name:</strong> Your full name</p>
+        <p><strong>Email Address:</strong> example@domain.com</p>
+        <p><strong>Phone Number:</strong> 91234678</p>
+        <p><strong>Staff Number:</strong> Your staff number (if applicable)</p>
+        <p><strong>Password:</strong> Create a password</p>
+        <p><strong>Terms and Conditions:</strong> You must agree to the terms to register.</p>
+      </div>
     </div>
+
     <script>
       $(document).ready(function () {
         $("#userType").change(function () {
-          if (
-            $(this).val() === "vehicleSales" ||
-            $(this).val() === "insuranceSales"
-          ) {
+          if ($(this).val() === "vehicleSales" || $(this).val() === "insuranceSales") {
             $("#staffNumberSection").slideDown();
             $("#staffNumber").prop("required", true);
           } else {
             $("#staffNumberSection").slideUp();
             $("#staffNumber").prop("required", false);
           }
+        });
+
+        $("#registrationForm").on("submit", function(event) {
+          let valid = true;
+          
+          $(".error").hide(); // Hide all error messages
+
+          if ($("#name").val().trim() === "") {
+            $("#nameError").show();
+            valid = false;
+          }
+          if ($("#email").val().trim() === "") {
+            $("#emailError").show();
+            valid = false;
+          }
+          if ($("#phone").val().trim() === "") {
+            $("#phoneError").show();
+            valid = false;
+          }
+          if ($("#staffNumberSection").is(":visible") && $("#staffNumber").val().trim() === "") {
+            $("#staffNumberError").show();
+            valid = false;
+          }
+          if ($("#password").val().trim() === "") {
+            $("#passwordError").show();
+            valid = false;
+          }
+
+          if (!valid) {
+            event.preventDefault(); // Prevent form submission
+          }
+        });
+
+        $("#toggleTextVersion").click(function() {
+          $("#formVersion").toggle();
+          $("#textVersion").toggleClass("show");
+          $(this).text($(this).text() === "Show Text Version" ? "Show Form Version" : "Show Text Version");
         });
       });
     </script>
