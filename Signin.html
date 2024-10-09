@@ -94,7 +94,7 @@
             cursor: pointer;
         }
 
-        .submit-btn:hover.valid {
+        .submit-btn.valid:hover {
             background-color: #4776c9; /* Hover color */
             color: white;
         }
@@ -181,6 +181,8 @@
         .role-button:hover {
             background-color: #4776c9; /* Hover background color */
             border-color: #1f2937; /* Change border color on hover */
+            transform: scale(1.05); /* Scale up on hover */
+            filter: blur(2px); /* Blur on hover */
         }
 
         .role-button.selected {
@@ -391,6 +393,10 @@
             $('#toggleToLogin').click(function () {
                 $('#registerContainer').hide();
                 $('#loginContainer').fadeIn();
+                // Reset role selection
+                $('.role-button').removeClass('selected');
+                $('#loginFields').hide();
+                $('#loginUserType').val('');
             });
 
             $('#toggleToRegister').click(function () {
@@ -400,8 +406,12 @@
 
             $('.role-button').hover(function () {
                 $(this).find('img').css('filter', 'brightness(0.5)');
+                $(this).css('transform', 'scale(1.05)'); // Scale up on hover
+                $(this).css('filter', 'blur(1px)'); // Blur on hover
             }, function () {
                 $(this).find('img').css('filter', 'none');
+                $(this).css('transform', 'scale(1)'); // Reset scale
+                $(this).css('filter', 'none'); // Reset blur
             });
 
             $('.role-button').click(function () {
@@ -452,6 +462,10 @@
             $('#returnToLogin').click(function () {
                 $('#registerContainer').hide();
                 $('#loginContainer').fadeIn();
+                // Reset role selection
+                $('.role-button').removeClass('selected');
+                $('#loginFields').hide();
+                $('#loginUserType').val('');
             });
 
             $('#returnToLoginFromLogin').click(function () {
