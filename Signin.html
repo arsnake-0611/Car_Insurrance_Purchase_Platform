@@ -5,7 +5,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Starry Night Registration & Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
     <style>
+        .password-toggle-icon {
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+            cursor: pointer;
+        }
+        
         body,
         html {
             margin: 0;
@@ -244,6 +253,21 @@
         }
     </style>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        function HideAndShowPassword() {
+            let passwordInput = document.getElementById("password");
+            let icon = document.querySelector(".password-toggle-icon");
+            if (passwordInput.type === "password") {
+                passwordInput.type = "text";
+                icon.classList.remove("fa-eye");
+                icon.classList.add("fa-eye-slash");
+            } else {
+                passwordInput.type = "password";
+                icon.classList.remove("fa-eye-slash");
+                icon.classList.add("fa-eye");
+            }
+        }
+    </script>
 </head>
 
 <body>
@@ -255,7 +279,7 @@
         </button>
         <h2>Create Your Account</h2>
         <form id="registerForm" action="" method="POST">
-            <label for="registerUserType">Register As:</label>
+            <label for="registerUserType">Register As:*</label>
             <select id="registerUserType" name="userType" required>
                 <option value="" disabled selected>Select your role</option>
                 <option value="customer">Customer</option>
@@ -263,31 +287,31 @@
                 <option value="insuranceSales">Insurance Sales</option>
             </select>
 
-            <label for="name">Full Name:</label>
-            <input type="text" id="name" name="name" placeholder="Your full name" required>
+            <label for="name">Full Name:*</label>
+            <input type="text" id="name" name="name" placeholder="Your full name" pattern="[A-Za-z]{5,}" required>
 
-            <label for="email">Email Address:</label>
+            <label for="email">Email Address:*</label>
             <input type="email" id="email" name="email" placeholder="example@domain.com" required>
 
-            <label for="phone">Phone Number:</label>
-            <input type="tel" id="phone" name="phone" placeholder="91234678" required>
+            <label for="phone">Phone Number:*</label>
+            <input type="tel" id="phone" name="phone" placeholder="91234678" pattern="\d{8}" required>
 
             <div id="staffNumberSection" style="display: none;">
                 <label for="staffNumber">Staff Number:</label>
                 <input type="text" id="staffNumber" name="staffNumber" placeholder="Your staff number">
             </div>
 
-            <label for="password">Password:</label>
+            <label for="password">Password:*</label>
             <div class="checkbox-group">
-                <input type="password" id="password" name="password" placeholder="Create a password" required>
+                <input type="password" id="password" name="password" pattern="[A-Za-z0-9_$]{6,}" placeholder="Create a password" required>
                 <label>
                     <input type="checkbox" id="togglePasswordVisibility"> Show
                 </label>
             </div>
 
-            <label for="confirmPassword">Re-enter Password:</label>
+            <label for="confirmPassword">Re-enter Password:*</label>
             <div class="checkbox-group">
-                <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Re-enter your password" required>
+                <input type="password" id="confirmPassword" name="confirmPassword" pattern="[A-Za-z0-9_$]{6,}" placeholder="Re-enter your password" required>
                 <label>
                     <input type="checkbox" id="toggleConfirmPasswordVisibility"> Show
                 </label>
@@ -296,7 +320,7 @@
             <label class="terms">
                 <input type="checkbox" name="terms" required>
                 I agree to the
-                <a href="http://www.google.com" target="_blank">terms and conditions</a>.
+                <a href="http://www.google.com" target="_blank">terms and conditions</a>.*
             </label>
 
             <button type="submit" class="submit-btn" id="registerButton" disabled>Register</button>
