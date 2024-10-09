@@ -7,14 +7,19 @@
     <title>Starry Night Registration & Login</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
     <style>
-        .password-toggle-icon {
-            position: absolute;
-            top: 50%;
+        .password-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .password-toggle-icon{
+            position: flex;
+            margin-left: 10px;
             right: 10px;
-            transform: translateY(-50%);
             cursor: pointer;
         }
-        
+
         body,
         html {
             margin: 0;
@@ -104,7 +109,7 @@
         }
 
         .submit-btn:hover.valid {
-            background-color: #4776c9; /* Hover color */
+            background-color: #4776c9;
             color: white;
         }
 
@@ -163,7 +168,7 @@
             flex: 1;
             background: none;
             border: 2px solid #ccc;
-            border-radius: 20px; /* Rounded corners */
+            border-radius: 20px;
             cursor: pointer;
             padding: 10px;
             text-align: center;
@@ -182,33 +187,33 @@
         .role-button .role-text {
             font-size: 16px;
             margin-top: 5px;
-            display: block; /* Always visible */
-            opacity: 1; /* Always visible */
+            display: block;
+            opacity: 1;
             transition: opacity 0.3s;
         }
 
         .role-button:hover {
-            background-color: #4776c9; /* Hover background color */
-            border-color: #1f2937; /* Change border color on hover */
+            background-color: #4776c9;
+            border-color: #1f2937;
         }
 
-        .role-button[data-role="customer"]:hover{
-            background-color: #3d63b8; /* Clicked background color */
-            border-color: #1f2937; /* Change border color when selected */
+        .role-button[data-role="customer"]:hover {
+            background-color: #3d63b8;
+            border-color: #1f2937;
         }
 
         .role-button[data-role="vehicleSales"]:hover {
-            background-color: #808080; /* Hover background color specifically for Vehicle Sales button */
-            border-color: #1f2937; /* Change border color on hover */
+            background-color: #808080;
+            border-color: #1f2937;
         }
 
         .role-button[data-role="insuranceSales"]:hover {
-            background-color: #98FB98; /* Hover background color specifically for Insurance Sales button */
-            border-color: #1f2937; /* Change border color on hover */
+            background-color: #98FB98;
+            border-color: #1f2937;
         }
 
         .role-button.selected img {
-            filter: blur(2px); /* Blur the image when selected */
+            filter: blur(2px);
         }
 
         .toast {
@@ -235,7 +240,6 @@
             text-align: justify;
         }
 
-        /* Additional spacing for inputs and checkboxes */
         .checkbox-group {
             display: flex;
             align-items: center;
@@ -254,9 +258,9 @@
     </style>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        function HideAndShowPassword() {
-            let passwordInput = document.getElementById("password");
-            let icon = document.querySelector(".password-toggle-icon");
+        function HideAndShowPassword(inputId, iconId) {
+            let passwordInput = document.getElementById(inputId);
+            let icon = document.getElementById(iconId);
             if (passwordInput.type === "password") {
                 passwordInput.type = "text";
                 icon.classList.remove("fa-eye");
@@ -302,19 +306,15 @@
             </div>
 
             <label for="password">Password:*</label>
-            <div class="checkbox-group">
+            <div class="password-container">
                 <input type="password" id="password" name="password" pattern="[A-Za-z0-9_$]{6,}" placeholder="Create a password" required>
-                <label>
-                    <input type="checkbox" id="togglePasswordVisibility"> Show
-                </label>
+                <i class="password-toggle-icon fas fa-eye" id="eye1" onclick="HideAndShowPassword('password', 'eye1')"></i>
             </div>
 
             <label for="confirmPassword">Re-enter Password:*</label>
-            <div class="checkbox-group">
+            <div class="password-container">
                 <input type="password" id="confirmPassword" name="confirmPassword" pattern="[A-Za-z0-9_$]{6,}" placeholder="Re-enter your password" required>
-                <label>
-                    <input type="checkbox" id="toggleConfirmPasswordVisibility"> Show
-                </label>
+                <i class="password-toggle-icon fas fa-eye" id="eye2" onclick="HideAndShowPassword('confirmPassword', 'eye2')"></i>
             </div>
 
             <label class="terms">
@@ -362,12 +362,9 @@
                 </div>
 
                 <label for="loginPassword">Password:</label>
-                <div class="checkbox-group">
+                <div class="password-container">
                     <input type="password" id="loginPassword" name="password" placeholder="Your Password" required>
-                    <label>
-                        <input type="checkbox" id="toggleLoginPasswordVisibility"> Show
-                        <i class="password-toggle-icon fas fa-eye" onclick="HideAndShowPassword()"></i>
-                    </label>
+                    <i class="password-toggle-icon fas fa-eye" id="eye3" onclick="HideAndShowPassword('loginPassword', 'eye3')"></i>
                 </div>
             </div>
 
@@ -455,16 +452,9 @@
                     $('#loginEmail').attr('placeholder', 'Your Email Address');
                 }
 
-                // Remove 'selected' class from all buttons
                 $('.role-button').removeClass('selected');
-                
-                // Add 'selected' class to the clicked button
                 $(this).addClass('selected');
-
-                // Show the text and blur the image
                 $(this).find('img').css('filter', 'blur(2px)');
-                
-                // Fade in the login fields
                 $('#loginFields').fadeIn(200);
                 $('#loginUserType').val(selectedRole);
 
