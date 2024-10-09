@@ -110,21 +110,37 @@
             padding: 10px;
             transition: border-color 0.3s;
             cursor: pointer;
+            text-align: center;
         }
 
         .coverage-option:hover {
             border-color: #1f2937;
         }
 
-        .error {
-            color: red;
-            font-size: 12px;
-            display: none;
+        .progress-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
         }
 
-        .confirmation-message {
-            display: none;
-            text-align: center;
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: #ccc;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+
+        .progress {
+            height: 100%;
+            background: #79aae1;
+            width: 0;
+            transition: width 1s;
+        }
+
+        .status-message {
             font-weight: bold;
             color: #1f2937;
         }
@@ -146,26 +162,12 @@
         <h2>Motor Insurance Application</h2>
 
         <div class="tab-buttons">
-            <button class="tab-button" onclick="showTab('login')">Log In</button>
             <button class="tab-button" onclick="showTab('coverage')">Coverage Options</button>
             <button class="tab-button" onclick="showTab('application')">Application Management</button>
-            <button class="tab-button" onclick="showTab('confirmation')">Confirmation</button>
             <button class="tab-button" onclick="showTab('tracking')">Track Application</button>
         </div>
 
-        <div id="login" class="tab active">
-            <form id="loginForm" onsubmit="handleLogin(event)">
-                <label for="username">Username:</label>
-                <input type="text" id="username" name="username" placeholder="Enter your username" required>
-
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" placeholder="Enter your password" required>
-
-                <button type="submit" class="submit-btn">Log In</button>
-            </form>
-        </div>
-
-        <div id="coverage" class="tab">
+        <div id="coverage" class="tab active">
             <h2>Select Coverage Plan</h2>
             <div id="coverageOptions">
                 <div class="coverage-option" onclick="selectCoverage('Comprehensive Coverage')">
@@ -212,34 +214,30 @@
             </form>
         </div>
 
-        <div id="confirmation" class="tab">
-            <h2>Application Confirmation</h2>
-            <p>Your application has been submitted!</p>
-            <p>Estimated processing time: <strong>3-5 business days</strong>.</p>
-            <button class="submit-btn" onclick="resetApplication()">Go Back to Home</button>
-        </div>
-
         <div id="tracking" class="tab">
             <h2>Track Application Status</h2>
-            <p>Check the status of your application:</p>
-            <input type="text" id="trackingNumber" placeholder="Enter your tracking number" required>
-            <button class="submit-btn" onclick="checkStatus()">Check Status</button>
-            <p id="statusMessage"></p>
-        </div>
-
-        <div class="confirmation-message" id="finalMessage">
-            Thank you for your submission! We will contact you shortly.
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress" id="progress"></div>
+                </div>
+                <p class="status-message" id="statusMessage">No application submitted yet.</p>
+            </div>
+            <button class="submit-btn" onclick="simulateProgress()">Check Application Status</button>
         </div>
     </div>
 
     <script>
+        let applicationSubmitted = false;
+
         function showTab(tabId) {
             const tabs = document.querySelectorAll('.tab');
             tabs.forEach(tab => {
                 tab.classList.remove('active');
             });
             document.getElementById(tabId).classList.add('active');
-            document.getElementById('finalMessage').style.display = 'none'; // Hide final message
+            document.getElementById('statusMessage').textContent = 'No application submitted yet.';
+            document.getElementById('progress').style.width = '0%';
+            applicationSubmitted = false; // Reset submission status when changing tabs
         }
 
         function selectCoverage(coverage) {
@@ -247,33 +245,32 @@
             showTab('application');
         }
 
-        function handleLogin(event) {
-            event.preventDefault();
-            // Simulate successful login
-            showTab('coverage');
-        }
-
         function handleApplication(event) {
             event.preventDefault();
             // Simulate application submission
-            const vehicleDetails = document.getElementById('vehicleDetails').value;
-            const vin = document.getElementById('vin').value;
-
-            // Hide application form and show confirmation
+            applicationSubmitted = true;
             document.getElementById('applicationForm').reset();
-            showTab('confirmation');
-            document.getElementById('finalMessage').style.display = 'block'; // Show final message
+            showTab('tracking');
+            document.getElementById('statusMessage').textContent = 'Application submitted! Progressing...';
+            document.getElementById('progress').style.width = '0%';
         }
 
-        function checkStatus() {
-            const trackingNumber = document.getElementById('trackingNumber').value;
-            // Simulate checking status
-            document.getElementById('statusMessage').textContent = `Status for application ${trackingNumber}: In Process`;
-        }
-
-        function resetApplication() {
-            document.getElementById('finalMessage').style.display = 'none'; // Hide final message
-            showTab('login'); // Go back to login or initial tab
+        function simulateProgress() {
+            if (!applicationSubmitted) {
+                document.getElementById('statusMessage').textContent = 'No application submitted yet.';
+                return;
+            }
+            let progress = 0;
+            const interval = setInterval(() => {
+                if (progress >= 100) {
+                    clearInterval(interval);
+                    document.getElementById('statusMessage').textContent = 'Application processed successfully!';
+                } else {
+                    progress += 20; // Increment progress by 20%
+                    document.getElementById('progress').style.width = progress + '%';
+                    document.getElementById('statusMessage').textContent = `Processing... ${progress}% completed`;
+                }
+            }, 1000); // Update progress every second
         }
     </script>
 </body>
