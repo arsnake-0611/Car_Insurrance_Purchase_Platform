@@ -183,9 +183,19 @@
             border-color: #1f2937; /* Change border color on hover */
         }
 
-        .role-button.selected {
+        .role-button[data-role="customer"]:hover{
             background-color: #3d63b8; /* Clicked background color */
             border-color: #1f2937; /* Change border color when selected */
+        }
+
+        .role-button[data-role="vehicleSales"]:hover {
+            background-color: #808080; /* Hover background color specifically for Vehicle Sales button */
+            border-color: #1f2937; /* Change border color on hover */
+        }
+
+        .role-button[data-role="insuranceSales"]:hover {
+            background-color: #98FB98; /* Hover background color specifically for Insurance Sales button */
+            border-color: #1f2937; /* Change border color on hover */
         }
 
         .role-button.selected img {
@@ -324,15 +334,12 @@
             <div id="loginFields" style="display: none;">
                 <label for="loginEmail">Email Address / Username:</label>
                 <div class="checkbox-group">
-                    <input type="email" id="loginEmail" name="email" placeholder="Email Address" required>
-                    <label>
-                        <input type="checkbox" id="toggleLoginEmailVisibility"> Show
-                    </label>
+                    <input type="email" id="loginEmail" name="email" required>
                 </div>
 
                 <label for="loginPassword">Password:</label>
                 <div class="checkbox-group">
-                    <input type="password" id="loginPassword" name="password" placeholder="Password" required>
+                    <input type="password" id="loginPassword" name="password" placeholder="Your Password" required>
                     <label>
                         <input type="checkbox" id="toggleLoginPasswordVisibility"> Show
                     </label>
@@ -406,6 +413,22 @@
 
             $('.role-button').click(function () {
                 const selectedRole = $(this).data('role');
+
+                if (selectedRole === 'customer') {
+                    $(this).find('.radio-button.selected').css('background-color', '#3d63b8');
+                    $('label[for="loginEmail"]').text('Username:');
+                    $('#loginEmail').attr('placeholder', 'Your Username');
+                }
+                else if (selectedRole === 'vehicleSales') {
+                    $(this).find('.radio-button.selected').css('background-color', '#3d63b8');
+                    $('label[for="loginEmail"]').text('Email Address:');
+                    $('#loginEmail').attr('placeholder', 'Your Email Address');
+                }
+                else if (selectedRole === 'insuranceSales') {
+                    $(this).find('.radio-button.selected').css('background-color', '#');
+                    $('label[for="loginEmail"]').text('Email Address:');
+                    $('#loginEmail').attr('placeholder', 'Your Email Address');
+                }
 
                 // Remove 'selected' class from all buttons
                 $('.role-button').removeClass('selected');
