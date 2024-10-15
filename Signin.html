@@ -1,452 +1,665 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Starry Night Registration & Login</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
+    />
     <style>
-        body,
-        html {
-            margin: 0;
-            width: 100%;
-            height: 100%;
-            font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
-            background: #79aae1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-        }
+      body,
+      html {
+        margin: 0;
+        width: 100%;
+        height: 100%;
+        font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+          sans-serif;
+        background: #79aae1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
 
+      .container {
+        width: 90%;
+        max-width: 400px;
+        background: #c9ddf4;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        z-index: 1;
+        position: relative;
+      }
+
+      .logo-container {
+        display: grid;
+        place-items: center;
+      }
+
+      h2 {
+        margin-bottom: 15px;
+      }
+
+      form {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      label {
+        text-align: left;
+        font-weight: bold;
+      }
+
+      input,
+      select {
+        padding: 10px;
+        background-color: rgba(255, 255, 255, 0.9);
+        border: 2px solid #ccc;
+        border-radius: 4px;
+        color: #333;
+        transition: border-color 0.3s;
+      }
+
+      input:focus {
+        border-color: #1f2937;
+        outline: none;
+      }
+
+      .submit-btn {
+        padding: 10px;
+        background-color: #ccc;
+        border: none;
+        color: #999;
+        border-radius: 4px;
+        cursor: not-allowed;
+        transition: background-color 0.3s, color 0.3s;
+      }
+
+      .submit-btn.valid {
+        background-color: #e1ecf8;
+        color: #79aae1;
+        cursor: pointer;
+      }
+
+      .submit-btn:hover.valid {
+        background-color: #4776c9;
+        color: white;
+      }
+
+      .toggle-btn {
+        background: none;
+        border: none;
+        color: #1f2937;
+        text-decoration: underline;
+        cursor: pointer;
+        font-size: 14px;
+        margin-top: 10px;
+      }
+
+      .return-btn {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background: none;
+        border: none;
+        cursor: pointer;
+      }
+
+      .return-btn img {
+        width: 30px;
+        height: auto;
+      }
+
+      .terms {
+        display: flex;
+        align-items: center;
+        font-size: 14px;
+      }
+
+      .terms a {
+        color: #3b5fba;
+        text-decoration: underline;
+        margin-left: 5px;
+      }
+
+      .role-buttons {
+        display: flex;
+        gap: 10px;
+      }
+
+      .role-button {
+        flex: 1;
+        background: none;
+        border: 2px solid #ccc;
+        border-radius: 50px;
+        cursor: pointer;
+        padding: 10px;
+        text-align: center;
+        transition: background-color 0.3s, border-color 0.3s, color 0.3s,
+          filter 0.3s;
+        color: #333;
+        filter: blur(1px);
+      }
+
+      .role-button.selected,
+      .role-button:hover {
+        filter: blur(0);
+      }
+
+      .role-button.customer.selected,
+      .role-button.customer:hover {
+        background-color: #8ed5e6;
+        border-color: #1f2937;
+      }
+
+      .role-button.vehicleSales.selected,
+      .role-button.vehicleSales:hover {
+        background-color: #8ec6e6;
+        border-color: #1f2937;
+      }
+
+      .role-button.insuranceSales.selected,
+      .role-button.insuranceSales:hover {
+        background-color: #8eb7e6;
+        border-color: #1f2937;
+      }
+
+      .password-container {
+        position: relative;
+        display: flex;
+        align-items: center;
+      }
+
+      .password-toggle-icon {
+        margin-left: 10px;
+        cursor: pointer;
+      }
+
+      .strength-bar {
+        height: 6px;
+        border-radius: 4px;
+        border: 2px outset#939393;
+        margin-top: 5px;
+        width: 100%;
+        background: #e0e0e0;
+      }
+
+      .strength-bar-fill {
+        height: 100%;
+        border-radius: 4px;
+        transition: width 0.4s ease, background-color 0.4s ease; /* Added ease for smooth transition */
+    }
+
+      .input-row {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 10px;
+      }
+
+      #loginPassword,#password, #confirmPassword {
+        width: 100%;
+      }
+
+      @media (max-width: 480px) {
         .container {
-            width: 90%;
-            max-width: 400px;
-            background: #c9ddf4;
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-            z-index: 1;
-            position: relative;
+          padding: 15px;
         }
 
         h2 {
-            margin-bottom: 15px;
-        }
-
-        form {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
+          font-size: 1.5em;
+          text-align: center;
         }
 
         label {
-            text-align: left;
-            font-weight: bold;
-        }
-
-        input,
-        select {
-            padding: 10px;
-            background-color: rgba(255, 255, 255, 0.9);
-            border: 2px solid #ccc;
-            border-radius: 4px;
-            color: #333;
-            transition: border-color 0.3s;
-        }
-
-        input:focus {
-            border-color: #1f2937;
-            outline: none;
-        }
-
-        .submit-btn {
-            padding: 10px;
-            background-color: #ccc;
-            border: none;
-            color: #999;
-            border-radius: 4px;
-            cursor: not-allowed;
-            transition: background-color 0.3s, color 0.3s;
-        }
-
-        .submit-btn.valid {
-            background-color: #e1ecf8;
-            color: #79aae1;
-            cursor: pointer;
-        }
-
-        .submit-btn:hover.valid {
-            background-color: #4776c9;
-            color: white;
+          text-align: center;
         }
 
         .toggle-btn {
-            background: none;
-            border: none;
-            color: #1f2937;
-            text-decoration: underline;
-            cursor: pointer;
-            font-size: 14px;
-            margin-top: 10px;
-        }
-
-        .return-btn {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: none;
-            border: none;
-            cursor: pointer;
-        }
-
-        .return-btn img {
-            width: 30px;
-            height: auto;
-        }
-
-        .terms {
-            display: flex;
-            align-items: center;
-            font-size: 14px;
-        }
-
-        .terms a {
-            color: #3b5fba;
-            text-decoration: underline;
-            margin-left: 5px;
+          width: 100%;
         }
 
         .role-buttons {
-            display: flex;
-            gap: 10px;
+          flex-direction: column;
+          align-items: center;
         }
 
         .role-button {
-            flex: 1;
-            background: none;
-            border: 2px solid #ccc;
-            border-radius: 50px;
-            cursor: pointer;
-            padding: 10px;
-            text-align: center;
-            transition: background-color 0.3s, border-color 0.3s, color 0.3s, filter 0.3s;
-            color: #333;
-            filter: blur(1px);
+          width: 100%;
+          max-width: 300px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-direction: row;
+          gap: 10px;
+          padding: 12px;
         }
 
-        .role-button.selected,
-        .role-button:hover {
-            filter: blur(0);
+        .role-button img {
+          width: 24px;
+          height: 24px;
         }
 
-        .role-button.customer.selected,
-        .role-button.customer:hover {
-            background-color: #8ed5e6;
+        .role-button .role-text {
+          font-size: 16px;
         }
 
-        .role-button.vehicleSales.selected,
-        .role-button.vehicleSales:hover {
-            background-color: #8ec6e6;
-        }
-
-        .role-button.insuranceSales.selected,
-        .role-button.insuranceSales:hover {
-            background-color: #8eb7e6;
-        }
-
-        .password-container {
-            position: relative;
-            display: flex;
-            align-items: center;
-        }
-
-        .password-toggle-icon {
-            margin-left: 10px;
-            cursor: pointer;
-        }
-
-        .strength-bar {
-            height: 6px;
-            border-radius: 4px;
-            margin-top: 5px;
-            width: 100%;
-            background: #e0e0e0;
-        }
-
-        .strength-bar-fill {
-            height: 100%;
-            border-radius: 4px;
-            transition: width 0.3s;
-        }
-
-        .input-row {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin-top: 10px;
-        }
-
-        @media (max-width: 480px) {
-            .container {
-                padding: 15px;
-            }
-
-            .role-buttons {
-                flex-direction: column;
-            }
-
-            h2 {
-                font-size: 1.5em;
-            }
-        }
+      }
     </style>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        function togglePasswordVisibility(inputId, iconId) {
-            const passwordInput = document.getElementById(inputId);
-            const icon = document.getElementById(iconId);
-            passwordInput.type = passwordInput.type === "password" ? "text" : "password";
-            icon.classList.toggle("fa-eye");
-            icon.classList.toggle("fa-eye-slash");
+      function togglePasswordVisibility(inputId, iconId) {
+        const passwordInput = document.getElementById(inputId);
+        const icon = document.getElementById(iconId);
+        passwordInput.type =
+          passwordInput.type === "password" ? "text" : "password";
+        icon.classList.toggle("fa-eye");
+        icon.classList.toggle("fa-eye-slash");
+      }
+
+      function updateStrengthBar(password) {
+        const strengthMessage = document.getElementById('strengthMessage');
+        const min = document.getElementById('min');
+        const oneUpper = document.getElementById('oneUpper');
+        const oneNum = document.getElementById('oneNum');
+        const oneSpecial = document.getElementById('oneSpecial');
+        const bar = document.querySelector('.strength-bar-fill');
+        let strength = 0;
+    
+        if (password.length > 0) {
+            strength += 25;
         }
 
-       /* function updateStrengthBar(password) {
-            const bar = document.querySelector('.strength-bar-fill');
-            let strength = 0;
-            if (password.length >= 6) strength += 25;
-            if (/[A-Z]/.test(password)) strength += 25;
-            if (/\d/.test(password)) strength += 25;
-            if (/_[$&@!%*?]/.test(password)) strength += 25;
+        if (password.length == 0){
+            min.style.color = 'black';
+            oneUpper.style.color = 'black';
+            oneNum.style.color = 'black';
+            oneSpecial.style.color = 'black';
+        }
 
-            bar.style.width = strength + '%';
-            if (strength === 0) {
-                bar.style.background = '#e0e0e0';
-            } else if (strength <= 50) {
-                bar.style.background = 'red';
-            } else if (strength <= 75) {
-                bar.style.background = 'orange';
-            } else {
-                bar.style.background = 'green';
+        // Update strength based on other criteria
+        if (password.length >= 8) {
+            strength += 25; // Increased minimum length
+            min.style.color = 'green';
+        }
+        else 
+            oneSpecial.style.color = 'red';
+
+
+        if (/[A-Z]/.test(password)) {
+            strength += 25; // Uppercase letter
+            oneUpper.style.color = 'green';
+        }
+        else 
+            oneSpecial.style.color = 'red';
+
+
+        if (/\d/.test(password)){ 
+            strength += 25; // Number
+            oneNum.style.color = 'green';
+        }
+        else 
+            oneSpecial.style.color = 'red';
+
+
+        if (/[_$&@!%*?]/.test(password)) {
+            strength += 25; // Special character
+            oneSpecial.style.color = 'green';
+        }
+        else 
+            oneSpecial.style.color = 'red';
+    
+        // Set bar width
+        bar.style.width = strength + '%';
+    
+        // Update bar color based on strength
+        if (strength === 0) {
+            bar.style.background = '#e0e0e0'; // Default color
+            strengthMessage.textContent = '';
+        } else if (strength <= 25) {
+            bar.style.background = 'red'; // Weak
+            strengthMessage.textContent = 'Weak';
+            strengthMessage.style.color = 'red';
+        } else if (strength <= 50) {
+            bar.style.background = 'orange'; // Medium
+            strengthMessage.textContent = 'Medium';
+            strengthMessage.style.color = 'orange';
+        } else if (strength <= 75) {
+            bar.style.background = '#9cab81'; // Medium
+            strengthMessage.textContent = 'Good';
+            strengthMessage.style.color = '#9cab81';
+        } else {
+            bar.style.background = 'green'; // Strong
+            strengthMessage.textContent = 'Strong';
+            strengthMessage.style.color = 'green';
+        }
+    }
+
+      $(document).ready(function () {
+        function validateForm(formId) {
+          const form = $(formId);
+          let valid = true;
+
+          form.find("input[required], select[required]").each(function () {
+            if ($(this).val().trim() === "") {
+              valid = false;
             }
-        } */
+          });
 
-        $(document).ready(function () {
-            function validateForm(formId) {
-                const form = $(formId);
-                let valid = true;
-
-                form.find('input[required], select[required]').each(function () {
-                    if ($(this).val().trim() === "") {
-                        valid = false;
-                    }
-                });
-
-                if (formId === '#registerForm') {
-                    const password = $('#password').val();
-                    const confirmPassword = $('#confirmPassword').val();
-                    if (password !== confirmPassword) {
-                        valid = false;
-                    }
-                }
-
-                return valid;
+          if (formId === "#registerForm") {
+            const password = $("#password").val();
+            const confirmPassword = $("#confirmPassword").val();
+            if (password !== confirmPassword) {
+              valid = false;
             }
+          }
 
-            function deselectButtons() {
-                $('.role-button').removeClass('selected').css('filter', 'blur(1px)');
-                $('#loginFields').hide();
-            }
+          return valid;
+        }
 
-            $('#registerUserType').change(function () {
-                const isStaff = $(this).val() === 'vehicleSales' || $(this).val() === 'insuranceSales';
-                $('#staffNumberSection').toggle(isStaff);
-                $('#staffNumber').prop('required', isStaff);
-            });
+        function deselectButtons() {
+          $(".role-button").removeClass("selected").css("filter", "blur(1px)");
+          $("#loginFields").hide();
+        }
 
-            $('.role-button').click(function () {
-                deselectButtons();
-                $(this).addClass('selected').css('filter', 'blur(0)');
-                const selectedRole = $(this).data('role');
-                $('#loginUserType').val(selectedRole);
-                $('#loginEmail').attr('placeholder', selectedRole === 'customer' ? 'Your Username' : 'Your Email Address');
-                $('#loginFields').fadeIn(200);
-
-                if (selectedRole === 'customer') {
-                    $(this).find('.radio-button.selected').css('background-color', '#3d63b8');
-                    $('label[for="loginEmail"]').text('Username:');
-                    $('#loginEmail').attr('placeholder', 'Your Username');
-                }
-                else if (selectedRole === 'vehicleSales') {
-                    $(this).find('.radio-button.selected').css('background-color', '#3d63b8');
-                    $('label[for="loginEmail"]').text('Email Address:');
-                    $('#loginEmail').attr('placeholder', 'Your Email Address');
-                }
-                else if (selectedRole === 'insuranceSales') {
-                    $(this).find('.radio-button.selected').css('background-color', '#');
-                    $('label[for="loginEmail"]').text('Email Address:');
-                    $('#loginEmail').attr('placeholder', 'Your Email Address');
-                }
-            });
-
-            $('#registerForm input, #registerForm select').on('input change', function () {
-                const isValid = validateForm('#registerForm');
-                $('#registerButton').prop('disabled', !isValid).toggleClass('valid', isValid);
-            });
-
-            $('#loginForm input').on('input', function () {
-                const isValid = validateForm('#loginForm');
-                $('#loginButton').prop('disabled', !isValid).toggleClass('valid', isValid);
-            });
-
-            $('#password').on('input', function () {
-                updateStrengthBar($(this).val());
-            });
-
-            $('#registerForm').on('submit', function (event) {
-                event.preventDefault();
-                if (!validateForm('#registerForm')) {
-                    alert("Please fill in all required fields correctly.");
-                    return;
-                }
-                alert("Account created successfully!");
-                $('#registerContainer').hide();
-                $('#loginContainer').show();
-            });
-
-            $('#loginForm').on('submit', function (event) {
-                if (!validateForm('#loginForm')) {
-                    alert("Please fill in all required fields.");
-                    event.preventDefault();
-                }
-            });
-
-            $('#returnToLogin, #returnToLoginFromLogin').click(function () {
-                $('#registerContainer').toggle();
-                $('#loginContainer').toggle();
-                deselectButtons();
-            });
-
-            $('#toggleToLogin').click(function () {
-                $('#registerContainer').hide();
-                $('#loginContainer').show();
-                deselectButtons();
-            });
-
-            $('#toggleToRegister').click(function () {
-                $('#loginContainer').hide();
-                $('#registerContainer').show();
-            });
+        $("#registerUserType").change(function () {
+          const isStaff =
+            $(this).val() === "vehicleSales" ||
+            $(this).val() === "insuranceSales";
+          $("#staffNumberSection").toggle(isStaff);
+          $("#staffNumber").prop("required", isStaff);
         });
+
+        $(".role-button").click(function () {
+          deselectButtons();
+          $(this).addClass("selected").css("filter", "blur(0)");
+          const selectedRole = $(this).data("role");
+          $("#loginUserType").val(selectedRole);
+          $("#loginEmail").attr(
+            "placeholder",
+            selectedRole === "customer" ? "Your Username" : "Your Email Address"
+          );
+          $("#loginFields").fadeIn(200);
+
+          if (selectedRole === "customer") {
+            $('label[for="loginEmail"]').text("Username:");
+            $("#loginEmail").attr("placeholder", "Your Username");
+          } else if (selectedRole === "vehicleSales") {
+            $('label[for="loginEmail"]').text("Email Address:");
+            $("#loginEmail").attr("placeholder", "Your Email Address");
+          } else if (selectedRole === "insuranceSales") {
+            $('label[for="loginEmail"]').text("Email Address:");
+            $("#loginEmail").attr("placeholder", "Your Email Address");
+          }
+        });
+
+        $("#registerForm input, #registerForm select").on(
+          "input change",
+          function () {
+            const isValid = validateForm("#registerForm");
+            $("#registerButton")
+              .prop("disabled", !isValid)
+              .toggleClass("valid", isValid);
+          }
+        );
+
+        $("#loginForm input").on("input", function () {
+          const isValid = validateForm("#loginForm");
+          $("#loginButton")
+            .prop("disabled", !isValid)
+            .toggleClass("valid", isValid);
+        });
+
+        $("#password").on("input", function () {
+          updateStrengthBar($(this).val());
+        });
+
+        $("#registerForm").on("submit", function (event) {
+          event.preventDefault();
+          if (!validateForm("#registerForm")) {
+            alert("Please fill in all required fields correctly.");
+            return;
+          }
+          alert("Account created successfully!");
+          $("#registerContainer").hide();
+          $("#loginContainer").show();
+        });
+
+        $("#loginForm").on("submit", function (event) {
+          if (!validateForm("#loginForm")) {
+            alert("Please fill in all required fields.");
+            event.preventDefault();
+          }
+        });
+
+        $("#returnToLogin, #returnToLoginFromLogin").click(function () {
+          $("#registerContainer").toggle();
+          $("#loginContainer").toggle();
+          deselectButtons();
+        });
+
+        $("#toggleToLogin").click(function () {
+          $("#registerContainer").hide();
+          $("#loginContainer").show();
+          deselectButtons();
+        });
+
+        $("#toggleToRegister").click(function () {
+          $("#loginContainer").hide();
+          $("#registerContainer").show();
+        });
+      });
     </script>
-</head>
+  </head>
 
-<body>
+  <body>
     <div class="container" id="registerContainer">
-        <button class="return-btn" id="returnToLogin">
-            <img src="icon/return.png" alt="Return">
+      <button class="return-btn" id="returnToLogin">
+        <img src="icon/return.png" alt="Return" />
+      </button>
+      <h2>Create Your Account</h2>
+      <form id="registerForm" action method="POST">
+        <label for="registerUserType">Register As:*</label>
+        <select id="registerUserType" name="userType" required>
+          <option value disabled selected>Select your role</option>
+          <option value="customer">Customer</option>
+          <option value="vehicleSales">Vehicle Sales</option>
+          <option value="insuranceSales">Insurance Sales</option>
+        </select>
+
+        <label for="name">Full Name:*</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          placeholder="Your full name"
+          pattern="[A-Za-z ]{5,}"
+          required
+        />
+
+        <label for="email">Email Address:*</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="example@domain.com"
+          required
+        />
+
+        <label for="phone">Phone Number:*</label>
+        <input
+          type="tel"
+          id="phone"
+          name="phone"
+          placeholder="91234678"
+          pattern="\d{8}"
+          required
+        />
+
+        <div id="staffNumberSection" class="input-row" style="display: none">
+          <label for="staffNumber">Staff Number:</label>
+          <input
+            type="text"
+            id="staffNumber"
+            name="staffNumber"
+            placeholder="Your staff number"
+            pattern="\d{1,}"
+            title="Must be digits only"
+          />
+        </div>
+
+        <div class="input-row">
+          <label for="password">Password:*</label>
+          <div class="password-container">
+            <input
+              type="password"
+              id="password"
+              name="password"
+              pattern="[A-Za-z0-9_$]{6,}"
+              placeholder="Create a password"
+              required
+            />
+            <i
+              class="password-toggle-icon fas fa-eye"
+              id="eye1"
+              onclick="togglePasswordVisibility('password', 'eye1')"
+            ></i>
+          </div>
+          <div class="strength-bar">
+            <div class="strength-bar-fill"></div>
+          </div>
+          <div id="strengthMessage" style="font-size: 12px; color: #333;"></div>
+          <div class="password-requirements">
+            <p>Password must contain:</p>   
+            <ul>
+                <li id="min">At least 8 characters</li>
+                <li id="oneUpper">At least one uppercase letter</li>
+                <li id="oneNum">At least one number</li>
+                <li id="oneSpecial">At least one special character</li>
+            </ul>
+        </div>
+        </div>
+
+        <div class="input-row">
+          <label for="confirmPassword">Re-enter Password:*</label>
+          <div class="password-container">
+            <input
+              type="password"
+              id="confirmPassword"
+              name="confirmPassword"
+              pattern="[A-Za-z0-9_$]{6,}"
+              placeholder="Re-enter your password"
+              required
+            />
+            <i
+              class="password-toggle-icon fas fa-eye"
+              id="eye2"
+              onclick="togglePasswordVisibility('confirmPassword', 'eye2')"
+            ></i>
+          </div>
+        </div>
+
+        <label class="terms">
+          <input type="checkbox" name="terms" required />
+          I agree to the
+          <a href="http://www.google.com" target="_blank"
+            >terms and conditions</a
+          >.*
+        </label>
+
+        <button type="submit" class="submit-btn" id="registerButton" disabled>
+          Register
         </button>
-        <h2>Create Your Account</h2>
-        <form id="registerForm" action="" method="POST">
-            <label for="registerUserType">Register As:*</label>
-            <select id="registerUserType" name="userType" required>
-                <option value="" disabled selected>Select your role</option>
-                <option value="customer">Customer</option>
-                <option value="vehicleSales">Vehicle Sales</option>
-                <option value="insuranceSales">Insurance Sales</option>
-            </select>
-
-            <label for="name">Full Name:*</label>
-            <input type="text" id="name" name="name" placeholder="Your full name" pattern="[A-Za-z ]{5,}" required>
-
-            <label for="email">Email Address:*</label>
-            <input type="email" id="email" name="email" placeholder="example@domain.com" required>
-
-            <label for="phone">Phone Number:*</label>
-            <input type="tel" id="phone" name="phone" placeholder="91234678" pattern="\d{8}" required>
-
-            <div id="staffNumberSection" style="display: none;">
-                <label for="staffNumber">Staff Number:</label>
-                <input type="text" id="staffNumber" name="staffNumber" placeholder="Your staff number" pattern="\d{1,}" title="Must be digits only">
-            </div>
-
-            <div class="input-row">
-                <label for="password">Password:*</label>
-                <div class="password-container">
-                    <input type="password" id="password" name="password" pattern="[A-Za-z0-9_$]{6,}" placeholder="Create a password" required>
-                    <i class="password-toggle-icon fas fa-eye" id="eye1" onclick="togglePasswordVisibility('password', 'eye1')"></i>
-                </div>
-                <div class="strength-bar">
-                    <div class="strength-bar-fill"></div>
-                </div>
-            </div>
-
-            <div class="input-row">
-                <label for="confirmPassword">Re-enter Password:*</label>
-                <div class="password-container">
-                    <input type="password" id="confirmPassword" name="confirmPassword" pattern="[A-Za-z0-9_$]{6,}" placeholder="Re-enter your password" required>
-                    <i class="password-toggle-icon fas fa-eye" id="eye2" onclick="togglePasswordVisibility('confirmPassword', 'eye2')"></i>
-                </div>
-            </div>
-
-            <label class="terms">
-                <input type="checkbox" name="terms" required>
-                I agree to the
-                <a href="http://www.google.com" target="_blank">terms and conditions</a>.*
-            </label>
-
-            <button type="submit" class="submit-btn" id="registerButton" disabled>Register</button>
-        </form>
-        <button class="toggle-btn" id="toggleToLogin">Already have an account? Click here to Login</button>
+      </form>
+      <button class="toggle-btn" id="toggleToLogin">
+        Already have an account? Click here to Login
+      </button>
     </div>
 
-    <div class="container" id="loginContainer" style="display: none;">
-        <button class="return-btn" id="returnToLoginFromLogin">
-            <img src="/icon/return.png" alt="Return">
+    <div class="container" id="loginContainer" style="display: none">
+      <div class="logo-container">
+        <div>
+          <img
+            src="./icon/lm.png"
+            alt="logo"
+            style="width: 125px; height: 75px; margin: 0 auto"
+          />
+        </div>
+      </div>
+
+      <button class="return-btn" id="returnToLoginFromLogin">
+        <img src="/icon/return.png" alt="Return" />
+      </button>
+      <h2>Login to Your Account</h2>
+      <form id="loginForm" action="https://example.com/login" method="POST">
+        <div class="login-section">
+          <div class="role-selection">
+            <label>Login As:</label>
+            <div class="role-buttons">
+              <button
+                type="button"
+                class="role-button customer"
+                data-role="customer"
+              >
+                <img src="icon/customer.png" alt="Customer" />
+                <span class="role-text">Customer</span>
+              </button>
+              <button
+                type="button"
+                class="role-button vehicleSales"
+                data-role="vehicleSales"
+              >
+                <img src="icon/vehicle.png" alt="Vehicle Sales" />
+                <span class="role-text">Vehicle Sales</span>
+              </button>
+              <button
+                type="button"
+                class="role-button insuranceSales"
+                data-role="insuranceSales"
+              >
+                <img src="icon/insurance.png" alt="Insurance Sales" />
+                <span class="role-text">Insurance Sales</span>
+              </button>
+            </div>
+          </div>
+          <input type="hidden" id="loginUserType" name="role" required />
+        </div>
+
+        <div id="loginFields" style="display: none">
+          <div class="input-row">
+            <label for="loginEmail">Email Address / Username:</label>
+            <input type="email" id="loginEmail" name="email" required />
+          </div>
+
+          <div class="input-row">
+            <label for="loginPassword">Password:</label>
+            <div class="password-container">
+              <input
+                type="password"
+                id="loginPassword"
+                name="password"
+                placeholder="Your Password"
+                required
+              />
+              <i
+                class="password-toggle-icon fas fa-eye"
+                id="eye3"
+                onclick="togglePasswordVisibility('loginPassword', 'eye3')"
+              ></i>
+            </div>
+          </div>
+        </div>
+
+        <button type="submit" class="submit-btn" id="loginButton" disabled>
+          Login
         </button>
-        <h2>Login to Your Account</h2>
-        <form id="loginForm" action="https://example.com/login" method="POST">
-            <div class="login-section">
-                <div class="role-selection">
-                    <label>Login As:</label>
-                    <div class="role-buttons">
-                        <button type="button" class="role-button customer" data-role="customer">
-                            <img src="icon/customer.png" alt="Customer" />
-                            <span class="role-text">Customer</span>
-                        </button>
-                        <button type="button" class="role-button vehicleSales" data-role="vehicleSales">
-                            <img src="icon/vehicle.png" alt="Vehicle Sales" />
-                            <span class="role-text">Vehicle Sales</span>
-                        </button>
-                        <button type="button" class="role-button insuranceSales" data-role="insuranceSales">
-                            <img src="icon/insurance.png" alt="Insurance Sales" />
-                            <span class="role-text">Insurance Sales</span>
-                        </button>
-                    </div>
-                </div>
-                <input type="hidden" id="loginUserType" name="role" required>
-            </div>
-
-            <div id="loginFields" style="display: none;">
-                <div class="input-row">
-                    <label for="loginEmail">Email Address / Username:</label>
-                    <input type="email" id="loginEmail" name="email" required>
-                </div>
-
-                <div class="input-row">
-                    <label for="loginPassword">Password:</label>
-                    <div class="password-container">
-                        <input type="password" id="loginPassword" name="password" placeholder="Your Password" required>
-                        <i class="password-toggle-icon fas fa-eye" id="eye3" onclick="togglePasswordVisibility('loginPassword', 'eye3')"></i>
-                    </div>
-                </div>
-            </div>
-
-            <button type="submit" class="submit-btn" id="loginButton" disabled>Login</button>
-        </form>
-        <button class="toggle-btn" id="toggleToRegister">Need an account? Click here to Register</button>
+      </form>
+      <button class="toggle-btn" id="toggleToRegister">
+        Need an account? Click here to Register
+      </button>
     </div>
-</body>
-
+  </body>
 </html>
