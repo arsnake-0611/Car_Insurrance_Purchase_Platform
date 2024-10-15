@@ -269,48 +269,42 @@
         const bar = document.querySelector('.strength-bar-fill');
         let strength = 0;
     
+        // Clear requirement colors initially
+        min.style.color = 'black';
+        oneUpper.style.color = 'black';
+        oneNum.style.color = 'black';
+        oneSpecial.style.color = 'black';
+    
+        // Check if the password has any length
         if (password.length > 0) {
-            strength += 25;
+            if (password.length >= 8) { // Minimum length
+                strength += 25;
+                min.style.color = 'green';
+            } else {
+                min.style.color = 'red';
+            }
+    
+            if (/[A-Z]/.test(password)) {
+                strength += 25; // Uppercase letter
+                oneUpper.style.color = 'green';
+            } else {
+                oneUpper.style.color = 'red';
+            }
+    
+            if (/\d/.test(password)) {
+                strength += 25; // Number
+                oneNum.style.color = 'green';
+            } else {
+                oneNum.style.color = 'red';
+            }
+    
+            if (/[_$&@!%*?]/.test(password)) {
+                strength += 25; // Special character
+                oneSpecial.style.color = 'green';
+            } else {
+                oneSpecial.style.color = 'red';
+            }
         }
-
-        if (password.length == 0){
-            min.style.color = 'black';
-            oneUpper.style.color = 'black';
-            oneNum.style.color = 'black';
-            oneSpecial.style.color = 'black';
-        }
-
-        // Update strength based on other criteria
-        if (password.length >= 8) {
-            strength += 25; // Increased minimum length
-            min.style.color = 'green';
-        }
-        else 
-            oneSpecial.style.color = 'red';
-
-
-        if (/[A-Z]/.test(password)) {
-            strength += 25; // Uppercase letter
-            oneUpper.style.color = 'green';
-        }
-        else 
-            oneSpecial.style.color = 'red';
-
-
-        if (/\d/.test(password)){ 
-            strength += 25; // Number
-            oneNum.style.color = 'green';
-        }
-        else 
-            oneSpecial.style.color = 'red';
-
-
-        if (/[_$&@!%*?]/.test(password)) {
-            strength += 25; // Special character
-            oneSpecial.style.color = 'green';
-        }
-        else 
-            oneSpecial.style.color = 'red';
     
         // Set bar width
         bar.style.width = strength + '%';
