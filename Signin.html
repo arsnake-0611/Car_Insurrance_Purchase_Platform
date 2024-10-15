@@ -5,7 +5,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Starry Night Registration & Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
     <style>
+        .password-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .password-toggle-icon{
+            position: flex;
+            margin-left: 10px;
+            right: 10px;
+            cursor: pointer;
+        }
+
         body,
         html {
             margin: 0;
@@ -94,8 +108,13 @@
             cursor: pointer;
         }
 
+<<<<<<< HEAD
         .submit-btn.valid:hover {
             background-color: #4776c9; /* Hover color */
+=======
+        .submit-btn:hover.valid {
+            background-color: #4776c9;
+>>>>>>> Add-eye
             color: white;
         }
 
@@ -153,8 +172,13 @@
         .role-button {
             flex: 1;
             background: none;
+<<<<<<< HEAD
             border: outset;
             border-radius: 50mm; /* Rounded corners */
+=======
+            border: 2px solid #ccc;
+            border-radius: 20px;
+>>>>>>> Add-eye
             cursor: pointer;
             padding: 10px;
             text-align: center;
@@ -174,13 +198,14 @@
         .role-button .role-text {
             font-size: 14px;
             margin-top: 5px;
-            display: block; /* Always visible */
-            opacity: 1; /* Always visible */
+            display: block;
+            opacity: 1;
             transition: opacity 0.3s;
             font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
         }
 
         .role-button:hover {
+<<<<<<< HEAD
             background-color: #4776c9; /* Hover background color */
             border-color: #1f2937; /* Change border color on hover */
             transform: scale(1.05); /* Scale up on hover */
@@ -200,10 +225,29 @@
         .role-button[data-role="insuranceSales"]:hover {
             background-color: #7afac4; /* Hover background color specifically for Insurance Sales button */
             border-color: #1f2937; /* Change border color on hover */
+=======
+            background-color: #4776c9;
+            border-color: #1f2937;
+        }
+
+        .role-button[data-role="customer"]:hover {
+            background-color: #3d63b8;
+            border-color: #1f2937;
+        }
+
+        .role-button[data-role="vehicleSales"]:hover {
+            background-color: #808080;
+            border-color: #1f2937;
+        }
+
+        .role-button[data-role="insuranceSales"]:hover {
+            background-color: #98FB98;
+            border-color: #1f2937;
+>>>>>>> Add-eye
         }
 
         .role-button.selected img {
-            filter: blur(2px); /* Blur the image when selected */
+            filter: blur(2px);
         }
 
     
@@ -218,7 +262,6 @@
             text-align: justify;
         }
 
-        /* Additional spacing for inputs and checkboxes */
         .checkbox-group {
             display: flex;
             align-items: center;
@@ -230,12 +273,31 @@
                 padding: 15px;
             }
 
+            .role-buttons {
+                flex-direction: column;
+            }
+
             h2 {
                 font-size: 1.5em;
             }
         }
     </style>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        function HideAndShowPassword(inputId, iconId) {
+            let passwordInput = document.getElementById(inputId);
+            let icon = document.getElementById(iconId);
+            if (passwordInput.type === "password") {
+                passwordInput.type = "text";
+                icon.classList.remove("fa-eye");
+                icon.classList.add("fa-eye-slash");
+            } else {
+                passwordInput.type = "password";
+                icon.classList.remove("fa-eye-slash");
+                icon.classList.add("fa-eye");
+            }
+        }
+    </script>
 </head>
 
 <body>
@@ -247,7 +309,7 @@
         </button>
         <h2>Create Your Account</h2>
         <form id="registerForm" action="" method="POST">
-            <label for="registerUserType">Register As:</label>
+            <label for="registerUserType">Register As:*</label>
             <select id="registerUserType" name="userType" required>
                 <option value="" disabled selected>Select your role</option>
                 <option value="customer">Customer</option>
@@ -255,40 +317,41 @@
                 <option value="insuranceSales">Insurance Sales</option>
             </select>
 
-            <label for="name">Full Name:</label>
-            <input type="text" id="name" name="name" placeholder="Your full name" required>
+            <label for="name">Full Name:*</label>
+            <input type="text" id="name" name="name" placeholder="Your full name" pattern="[A-Za-z]{5,}" required>
 
+<<<<<<< HEAD
             <label for="email">Email Address:</label>
             <input type="email" id="email" name="email" placeholder="example@domain.com"  pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$"required>
+=======
+            <label for="email">Email Address:*</label>
+            <input type="email" id="email" name="email" placeholder="example@domain.com" required>
+>>>>>>> Add-eye
 
-            <label for="phone">Phone Number:</label>
-            <input type="tel" id="phone" name="phone" placeholder="91234678" required>
+            <label for="phone">Phone Number:*</label>
+            <input type="tel" id="phone" name="phone" placeholder="91234678" pattern="\d{8}" required>
 
             <div id="staffNumberSection" style="display: none;">
                 <label for="staffNumber">Staff Number:</label>
                 <input type="text" id="staffNumber" name="staffNumber" placeholder="Your staff number">
             </div>
 
-            <label for="password">Password:</label>
-            <div class="checkbox-group">
-                <input type="password" id="password" name="password" placeholder="Create a password" required>
-                <label>
-                    <input type="checkbox" id="togglePasswordVisibility"> Show
-                </label>
+            <label for="password">Password:*</label>
+            <div class="password-container">
+                <input type="password" id="password" name="password" pattern="[A-Za-z0-9_$]{6,}" placeholder="Create a password" required>
+                <i class="password-toggle-icon fas fa-eye" id="eye1" onclick="HideAndShowPassword('password', 'eye1')"></i>
             </div>
 
-            <label for="confirmPassword">Re-enter Password:</label>
-            <div class="checkbox-group">
-                <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Re-enter your password" required>
-                <label>
-                    <input type="checkbox" id="toggleConfirmPasswordVisibility"> Show
-                </label>
+            <label for="confirmPassword">Re-enter Password:*</label>
+            <div class="password-container">
+                <input type="password" id="confirmPassword" name="confirmPassword" pattern="[A-Za-z0-9_$]{6,}" placeholder="Re-enter your password" required>
+                <i class="password-toggle-icon fas fa-eye" id="eye2" onclick="HideAndShowPassword('confirmPassword', 'eye2')"></i>
             </div>
 
             <label class="terms">
                 <input type="checkbox" name="terms" required>
                 I agree to the
-                <a href="http://www.google.com" target="_blank">terms and conditions</a>.
+                <a href="http://www.google.com" target="_blank">terms and conditions</a>.*
             </label>
 
             <button type="submit" class="submit-btn" id="registerButton" disabled>Register</button>
@@ -330,12 +393,9 @@
                 </div>
 
                 <label for="loginPassword">Password:</label>
-                <div class="checkbox-group">
+                <div class="password-container">
                     <input type="password" id="loginPassword" name="password" placeholder="Your Password" required>
-                    <label>
-                        <input type="checkbox" id="toggleLoginPasswordVisibility"> Show
-                        <i class="password-toggle-icon fas fa-eye" onclick="HideAndShowPassword()"></i>
-                    </label>
+                    <i class="password-toggle-icon fas fa-eye" id="eye3" onclick="HideAndShowPassword('loginPassword', 'eye3')"></i>
                 </div>
             </div>
 
@@ -431,16 +491,9 @@
                     $('#loginEmail').attr('placeholder', 'Your Email Address');
                 }
 
-                // Remove 'selected' class from all buttons
                 $('.role-button').removeClass('selected');
-                
-                // Add 'selected' class to the clicked button
                 $(this).addClass('selected');
-
-                // Show the text and blur the image
                 $(this).find('img').css('filter', 'blur(2px)');
-                
-                // Fade in the login fields
                 $('#loginFields').fadeIn(200);
                 $('#loginUserType').val(selectedRole);
 

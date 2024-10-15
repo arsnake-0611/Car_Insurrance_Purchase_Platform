@@ -61,7 +61,11 @@
         }
 
         .tab-button:hover {
-            background-color: #4776c9;
+            background-color: #7aade0;
+        }
+
+        .tab-button.active {
+            background-color: #a5c9eb;
         }
 
         form {
@@ -101,7 +105,7 @@
         }
 
         .submit-btn:hover {
-            background-color: #4776c9;
+            background-color: #7aade0;
         }
 
         .coverage-option {
@@ -150,6 +154,11 @@
                 padding: 15px;
             }
 
+            .tab-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+
             h2 {
                 font-size: 1.5em;
             }
@@ -162,7 +171,7 @@
         <h2>Motor Insurance Application</h2>
 
         <div class="tab-buttons">
-            <button class="tab-button" onclick="showTab('coverage')">Coverage Options</button>
+            <button class="tab-button active" onclick="showTab('coverage')">Coverage Options</button>
             <button class="tab-button" onclick="showTab('application')">Application Management</button>
             <button class="tab-button" onclick="showTab('tracking')">Track Application</button>
         </div>
@@ -184,6 +193,7 @@
 
         <div id="application" class="tab">
             <h2>Application Management</h2>
+            <p id="applicationStatus" class="status-message">Creating your insurance application...</p>
             <form id="applicationForm" onsubmit="handleApplication(event)">
                 <label for="vehicleDetails">Vehicle Details:</label>
                 <input type="text" id="vehicleDetails" name="vehicleDetails" placeholder="Make, Model, Year" required>
@@ -231,10 +241,15 @@
 
         function showTab(tabId) {
             const tabs = document.querySelectorAll('.tab');
+            const buttons = document.querySelectorAll('.tab-button');
             tabs.forEach(tab => {
                 tab.classList.remove('active');
             });
+            buttons.forEach(button => {
+                button.classList.remove('active');
+            });
             document.getElementById(tabId).classList.add('active');
+            document.querySelector(`.tab-button[onclick="showTab('${tabId}')"]`).classList.add('active');
             document.getElementById('statusMessage').textContent = 'No application submitted yet.';
             document.getElementById('progress').style.width = '0%';
             applicationSubmitted = false; // Reset submission status when changing tabs
@@ -247,9 +262,9 @@
 
         function handleApplication(event) {
             event.preventDefault();
-            // Simulate application submission
             applicationSubmitted = true;
             document.getElementById('applicationForm').reset();
+            document.getElementById('applicationStatus').textContent = 'Editing your insurance application...';
             showTab('tracking');
             document.getElementById('statusMessage').textContent = 'Application submitted! Progressing...';
             document.getElementById('progress').style.width = '0%';
