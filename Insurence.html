@@ -169,9 +169,17 @@
     <div class="container">
         <h2>Motor Insurance Application</h2>
 
+        <div class="progress-container">
+            <div class="progress-bar">
+                <div class="progress" id="progress"></div>
+            </div>
+            <p class="status-message" id="statusMessage">Step 1: Select Coverage</p>
+        </div>
+
         <div class="tab-buttons">
             <button class="tab-button active" onclick="showTab('coverage')">Coverage Options</button>
-            <button class="tab-button" onclick="showTab('application')">Application Management</button>
+            <button class="tab-button" onclick="showTab('application')">Application Details</button>
+            <button class="tab-button" onclick="showTab('confirmation')">Confirmation</button>
             <button class="tab-button" onclick="showTab('tracking')">Track Application</button>
         </div>
 
@@ -191,8 +199,7 @@
         </div>
 
         <div id="application" class="tab">
-            <h2>Application Management</h2>
-            <p id="applicationStatus" class="status-message">Creating your insurance application...</p>
+            <h2>Application Details</h2>
             <form id="applicationForm" onsubmit="handleApplication(event)">
                 <label for="vehicleDetails">Vehicle Details:</label>
                 <input type="text" id="vehicleDetails" name="vehicleDetails" placeholder="Make, Model, Year" required>
@@ -219,17 +226,24 @@
                     <option value="paypal">PayPal</option>
                 </select>
 
-                <button type="submit" class="submit-btn">Request Quote</button>
+                <button type="submit" class="submit-btn">Proceed to Confirmation</button>
             </form>
+        </div>
+
+        <div id="confirmation" class="tab">
+            <h2>Confirmation</h2>
+            <p>Your application has been submitted. Please review the details below:</p>
+            <div id="confirmationDetails"></div>
+            <button class="submit-btn" onclick="showTab('tracking')">Track Application</button>
         </div>
 
         <div id="tracking" class="tab">
             <h2>Track Application Status</h2>
             <div class="progress-container">
                 <div class="progress-bar">
-                    <div class="progress" id="progress"></div>
+                    <div class="progress" id="trackingProgress"></div>
                 </div>
-                <p class="status-message" id="statusMessage">No application submitted yet.</p>
+                <p class="status-message" id="trackingStatusMessage">No application submitted yet.</p>
             </div>
             <button class="submit-btn" onclick="simulateProgress()">Check Application Status</button>
         </div>
@@ -237,6 +251,7 @@
 
     <script>
         let applicationSubmitted = false;
+        let coverageSelected = '';
 
         function showTab(tabId) {
             const tabs = document.querySelectorAll('.tab');
@@ -249,12 +264,13 @@
             });
             document.getElementById(tabId).classList.add('active');
             document.querySelector(`.tab-button[onclick="showTab('${tabId}')"]`).classList.add('active');
-            document.getElementById('statusMessage').textContent = 'No application submitted yet.';
-            document.getElementById('progress').style.width = '0%';
-            applicationSubmitted = false; // Reset submission status when changing tabs
+
+            // Update progress and status message based on tab
+            updateProgress(tabId);
         }
 
         function selectCoverage(coverage) {
+            coverageSelected = coverage;
             document.getElementById('selectedCoverage').textContent = `Selected Coverage: ${coverage}`;
             showTab('application');
         }
@@ -262,32 +278,45 @@
         function handleApplication(event) {
             event.preventDefault();
             applicationSubmitted = true;
-            document.getElementById('applicationForm').reset();
-            document.getElementById('applicationStatus').textContent = 'Editing your insurance application...';
-            showTab('tracking');
-            document.getElementById('statusMessage').textContent = 'Application submitted! Progressing...';
-            document.getElementById('progress').style.width = '0%';
+            document.getElementById('confirmationDetails').innerHTML = `
+                <p>Coverage: ${coverageSelected}</p>
+                <p>Vehicle Details: ${document.getElementById('vehicleDetails').value}</p>
+                <p>VIN: ${document.getElementById('vin').value}</p>
+                <p>Name: ${document.getElementById('personalInfo').value}</p>
+                <p>Email: ${document.getElementById('email').value}</p>
+                <p>Phone: ${document.getElementById('phone').value}</p>
+                <p>Address: ${document.getElementById('address').value}</p>
+                <p>Payment Method: ${document.getElementById('paymentMethod').value}</p>
+            `;
+            showTab('confirmation');
+        }
+
+        function updateProgress(tabId) {
+            const steps = ['coverage', 'application', 'confirmation', 'tracking'];
+            const currentStep = steps.indexOf(tabId) + 1;
+            const progressPercentage = (currentStep / steps.length) * 100;
+
+            document.getElementById('progress').style.width = `${progressPercentage}%`;
+            document.getElementById('statusMessage').textContent = `Step ${currentStep}: ${tabId.charAt(0).toUpperCase() + tabId.slice(1).replace(/([A-Z])/g, ' $1')}`;
         }
 
         function simulateProgress() {
             if (!applicationSubmitted) {
-                document.getElementById('statusMessage').textContent = 'No application submitted yet.';
+                document.getElementById('trackingStatusMessage').textContent = 'No application submitted yet.';
                 return;
             }
             let progress = 0;
             const interval = setInterval(() => {
                 if (progress >= 100) {
                     clearInterval(interval);
-                    document.getElementById('statusMessage').textContent = 'Application processed successfully!';
+                    document.getElementById('trackingStatusMessage').textContent = 'Application processed successfully!';
                 } else {
                     progress += 20; // Increment progress by 20%
-                    document.getElementById('progress').style.width = progress + '%';
-                    document.getElementById('statusMessage').textContent = `Processing... ${progress}% completed`;
+                    document.getElementById('trackingProgress').style.width = progress + '%';
+                    document.getElementById('trackingStatusMessage').textContent = `Processing... ${progress}% completed`;
                 }
             }, 1000); // Update progress every second
         }
-
-
     </script>
 </body>
 
