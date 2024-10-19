@@ -1,223 +1,152 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Legend Motor Inc.</title>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
-    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
     <link rel="stylesheet" href="/Signin.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="./Signin.js"></script>
-  </head>
+</head>
 
-  <body>
+<body>
     <div class="container" id="registerContainer">
-      <button class="return-btn" id="returnToLogin">
-        <img src="icon/return.png" alt="Return" />
-      </button>
-      <h2>Create Your Account</h2>
-      <form id="registerForm" action method="POST">
-        <label for="registerUserType">Register As:*</label>
-        <select id="registerUserType" name="userType" required>
-          <option value disabled selected>Select your role</option>
-          <option value="customer">Customer</option>
-          <option value="vehicleSales">Vehicle Sales</option>
-          <option value="insuranceSales">Insurance Sales</option>
-        </select>
-
-        <label for="name">Full Name:*</label>
-        <input
-          type="text"
-          id="name"
-          name="name"
-          placeholder="Your full name"
-          pattern="[A-Za-z ]{5,}"
-          required
-        />
-
-        <label for="email">Email Address:*</label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          placeholder="example@domain.com"
-          required
-        />
-
-        <label for="phone">Phone Number:*</label>
-        <input
-          type="tel"
-          id="phone"
-          name="phone"
-          placeholder="91234678"
-          pattern="\d{8}"
-          required
-        />
-
-        <div id="staffNumberSection" class="input-row" style="display: none">
-          <label for="staffNumber">Staff Number:</label>
-          <input
-            type="text"
-            id="staffNumber"
-            name="staffNumber"
-            placeholder="Your staff number"
-            pattern="\d{1,}"
-            title="Must be digits only"
-          />
-        </div>
-
-        <div class="input-row">
-          <label for="password">Password:*</label>
-          <div class="password-container">
-            <input
-              type="password"
-              id="password"
-              name="password"
-              pattern="[A-Za-z0-9_$]{6,}"
-              placeholder="Create a password"
-              required
-            />
-            <i
-              class="password-toggle-icon fas fa-eye"
-              id="eye1"
-              onclick="togglePasswordVisibility('password', 'eye1')"
-            ></i>
-          </div>
-          <div class="strength-bar">
-            <div class="strength-bar-fill"></div>
-          </div>
-          <div id="strengthMessage" style="font-size: 12px; color: #333;"></div>
-          <div class="password-requirements">
-            <p>Password must contain:</p>   
-            <ul>
-                <li id="min">At least 8 characters</li>
-                <li id="oneUpper">At least one uppercase letter</li>
-                <li id="oneNum">At least one number</li>
-                <li id="oneSpecial">At least one special character</li>
-            </ul>
-        </div>
-        </div>
-
-        <div class="input-row">
-          <label for="confirmPassword">Re-enter Password:*</label>
-          <div class="password-container">
-            <input
-              type="password"
-              id="confirmPassword"
-              name="confirmPassword"
-              pattern="[A-Za-z0-9_$]{6,}"
-              placeholder="Re-enter your password"
-              required
-            />
-            <i
-              class="password-toggle-icon fas fa-eye"
-              id="eye2"
-              onclick="togglePasswordVisibility('confirmPassword', 'eye2')"
-            ></i>
-          </div>
-        </div>
-
-        <label class="terms">
-          <input type="checkbox" name="terms" required />
-          I agree to the
-          <a href="http://www.google.com" target="_blank"
-            >terms and conditions</a
-          >.*
-        </label>
-
-        <button type="submit" class="submit-btn" id="registerButton" disabled>
-          Register
+        <button class="return-btn" id="returnToLogin">
+            <img src="icon/return.png" alt="Return">
         </button>
-      </form>
-      <button class="toggle-btn" id="toggleToLogin">
-        Already have an account? Click here to Login
-      </button>
+        <h2>Create Your Account</h2>
+        <form id="registerForm" action method="POST">
+            <label for="registerUserType">Register As:*</label>
+            <select id="registerUserType" name="userType" required>
+                <option value disabled selected>Select your role</option>
+                <option value="customer">Customer</option>
+                <option value="vehicleSales">Vehicle Sales</option>
+                <option value="insuranceSales">Insurance Sales</option>
+            </select>
+
+            <label for="name">Full Name:*</label>
+            <input type="text" id="name" name="name" placeholder="Your full name" pattern="[A-Za-z ]{5,}" required>
+
+            <label for="email">Email Address:*</label>
+            <input type="email" id="email" name="email" placeholder="example@domain.com" required>
+
+            <label for="phone">Phone Number:*</label>
+            <input type="tel" id="phone" name="phone" placeholder="91234678" pattern="\d{8}" required>
+
+            <div id="staffNumberSection" class="input-row" style="display: none">
+                <label for="staffNumber">Staff Number:</label>
+                <input type="text" id="staffNumber" name="staffNumber" placeholder="Your staff number"
+                    pattern="\d{1,}" title="Must be digits only">
+            </div>
+
+            <div class="password-group">
+                <div class="input-row">
+                    <label for="password">Password:*</label>
+                    <div class="password-container">
+                        <input type="password" id="password" name="password" pattern="[A-Za-z0-9_$]{6,}"
+                            placeholder="Create a password" required>
+                        <i class="password-toggle-icon fas fa-eye" id="eye1"
+                            onclick="togglePasswordVisibility('password', 'eye1')"></i>
+                    </div>
+                    <div class="strength-bar">
+                        <div class="strength-bar-fill"></div>
+                    </div>
+                    <div id="strengthMessage" style="font-size: 12px; color: #333;"></div>
+                    <div class="password-requirements">
+                        <p>Password must contain:</p>
+                        <ul>
+                            <li id="min">At least 8 characters</li>
+                            <li id="oneUpper">At least one uppercase letter</li>
+                            <li id="oneNum">At least one number</li>
+                            <li id="oneSpecial">At least one special character</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="input-row">
+                    <label for="confirmPassword">Re-enter Password:*</label>
+                    <div class="password-container">
+                        <input type="password" id="confirmPassword" name="confirmPassword"
+                            pattern="[A-Za-z0-9_$]{6,}" placeholder="Re-enter your password" required>
+                        <i class="password-toggle-icon fas fa-eye" id="eye2"
+                            onclick="togglePasswordVisibility('confirmPassword', 'eye2')"></i>
+                    </div>
+                </div>
+            </div>
+
+            <label class="terms">
+                <input type="checkbox" name="terms" required />
+                I agree to the <a href="http://www.google.com" target="_blank">terms and conditions</a>.*
+            </label>
+
+            <button type="submit" class="submit-btn" id="registerButton" disabled>
+                Register
+            </button>
+        </form>
+        <button class="toggle-btn" id="toggleToLogin">
+            Already have an account? Click here to Login
+        </button>
     </div>
 
     <div class="container" id="loginContainer" style="display: none">
-      <div class="logo-container">
-        <div>
-          <img
-            src="./icon/lm.png"
-            alt="logo"
-            style="width: 125px; height: 75px; margin: 0 auto"
-          />
-        </div>
-      </div>
-
-      <button class="return-btn" id="returnToLoginFromLogin">
-        <img src="/icon/return.png" alt="Return" />
-      </button>
-      <h2>Login to Your Account</h2>
-      <form id="loginForm" action="https://example.com/login" method="POST">
-        <div class="login-section">
-          <div class="role-selection">
-            <label>Login As:</label>
-            <div class="role-buttons">
-              <button
-                type="button"
-                class="role-button customer"
-                data-role="customer"
-              >
-                <img src="icon/customer.png" alt="Customer" />
-                <span class="role-text">Customer</span>
-              </button>
-              <button
-                type="button"
-                class="role-button vehicleSales"
-                data-role="vehicleSales"
-              >
-                <img src="icon/vehicle.png" alt="Vehicle Sales" />
-                <span class="role-text">Vehicle Sales</span>
-              </button>
-              <button
-                type="button"
-                class="role-button insuranceSales"
-                data-role="insuranceSales"
-              >
-                <img src="icon/insurance.png" alt="Insurance Sales" />
-                <span class="role-text">Insurance Sales</span>
-              </button>
+        <div class="logo-container">
+            <div>
+                <img src="./icon/lm.png" alt="logo" style="width: 125px; height: 75px; margin: 0 auto">
             </div>
-          </div>
-          <input type="hidden" id="loginUserType" name="role" required />
         </div>
 
-        <div id="loginFields" style="display: none">
-          <div class="input-row">
-            <label for="loginEmail">Email Address / Username:</label>
-            <input type="email" id="loginEmail" name="email" required />
-          </div>
-
-          <div class="input-row">
-            <label for="loginPassword">Password:</label>
-            <div class="password-container">
-              <input
-                type="password"
-                id="loginPassword"
-                name="password"
-                placeholder="Your Password"
-                required
-              />
-              <i
-                class="password-toggle-icon fas fa-eye"
-                id="eye3"
-                onclick="togglePasswordVisibility('loginPassword', 'eye3')"
-              ></i>
-            </div>
-          </div>
-        </div>
-
-        <button type="submit" class="submit-btn" id="loginButton" disabled>
-          Login
+        <button class="return-btn" id="returnToLoginFromLogin">
+            <img src="/icon/return.png" alt="Return">
         </button>
-      </form>
-      <button class="toggle-btn" id="toggleToRegister">
-        Need an account? Click here to Register
-      </button>
+        <h2>Login to Your Account</h2>
+        <form id="loginForm" action="https://example.com/login" method="POST">
+            <div class="login-section">
+                <div class="role-selection">
+                    <label>Login As:</label>
+                    <div class="role-buttons">
+                        <button type="button" class="role-button customer" data-role="customer">
+                            <img src="icon/customer.png" alt="Customer">
+                            <span class="role-text">Customer</span>
+                        </button>
+                        <button type="button" class="role-button vehicleSales" data-role="vehicleSales">
+                            <img src="icon/vehicle.png" alt="Vehicle Sales">
+                            <span class="role-text">Vehicle Sales</span>
+                        </button>
+                        <button type="button" class="role-button insuranceSales" data-role="insuranceSales">
+                            <img src="icon/insurance.png" alt="Insurance Sales">
+                            <span class="role-text">Insurance Sales</span>
+                        </button>
+                    </div>
+                </div>
+                <input type="hidden" id="loginUserType" name="role" required />
+            </div>
+
+            <div id="loginFields" style="display: none">
+                <div class="input-row">
+                    <label for="loginEmail">Email Address / Username:</label>
+                    <input type="email" id="loginEmail" name="email" required />
+                </div>
+
+                <div class="input-row">
+                    <label for="loginPassword">Password:</label>
+                    <div class="password-container">
+                        <input type="password" id="loginPassword" name="password" placeholder="Your Password" required>
+                        <i class="password-toggle-icon fas fa-eye" id="eye3"
+                            onclick="togglePasswordVisibility('loginPassword', 'eye3')"></i>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="submit-btn" id="loginButton" disabled>
+                Login
+            </button>
+        </form>
+        <button class="toggle-btn" id="toggleToRegister">
+            Need an account? Click here to Register
+        </button>
     </div>
-  </body>
+</body>
+
 </html>

@@ -1,245 +1,251 @@
 body,
 html {
-  margin: 0;
-  width: 100%;
-  height: 100%;
-  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
-    sans-serif;
-  background: #79aae1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+    background: #79aae1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .container {
-  width: 90%;
-  max-width: 400px;
-  background: #c9ddf4;
-  border-radius: 10px;
-  padding: 20px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-  z-index: 1;
-  position: relative;
+    width: 90%;
+    max-width: 400px;
+    background: #c9ddf4;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    z-index: 1;
+    position: relative;
 }
 
 .logo-container {
-  display: grid;
-  place-items: center;
+    display: grid;
+    place-items: center;
 }
 
 h2 {
-  margin-bottom: 15px;
+    margin-bottom: 15px;
 }
 
 form {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
 }
 
 label {
-  text-align: left;
-  font-weight: bold;
+    text-align: left;
+    font-weight: bold;
 }
 
 input,
 select {
-  padding: 10px;
-  background-color: rgba(255, 255, 255, 0.9);
-  border: 2px solid #ccc;
-  border-radius: 4px;
-  color: #333;
-  transition: border-color 0.3s;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    color: #333;
+    transition: border-color 0.3s;
 }
 
 input:focus {
-  border-color: #1f2937;
-  outline: none;
+    border-color: #1f2937;
+    outline: none;
 }
 
 .submit-btn {
-  padding: 10px;
-  background-color: #ccc;
-  border: none;
-  color: #999;
-  border-radius: 4px;
-  cursor: not-allowed;
-  transition: background-color 0.3s, color 0.3s;
+    padding: 10px;
+    background-color: #ccc;
+    border: none;
+    color: #999;
+    border-radius: 4px;
+    cursor: not-allowed;
+    transition: background-color 0.3s, color 0.3s;
 }
 
 .submit-btn.valid {
-  background-color: #e1ecf8;
-  color: #79aae1;
-  cursor: pointer;
+    background-color: #e1ecf8;
+    color: #79aae1;
+    cursor: pointer;
 }
 
 .submit-btn:hover.valid {
-  background-color: #4776c9;
-  color: white;
+    background-color: #4776c9;
+    color: white;
 }
 
 .toggle-btn {
-  background: none;
-  border: none;
-  color: #1f2937;
-  text-decoration: underline;
-  cursor: pointer;
-  font-size: 14px;
-  margin-top: 10px;
+    background: none;
+    border: none;
+    color: #1f2937;
+    text-decoration: underline;
+    cursor: pointer;
+    font-size: 14px;
+    margin-top: 10px;
 }
 
 .return-btn {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  background: none;
-  border: none;
-  cursor: pointer;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
 }
 
 .return-btn img {
-  width: 30px;
-  height: auto;
+    width: 30px;
+    height: auto;
 }
 
 .terms {
-  display: flex;
-  align-items: center;
-  font-size: 14px;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
 }
 
 .terms a {
-  color: #3b5fba;
-  text-decoration: underline;
-  margin-left: 5px;
+    color: #3b5fba;
+    text-decoration: underline;
+    margin-left: 5px;
 }
 
 .role-buttons {
-  display: flex;
-  gap: 10px;
+    display: flex;
+    gap: 10px;
 }
 
 .role-button {
-  flex: 1;
-  background: none;
-  border: 2px solid #ccc;
-  border-radius: 50px;
-  cursor: pointer;
-  padding: 10px;
-  text-align: center;
-  transition: background-color 0.3s, border-color 0.3s, color 0.3s,
-    filter 0.3s;
-  color: #333;
-  filter: blur(1px);
+    flex: 1;
+    background: none;
+    border: 2px solid #ccc;
+    border-radius: 50px;
+    cursor: pointer;
+    padding: 10px;
+    text-align: center;
+    transition: background-color 0.3s, border-color 0.3s, color 0.3s, filter 0.3s;
+    color: #333;
+    filter: blur(1px);
 }
 
 .role-button.selected,
 .role-button:hover {
-  filter: blur(0);
+    filter: blur(0);
 }
 
 .role-button.customer.selected,
 .role-button.customer:hover {
-  background-color: #8ed5e6;
-  border-color: #1f2937;
+    background-color: #8ed5e6;
+    border-color: #1f2937;
 }
 
 .role-button.vehicleSales.selected,
 .role-button.vehicleSales:hover {
-  background-color: #8ec6e6;
-  border-color: #1f2937;
+    background-color: #8ec6e6;
+    border-color: #1f2937;
 }
 
 .role-button.insuranceSales.selected,
 .role-button.insuranceSales:hover {
-  background-color: #8eb7e6;
-  border-color: #1f2937;
+    background-color: #8eb7e6;
+    border-color: #1f2937;
 }
 
 .password-container {
-  position: relative;
-  display: flex;
-  align-items: center;
+    position: relative;
+    display: flex;
+    align-items: center;
 }
 
 .password-toggle-icon {
-  margin-left: 10px;
-  cursor: pointer;
+    margin-left: 10px;
+    cursor: pointer;
 }
 
-#eye1,#eye2,#eye3 {
-  position: absolute;
-  top: 50%;
-  right: 10px;
-  transform: translateY(-50%);
+#eye1,
+#eye2,
+#eye3 {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
 }
 
 .strength-bar {
-  height: 6px;
-  border-radius: 4px;
-  border: 2px outset#939393;
-  margin-top: 5px;
-  width: 100%;
-  background: #e0e0e0;
+    height: 6px;
+    border-radius: 4px;
+    border: 2px outset #939393;
+    margin-top: 5px;
+    width: 100%;
+    background: #e0e0e0;
 }
 
 .strength-bar-fill {
-  height: 100%;
-  border-radius: 4px;
-  transition: width 0.4s ease, background-color 0.4s ease; /* Added ease for smooth transition */
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.4s ease, background-color 0.4s ease;
 }
 
 .input-row {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 8px;
 }
 
-#loginPassword,#password, #confirmPassword {
-  width: 100%;
+#loginPassword,
+#password,
+#confirmPassword {
+    width: 100%;
+}
+
+.password-group {
+    margin-top: 8px;
 }
 
 @media (max-width: 480px) {
-  .container {
-    padding: 15px;
-  }
+   .container {
+        padding: 15px;
+    }
 
-  h2 {
-    font-size: 1.5em;
-    text-align: center;
-  }
+    h2 {
+        font-size: 1.5em;
+        text-align: center;
+    }
 
-  label {
-    text-align: center;
-  }
+    label {
+        text-align: center;
+    }
 
-  .toggle-btn {
-    width: 100%;
-  }
+   .toggle-btn {
+        width: 100%;
+    }
 
-  .role-buttons {
-    flex-direction: column;
-    align-items: center;
-  }
+   .role-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
 
-  .role-button {
-    width: 100%;
-    max-width: 300px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: row;
-    gap: 10px;
-    padding: 12px;
-  }
+   .role-button {
+        width: 100%;
+        max-width: 300px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: row;
+        gap: 10px;
+        padding: 12px;
+    }
 
-  .role-button img {
-    width: 24px;
-    height: 24px;
-  }
+   .role-button img {
+        width: 24px;
+        height: 24px;
+    }
 
-  .role-button .role-text {
-    font-size: 16px;
-  }
+   .role-button.role-text {
+        font-size: 16px;
+    }
 }
