@@ -80,8 +80,8 @@ input:focus {
 .toggle-btn {
     background: none;
     border: none;
-    color: #1f2937;
-    text-decoration: underline;
+    color: #4398e7;
+    font-weight: bold;
     cursor: pointer;
     font-size: 14px;
     margin-top: 10px;
