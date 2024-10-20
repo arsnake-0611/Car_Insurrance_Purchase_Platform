@@ -75,7 +75,7 @@ input:focus {
 
 .submit-btn:hover.valid {
     background-color: #4776c9;
-    color: white;
+    color: #e1ecf8;
 }
 
 .form-row {
