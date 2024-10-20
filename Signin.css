@@ -77,14 +77,26 @@ input:focus {
     color: white;
 }
 
+.form-row {
+    display: flex; 
+    width: 100%; 
+    align-items: center;   
+    margin-top: 10px; 
+    text-align: left;
+}
+
 .toggle-btn {
     background: none;
     border: none;
-    color: #4398e7;
+    color: #4776c9;
     font-weight: bold;
     cursor: pointer;
     font-size: 14px;
-    margin-top: 10px;
+}
+
+.toggle-btn:hover{
+    color:#79aae1;
+    text-decoration: underline;
 }
 
 .return-btn {
@@ -111,6 +123,10 @@ input:focus {
     color: #3b5fba;
     text-decoration: underline;
     margin-left: 5px;
+}
+
+.terms a:hover {
+    color: #79aae1;
 }
 
 .role-buttons {
@@ -206,7 +222,7 @@ input:focus {
     margin-top: 8px;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 500px) {
    .container {
         padding: 15px;
     }
@@ -220,8 +236,19 @@ input:focus {
         text-align: center;
     }
 
+    .form-row {
+        flex-direction: row; 
+        align-items: center;  
+        text-align: left;
+    }
+
    .toggle-btn {
-        width: 100%;
+        width: 50%;
+        margin-left: 0;
+        align-items: center;
+        flex-direction: row;
+        justify-items: space-between;
+        padding-left: 0%;
     }
 
    .role-buttons {
