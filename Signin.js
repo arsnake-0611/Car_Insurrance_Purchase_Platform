@@ -90,6 +90,11 @@ function togglePasswordVisibility(inputId, iconId) {
         }
       });
 
+      if (formId === "#registerForm" && !$("#terms").is(":checked")) {
+        valid = false;
+      }
+  
+
       if (formId === "#registerForm") {
         const password = $("#password").val();
         const confirmPassword = $("#confirmPassword").val();
@@ -113,6 +118,19 @@ function togglePasswordVisibility(inputId, iconId) {
       $("#staffNumberSection").toggle(isStaff);
       $("#staffNumber").prop("required", isStaff);
     });
+
+    $(".role-button").hover(
+      function () {
+        if (!$(this).hasClass("selected")) {
+          $(this).css("filter", "blur(0)");
+        }
+      },
+      function () {
+        if (!$(this).hasClass("selected")) {
+          $(this).css("filter", "blur(1px)");
+        }
+      }
+    );
 
     $(".role-button").click(function () {
       deselectButtons();
@@ -158,10 +176,15 @@ function togglePasswordVisibility(inputId, iconId) {
       updateStrengthBar($(this).val());
     });
 
+    $("#registerForm input, #registerForm select").on("input change", function () {
+      const isValid = validateForm("#registerForm");
+      $("#registerButton").prop("disabled", !isValid).toggleClass("valid", isValid);
+    });
+
     $("#registerForm").on("submit", function (event) {
       event.preventDefault();
       if (!validateForm("#registerForm")) {
-        alert("Please fill in all required fields correctly.");
+        alert("Please fill in all required fields correctly.and agree to the terms and conditions.");
         return;
       }
       alert("Account created successfully!");
