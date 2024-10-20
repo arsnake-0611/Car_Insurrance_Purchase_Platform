@@ -111,6 +111,19 @@ function togglePasswordVisibility(inputId, iconId) {
       $("#loginFields").hide();
     }
 
+    $(".role-button").hover(
+      function () {
+        if (!$(this).hasClass("selected")) {
+          $(this).css("filter", "blur(0)");
+        }
+      },
+      function () {
+        if (!$(this).hasClass("selected")) {
+          $(this).css("filter", "blur(1px)");
+        }
+      }
+    );
+
     $("#registerUserType").change(function () {
       const isStaff =
         $(this).val() === "vehicleSales" ||
