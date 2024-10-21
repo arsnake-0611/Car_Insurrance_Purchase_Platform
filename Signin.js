@@ -83,6 +83,7 @@ $(document).ready(function () {
   function validateForm(formId) {
     const form = $(formId);
     let valid = true;
+    
 
     form.find("input[required], select[required]").each(function () {
       if ($(this).val().trim() === "") {
@@ -195,7 +196,7 @@ $(document).ready(function () {
   $("#registerForm").on("submit", function (event) {
     event.preventDefault();
     if (!validateForm("#registerForm")) {
-      alert("Please fill in all required fields correctly.and agree to the terms and conditions.");
+      alert("Please fill in all required fields correctly and agree to the terms and conditions.");
       return;
     }
     alert("Account created successfully!");
