@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Legend Motor - Vehicle Sales Platform</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="VehicleOrder.js"></script>
+  <link rel="stylesheet" href="VehicleOrder.css">
+</head>
+
+<body>
+  <header>
+    <nav class="container">
+        <img src="./icon/lm.png" alt="Legend Motor" class="logo" style="width:250px;height:150px">
+      <h1>Legend Motor</h1>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#vehicles">Vehicles</a></li>
+        <li><a href="#wishlist">Wishlist</a></li>
+        <li><a href="#account">My Account</a></li>
+      </ul>
+      <button id="dark-mode-toggle">🌙</button>
+        </nav>
+  </header>
+
+  <main class="container">
+    <section id="home">
+      <h2>Welcome to Legend Motor</h2>
+      <p>Discover your dream vehicle and start your journey with us today.</p>
+      <a href="#vehicles" class="btn">Browse Vehicles</a>
+    </section>
+
+    <section id="vehicles">
+      <h2>Available Vehicles</h2>
+      <div class="vehicle-list"></div>
+    </section>
+
+    <section id="wishlist" class="wishlist">
+      <h2>Your Wishlist</h2>
+      <ul></ul>
+      <button class="btn" id="request-quote" disabled>Request Quote</button>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2024 Legend Motor. All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+
+</html>
