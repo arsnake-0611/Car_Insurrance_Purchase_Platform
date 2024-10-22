@@ -33,13 +33,13 @@ h2 {
 form {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 5px;
 }
 
 label {
     text-align: left;
     font-weight: bold;
-    padding-bottom: 10px;
+    padding-bottom: 5px;
 }
 
 input,
@@ -232,9 +232,9 @@ input:focus {
     margin-top: 8px;
 }
 
-@media (max-width: 500px) {
-   .container {
-        padding: 15px;
+@media (max-width: 480px) {
+    form{
+        gap: 5px;
     }
 
     h2 {
@@ -244,12 +244,17 @@ input:focus {
 
     label {
         text-align: center;
+        padding-bottom: 5px;
     }
 
     .form-row {
         flex-direction: row; 
         align-items: center;  
         text-align: left;
+    }
+
+    .input-row{
+        gap:0px
     }
 
    .toggle-btn {
@@ -286,4 +291,5 @@ input:focus {
    .role-button.role-text {
         font-size: 16px;
     }
+
 }

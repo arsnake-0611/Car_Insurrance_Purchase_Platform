@@ -1,0 +1,110 @@
+<style>
+body,
+html {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+    background: #79aae1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    width: 90%;
+    max-width: 400px;
+    background: #c9ddf4;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    z-index: 1;
+    position: relative;
+}
+
+h2 {
+    margin-bottom: 15px;
+    color: #1f2937;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+label {
+    text-align: left;
+    font-weight: bold;
+    padding-bottom: 10px;
+    color: #1f2937;
+}
+
+input,
+select {
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    color: #333;
+    transition: border-color 0.3s;
+}
+
+input:focus,
+select:focus {
+    border-color: #1f2937;
+    outline: none;
+}
+
+button {
+    padding: 10px;
+    background-color: #e1ecf8;
+    border: none;
+    color: #79aae1;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+button:hover {
+    background-color: #4776c9;
+    color: #e1ecf8;
+}
+
+.form-row {
+    display: flex; 
+    width: 100%; 
+    align-items: center;   
+    margin-top: 10px; 
+    text-align: left;
+}
+
+.input-row{
+    gap: 5px;
+    padding-bottom: 3px;
+}
+
+@media (max-width: 500px) {
+    .container {
+        padding: 15px;
+    }
+
+    h2 {
+        font-size: 1.5em;
+        text-align: center;
+    }
+
+    label {
+        text-align: center;
+    }
+
+    .form-row {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    button {
+        width: 100%;
+    }
+}
+</style>
