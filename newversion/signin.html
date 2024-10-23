@@ -1,0 +1,996 @@
+<html><head><base href="https://legendmotor.com/">
+    <meta charset="UTF-8">
+    <title>Legend Motor - Login & Registration</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+    body {
+      font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+      margin: 0;
+      padding: 30px;
+      background-color: #ffffff;
+      color: #202124;
+      transition: all 0.3s ease;
+    }
+    
+    body[data-theme="dark"] {
+      background-color: #202124;
+      color: #e8eaed;
+    }
+    
+    .theme-toggle {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: none;
+      border: none;
+      color: #202124;
+      cursor: pointer;
+      font-size: 24px;
+    }
+    
+    body[data-theme="dark"] .theme-toggle {
+      color: #e8eaed;
+    }
+    
+    .input-field {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #dadce0;
+      border-radius: 4px;
+      background-color: #f1f3f4;
+      color: #202124;
+      box-sizing: border-box;
+      transition: all 0.3s ease;
+    }
+    
+    body[data-theme="dark"] .input-field {
+      border-color: #5f6368;
+      background-color: #303134;
+      color: #e8eaed;
+    }
+    
+    .input-field:focus {
+      border-color: #1a73e8;
+      box-shadow: 0 0 0 2px rgba(26, 115, 232, 0.2);
+    }
+    
+    body[data-theme="dark"] .input-field:focus {
+      border-color: #8ab4f8;
+    }
+    
+    .input-field.error {
+      border-color: #d93025;
+    }
+    
+    body[data-theme="dark"] .input-field.error {
+      border-color: #ff7066;
+    }
+    
+    .error-message {
+      color: #d93025;
+      font-size: 12px;
+      margin-top: 4px;
+      display: none;
+    }
+    
+    body[data-theme="dark"] .error-message {
+      color: #ff7066;
+    }
+    
+    .btn {
+      width: 100%;
+      padding: 12px;
+      background-color: #1a73e8;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+    
+    .btn:hover:not(:disabled) {
+      background-color: #4285f4;
+      transform: translateY(-1px);
+    }
+    
+    .btn:active:not(:disabled) {
+      background-color: #1557b0;
+      transform: translateY(1px);
+    }
+    
+    .btn:disabled {
+      background-color: #cccccc;
+      cursor: not-allowed;
+      opacity: 0.7;
+    }
+    
+    .btn:disabled:hover {
+      position: relative;
+    }
+    
+    .btn:disabled:hover::after {
+      content: "Please complete all required fields and match password requirements";
+      position: absolute;
+      bottom: -120%;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 8px 12px;
+      background: #333;
+      color: white;
+      border-radius: 4px;
+      font-size: 12px;
+      white-space: nowrap;
+      z-index: 1000;
+    }
+    
+    body[data-theme="dark"] .btn:disabled {
+      background-color: #666666;
+    }
+    
+    .role-card {
+      padding: 15px;
+      border: 2px solid #dadce0;
+      border-radius: 8px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    body[data-theme="dark"] .role-card {
+      border-color: #5f6368;
+    }
+    
+    .role-card:hover {
+      border-color: #1a73e8;
+      background-color: #e8f0fe;
+    }
+    
+    body[data-theme="dark"] .role-card:hover {
+      border-color: #8ab4f8;
+      background-color: #303134;
+    }
+    
+    #registration-message {
+      margin-top: 15px;
+      padding: 10px;
+      border-radius: 4px;
+      background-color: #e8f0fe;
+      text-align: center;
+      display: none;
+    }
+    
+    body[data-theme="dark"] #registration-message {
+      background-color: #303134;
+    }
+    
+    .container {
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 30px;
+    }
+    
+    .tab-container {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      position: relative;
+      padding: 2px;
+      background-color: #f1f3f4;
+      border-radius: 9px;
+      margin: 10px 20px 0px 20px;
+      overflow: hidden;
+    }
+    
+    .tab {
+      width: 50%;
+      height: 28px;
+      position: relative;
+      z-index: 99;
+      background-color: transparent;
+      border: 0;
+      outline: none;
+      flex: none;
+      align-self: stretch;
+      flex-grow: 1;
+      cursor: pointer;
+      font-weight: 500;
+      color: #202124;
+      transition: color 0.3s ease;
+    }
+    
+    .tab:hover {
+      color: #1a73e8;
+      transition: color 0.2s ease;
+    }
+    
+    body[data-theme="dark"] .tab:hover {
+      color: #8ab4f8;
+    }
+    
+    .indicator {
+      position: absolute;
+      height: calc(100% - 4px);
+      width: calc(50% - 4px);
+      background-color: #ffffff;
+      border-radius: 7px;
+      top: 2px;
+      left: 2px;
+      transition: left 0.3s ease;
+    }
+    
+    .tab.active {
+      color: #1a73e8;
+    }
+    
+    .tab--1:hover ~ .indicator {
+      left: 2px;
+    }
+    
+    .tab--2:hover ~ .indicator {
+      left: calc(50% - 2px);
+    }
+    
+    .tab--1.active ~ .indicator {
+      left: 2px;
+    }
+    
+    .tab--2.active ~ .indicator {
+      left: calc(50% - 2px);
+    }
+    
+    .form-container {
+      margin-top: 20px;
+    }
+    
+    .form-group {
+      position: relative;
+      margin-bottom: 20px;
+    }
+    
+    .password-container {
+      position: relative;
+    }
+    
+    .password-toggle {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      color: #757575;
+      transition: color 0.3s ease;
+    }
+    
+    .password-toggle:hover {
+      color: #1a73e8;
+    }
+    
+    body[data-theme="dark"] .password-toggle {
+      color: #9aa0a6;
+    }
+    
+    body[data-theme="dark"] .password-toggle:hover {
+      color: #8ab4f8;
+    }
+    
+    .role-selection {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+      margin-top: 20px;
+    }
+    
+    .role-card svg {
+      width: 48px;
+      height: 48px;
+      margin-bottom: 10px;
+    }
+    
+    .hidden {
+      display: none;
+    }
+    
+    .registration-form {
+      animation: slideIn 0.3s ease;
+    }
+    
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .strength-bar {
+      height: 5px;
+      background-color: #e0e0e0;
+      margin-top: 5px;
+      border-radius: 3px;
+    }
+    
+    .strength-bar-fill {
+      height: 100%;
+      width: 0;
+      border-radius: 3px;
+      transition: all 0.3s;
+    }
+    
+    .password-requirements {
+      margin-top: 10px;
+      font-size: 12px;
+    }
+    
+    .password-requirements ul {
+      margin: 5px 0;
+      padding-left: 0;
+      list-style-type: none;
+    }
+    
+    .password-requirements li {
+      color: #757575;
+      position: relative;
+      list-style: none;
+      margin-left: 20px;
+    }
+    
+    .password-requirements li.valid::before {
+      content: '✓';
+      position: absolute;
+      left: -20px;
+      color: green;
+    }
+    
+    .password-requirements li:not(.valid)::before {
+      content: '✕';  
+      position: absolute;
+      left: -20px;
+      color: #d93025;
+    }
+    
+    #strength-message {
+      font-size: 12px;
+      margin-top: 5px;
+    }
+    
+    .password-toggle {
+      cursor: pointer;
+      user-select: none;
+    }
+    
+    .input-field[data-tooltip] {
+      position: relative;
+    }
+    
+    .input-field[data-tooltip]:hover::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      bottom: 100%;
+      left: 0;
+      background: #333;
+      color: white;
+      padding: 5px 10px;
+      border-radius: 4px;
+      font-size: 12px;
+      white-space: nowrap;
+      z-index: 100;
+      margin-bottom: 5px;
+    }
+    
+    .help-icon {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: #1a73e8;
+      color: white;
+      text-align: center;
+      font-size: 12px;
+      line-height: 16px;
+      cursor: pointer;
+      margin-left: 5px;
+      transition: background-color 0.2s;
+    }
+    
+    .help-icon:hover {
+      background: #1557b0;
+    }
+    
+    .tooltip {
+      position: relative;
+      display: inline-block;
+    }
+    
+    .tooltip .tooltip-text {
+      visibility: hidden;
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      border-radius: 6px;
+      padding: 8px;
+      position: absolute;
+      z-index: 1;
+      bottom: 125%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 200px;
+      font-size: 12px;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+    
+    .tooltip:hover .tooltip-text {
+      visibility: visible;
+      opacity: 1;
+    }
+    
+    #forgot-password-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    body[data-theme="dark"] #forgot-password-modal .modal-content {
+      background: #303134;
+      color: #e8eaed;
+    }
+    
+    .modal-content {
+      background: white;
+      padding: 25px;
+      border-radius: 8px;
+      width: 90%;
+      max-width: 400px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      position: relative;
+    }
+    
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    
+    .close-modal {
+      background: none;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+      color: inherit;
+      padding: 0;
+      margin: 0;
+    }
+    
+    .close-modal:hover {
+      opacity: 0.7;
+    }
+    
+    @media (max-width: 480px) {
+      .container {
+        padding: 15px;
+        margin: 10px;
+      }
+      
+      .role-selection {
+        grid-template-columns: 1fr;
+      }
+      
+      .form-group {
+        margin-bottom: 10px;
+      }
+      
+      .input-field {
+        padding: 10px;
+      }
+    }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    </head>
+    <body>
+    <div class="container">
+      <button class="theme-toggle" onclick="toggleTheme()">🌓</button>
+      
+      <div class="logo">
+        <svg width="150" height="50" viewBox="0 0 150 50">
+          <text x="75" y="30" text-anchor="middle" fill="currentColor" style="font-size: 24px; font-weight: bold;">Legend Motor</text>
+        </svg>
+      </div>
+    
+      <div class="tab-container">
+        <button class="tab tab--1 active" data-tab="login" onclick="switchTab('login')">Login</button>
+        <button class="tab tab--2" data-tab="register" onclick="switchTab('register')">Register</button>
+        <div class="indicator"></div>
+      </div>
+    
+      <!-- Login Form -->
+      <div id="login-form" class="form-container">
+        <form onsubmit="handleLogin(event)">
+          <div class="form-group">
+            <select id="login-type" class="input-field" onchange="updateLoginForm()">
+              <option value="customer">Customer</option>
+              <option value="vehicle-sales">Vehicle Sales</option>
+              <option value="insurance-sales">Insurance Sales</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label id="username-email-label" for="username-email">Email Address*</label>
+            <input type="email" id="username-email" class="input-field" required 
+                   aria-required="true" aria-invalid="false" aria-describedby="email-error">
+          </div>
+          <div class="form-group">
+            <label for="password">Password*</label>
+            <div class="password-container">
+              <input type="password" id="password" class="input-field" required>
+              <i class="password-toggle fas fa-eye"></i>
+            </div>
+          </div>
+          <div class="form-group text-right">
+            <a href="#" onclick="showForgotPassword()" class="forgot-password-link">Forgot Password?</a>
+          </div>
+          <button type="submit" class="btn">Login</button>
+        </form>
+      </div>
+    
+      <!-- Forgot Password Modal -->
+      <div id="forgot-password-modal">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2>Reset Password</h2>
+            <button class="close-modal" onclick="hideForgotPassword()">&times;</button>
+          </div>
+          <p>Enter your email address to receive password reset instructions.</p>
+          <form onsubmit="handleForgotPassword(event)">
+            <div class="form-group">
+              <label for="reset-email">Email Address*</label>
+              <div class="tooltip">
+                <span class="help-icon">?</span>
+                <span class="tooltip-text">Enter account email</span>
+              </div>
+              <input type="email" id="reset-email" class="input-field" required 
+                     aria-required="true" aria-describedby="reset-email-help">
+            </div>
+            <button type="submit" class="btn">Submit</button>
+          </form>
+        </div>
+      </div>
+    
+      <!-- Registration Role Selection -->
+      <div id="register-form" class="form-container" style="display: none;">
+        <div class="role-selection">
+          <div class="role-card" onclick="showRegistrationForm('customer')">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+            </svg>
+            <div>Customer</div>
+          </div>
+          <div class="role-card" onclick="showRegistrationForm('vehicle-sales')">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
+            </svg>
+            <div>Vehicle Sales</div>
+          </div>
+          <div class="role-card" onclick="showRegistrationForm('insurance-sales')">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-1 14H5c-.55 0-1-.45-1-1V7c0-.55.45-1 1-1h14c.55 0 1 .45 1 1v10c0 .55-.45 1-1 1z"/>
+            </svg>
+            <div>Insurance Sales</div>
+          </div>
+        </div>
+      </div>
+    
+      <!-- Registration Details Form -->
+      <div id="registration-details" class="form-container registration-form" style="display: none;">
+        <h2 id="registration-title"></h2>
+        <form onsubmit="handleRegistration(event)">
+          <div class="form-group">
+            <label for="reg-name">Full Name*</label>
+            <input type="text" id="reg-name" class="input-field" required placeholder="Enter your full name" data-tooltip="Letters only, 2-50 chars">
+            <div class="error-message" id="name-error">Please enter your full name</div>
+          </div>
+          <div class="form-group">
+            <label for="reg-email">Email Address*</label>
+            <input type="email" id="reg-email" class="input-field" required placeholder="example@domain.com" data-tooltip="Valid email required">
+            <div class="error-message" id="email-error">Please enter a valid email address</div>
+          </div>
+          <div class="form-group">
+            <label for="reg-phone">Phone Number*</label>
+            <input type="tel" id="reg-phone" class="input-field" pattern="\d{8}" title="Please enter 8 digits" required placeholder="9232678" data-tooltip="8 digits only">
+            <div class="error-message" id="phone-error">Please enter a valid 8-digit phone number</div>
+          </div>
+          <div id="staff-number-container" class="form-group" style="display: none;">
+            <label for="staff-number">Staff Number</label>
+            <input type="text" id="staff-number" class="input-field" data-tooltip="2 uppercase + 4 digits">
+            <div class="error-message" id="staff-error">Please enter your staff number</div>
+          </div>
+          <div id="username-container" class="form-group" style="display: none;">
+            <label for="username">Username*</label>
+            <input type="text" id="username" class="input-field" data-tooltip="3-20 chars: letters, numbers, _">
+            <div class="error-message" id="username-error">Please enter your username</div>
+          </div>
+          <div class="form-group">
+            <label for="reg-password">Password*</label>
+            <div class="password-container">
+              <input type="password" id="reg-password" class="input-field" pattern="[A-Za-z0-9_$!@#|]{6,}" required placeholder="Create a password">
+              <i class="password-toggle fas fa-eye"></i>
+            </div>
+            <div class="strength-bar">
+              <div class="strength-bar-fill"></div>
+            </div>
+            <div id="strength-message"></div>
+            <div class="password-requirements">
+              <p>Password must contain:</p>
+              <ul style="list-style-type: none; padding-left: 0;">
+                <li id="min">At least 8 characters</li>
+                <li id="oneUpper">At least one uppercase letter</li>
+                <li id="oneNum">At least one number</li>  
+                <li id="oneSpecial">At least one special character</li>
+              </ul>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="reg-confirm-password">Confirm Password*</label>
+            <div class="password-container">
+              <input type="password" id="reg-confirm-password" class="input-field" required placeholder="Re-enter your password">
+              <i class="password-toggle fas fa-eye"></i>
+            </div>
+            <div class="error-message" id="password-match-error">Passwords do not match</div>
+          </div>
+          <div class="form-group">
+            <label>
+              <input type="checkbox" required>
+              I agree to the terms and conditions
+            </label>
+          </div>
+          <button type="submit" class="btn" disabled>Register</button>
+        </form>
+        <div id="registration-message"></div>
+      </div>
+    </div>
+    
+    <script>
+    window.toggleTheme = function() {
+      const body = document.body;
+      if (body.getAttribute('data-theme') === 'dark') {
+        body.removeAttribute('data-theme');
+      } else {
+        body.setAttribute('data-theme', 'dark');
+      }
+    }
+    
+    window.switchTab = function(tab) {
+      const tabs = document.querySelectorAll('.tab');
+      tabs.forEach(t => t.classList.remove('active'));
+      
+      document.querySelector(`.tab[data-tab="${tab}"]`).classList.add('active');
+    
+      document.getElementById('login-form').style.display = tab === 'login' ? 'block' : 'none';
+      document.getElementById('register-form').style.display = tab === 'register' ? 'block' : 'none';
+      document.getElementById('registration-details').style.display = 'none';
+    }
+    
+    window.updateLoginForm = function() {
+      const loginType = document.getElementById('login-type').value;
+      const usernameEmailLabel = document.getElementById('username-email-label');
+      
+      if (loginType === 'insurance-sales') {
+        usernameEmailLabel.textContent = 'Username';
+      } else {
+        usernameEmailLabel.textContent = 'Email Address*';
+      }
+    }
+    
+    window.showRegistrationForm = function(role) {
+      window.currentRole = role;
+      document.getElementById('register-form').style.display = 'none';
+      document.getElementById('registration-details').style.display = 'block';
+      document.getElementById('registration-title').textContent = `${role.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')} Registration`;
+      
+      const staffNumberContainer = document.getElementById('staff-number-container');
+      const usernameContainer = document.getElementById('username-container');
+      
+      if (role === 'vehicle-sales' || role === 'insurance-sales') {
+        staffNumberContainer.style.display = 'block';
+      } else {
+        staffNumberContainer.style.display = 'none';
+      }
+      
+      if (role === 'insurance-sales') {
+        usernameContainer.style.display = 'block';
+      } else {
+        usernameContainer.style.display = 'none';
+      }
+    }
+    
+    window.showForgotPassword = function() {
+      const modal = document.getElementById('forgot-password-modal');
+      modal.style.display = 'flex';
+      document.getElementById('reset-email').focus();
+    }
+    
+    window.hideForgotPassword = function() {
+      document.getElementById('forgot-password-modal').style.display = 'none';
+    }
+    
+    // Add ESC key handler
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        hideForgotPassword();
+      }
+    });
+    
+    // Close modal when clicking outside
+    document.getElementById('forgot-password-modal').addEventListener('click', function(e) {
+      if (e.target === this) {
+        hideForgotPassword();
+      }
+    });
+    
+    window.handleForgotPassword = async function(event) {
+      event.preventDefault();
+      try {
+        const email = document.getElementById('reset-email').value;
+        alert('Password reset instructions have been sent to ' + email);
+        hideForgotPassword();
+      } catch (err) {
+        console.error('Password reset error:', err);
+      }
+    }
+    
+    window.handleLogin = async function(event) {
+      event.preventDefault();
+      try {
+        const loginType = document.getElementById('login-type')?.value || '';
+        const usernameEmail = document.getElementById('username-email')?.value || '';
+        const password = document.getElementById('password')?.value || '';
+        
+        console.log('Login attempted:', { loginType, usernameEmail, password });
+      } catch (err) {
+        console.error('Login error:', err);
+      }
+    }
+    
+    window.handleRegistration = function(event) {
+      if (!event) return;
+      event.preventDefault();
+      
+      try {
+        // Initialize currentRole if not set
+        if (typeof window.currentRole === 'undefined') {
+          window.currentRole = '';
+        }
+    
+        // Reset all errors
+        const errorMessages = document.querySelectorAll('.error-message');
+        if (errorMessages) {
+          errorMessages.forEach(msg => {
+            msg.style.display = 'none';
+          });
+        }
+        
+        const inputFields = document.querySelectorAll('.input-field');
+        if (inputFields) {
+          inputFields.forEach(input => {
+            input.classList.remove('error');
+          });
+        }
+    
+        let hasErrors = false;
+        let errorFields = [];
+        
+        // Validate name
+        const nameInput = document.getElementById('reg-name');
+        if (nameInput && (!nameInput.value || !nameInput.value.trim())) {
+          nameInput.classList.add('error');
+          const nameError = document.getElementById('name-error');
+          if (nameError) nameError.style.display = 'block';
+          hasErrors = true;
+          errorFields.push('Full Name');
+        }
+    
+        // Validate email
+        const emailInput = document.getElementById('reg-email');
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (emailInput && (!emailInput.value || !emailRegex.test(emailInput.value))) {
+          emailInput.classList.add('error');
+          const emailError = document.getElementById('email-error');
+          if (emailError) emailError.style.display = 'block';
+          hasErrors = true;
+          errorFields.push('Email Address');
+        }
+    
+        // Validate phone
+        const phoneInput = document.getElementById('reg-phone');
+        const phoneRegex = /^\d{8}$/;
+        if (phoneInput && (!phoneInput.value || !phoneRegex.test(phoneInput.value))) {
+          phoneInput.classList.add('error');
+          const phoneError = document.getElementById('phone-error');
+          if (phoneError) phoneError.style.display = 'block';
+          hasErrors = true;
+          errorFields.push('Phone Number');
+        }
+    
+        // Validate password
+        const passwordInput = document.getElementById('reg-password');
+        const confirmInput = document.getElementById('reg-confirm-password');
+        
+        if (passwordInput && confirmInput && passwordInput.value !== confirmInput.value) {
+          confirmInput.classList.add('error');
+          const matchError = document.getElementById('password-match-error');
+          if (matchError) matchError.style.display = 'block';
+          hasErrors = true;
+          errorFields.push('Password Match');
+        }
+    
+        const termsCheckbox = document.querySelector('#registration-details input[type="checkbox"]');
+        const submitButton = document.querySelector('#registration-details button[type="submit"]');
+        if (submitButton) {
+          if (hasErrors || !termsCheckbox.checked) {
+            submitButton.disabled = true;
+            submitButton.setAttribute('data-tooltip', 'Please complete: ' + errorFields.join(', ') + (termsCheckbox.checked ? '' : ', agree to terms'));
+          } else {
+            submitButton.disabled = false;
+            submitButton.removeAttribute('data-tooltip');
+          }
+        }
+    
+        // Show success message if no errors
+        if (!hasErrors) {
+          const messageElement = document.getElementById('registration-message');
+          if (messageElement) {
+            messageElement.style.display = 'block';
+            messageElement.textContent = window.currentRole === 'insurance-sales' 
+              ? 'Your registration will be validated by an admin. You will be notified once approved.'
+              : 'Registration successful! You can now login.';
+          }
+        }
+        
+      } catch (err) {
+        console.error('Registration error:', err);
+      }
+    }
+    
+    // Add toggle password functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      const togglePassword = document.querySelectorAll('.password-toggle');
+      
+      togglePassword.forEach(toggle => {
+        toggle.addEventListener('click', function() {
+          const passwordInput = this.previousElementSibling;
+          if (passwordInput.type === 'password') {
+            passwordInput.type = 'text';
+            this.classList.remove('fa-eye');
+            this.classList.add('fa-eye-slash');
+          } else {
+            passwordInput.type = 'password';
+            this.classList.remove('fa-eye-slash');
+            this.classList.add('fa-eye');
+          }
+        });
+      });
+    });
+    
+    // Initialize on page load
+    document.addEventListener('DOMContentLoaded', function() {
+      try {
+        window.currentRole = '';
+        
+        // Get password input and requirements list
+        const passwordInput = document.getElementById('reg-password');
+        const confirmInput = document.getElementById('reg-confirm-password');
+        const strengthBar = document.querySelector('.strength-bar-fill');
+        const strengthMessage = document.getElementById('strength-message');
+        
+        const minReq = document.getElementById('min');
+        const upperReq = document.getElementById('oneUpper');
+        const numReq = document.getElementById('oneNum');
+        const specialReq = document.getElementById('oneSpecial');
+    
+        // Add input event listener to password field
+        passwordInput.addEventListener('input', function() {
+          const password = this.value;
+          
+          // Check requirements
+          const hasMinLength = password.length >= 8;
+          const hasUpper = /[A-Z]/.test(password);
+          const hasNumber = /[0-9]/.test(password);
+          const hasSpecial = /[!@#$%^&*]/.test(password);
+          
+          // Update requirement indicators
+          minReq.classList.toggle('valid', hasMinLength);
+          upperReq.classList.toggle('valid', hasUpper); 
+          numReq.classList.toggle('valid', hasNumber);
+          specialReq.classList.toggle('valid', hasSpecial);
+    
+          // Calculate strength
+          let strength = 0;
+          if(hasMinLength) strength += 25;
+          if(hasUpper) strength += 25;
+          if(hasNumber) strength += 25;
+          if(hasSpecial) strength += 25;
+    
+          // Update strength bar
+          strengthBar.style.width = strength + '%';
+          
+          // Set color based on strength
+          if(strength <= 25) {
+            strengthBar.style.backgroundColor = '#ff4444';
+            strengthMessage.textContent = 'Weak';
+          } else if(strength <= 50) {
+            strengthBar.style.backgroundColor = '#ffbb33';
+            strengthMessage.textContent = 'Fair';
+          } else if(strength <= 75) {
+            strengthBar.style.backgroundColor = '#00C851';
+            strengthMessage.textContent = 'Good';
+          } else {
+            strengthBar.style.backgroundColor = '#007E33';
+            strengthMessage.textContent = 'Strong';
+          }
+    
+          validateForm();
+        });
+    
+        // Add validation for confirm password
+        confirmInput.addEventListener('input', validateForm);
+    
+        // Form validation function
+        function validateForm() {
+          const password = passwordInput.value;
+          const confirmPassword = confirmInput.value;
+          const form = document.querySelector('#registration-details form');
+          const submitButton = form.querySelector('button[type="submit"]');
+          const termsCheckbox = form.querySelector('input[type="checkbox"]');
+          
+          const requiredFields = form.querySelectorAll('input[required]');
+          let allFieldsFilled = true;
+          
+          requiredFields.forEach(field => {
+            if (!field.value) {
+              allFieldsFilled = false;
+            }
+          });
+    
+          // Check password requirements
+          const meetsRequirements = 
+            password.length >= 8 &&
+            /[A-Z]/.test(password) &&
+            /[0-9]/.test(password) &&
+            /[!@#$%^&*]/.test(password);
+    
+          // Enable button only if all conditions are met
+          submitButton.disabled = !(allFieldsFilled && meetsRequirements && 
+                              password === confirmPassword && 
+                              termsCheckbox.checked);
+        }
+    
+        // Add event listener for checkbox
+        const termsCheckbox = document.querySelector('#registration-details input[type="checkbox"]');
+        if (termsCheckbox) {
+          termsCheckbox.addEventListener('change', validateForm);
+        }
+    
+        // Add validation to all required fields
+        const form = document.querySelector('#registration-details form');
+        if (form) {
+          form.querySelectorAll('input[required]').forEach(input => {
+            input.addEventListener('input', validateForm);
+          });
+        }
+    
+      } catch (err) {
+        console.error('Initialization error:', err);
+      }
+    });
+    </script>
+    </body></html>
