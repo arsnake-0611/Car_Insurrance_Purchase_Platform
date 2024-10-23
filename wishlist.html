@@ -1,0 +1,298 @@
+<html><head>
+<title>Legend Motor - My Wishlist</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+    --primary-color: #212121;
+    --secondary-color: #4a90e2;
+    --accent-color: #ff4081;
+    --text-color: #333;
+    --background-color: #f8f9fa;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.6;
+    background-color: var(--background-color);
+}
+
+header {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 1rem 0;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+nav a:hover {
+    color: var(--secondary-color);
+}
+
+.wishlist-header {
+    margin-top: 100px;
+    text-align: center;
+    padding: 20px;
+}
+
+.wishlist-container {
+    margin-top: 20px;
+}
+
+.wishlist-item {
+    background: white;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 200px 1fr auto;
+    gap: 20px;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.wishlist-item:hover {
+    transform: translateY(-2px);
+}
+
+.vehicle-image {
+    width: 200px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.vehicle-info {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.vehicle-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.vehicle-specs {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 10px;
+    font-size: 0.9rem;
+}
+
+.spec-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.price-change {
+    color: #4CAF50;
+    font-size: 0.9rem;
+}
+
+.price-increase {
+    color: #f44336;
+}
+
+.actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: center;
+}
+
+.btn {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 0.9rem;
+    text-align: center;
+    text-decoration: none;
+}
+
+.btn-primary {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+.btn-outline {
+    background-color: transparent;
+    border: 1px solid var(--secondary-color);
+    color: var(--secondary-color);
+}
+
+.btn-remove {
+    background-color: transparent;
+    border: 1px solid #f44336;
+    color: #f44336;
+}
+
+.empty-wishlist {
+    text-align: center;
+    margin-top: 50px;
+    padding: 50px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.empty-wishlist svg {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+    .wishlist-item {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .vehicle-image {
+        width: 100%;
+        height: 200px;
+    }
+
+    .actions {
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    nav ul {
+        display: none;
+    }
+}
+</style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div style="width:50px; height:50px; background:#fff; border-radius:50%; display:flex; align-items:center; justify-content:center;">
+                <span style="color:#212121; font-weight:bold;">LM</span>
+            </div>
+            <ul>
+                <li><a href="home.html">Home</a></li>
+                <li><a href="vehicles.html">Vehicles</a></li>
+                <li><a href="wishlist.html">Wishlist</a></li>
+                <li><a href="myAccount.html">My Account</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        <div class="wishlist-header">
+            <h1>My Wishlist</h1>
+            <p>Keep track of your favorite vehicles and get notified about price changes</p>
+        </div>
+
+        <div class="wishlist-container">
+            <div class="wishlist-item">
+                <img src="https://images.unsplash.com/photo-1555652736-e92021d28a10" alt="Mercedes-Benz S-Class, luxury sedan in silver" class="vehicle-image">
+                <div class="vehicle-info">
+                    <div class="vehicle-title">2024 Mercedes-Benz S-Class</div>
+                    <div class="vehicle-specs">
+                        <div class="spec-item">🛣️ 15 miles</div>
+                        <div class="spec-item">⚡ 429 HP</div>
+                        <div class="spec-item">🌍 AWD</div>
+                        <div class="spec-item">🎨 Silver</div>
+                    </div>
+                    <div class="price-info">
+                        <div class="current-price">$125,000</div>
+                        <div class="price-change">Price dropped by $5,000</div>
+                    </div>
+                </div>
+                <div class="actions">
+                    <a href="https://legendmotor.com/vehicles/schedule-test-drive" class="btn btn-primary">Schedule Test Drive</a>
+                    <a href="https://legendmotor.com/vehicles/details" class="btn btn-outline">View Details</a>
+                    <button class="btn btn-remove">Remove from Wishlist</button>
+                </div>
+            </div>
+
+            <div class="wishlist-item">
+                <img src="https://images.unsplash.com/photo-1600705722952-b0d49f3e4e7a" alt="Porsche 911, sports car in red" class="vehicle-image">
+                <div class="vehicle-info">
+                    <div class="vehicle-title">2023 Porsche 911 Carrera S</div>
+                    <div class="vehicle-specs">
+                        <div class="spec-item">🛣️ 250 miles</div>
+                        <div class="spec-item">⚡ 443 HP</div>
+                        <div class="spec-item">🌍 RWD</div>
+                        <div class="spec-item">🎨 Red</div>
+                    </div>
+                    <div class="price-info">
+                        <div class="current-price">$165,000</div>
+                        <div class="price-change price-increase">Price increased by $2,000</div>
+                    </div>
+                </div>
+                <div class="actions">
+                    <a href="https://legendmotor.com/vehicles/schedule-test-drive" class="btn btn-primary">Schedule Test Drive</a>
+                    <a href="https://legendmotor.com/vehicles/details" class="btn btn-outline">View Details</a>
+                    <button class="btn btn-remove">Remove from Wishlist</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Remove from wishlist functionality
+        document.querySelectorAll('.btn-remove').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const wishlistItem = this.closest('.wishlist-item');
+                wishlistItem.style.opacity = '0';
+                setTimeout(() => {
+                    wishlistItem.remove();
+                    // Check if wishlist is empty
+                    if (document.querySelectorAll('.wishlist-item').length === 0) {
+                        const emptyState = document.createElement('div');
+                        emptyState.className = 'empty-wishlist';
+                        emptyState.innerHTML = `
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                            </svg>
+                            <h2>Your wishlist is empty</h2>
+                            <p>Start adding vehicles to your wishlist to keep track of your favorites</p>
+                            <a href="https://legendmotor.com/vehicles" class="btn btn-primary">Browse Vehicles</a>
+                        `;
+                        document.querySelector('.wishlist-container').appendChild(emptyState);
+                    }
+                }, 300);
+            });
+        });
+    </script>
+</body>
+</html>
