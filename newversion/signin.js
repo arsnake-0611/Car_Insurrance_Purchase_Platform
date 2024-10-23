@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 window.toggleTheme = function() {
   const body = document.body;
   if (body.getAttribute('data-theme') === 'dark') {
@@ -330,3 +331,5 @@ document.addEventListener('DOMContentLoaded', function() {
     console.error('Initialization error:', err);
   }
 });
+=======
+>>>>>>> parent of e4c313e (4.1 Chage minor)
