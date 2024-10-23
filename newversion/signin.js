@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-window.toggleTheme = function() {
+function toggleTheme() {
   const body = document.body;
   if (body.getAttribute('data-theme') === 'dark') {
     body.removeAttribute('data-theme');
@@ -8,7 +7,7 @@ window.toggleTheme = function() {
   }
 }
 
-window.switchTab = function(tab) {
+function switchTab(tab) {
   const tabs = document.querySelectorAll('.tab');
   tabs.forEach(t => t.classList.remove('active'));
   
@@ -19,7 +18,7 @@ window.switchTab = function(tab) {
   document.getElementById('registration-details').style.display = 'none';
 }
 
-window.updateLoginForm = function() {
+function updateLoginForm() {
   const loginType = document.getElementById('login-type').value;
   const usernameEmailLabel = document.getElementById('username-email-label');
   
@@ -30,8 +29,8 @@ window.updateLoginForm = function() {
   }
 }
 
-window.showRegistrationForm = function(role) {
-  window.currentRole = role;
+function showRegistrationForm(role) {
+  currentRole = role;
   document.getElementById('register-form').style.display = 'none';
   document.getElementById('registration-details').style.display = 'block';
   document.getElementById('registration-title').textContent = `${role.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')} Registration`;
@@ -52,13 +51,13 @@ window.showRegistrationForm = function(role) {
   }
 }
 
-window.showForgotPassword = function() {
+function showForgotPassword() {
   const modal = document.getElementById('forgot-password-modal');
   modal.style.display = 'flex';
   document.getElementById('reset-email').focus();
 }
 
-window.hideForgotPassword = function() {
+function hideForgotPassword() {
   document.getElementById('forgot-password-modal').style.display = 'none';
 }
 
@@ -76,7 +75,7 @@ document.getElementById('forgot-password-modal').addEventListener('click', funct
   }
 });
 
-window.handleForgotPassword = async function(event) {
+function handleForgotPassword(event) {
   event.preventDefault();
   try {
     const email = document.getElementById('reset-email').value;
@@ -87,7 +86,7 @@ window.handleForgotPassword = async function(event) {
   }
 }
 
-window.handleLogin = async function(event) {
+function handleLogin(event) {
   event.preventDefault();
   try {
     const loginType = document.getElementById('login-type')?.value || '';
@@ -100,14 +99,14 @@ window.handleLogin = async function(event) {
   }
 }
 
-window.handleRegistration = function(event) {
+function handleRegistration(event) {
   if (!event) return;
   event.preventDefault();
   
   try {
     // Initialize currentRole if not set
-    if (typeof window.currentRole === 'undefined') {
-      window.currentRole = '';
+    if (typeof currentRole === 'undefined') {
+      currentRole = '';
     }
 
     // Reset all errors
@@ -189,7 +188,7 @@ window.handleRegistration = function(event) {
       const messageElement = document.getElementById('registration-message');
       if (messageElement) {
         messageElement.style.display = 'block';
-        messageElement.textContent = window.currentRole === 'insurance-sales' 
+        messageElement.textContent = currentRole === 'insurance-sales' 
           ? 'Your registration will be validated by an admin. You will be notified once approved.'
           : 'Registration successful! You can now login.';
       }
@@ -223,7 +222,7 @@ document.addEventListener('DOMContentLoaded', function() {
 // Initialize on page load
 document.addEventListener('DOMContentLoaded', function() {
   try {
-    window.currentRole = '';
+    currentRole = '';
     
     // Get password input and requirements list
     const passwordInput = document.getElementById('reg-password');
@@ -331,5 +330,3 @@ document.addEventListener('DOMContentLoaded', function() {
     console.error('Initialization error:', err);
   }
 });
-=======
->>>>>>> parent of e4c313e (4.1 Chage minor)

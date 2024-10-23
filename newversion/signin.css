@@ -1,492 +1,494 @@
 body {
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    margin: 0;
-    padding: 30px;
-    background-color: #ffffff;
-    color: #202124;
-    transition: all 0.3s ease;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  margin: 0;
+  padding: 30px;
+  background-color: #ffffff;
+  color: #202124;
+  transition: all 0.3s ease;
+}
+
+body[data-theme="dark"] {
+  background-color: #202124;
+  color: #e8eaed;
+}
+
+.theme-toggle {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: none;
+  border: none;
+  color: #202124;
+  cursor: pointer;
+  font-size: 24px;
+}
+
+body[data-theme="dark"] .theme-toggle {
+  color: #e8eaed;
+}
+
+.input-field {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #dadce0;
+  border-radius: 4px;
+  background-color: #f1f3f4;
+  color: #202124;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+}
+
+body[data-theme="dark"] .input-field {
+  border-color: #5f6368;
+  background-color: #303134;
+  color: #e8eaed;
+}
+
+.input-field:focus {
+  border-color: #1a73e8;
+  box-shadow: 0 0 0 2px rgba(26, 115, 232, 0.2);
+}
+
+body[data-theme="dark"] .input-field:focus {
+  border-color: #8ab4f8;
+}
+
+.input-field.error {
+  border-color: #d93025;
+}
+
+body[data-theme="dark"] .input-field.error {
+  border-color: #ff7066;
+}
+
+.error-message {
+  color: #d93025;
+  font-size: 12px;
+  margin-top: 4px;
+  display: none;
+}
+
+body[data-theme="dark"] .error-message {
+  color: #ff7066;
+}
+
+.btn {
+  width: 100%;
+  padding: 12px;
+  background-color: #1a73e8;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.btn:hover:not(:disabled) {
+  background-color: #4285f4;
+  transform: translateY(-1px);
+}
+
+.btn:active:not(:disabled) {
+  background-color: #1557b0;
+  transform: translateY(1px);
+}
+
+.btn:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.btn:disabled:hover {
+  position: relative;
+}
+
+.btn:disabled:hover::after {
+  content: "Please complete all required fields and match password requirements";
+  position: absolute;
+  bottom: -120%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 8px 12px;
+  background: #333;
+  color: white;
+  border-radius: 4px;
+  font-size: 12px;
+  white-space: nowrap;
+  z-index: 1000;
+}
+
+body[data-theme="dark"] .btn:disabled {
+  background-color: #666666;
+}
+
+.role-card {
+  padding: 15px;
+  border: 2px solid #dadce0;
+  border-radius: 8px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+body[data-theme="dark"] .role-card {
+  border-color: #5f6368;
+}
+
+.role-card:hover {
+  border-color: #1a73e8;
+  background-color: #e8f0fe;
+}
+
+body[data-theme="dark"] .role-card:hover {
+  border-color: #8ab4f8;
+  background-color: #303134;
+}
+
+.role-card img {
+  width: 48px;
+  height: 48px;
+  margin-bottom: 10px;
+  display: block;
+  margin: 0 auto 10px auto;
+}
+
+#registration-message {
+  margin-top: 15px;
+  padding: 10px;
+  border-radius: 4px;
+  background-color: #e8f0fe;
+  text-align: center;
+  display: none;
+}
+
+body[data-theme="dark"] #registration-message {
+  background-color: #303134;
+}
+
+.container {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 30px;
+}
+
+.tab-container {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  position: relative;
+  padding: 2px;
+  background-color: #f1f3f4;
+  border-radius: 9px;
+  margin: 10px 20px 0px 20px;
+  overflow: hidden;
+}
+
+.tab {
+  width: 50%;
+  height: 28px;
+  position: relative;
+  z-index: 99;
+  background-color: transparent;
+  border: 0;
+  outline: none;
+  flex: none;
+  align-self: stretch;
+  flex-grow: 1;
+  cursor: pointer;
+  font-weight: 500;
+  color: #202124;
+  transition: color 0.3s ease;
+}
+
+.tab:hover {
+  color: #1a73e8;
+  transition: color 0.2s ease;
+}
+
+body[data-theme="dark"] .tab:hover {
+  color: #8ab4f8;
+}
+
+.indicator {
+  position: absolute;
+  height: calc(100% - 4px);
+  width: calc(50% - 4px);
+  background-color: #ffffff;
+  border-radius: 7px;
+  top: 2px;
+  left: 2px;
+  transition: left 0.3s ease;
+}
+
+.tab.active {
+  color: #1a73e8;
+}
+
+.tab1:hover ~ .indicator {
+  left: 2px;
+}
+
+.tab2:hover ~ .indicator {
+  left: calc(50% - 2px);
+}
+
+.tab1.active ~ .indicator {
+  left: 2px;
+}
+
+.tab2.active ~ .indicator {
+  left: calc(50% - 2px);
+}
+
+.form-container {
+  margin-top: 20px;
+}
+
+.form-group {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.password-container {
+  position: relative;
+}
+
+.password-toggle {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #757575;
+  transition: color 0.3s ease;
+}
+
+.password-toggle:hover {
+  color: #1a73e8;
+}
+
+body[data-theme="dark"] .password-toggle {
+  color: #9aa0a6;
+}
+
+body[data-theme="dark"] .password-toggle:hover {
+  color: #8ab4f8;
+}
+
+.role-selection {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.hidden {
+  display: none;
+}
+
+.registration-form {
+  animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
   }
-  
-  body[data-theme="dark"] {
-    background-color: #202124;
-    color: #e8eaed;
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
-  
-  .theme-toggle {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    background: none;
-    border: none;
-    color: #202124;
-    cursor: pointer;
-    font-size: 24px;
-  }
-  
-  body[data-theme="dark"] .theme-toggle {
-    color: #e8eaed;
-  }
-  
-  .input-field {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #dadce0;
-    border-radius: 4px;
-    background-color: #f1f3f4;
-    color: #202124;
-    box-sizing: border-box;
-    transition: all 0.3s ease;
-  }
-  
-  body[data-theme="dark"] .input-field {
-    border-color: #5f6368;
-    background-color: #303134;
-    color: #e8eaed;
-  }
-  
-  .input-field:focus {
-    border-color: #1a73e8;
-    box-shadow: 0 0 0 2px rgba(26, 115, 232, 0.2);
-  }
-  
-  body[data-theme="dark"] .input-field:focus {
-    border-color: #8ab4f8;
-  }
-  
-  .input-field.error {
-    border-color: #d93025;
-  }
-  
-  body[data-theme="dark"] .input-field.error {
-    border-color: #ff7066;
-  }
-  
-  .error-message {
-    color: #d93025;
-    font-size: 12px;
-    margin-top: 4px;
-    display: none;
-  }
-  
-  body[data-theme="dark"] .error-message {
-    color: #ff7066;
-  }
-  
-  .btn {
-    width: 100%;
-    padding: 12px;
-    background-color: #1a73e8;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-weight: 500;
-    transition: all 0.3s ease;
-  }
-  
-  .btn:hover:not(:disabled) {
-    background-color: #4285f4;
-    transform: translateY(-1px);
-  }
-  
-  .btn:active:not(:disabled) {
-    background-color: #1557b0;
-    transform: translateY(1px);
-  }
-  
-  .btn:disabled {
-    background-color: #cccccc;
-    cursor: not-allowed;
-    opacity: 0.7;
-  }
-  
-  .btn:disabled:hover {
-    position: relative;
-  }
-  
-  .btn:disabled:hover::after {
-    content: "Please complete all required fields and match password requirements";
-    position: absolute;
-    bottom: -120%;
-    left: 50%;
-    transform: translateX(-50%);
-    padding: 8px 12px;
-    background: #333;
-    color: white;
-    border-radius: 4px;
-    font-size: 12px;
-    white-space: nowrap;
-    z-index: 1000;
-  }
-  
-  body[data-theme="dark"] .btn:disabled {
-    background-color: #666666;
-  }
-  
-  .role-card {
-    padding: 15px;
-    border: 2px solid #dadce0;
-    border-radius: 8px;
-    text-align: center;
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-  
-  body[data-theme="dark"] .role-card {
-    border-color: #5f6368;
-  }
-  
-  .role-card:hover {
-    border-color: #1a73e8;
-    background-color: #e8f0fe;
-  }
-  
-  body[data-theme="dark"] .role-card:hover {
-    border-color: #8ab4f8;
-    background-color: #303134;
-  }
-  
-  #registration-message {
-    margin-top: 15px;
-    padding: 10px;
-    border-radius: 4px;
-    background-color: #e8f0fe;
-    text-align: center;
-    display: none;
-  }
-  
-  body[data-theme="dark"] #registration-message {
-    background-color: #303134;
-  }
-  
+}
+
+.strength-bar {
+  height: 5px;
+  background-color: #e0e0e0;
+  margin-top: 5px;
+  border-radius: 3px;
+}
+
+.strength-bar-fill {
+  height: 100%;
+  width: 0;
+  border-radius: 3px;
+  transition: all 0.3s;
+}
+
+.password-requirements {
+  margin-top: 10px;
+  font-size: 12px;
+}
+
+.password-requirements ul {
+  margin: 5px 0;
+  padding-left: 0;
+  list-style-type: none;
+}
+
+.password-requirements li {
+  color: #757575;
+  position: relative;
+  list-style: none;
+  margin-left: 20px;
+}
+
+.password-requirements li.valid::before {
+  content: '✓';
+  position: absolute;
+  left: -20px;
+  color: green;
+}
+
+.password-requirements li:not(.valid)::before {
+  content: '✕';  
+  position: absolute;
+  left: -20px;
+  color: #d93025;
+}
+
+#strength-message {
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+.password-toggle {
+  cursor: pointer;
+  user-select: none;
+}
+
+.input-field[data-tooltip] {
+  position: relative;
+}
+
+.input-field[data-tooltip]:hover::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  background: #333;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  white-space: nowrap;
+  z-index: 100;
+  margin-bottom: 5px;
+}
+
+.help-icon {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #1a73e8;
+  color: white;
+  text-align: center;
+  font-size: 12px;
+  line-height: 16px;
+  cursor: pointer;
+  margin-left: 5px;
+  transition: background-color 0.2s;
+}
+
+.help-icon:hover {
+  background: #1557b0;
+}
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip .tooltip-text {
+  visibility: hidden;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 8px;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+  font-size: 12px;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.tooltip:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
+}
+
+#forgot-password-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+}
+
+body[data-theme="dark"] #forgot-password-modal .modal-content {
+  background: #303134;
+  color: #e8eaed;
+}
+
+.modal-content {
+  background: white;
+  padding: 25px;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  position: relative;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.close-modal {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: inherit;
+  padding: 0;
+  margin: 0;
+}
+
+.close-modal:hover {
+  opacity: 0.7;
+}
+
+@media (max-width: 480px) {
   .container {
-    max-width: 400px;
-    margin: 0 auto;
-    padding: 30px;
-  }
-  
-  .tab-container {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    position: relative;
-    padding: 2px;
-    background-color: #f1f3f4;
-    border-radius: 9px;
-    margin: 10px 20px 0px 20px;
-    overflow: hidden;
-  }
-  
-  .tab {
-    width: 50%;
-    height: 28px;
-    position: relative;
-    z-index: 99;
-    background-color: transparent;
-    border: 0;
-    outline: none;
-    flex: none;
-    align-self: stretch;
-    flex-grow: 1;
-    cursor: pointer;
-    font-weight: 500;
-    color: #202124;
-    transition: color 0.3s ease;
-  }
-  
-  .tab:hover {
-    color: #1a73e8;
-    transition: color 0.2s ease;
-  }
-  
-  body[data-theme="dark"] .tab:hover {
-    color: #8ab4f8;
-  }
-  
-  .indicator {
-    position: absolute;
-    height: calc(100% - 4px);
-    width: calc(50% - 4px);
-    background-color: #ffffff;
-    border-radius: 7px;
-    top: 2px;
-    left: 2px;
-    transition: left 0.3s ease;
-  }
-  
-  .tab.active {
-    color: #1a73e8;
-  }
-  
-  .tab--1:hover ~ .indicator {
-    left: 2px;
-  }
-  
-  .tab--2:hover ~ .indicator {
-    left: calc(50% - 2px);
-  }
-  
-  .tab--1.active ~ .indicator {
-    left: 2px;
-  }
-  
-  .tab--2.active ~ .indicator {
-    left: calc(50% - 2px);
-  }
-  
-  .form-container {
-    margin-top: 20px;
-  }
-  
-  .form-group {
-    position: relative;
-    margin-bottom: 20px;
-  }
-  
-  .password-container {
-    position: relative;
-  }
-  
-  .password-toggle {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    cursor: pointer;
-    color: #757575;
-    transition: color 0.3s ease;
-  }
-  
-  .password-toggle:hover {
-    color: #1a73e8;
-  }
-  
-  body[data-theme="dark"] .password-toggle {
-    color: #9aa0a6;
-  }
-  
-  body[data-theme="dark"] .password-toggle:hover {
-    color: #8ab4f8;
+    padding: 15px;
+    margin: 10px;
   }
   
   .role-selection {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 15px;
-    margin-top: 20px;
+    grid-template-columns: 1fr;
   }
   
-  .role-card svg {
-    width: 48px;
-    height: 48px;
+  .form-group {
     margin-bottom: 10px;
   }
   
-  .hidden {
-    display: none;
+  .input-field {
+    padding: 10px;
   }
-  
-  .registration-form {
-    animation: slideIn 0.3s ease;
-  }
-  
-  @keyframes slideIn {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  
-  .strength-bar {
-    height: 5px;
-    background-color: #e0e0e0;
-    margin-top: 5px;
-    border-radius: 3px;
-  }
-  
-  .strength-bar-fill {
-    height: 100%;
-    width: 0;
-    border-radius: 3px;
-    transition: all 0.3s;
-  }
-  
-  .password-requirements {
-    margin-top: 10px;
-    font-size: 12px;
-  }
-  
-  .password-requirements ul {
-    margin: 5px 0;
-    padding-left: 0;
-    list-style-type: none;
-  }
-  
-  .password-requirements li {
-    color: #757575;
-    position: relative;
-    list-style: none;
-    margin-left: 20px;
-  }
-  
-  .password-requirements li.valid::before {
-    content: '✓';
-    position: absolute;
-    left: -20px;
-    color: green;
-  }
-  
-  .password-requirements li:not(.valid)::before {
-    content: '✕';  
-    position: absolute;
-    left: -20px;
-    color: #d93025;
-  }
-  
-  #strength-message {
-    font-size: 12px;
-    margin-top: 5px;
-  }
-  
-  .password-toggle {
-    cursor: pointer;
-    user-select: none;
-  }
-  
-  .input-field[data-tooltip] {
-    position: relative;
-  }
-  
-  .input-field[data-tooltip]:hover::after {
-    content: attr(data-tooltip);
-    position: absolute;
-    bottom: 100%;
-    left: 0;
-    background: #333;
-    color: white;
-    padding: 5px 10px;
-    border-radius: 4px;
-    font-size: 12px;
-    white-space: nowrap;
-    z-index: 100;
-    margin-bottom: 5px;
-  }
-  
-  .help-icon {
-    display: inline-block;
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    background: #1a73e8;
-    color: white;
-    text-align: center;
-    font-size: 12px;
-    line-height: 16px;
-    cursor: pointer;
-    margin-left: 5px;
-    transition: background-color 0.2s;
-  }
-  
-  .help-icon:hover {
-    background: #1557b0;
-  }
-  
-  .tooltip {
-    position: relative;
-    display: inline-block;
-  }
-  
-  .tooltip .tooltip-text {
-    visibility: hidden;
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-    border-radius: 6px;
-    padding: 8px;
-    position: absolute;
-    z-index: 1;
-    bottom: 125%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 200px;
-    font-size: 12px;
-    opacity: 0;
-    transition: opacity 0.2s;
-  }
-  
-  .tooltip:hover .tooltip-text {
-    visibility: visible;
-    opacity: 1;
-  }
-  
-  #forgot-password-modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0,0,0,0.5);
-    z-index: 1000;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  body[data-theme="dark"] #forgot-password-modal .modal-content {
-    background: #303134;
-    color: #e8eaed;
-  }
-  
-  .modal-content {
-    background: white;
-    padding: 25px;
-    border-radius: 8px;
-    width: 90%;
-    max-width: 400px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    position: relative;
-  }
-  
-  .modal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-  }
-  
-  .close-modal {
-    background: none;
-    border: none;
-    font-size: 24px;
-    cursor: pointer;
-    color: inherit;
-    padding: 0;
-    margin: 0;
-  }
-  
-  .close-modal:hover {
-    opacity: 0.7;
-  }
-  
-  @media (max-width: 480px) {
-    .container {
-      padding: 15px;
-      margin: 10px;
-    }
-    
-    .role-selection {
-      grid-template-columns: 1fr;
-    }
-    
-    .form-group {
-      margin-bottom: 10px;
-    }
-    
-    .input-field {
-      padding: 10px;
-    }
-  }
+}
