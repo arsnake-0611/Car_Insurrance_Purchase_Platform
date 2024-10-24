@@ -46,11 +46,14 @@ body[data-theme="dark"] .input-field {
 
 .input-field:focus {
   border-color: #1a73e8;
+  background-color: #889ea8;
   box-shadow: 0 0 0 2px rgba(26, 115, 232, 0.2);
 }
 
 body[data-theme="dark"] .input-field:focus {
   border-color: #8ab4f8;
+  background-color: #cccccc;
+  color: #303134;
 }
 
 .input-field.error {
@@ -171,6 +174,10 @@ body[data-theme="dark"] #registration-message {
   max-width: 400px;
   margin: 0 auto;
   padding: 30px;
+}
+
+.logo{
+  flex-direction: row;
 }
 
 .tab-container {
@@ -306,7 +313,7 @@ body[data-theme="dark"] .password-toggle:hover {
 .strength-bar {
   height: 5px;
   background-color: #e0e0e0;
-  margin-top: 5px;
+  margin-top: 10px;
   border-radius: 3px;
 }
 
@@ -480,6 +487,11 @@ body[data-theme="dark"] #forgot-password-modal .modal-content {
     margin: 10px;
   }
   
+  .logo{
+    flex-direction: row;
+    padding-left: 5px;
+  }
+
   .role-selection {
     grid-template-columns: 1fr;
   }
