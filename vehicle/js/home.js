@@ -1,3 +1,17 @@
+$(document).ready(function () {
+    $('.menu-icon-close').hide();
+    
+    $('.menu-icon-open').click(function () {
+      $('.menu-icon-open').hide();
+      $('.menu-icon-close').show();
+    });
+    
+    $('.menu-icon-close').click(function () {
+      $('.menu-icon-close').hide();
+      $('.menu-icon-open').show();
+    });
+});
+
 // Add smooth scrolling for anchor links
 document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
     anchor.addEventListener("click", function (e) {

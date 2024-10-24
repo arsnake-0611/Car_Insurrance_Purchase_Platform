@@ -38,8 +38,8 @@ header {
     font-family: "Copperplate", "Papyrus", fantasy; 
 }
 
-.logo-container:hover{
-   
+.menu-icon-open, .menu-icon-close {
+    display: none;
 }
 
 nav {
@@ -185,6 +185,13 @@ nav a:hover {
 }
 
 @media (max-width: 768px) {
+   .menu-icon-close {
+        display: block;
+    }
+    .menu-icon-open {
+        display: block;
+    }
+
     nav ul {
         display: none;
     }
