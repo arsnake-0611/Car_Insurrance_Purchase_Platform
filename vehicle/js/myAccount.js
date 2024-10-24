@@ -11,11 +11,6 @@ document.querySelectorAll('.tab').forEach(tab => {
     });
 });
 
-document.getElementById('logoLink').addEventListener('click', function(event) {
-    event.preventDefault();
-    window.location.href = 'home.html';
-});
-
 // Form submission handling
 document.getElementById('profile-form').addEventListener('submit', (e) => {
     e.preventDefault();

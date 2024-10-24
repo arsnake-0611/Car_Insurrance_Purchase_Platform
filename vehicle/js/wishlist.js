@@ -1,8 +1,3 @@
-document.getElementById('logoLink').addEventListener('click', function(event) {
-    event.preventDefault();
-    window.location.href = 'home.html';
-});
-
   // Remove from wishlist functionality
    document.querySelectorAll('.btn-remove').forEach(btn => {
     btn.addEventListener('click', function() {

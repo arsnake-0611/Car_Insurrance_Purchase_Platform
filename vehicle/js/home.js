@@ -8,11 +8,6 @@ document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
     });
 });
 
-document.getElementById('logoLink').addEventListener('click', function(event) {
-    event.preventDefault();
-    window.location.href = 'home.html';
-});
-
 // Add scroll animation for elements
 window.addEventListener("scroll", function () {
     const elements = document.querySelectorAll(
