@@ -2,13 +2,13 @@ body {
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   margin: 0;
   padding: 30px;
-  background-color: #ffffff;
-  color: #202124;
+  background-color: #f5f6f8;
+  color: #303136;
   transition: all 0.3s ease;
 }
 
 body[data-theme="dark"] {
-  background-color: #202124;
+  background-color: #40444b;
   color: #e8eaed;
 }
 
@@ -31,7 +31,7 @@ body[data-theme="dark"] .theme-toggle {
   width: 100%;
   padding: 12px;
   border: 1px solid #dadce0;
-  border-radius: 4px;
+  border-radius: 30px;
   background-color: #f1f3f4;
   color: #202124;
   box-sizing: border-box;
@@ -40,14 +40,14 @@ body[data-theme="dark"] .theme-toggle {
 
 body[data-theme="dark"] .input-field {
   border-color: #5f6368;
-  background-color: #303134;
-  color: #e8eaed;
+  background-color: #232529;
+  color: #f4f5f7
 }
 
 .input-field:focus {
   border-color: #1a73e8;
   background-color: #889ea8;
-  box-shadow: 0 0 0 2px rgba(26, 115, 232, 0.2);
+  box-shadow: 0 0 0 2px #1a73e833;
 }
 
 body[data-theme="dark"] .input-field:focus {
@@ -488,8 +488,7 @@ body[data-theme="dark"] #forgot-password-modal .modal-content {
   }
   
   .logo{
-    flex-direction: row;
-    padding-left: 5px;
+    position: relative;
   }
 
   .role-selection {
