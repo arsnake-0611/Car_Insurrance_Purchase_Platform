@@ -1,113 +1,85 @@
 <html>
   <head>
     <title>Legend Motor - My Wishlist</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap"
-      rel="stylesheet"
-    />
-    <link href="css/wishlist.css" rel="stylesheet" />
-  </head>
-  <body>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="css/wishlist.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="./js/wishlist.js"></script>
+</head>
+<body>
     <header>
         <nav class="container">
-          <a href="home.html">
-            <div class="logo-container">
-              <img src="./photo/lm-logo.png" alt="Legend Motor" style="width:40px;height:auto;" />
-              <div style="color: #42768c;font-size:25px;">|&nbsp;&nbsp;Legend Motor</div>
-            </div>
-          </a>
-          <ul>
-            <li><a href="home.html">Home</a></li>
-            <li><a href="vehicles.html">Vehicles</a></li>
-            <li><a href="wishlist.html">Wishlist</a></li>
-            <li><a href="orders.html">Orders</a></li>
-            <li><a href="myAccount.html">My Account</a></li>
-          </ul>
+            <a href="home.html">
+                <div class="logo-container">
+                    <img src="./photo/lm-logo.png" alt="Legend Motor" style="width:40px;height:auto;">
+                    <div style="color: #42768c;font-size:25px;">|&nbsp;&nbsp;Legend Motor</div>
+                </div>
+            </a>
+            <ul>
+                <li><a href="home.html">Home</a></li>
+                <li><a href="vehicles.html">Vehicles</a></li>
+                <li><a href="wishlist.html">Wishlist</a></li>
+                <li><a href="orders.html">Orders</a></li>
+                <li><a href="myAccount.html">My Account</a></li>
+            </ul>
         </nav>
-      </header>
+    </header>
 
     <main class="container">
-      <div class="wishlist-header">
-        <h1>My Wishlist</h1>
-        <p>
-          Keep track of your favorite vehicles and get notified about price
-          changes
-        </p>
-      </div>
-
-      <div class="wishlist-container">
-        <div class="wishlist-item">
-          <img
-            src="./photo/AudiA8.jpg"
-            alt="Audi A8 L, luxury sedan in silver"
-            class="vehicle-image"
-          />
-          <div class="vehicle-info">
-            <div class="vehicle-title">2024 Audi A8 L</div>
-            <div class="vehicle-specs">
-              <div class="spec-item">🛣️ 15 miles</div>
-              <div class="spec-item">⚡ 429 HP</div>
-              <div class="spec-item">🌍 AWD</div>
-              <div class="spec-item">🎨 Silver</div>
-            </div>
-            <div class="price-info">
-              <div class="current-price">$125,000</div>
-              <div class="price-change">Price dropped by $5,000</div>
-            </div>
-          </div>
-          <div class="actions">
-            <a
-              href="https://legendmotor.com/vehicles/schedule-test-drive"
-              class="btn btn-primary"
-              >Schedule Test Drive</a
-            >
-            <a
-              href="https://legendmotor.com/vehicles/details"
-              class="btn btn-outline"
-              >View Details</a
-            >
-            <button class="btn btn-remove">Remove from Wishlist</button>
-          </div>
+        <div class="wishlist-header">
+            <h1>My Wishlist</h1>
+            <p>
+                Keep track of your favorite vehicles and get notified about price changes
+            </p>
         </div>
 
-        <div class="wishlist-item">
-          <img
-            src="./photo/Porsche.jpg"
-            alt="Porsche 911, sports car in red"
-            class="vehicle-image"
-          />
-          <div class="vehicle-info">
-            <div class="vehicle-title">2023 Porsche 911 Carrera S</div>
-            <div class="vehicle-specs">
-              <div class="spec-item">🛣️ 250 miles</div>
-              <div class="spec-item">⚡ 443 HP</div>
-              <div class="spec-item">🌍 RWD</div>
-              <div class="spec-item">🎨 Red</div>
+        <div class="wishlist-container">
+            <div class="wishlist-item">
+                <img src="./photo/AudiA8.jpg" alt="Audi A8 L, luxury sedan in silver" class="vehicle-image">
+                <div class="vehicle-info">
+                    <div class="vehicle-title">2024 Audi A8 L</div>
+                    <div class="vehicle-specs">
+                        <div class="spec-item">🛣️ 15 miles</div>
+                        <div class="spec-item">⚡ 429 HP</div>
+                        <div class="spec-item">🌍 AWD</div>
+                        <div class="spec-item">🎨 Silver</div>
+                    </div>
+                    <div class="price-info">
+                        <div class="current-price">$125,000</div>
+                        <div class="price-change">Price dropped by $5,000</div>
+                    </div>
+                </div>
+                <div class="actions">
+                    <a href="https://legendmotor.com/vehicles/schedule-test-drive" class="btn btn-primary">Schedule Test Drive</a>
+                    <a href="https://legendmotor.com/vehicles/details" class="btn btn-outline">View Details</a>
+                    <button class="btn btn-remove">Remove from Wishlist</button>
+                </div>
             </div>
-            <div class="price-info">
-              <div class="current-price">$165,000</div>
-              <div class="price-change price-increase">
-                Price increased by $2,000
-              </div>
+
+            <div class="wishlist-item">
+                <img src="./photo/Porsche.jpg" alt="Porsche 911, sports car in red" class="vehicle-image">
+                <div class="vehicle-info">
+                    <div class="vehicle-title">2023 Porsche 911 Carrera S</div>
+                    <div class="vehicle-specs">
+                        <div class="spec-item">🛣️ 250 miles</div>
+                        <div class="spec-item">⚡ 443 HP</div>
+                        <div class="spec-item">🌍 RWD</div>
+                        <div class="spec-item">🎨 Red</div>
+                    </div>
+                    <div class="price-info">
+                        <div class="current-price">$165,000</div>
+                        <div class="price-change price-increase">Price increased by $2,000</div>
+                    </div>
+                </div>
+                <div class="actions">
+                    <a href="https://legendmotor.com/vehicles/schedule-test-drive" class="btn btn-primary">Schedule Test Drive</a>
+                    <a href="https://legendmotor.com/vehicles/details" class="btn btn-outline">View Details</a>
+                    <button class="btn btn-remove">Remove from Wishlist</button>
+                </div>
             </div>
-          </div>
-          <div class="actions">
-            <a
-              href="https://legendmotor.com/vehicles/schedule-test-drive"
-              class="btn btn-primary"
-              >Schedule Test Drive</a
-            >
-            <a
-              href="https://legendmotor.com/vehicles/details"
-              class="btn btn-outline"
-              >View Details</a
-            >
-            <button class="btn btn-remove">Remove from Wishlist</button>
-          </div>
         </div>
-      </div>
     </main>
   </body>
 </html>

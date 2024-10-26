@@ -1,24 +1,23 @@
-// Wishlist functionality
-        document.querySelectorAll(".wishlist-btn").forEach((btn) => {
-            btn.addEventListener("click", function () {
-                this.textContent = this.textContent === "❤️" ? "♡" : "❤️";
-            });
-        });
+$(document).ready(function () {
+    // Wishlist functionality
+    $('.wishlist-btn').on('click', function () {
+        if ($(this).text() === "❤️") {
+            $(this).text("♡");
+        } else {
+            $(this).text("❤️");
+        }
+    });
 
-        // Filter functionality
-        const filters = document.querySelectorAll("select");
-        filters.forEach((filter) => {
-            filter.addEventListener("change", function () {
-                // Here you would typically make an API call to filter results
-                console.log("Filter changed:", this.id, this.value);
-            });
-        });
+    // Filter functionality
+    $('select').on('change', function () {
+        // Here you would typically make an API call to filter results
+        console.log("Filter changed:", this.id, this.value);
+    });
 
-        // Pagination functionality
-        document.querySelectorAll(".page-btn").forEach((btn) => {
-            btn.addEventListener("click", function () {
-                document.querySelector(".page-btn.active").classList.remove("active");
-                this.classList.add("active");
-                // Here you would typically make an API call to get the next page of results
-            });
-        });
+    // Pagination functionality
+    $('.page-btn').on('click', function () {
+        $('.page-btn.active').removeClass('active');
+        $(this).addClass('active');
+        // Here you would typically make an API call to get the next page of results
+    });
+});

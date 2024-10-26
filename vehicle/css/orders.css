@@ -63,6 +63,7 @@ nav a:hover {
     color: var(--secondary-color);
 }
 
+
 .orders-header {
     text-align: center;
     padding: 20px;
@@ -247,6 +248,30 @@ nav a:hover {
     gap: 10px;
 }
 
+.order-details {
+    display: none;
+    padding: 20px;
+    background: #f8f9fa;
+    margin-top: 20px;
+    border-radius: 8px;
+}
+
+.order-details.active {
+    display: block;
+}
+
+.tracking-details {
+    display: none;
+    padding: 20px;
+    background: #f8f9fa;
+    margin-top: 20px;
+    border-radius: 8px;
+}
+
+.tracking-details.active {
+    display: block;
+}
+
 .btn {
     padding: 8px 15px;
     border: none;
@@ -264,6 +289,11 @@ nav a:hover {
 }
 
 .btn-outline:hover {
+    background: var(--secondary-color);
+    color: white;
+}
+
+.btn.active {
     background: var(--secondary-color);
     color: white;
 }
