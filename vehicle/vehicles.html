@@ -9,7 +9,7 @@
     />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link href="css/vehicles.css" rel="stylesheet" />
-    <script src="js/vehicles.js"></script>
+    <script src="js/vehicles.js" defer></script>
   </head>
   <body>
     <header>
@@ -27,6 +27,8 @@
           <li><a href="orders.html">Orders</a></li>
           <li><a href="myAccount.html">My Account</a></li>
         </ul>
+        <img class="menu-icon-open" src="photo/bars-solid.png" style="width:30px;">
+        <img class="menu-icon-close" src="./photo/xmark-solid.png" style="width:30px;" >
       </nav>
     </header>
 
@@ -94,8 +96,7 @@
               <div class="spec-item">🎨 Silver</div>
             </div>
             <div class="vehicle-actions">
-              <button class="btn btn-primary">Schedule Test Drive</button>
-              <button class="btn btn-outline">View Details</button>
+              <a href="https://www.audi.com.hk/hk/web/tc/models/a8/a8-l.html"><button class="btn btn-outline">View Details</button></a>
             </div>
           </div>
         </article>
@@ -117,8 +118,7 @@
               <div class="spec-item">🎨 Red</div>
             </div>
             <div class="vehicle-actions">
-              <button class="btn btn-primary">Schedule Test Drive</button>
-              <button class="btn btn-outline">View Details</button>
+              <a href="https://www.porsche.com/pap/_hong-kong_/models/911/"><button class="btn btn-outline">View Details</button></a>
             </div>
           </div>
         </article>
@@ -140,8 +140,7 @@
               <div class="spec-item">🎨 Black</div>
             </div>
             <div class="vehicle-actions">
-              <button class="btn btn-primary">Schedule Test Drive</button>
-              <button class="btn btn-outline">View Details</button>
+              <a href="https://www.landrover.com.hk/zh/range-rover/new-range-rover-sport/sv"><button class="btn btn-outline">View Details</button></a>
             </div>
           </div>
         </article>
@@ -155,5 +154,16 @@
         <button class="page-btn">Next →</button>
       </div>
     </main>
+
+    <div class="mobile-menu">
+      <ul>
+          <li><a href="home.html">Home</a></li>
+          <li><a href="vehicles.html">Vehicles</a></li>
+          <li><a href="wishlist.html">Wishlist</a></li>
+          <li><a href="orders.html">Orders</a></li>
+          <li><a href="myAccount.html">My Account</a></li>
+      </ul>
+    </div>
+
   </body>
 </html>

@@ -38,6 +38,14 @@ header {
     font-family: "Copperplate", "Papyrus", fantasy; 
 }
 
+.menu-icon-open, .menu-icon-close {
+    display: none;
+}
+
+.mobile-menu {
+    display: none;
+}
+
 nav {
     display: flex;
     justify-content: space-between;
@@ -178,6 +186,47 @@ nav a:hover {
 }
 
 @media (max-width: 768px) {
+    .menu-icon-close, .menu-icon-open {
+        display: block;
+        z-index: 998;
+    }
+
+    .mobile-menu {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0,0.9);
+        z-index: 999;
+    }
+    
+    .mobile-menu ul {
+        list-style: none;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+    }
+    
+    .mobile-menu li {
+        margin-bottom: 20px;
+    }
+    
+    .mobile-menu a {
+        color: white;
+        text-decoration: none;
+        font-size: 1.5rem;
+        transition: color 0.3s ease;
+    }
+    
+    .mobile-menu a:hover {
+        color: var(--secondary-color);
+        background-color:var(--secondary-color), transparent;
+    }
+    
     .wishlist-item {
         grid-template-columns: 1fr;
         text-align: center;
@@ -186,6 +235,15 @@ nav a:hover {
     .vehicle-image {
         width: 100%;
         height: 200px;
+    }
+
+    header{
+        position: fixed;
+        top: 0;
+    }
+
+    .wishlist-header {
+        padding: 70px 0 0;
     }
 
     .actions {
