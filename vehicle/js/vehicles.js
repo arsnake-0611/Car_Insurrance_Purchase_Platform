@@ -1,12 +1,4 @@
 $(document).ready(function () {
-    // Wishlist functionality
-    $(".wishlist-btn").on("click", function () {
-        if ($(this).text() === "❤️") {
-            $(this).text("♡");
-        } else {
-            $(this).text("❤️");
-        }
-    });
 
     $(".menu-icon-close").hide();
     $(".menu-icon-open").click(function () {
@@ -22,9 +14,102 @@ $(document).ready(function () {
 
     // Filter functionality
     $("select").on("change", function () {
-        // Here you would typically make an API call to filter results
-        console.log("Filter changed:", this.id, this.value);
+        var selectedBrand = $("#brand").val();
+        var selectedType = $("#type").val();
+        var selectedPrice = $("#price").val();
+        var selectedYear = $("#year").val();
+    
+        $(".vehicle-card").each(function () {
+            var vehicleName = $(this).find(".vehicle-content h3").text();
+            var cardPrice = parseInt($(this).find(".vehicle-price").text().slice(1));
+    
+            // Enhanced brand filtering
+            if (selectedBrand!== "" && selectedBrand!== "All Brands") {
+                var knownBrands = {
+                    "audi": /audi/i,
+                    "bmw": /bmw/i,
+                    "mercedes": /mercedes(-benz)?/i,
+                    "porsche": /porsche/i
+                };
+                var brandRegex = knownBrands[selectedBrand];
+                if (!brandRegex ||!vehicleName.match(brandRegex)) {
+                    $(this).hide();
+                    return;
+                }
+            }
+    
+            // Enhanced vehicle type filtering
+            var vehicleTypeKeywords = {
+                "sedan": /sedan|saloon/i,
+                "suv": /suv|sport utility vehicle/i,
+                "coupe": /coupe/i,
+                "convertible": /convertible/i
+            };
+            var cardType = null;
+            for (var type in vehicleTypeKeywords) {
+                if (vehicleName.match(vehicleTypeKeywords[type])) {
+                    cardType = type;
+                    break;
+                }
+            }
+            if (selectedType!== "" && selectedType!== "All Types" && cardType!== selectedType) {
+                $(this).hide();
+                return;
+            }
+    
+            // Enhanced year filtering
+            var yearRegex = /(\d{4})/;
+            var cardYear = parseInt(vehicleName.match(yearRegex)[1]);
+            if (selectedYear!== "" && selectedYear!== "All Years" && selectedYear!== cardYear.toString()) {
+                $(this).hide();
+                return;
+            }
+    
+            if (selectedPrice!== "" && (selectedPrice === "200000" && cardPrice < 200000 || cardPrice > parseInt(selectedPrice))) {
+                $(this).hide();
+                return;
+            }
+    
+            $(this).show();
+        });
     });
+
+   // Add to Wishlist functionality
+   $(".add-to-wishlist").click(function () {
+    var vehicleCard = $(this).closest(".vehicle-card");
+    var vehicleName = vehicleCard.find(".vehicle-content h3").text();
+    var vehiclePrice = vehicleCard.find(".vehicle-price").text();
+    var vehicleImage = vehicleCard.find(".vehicle-image img").attr("src");
+
+    // Check if the item is already in the wishlist
+    if ($(".wishlist-item").find("h3").text() === vehicleName) {
+        alert("This item is already in your wishlist.");
+        return;
+    }
+
+    var wishlistItem = $("<div>", {
+        class: "wishlist-item"
+    }).append(
+        $("<img>", {
+            src: vehicleImage,
+            alt: vehicleName
+        }),
+        $("<div>").append(
+            $("<h3>").text(vehicleName),
+            $("<p>").text(vehiclePrice)
+        )
+    );
+
+    $(".wishlist-items").append(wishlistItem);
+
+    // Provide visual feedback (fade in the added item)
+    wishlistItem.hide().fadeIn(300);
+
+    alert(vehicleName + " added to wishlist");
+});
+});
+
+
 
     // Pagination functionality
     $(".page-btn").on("click", function () {
