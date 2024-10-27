@@ -2,14 +2,14 @@ body {
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   margin: 0;
   padding: 30px;
-  background-color: #f5f6f8;
+  background-color: #fAf9f6;
   color: #303136;
   transition: all 0.3s ease;
 }
 
 body[data-theme="dark"] {
   background-color: #40444b;
-  color: #e8eaed;
+  color: #fAf9f6;
 }
 
 .theme-toggle {
@@ -24,14 +24,14 @@ body[data-theme="dark"] {
 }
 
 body[data-theme="dark"] .theme-toggle {
-  color: #e8eaed;
+  color: #fAf9f6;
 }
 
 .input-field {
   width: 100%;
   padding: 12px;
-  border: 1px solid #dadce0;
-  border-radius: 30px;
+  border: 1px solid #E0DDCA;
+  border-radius: 20px;
   background-color: #f1f3f4;
   color: #202124;
   box-sizing: border-box;
@@ -39,21 +39,19 @@ body[data-theme="dark"] .theme-toggle {
 }
 
 body[data-theme="dark"] .input-field {
-  border-color: #5f6368;
-  background-color: #232529;
-  color: #f4f5f7
+  border-color: #cacde0;
+  background-color: 	#f4f2f1;
+  color:		#242320;
 }
 
 .input-field:focus {
-  border-color: #1a73e8;
-  background-color: #889ea8;
-  box-shadow: 0 0 0 2px #1a73e833;
+  border-color:#c9c6b5;
+  background-color: #d4dbde;
 }
 
 body[data-theme="dark"] .input-field:focus {
-  border-color: #8ab4f8;
-  background-color: #cccccc;
-  color: #303134;
+  border-color: #aaafcd;
+  background-color: #ded7d4;
 }
 
 .input-field.error {
@@ -78,23 +76,25 @@ body[data-theme="dark"] .error-message {
 .btn {
   width: 100%;
   padding: 12px;
-  background-color: #1a73e8;
-  color: white;
+  background-color: 	#DDF1ED  ;
+  color: #202124;
   border: none;
-  border-radius: 4px;
+  border-radius: 20px;
   cursor: pointer;
-  font-weight: 500;
   transition: all 0.3s ease;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 .btn:hover:not(:disabled) {
-  background-color: #4285f4;
+  background-color: #f1dde1;
   transform: translateY(-1px);
+  border: 2px solid #ddebf1;
 }
 
 .btn:active:not(:disabled) {
-  background-color: #1557b0;
+  background-color: #f1dde1;
   transform: translateY(1px);
+  border: 1px solid #E0DDCA;
 }
 
 .btn:disabled {
@@ -116,7 +116,7 @@ body[data-theme="dark"] .error-message {
   padding: 8px 12px;
   background: #333;
   color: white;
-  border-radius: 4px;
+  border-radius: 20px;
   font-size: 12px;
   white-space: nowrap;
   z-index: 1000;
@@ -129,7 +129,7 @@ body[data-theme="dark"] .btn:disabled {
 .role-card {
   padding: 15px;
   border: 2px solid #dadce0;
-  border-radius: 8px;
+  border-radius: 20px;
   text-align: center;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -160,7 +160,7 @@ body[data-theme="dark"] .role-card:hover {
 #registration-message {
   margin-top: 15px;
   padding: 10px;
-  border-radius: 4px;
+  border-radius: 20px;
   background-color: #e8f0fe;
   text-align: center;
   display: none;
@@ -187,7 +187,7 @@ body[data-theme="dark"] #registration-message {
   position: relative;
   padding: 2px;
   background-color: #f1f3f4;
-  border-radius: 9px;
+  border-radius: 20px;
   margin: 10px 20px 0px 20px;
   overflow: hidden;
 }
@@ -378,7 +378,7 @@ body[data-theme="dark"] .password-toggle:hover {
   background: #333;
   color: white;
   padding: 5px 10px;
-  border-radius: 4px;
+  border-radius: 20px;
   font-size: 12px;
   white-space: nowrap;
   z-index: 100;
@@ -414,7 +414,7 @@ body[data-theme="dark"] .password-toggle:hover {
   background-color: #333;
   color: #fff;
   text-align: center;
-  border-radius: 6px;
+  border-radius: 20px;
   padding: 8px;
   position: absolute;
   z-index: 1;
@@ -453,7 +453,7 @@ body[data-theme="dark"] #forgot-password-modal .modal-content {
 .modal-content {
   background: white;
   padding: 25px;
-  border-radius: 8px;
+  border-radius: 20px;
   width: 90%;
   max-width: 400px;
   box-shadow: 0 2px 10px rgba(0,0,0,0.1);
