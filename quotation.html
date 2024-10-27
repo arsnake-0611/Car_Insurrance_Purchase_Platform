@@ -8,7 +8,8 @@
             font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
             background: #79aae1;
             margin: 0;
-            padding: 20px;
+            padding: 8px;
+            border-radius: 24px;
         }
         body {
             max-width: 800px;
@@ -19,59 +20,119 @@
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
         }
         body[data-theme="dark"] {
-            background: #40444b;
+            background: #202124;
             color: #fAf9f6;
         }
         h1, h2 {
             color: #2c3e50;
+        }
+        body[data-theme="dark"] h1, 
+        body[data-theme="dark"] h2,
+        body[data-theme="dark"] h3,
+        body[data-theme="dark"] h4 {
+            color: #e8eaed;
+        }
+        body[data-theme="dark"] #confirmationSection {
+            background: #303134;
+            color: #e8eaed;
+            border: 1px solid #5f6368;
+            border-radius: 8px;
+            padding: 20px;
         }
         body[data-theme="dark"] .form-section,
         body[data-theme="dark"] #reviewSection,
         body[data-theme="dark"] #dashboard {
             background: #303134;
             border-color: #5f6368;
+            border-radius: 16px;
+        }
+        #confirmationSection {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 30px;
+            margin: 20px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        body[data-theme="dark"] #confirmationSection {
+            background: #303134;
+            color: #e8eaed;
+            border: 1px solid #5f6368;
         }
         .form-section {
-            background: #ffffff;
-            border: none;
-            padding: 25px;
-            margin-bottom: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            animation: slideIn 0.5s ease-out;
+        }
+        .form-section.hidden {
+            display: none;
+        }
+        .form-section:focus-within {
+            transform: translateY(-5px);
+        }
+        .form-section.visible {
+            display: block;
         }
         .form-group {
-            margin-bottom: 15px;
+            position: relative;
+            margin-bottom: 1.2rem;
+            padding: 0 15px;
+            transition: transform 0.3s ease;
         }
         label {
             display: block;
-            margin-bottom: 5px;
+            margin-bottom: 10px;
             font-weight: bold;
         }
-        input[type="text"], input[type="email"], input[type="number"], select {
-            background-color: #f8fafc;
-            border: 2px solid #c9ddf4;
+        input[type="number"], input[type="text"], input[type="email"], select {
+            max-width: 400px;
             width: 100%;
-            padding: 8px;
-            border-radius: 4px;
-            box-sizing: border-box;
+            padding: 10px;
+            border: 2px solid #c9ddf4;
+            border-radius: 8px;
+            font-size: 16px;
             transition: all 0.3s ease;
         }
         body[data-theme="dark"] input[type="text"],
         body[data-theme="dark"] input[type="email"],
         body[data-theme="dark"] input[type="number"],
         body[data-theme="dark"] select {
-            background-color: #f4f2f1;
-            color: #242320;
-            border-color: #cacde0;
+            background-color: #303134;
+            color: #e8eaed;
+            border-color: #5f6368;
         }
-        input:focus, select:focus {
+        select {
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%234a90e2' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 8px center;
+            background-size: 16px;
+            padding-right: 40px;
+        }
+        body[data-theme="dark"] select {
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23DDF1ED' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+        }
+        select option {
+            padding: 12px;
+        }
+        body[data-theme="dark"] select option {
+            background-color: #303134;
+            color: #e8eaed;
+        }
+        input:focus, select:focus,
+        .radio-label:focus-within {
             border-color: #4a90e2;
-            box-shadow: 0 0 5px rgba(74, 144, 226, 0.3);
+            box-shadow: 0 0 8px rgba(74, 144, 226, 0.4);
             outline: none;
+            transform: translateY(-2px);
+            transition: all 0.3s ease;
+            background-color: #f0f7ff;
+        }
+        body[data-theme="dark"] input:focus,
+        body[data-theme="dark"] select:focus {
+            background-color: #3c4043;
+            border-color: #DDF1ED;
         }
         button {
             background-color: #4a90e2;
-            color: white;
+            color: #202124;
             border: none;
             padding: 12px 20px;
             cursor: pointer;
@@ -81,12 +142,17 @@
             transition: all 0.3s ease;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
-        body[data-theme="dark"] .btn {
-            background-color: #DDF1ED;
-            color: #202124;
+        body[data-theme="dark"] button:not(.active) {
+            background-color: #303134;
+            color: #e8eaed;
         }
-        body[data-theme="dark"] button:hover {
-            background-color: #f1dde1;
+        body[data-theme="dark"] button:hover,
+        body[data-theme="dark"] .nav-button:hover,
+        body[data-theme="dark"] #searchBtn:hover,
+        body[data-theme="dark"] #applyNow:hover,
+        body[data-theme="dark"] .view-details-btn:hover {
+            background-color: #c2e5e0;
+            color: #202124;
         }
         button:hover {
             background-color: #357abd;
@@ -97,8 +163,12 @@
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
         .error {
-            color: #e74c3c;
+            color: #dc3545;
             font-size: 0.9em;
+            margin-top: 5px;
+            padding: 5px;
+            border-radius: 4px;
+            animation: fadeIn 0.3s ease-in;
         }
         .hidden {
             display: none;
@@ -111,12 +181,16 @@
             box-shadow: inset 0 1px 3px rgba(0, 0, 0, .2);
             margin-bottom: 20px;
         }
+        body[data-theme="dark"] #progressBar {
+            background-color: #303134;
+            border: 1px solid #5f6368;
+        }
         #progressBar div {
             width: 0;
             height: 20px;
-            background-color: #4a90e2;
+            background-color: #ff6b6b;
             border-radius: 3px;
-            transition: width 0.5s ease-in-out;
+            transition: all 0.5s ease-in-out;
             background-image: linear-gradient(45deg, 
                 rgba(255, 255, 255, .15) 25%, transparent 25%,
                 transparent 50%, rgba(255, 255, 255, .15) 50%,
@@ -124,6 +198,12 @@
                 transparent);
             background-size: 40px 40px;
             animation: progress-bar-stripes 1s linear infinite;
+        }
+        #progressBar div.success {
+            background-color: #4CAF50;
+        }
+        #progressBar div.warning {
+            background-color: #ff6b6b;
         }
         @keyframes progress-bar-stripes {
             from { background-position: 40px 0; }
@@ -158,15 +238,11 @@
         #quotationReview,
         #websiteGuide {
             background: #ffffff;
-            border-radius: 15px;
+            border-radius: 16px;
             padding: 25px;
             margin-bottom: 20px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
             transition: transform 0.3s ease;
-        }
-        #quotationReview:hover,
-        #websiteGuide:hover {
-            transform: translateY(-5px);
         }
         body[data-theme="dark"] #quotationReview,
         body[data-theme="dark"] #websiteGuide {
@@ -182,7 +258,7 @@
         #reviewSection {
             background: #ffffff;
             padding: 25px;
-            border-radius: 8px;
+            border-radius: 16px;
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
         }
         #reviewContent {
@@ -226,12 +302,15 @@
         }
         .info-panel {
             background: #ffffff;
-            border-radius: 15px;
+            border-radius: 16px;
             padding: 25px;
             margin-bottom: 20px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
             transition: transform 0.3s ease;
             animation: slideIn 0.8s ease-out;
+        }
+        body[data-theme="dark"] .info-panel {
+            background: #303134;
         }
         .coverage-option {
             padding: 15px;
@@ -240,12 +319,18 @@
             border-radius: 10px;
             transition: transform 0.2s ease;
         }
+        body[data-theme="dark"] .coverage-option {
+            background: #303134;
+        }
         .coverage-option:hover {
             transform: translateY(-2px);
         }
         .coverage-option h4 {
             color: #202124;
             margin-bottom: 10px;
+        }
+        body[data-theme="dark"] .coverage-option h4 {
+            color: #e8eaed;
         }
         .coverage-option ul {
             padding-left: 20px;
@@ -254,12 +339,6 @@
         .coverage-option li {
             margin: 5px 0;
             color: #5f6368;
-        }
-        body[data-theme="dark"] .coverage-option {
-            background: #303134;
-        }
-        body[data-theme="dark"] .coverage-option h4 {
-            color: #e8eaed;
         }
         body[data-theme="dark"] .coverage-option li {
             color: #9aa0a6;
@@ -310,6 +389,7 @@
             }
             input[type="text"], input[type="email"], input[type="number"], select {
                 font-size: 16px; 
+                max-width: 100%;
             }
             button {
                 width: 100%;
@@ -335,6 +415,261 @@
                 padding-left: 15px;
             }
         }
+        .confirmation-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        body[data-theme="dark"] .confirmation-table {
+            background: #303134;
+            border: 1px solid #5f6368;
+        }
+        .confirmation-table th,
+        .confirmation-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        body[data-theme="dark"] .confirmation-table th,
+        body[data-theme="dark"] .confirmation-table td {
+            border-bottom: 1px solid #5f6368;
+        }
+        .confirmation-table th {
+            background: #f8fafc;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        body[data-theme="dark"] .confirmation-table th {
+            background: #202124;
+            color: #e8eaed;
+        }
+        .confirmation-table tr:hover {
+            background: #f1f3f4;
+        }
+        body[data-theme="dark"] .confirmation-table tr:hover {
+            background: #3c4043;
+        }
+        .radio-group {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            padding: 15px 0;
+            width: 100%;
+        }
+        .radio-label {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+            background: #f8fafc;
+            border: 2px solid #c9ddf4;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .brand-logo {
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 40px;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+        .radio-label:hover .brand-logo {
+            opacity: 1;
+            top: -40px;
+        }
+        .number-input-wrapper,
+        .number-controls {
+            display: none;
+        }
+        .search-results {
+            margin-top: 20px;
+        }
+        .application-card {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+        body[data-theme="dark"] .application-card {
+            background: #303134;
+            border: 1px solid #5f6368;
+        }
+        .delete-app {
+            background-color: #dc3545;
+            color: white;
+            margin-top: 10px;
+        }
+        body[data-theme="dark"] .delete-app {
+            background-color: #dc3545;
+            color: #ffffff;
+        }
+        .delete-app:hover {
+            background-color: #c82333;
+        }
+        body[data-theme="dark"] .delete-app:hover {
+            background-color: #bb2d3b;
+        }
+        .search-section {
+            margin-bottom: 30px;
+        }
+        .input-error {
+            border-color: #dc3545 !important;
+            box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25) !important;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            margin-left: 8px;
+            font-size: 16px;
+            color: #4a90e2;
+            cursor: help;
+        }
+        .tooltip .tooltip-text {
+            visibility: hidden;
+            width: 200px;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 8px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .tooltip:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+        }
+        .input-hint {
+            position: absolute;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            background: #fff;
+            padding: 8px;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            pointer-events: none;
+            z-index: 100;
+        }
+        body[data-theme="dark"] .input-hint {
+            background: #303134;
+            color: #e8eaed;
+        }
+        .form-group:hover .input-hint {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .full-details-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .modal-content {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 16px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        body[data-theme="dark"] .modal-content {
+            background: #303134;
+            color: #e8eaed;
+            border: 1px solid #5f6368;
+        }
+        .view-details-btn {
+            margin-top: 20px;
+            width: 100%;
+        }
+        .phone-input {
+            position: relative;
+        }
+        .phone-hint {
+            font-size: 0.85em;
+            color: #666;
+            margin-top: 4px;
+        }
+        body[data-theme="dark"] .phone-hint {
+            color: #9aa0a6;
+        }
+        input[type="text"][name="phoneNumber"]:invalid {
+            border-color: #dc3545;
+        }
+        .action-buttons {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        #websiteGuide {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 25px;
+            margin: 20px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            animation: slideIn 0.8s ease-out;
+        }
+        body[data-theme="dark"] #websiteGuide {
+            background: #303134;
+            border: 1px solid #5f6368;
+        }
+        .guide-section {
+            margin-bottom: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            background: #f8fafc;
+        }
+        body[data-theme="dark"] .guide-section {
+            background: #3c4043;
+        }
+        .guide-section h4 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #c9ddf4;
+            padding-bottom: 8px;
+        }
+        body[data-theme="dark"] .guide-section h4 {
+            color: #e8eaed;
+            border-bottom-color: #5f6368;
+        }
+        .guide-section ul, 
+        .guide-section ol {
+            padding-left: 20px;
+        }
+        .guide-section li {
+            margin: 8px 0;
+            line-height: 1.5;
+        }
+        .guide-section ul ul {
+            margin-top: 5px;
+        }
     </style>
     </head>
     <body>
@@ -349,54 +684,138 @@
     
         <div id="progressBar"><div></div></div>
     
-        <form id="insuranceForm">
-            <div id="vehicleSection" class="form-section">
+        <div id="websiteGuide">
+            <h3>How to Use This Website</h3>
+            <div class="guide-content">
+                <div class="guide-section">
+                    <h4>Before You Start</h4>
+                    <ul>
+                        <li>Review the available coverage plans in detail</li>
+                        <li>Have your vehicle information ready</li>
+                        <li>Select your preferred coverage plan</li>
+                        <li>Click "Apply Now" to start your application</li>
+                    </ul>
+                </div>
+                <div class="guide-section">
+                    <h4>Application Process</h4>
+                    <ol>
+                        <li>Fill in Vehicle Information:
+                            <ul>
+                                <li>Select vehicle brand and model</li>
+                                <li>Enter manufacturing year (YYYY format)</li>
+                                <li>Choose body type</li>
+                                <li>Provide vehicle specifications</li>
+                            </ul>
+                        </li>
+                        <li>Enter Personal Information:
+                            <ul>
+                                <li>Provide contact details</li>
+                                <li>Enter driving experience</li>
+                                <li>Confirm coverage plan</li>
+                            </ul>
+                        </li>
+                        <li>Review and Submit:
+                            <ul>
+                                <li>Verify all information</li>
+                                <li>Submit application</li>
+                                <li>Save reference number</li>
+                            </ul>
+                        </li>
+                    </ol>
+                </div>
+                <div class="guide-section">
+                    <h4>After Submission</h4>
+                    <ul>
+                        <li>Track application status in dashboard</li>
+                        <li>Search using reference number</li>
+                        <li>View or delete applications</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    
+        <form id="insuranceForm" class="hidden" autocomplete="off">
+            <div id="vehicleSection" class="form-section visible">
                 <h2>Vehicle Information</h2>
                 <div class="form-group">
-                    <label for="vehicleMake">Vehicle Make:</label>
-                    <select id="vehicleMake" name="vehicleMake" required>
-                        <option value="">Select Make</option>
-                        <option value="Audi">Audi</option>
-                        <option value="BMW">BMW</option>
-                        <option value="Ford">Ford</option>
-                        <option value="Honda">Honda</option>
-                        <option value="Toyota">Toyota</option>
-                    </select>
+                    <label>Vehicle Brand Name:</label>
+                    <div class="radio-group">
+                        <label class="radio-label">
+                            <input type="radio" name="vehicleMake" value="Audi" required>
+                            <span class="brand-name">Audi</span>
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="vehicleMake" value="BMW" required>
+                            <span class="brand-name">BMW</span>
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="vehicleMake" value="Ford" required>
+                            <span class="brand-name">Ford</span>
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="vehicleMake" value="Honda" required>
+                            <span class="brand-name">Honda</span>
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="vehicleMake" value="Toyota" required>
+                            <span class="brand-name">Toyota</span>
+                        </label>
+                    </div>
                 </div>
                 <div class="form-group">
-                    <label for="vehicleModel">Vehicle Model:</label>
-                    <select id="vehicleModel" name="vehicleModel" required>
-                        <option value="">Select Model</option>
-                    </select>
+                    <label>Vehicle Model:</label>
+                    <div class="radio-group" id="vehicleModelOptions"></div>
                 </div>
                 <div class="form-group">
                     <label for="vehicleYear">Manufacturing Year:</label>
-                    <input type="number" id="vehicleYear" name="vehicleYear" min="1900" max="2023" required>
+                    <input type="number" id="vehicleYear" name="vehicleYear" min="1900" max="2023" required
+                           pattern="[0-9]{4}" title="Enter a 4-digit year between 1900 and current year">
+                    <div class="input-hint">Enter 4 digits for year (1900-2023)</div>
                 </div>
                 <div class="form-group">
-                    <label for="bodyType">Body Type:</label>
-                    <select id="bodyType" name="bodyType" required>
-                        <option value="">Select Body Type</option>
-                        <option value="Saloon">Saloon</option>
-                        <option value="Hatchback">Hatchback</option>
-                        <option value="SUV">SUV</option>
-                        <option value="Coupe">Coupe</option>
-                        <option value="Convertible">Convertible</option>
-                    </select>
+                    <label>Body Type:</label>
+                    <div class="radio-group">
+                        <label class="radio-label">
+                            <input type="radio" name="bodyType" value="Saloon" required>
+                            <span>Saloon</span>
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="bodyType" value="Hatchback" required>
+                            <span>Hatchback</span>
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="bodyType" value="SUV" required>
+                            <span>SUV</span>
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="bodyType" value="Coupe" required>
+                            <span>Coupe</span>
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="bodyType" value="Convertible" required>
+                            <span>Convertible</span>
+                        </label>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="seatingCapacity">Seating Capacity:</label>
-                    <input type="number" id="seatingCapacity" name="seatingCapacity" min="2" max="9" required>
+                    <input type="number" id="seatingCapacity" name="seatingCapacity" min="2" max="9" required
+                           pattern="[2-9]" title="Enter a number between 2 and 9">
+                    <div class="input-hint">Enter seating capacity (2-9)</div>
                 </div>
                 <div class="form-group">
                     <label for="cylinderCapacity">Cylinder Capacity (C.C.):</label>
-                    <input type="number" id="cylinderCapacity" name="cylinderCapacity" min="500" max="8000" step="100" required>
+                    <input type="number" id="cylinderCapacity" name="cylinderCapacity" min="500" max="8000" step="100" required
+                           pattern="[5-8][0-9]{2}0" title="Enter cylinder capacity between 500-8000 CC">
+                    <div class="input-hint">Enter CC value (500-8000)</div>
                 </div>
                 <div class="form-group">
                     <label for="vehicleValue">Estimated Vehicle Value (HK$):</label>
                     <input type="number" id="vehicleValue" name="vehicleValue" min="0" step="1000" required>
                 </div>
-                <button type="button" id="nextButton">Next</button>
+                <div class="action-buttons">
+                    <button type="button" id="nextButton">Next</button>
+                </div>
             </div>
     
             <div id="personalSection" class="form-section hidden">
@@ -411,7 +830,8 @@
                 </div>
                 <div class="form-group">
                     <label for="phoneNumber">Phone Number:</label>
-                    <input type="text" id="phoneNumber" name="phoneNumber" required>
+                    <input type="text" id="phoneNumber" name="phoneNumber" required pattern="\d{8}">
+                    <div class="input-hint">Enter your 8-digit phone number (e.g., 12345678)</div>
                 </div>
                 <div class="form-group">
                     <label for="drivingExperience">Driving Experience (years):</label>
@@ -425,28 +845,36 @@
                         <option value="thirdParty">Third-Party Coverage</option>
                     </select>
                 </div>
-                <button type="button" id="backButton">Back</button>
-                <button type="submit">Submit Application</button>
+                <div class="action-buttons">
+                    <button type="button" id="backButton">Back</button>
+                    <button type="submit">Submit Application</button>
+                </div>
             </div>
         </form>
     
         <div id="reviewSection" class="hidden">
             <h2>Review Your Application</h2>
             <div id="reviewContent"></div>
-            <button id="editButton">Edit Application</button>
-            <button id="confirmButton">Confirm and Submit</button>
+            <div class="action-buttons">
+                <button id="editButton">Edit Application</button>
+                <button id="confirmButton">Confirm and Submit</button>
+            </div>
         </div>
     
         <div id="confirmationSection" class="hidden">
             <h2>Application Submitted Successfully</h2>
-            <p>Thank you for submitting your application. Your estimated processing time is 2-3 business days.</p>
-            <p>Your application reference number: <strong id="applicationId"></strong></p>
-            <p>You can track the status of your application using this reference number.</p>
+            <p>Your application has been submitted. Your estimated processing time is 2-3 business days.</p>
+            <p>You can track your application status using this reference number in the dashboard.</p>
         </div>
     
         <div id="dashboard" class="hidden">
             <div class="dashboard-header">
                 <h2>Welcome to Your Insurance Dashboard</h2>
+            </div>
+            <div class="search-section">
+                <input type="text" id="searchReference" placeholder="Search by Reference Number or Email">
+                <button id="searchBtn">Search</button>
+                <div id="searchResults"></div>
             </div>
             <div id="quotationReview" class="info-panel">
                 <h3>Insurance Coverage Options</h3>
@@ -473,19 +901,57 @@
                 </div>
                 <button id="applyNow" class="btn">Apply Now</button>
             </div>
-            <div id="websiteGuide">
-                <h3>How to Use This Website</h3>
-                <ol>
-                    <li>Fill in the Vehicle Information form with details about your car.</li>
-                    <li>Provide your Personal Information and select a Coverage Plan.</li>
-                    <li>Review your application details before submitting.</li>
-                    <li>After submission, you can view and edit your quotation from the Dashboard.</li>
-                </ol>
-            </div>
         </div>
     
         <script>
         $(document).ready(function() {
+            const submittedApplications = new Map();
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            $('body').attr('data-theme', savedTheme);
+    
+            function initializeApp() {
+                $('#insuranceForm, #dashboard, #reviewSection, #confirmationSection').hide();
+                $('#websiteGuide').show();
+                $('#quotationReview').show();
+            }
+    
+            function initializeForm() {
+                $('#insuranceForm')[0].reset();
+                $('.error').remove();
+                $('.input-error').removeClass('input-error');
+                $('#progressBar div').width('0%');
+                $('#vehicleSection').show();
+                $('#personalSection').hide();
+                $('#reviewSection').hide();
+                $('#confirmationSection').hide();
+                $('#insuranceForm').fadeIn(300);
+                $('.nav-button').removeClass('active');
+                $('.nav-button[data-section="insuranceForm"]').addClass('active');
+                $('#vehicleModelOptions').empty();
+                showSection('insuranceForm');
+    
+                const hints = {
+                    'vehicleYear': 'Enter 4 digits for year (1900-2023)',
+                    'seatingCapacity': 'Enter seating capacity (2-9)',
+                    'cylinderCapacity': 'Enter CC value (500-8000)',
+                    'phoneNumber': 'Enter your 8-digit phone number',
+                    'email': 'Enter a valid email address'
+                };
+    
+                Object.entries(hints).forEach(([id, hint]) => {
+                    const input = $(`#${id}`);
+                    const hintDiv = $('<div>').addClass('input-hint').text(hint);
+                    input.closest('.form-group').append(hintDiv);
+                });
+            }
+    
+            function showSection(sectionId) {
+                $('#insuranceForm, #dashboard, #reviewSection, #confirmationSection').hide();
+                $(`#${sectionId}`).show();
+                $('.nav-button').removeClass('active');
+                $(`.nav-button[data-section="${sectionId}"]`).addClass('active');
+            }
+    
             const carModels = {
                 'Audi': ['A3', 'A4', 'A6', 'Q5', 'Q7'],
                 'BMW': ['3 Series', '5 Series', 'X3', 'X5', 'Z4'],
@@ -494,26 +960,58 @@
                 'Toyota': ['Corolla', 'Camry', 'RAV4', 'Prius', 'Yaris']
             };
     
-            $('#vehicleMake').on('change', function() {
+            const brandLogos = {
+                'Audi': 'Audi',
+                'BMW': 'BMW',
+                'Ford': 'Ford',
+                'Honda': 'Honda',
+                'Toyota': 'Toyota'
+            };
+    
+            $('input[name="vehicleMake"]').each(function() {
+                const brand = $(this).val();
+                $(this).closest('.radio-label').find('.brand-name').text(brand);
+            });
+    
+            $('input[name="vehicleMake"]').on('change', function() {
                 const selectedMake = $(this).val();
-                $('#vehicleModel').html('<option value="">Select Model</option>');
+                $('#vehicleModelOptions').html('');
                 if (carModels[selectedMake]) {
                     carModels[selectedMake].forEach(model => {
-                        $('#vehicleModel').append(`<option value="${model}">${model}</option>`);
+                        $('#vehicleModelOptions').append(`
+                            <label class="radio-label">
+                                <input type="radio" name="vehicleModel" value="${model}" required>
+                                <span>${model}</span>
+                            </label>
+                        `);
                     });
                 }
             });
     
             function updateProgressBar() {
-                const totalFields = $('#insuranceForm').find('input, select').length;
-                const filledFields = $('#insuranceForm').find('input, select').filter(function() {
+                const totalRequired = $('#insuranceForm').find('input[required], select[required]').length;
+                const filledRequired = $('#insuranceForm').find('input[required], select[required]').filter(function() {
+                    if ($(this).attr('type') === 'radio') {
+                        return $(`input[name="${$(this).attr('name')}"]:checked`).length > 0;
+                    }
                     return $(this).val() !== '';
                 }).length;
-                const progress = (filledFields / totalFields) * 100;
-                $('#progressBar div').width(progress + '%');
+                const progress = (filledRequired / totalRequired) * 100;
+                $('#progressBar div')
+                    .width(progress + '%')
+                    .removeClass('warning success')
+                    .addClass(progress === 100 ? 'success' : 'warning');
             }
     
             $('#insuranceForm').on('input', updateProgressBar);
+    
+            $('#insuranceForm').submit(function(e) {
+                e.preventDefault();
+                if (validateForm()) {
+                    const applicationData = collectFormData();
+                    displayReview(applicationData);
+                }
+            });
     
             $('#nextButton').click(function() {
                 if (validateVehicleSection()) {
@@ -528,166 +1026,405 @@
                 $('#vehicleSection').delay(300).slideDown(300);
             });
     
-            $('#insuranceForm').submit(function(e) {
-                e.preventDefault();
-                if (validateForm()) {
-                    displayReview();
-                    updateQuotationReview();
-                }
+            $('#confirmButton').click(function() {
+                const applicationData = collectFormData();
+                submittedApplications.set(applicationData.id, applicationData);
+                showConfirmation(applicationData);
+            });
+    
+            $('#editButton').click(function() {
+                $('#reviewSection').hide();
+                $('#insuranceForm').show();
+                $('#vehicleSection').show();
+                $('#personalSection').hide();
+                updateProgressBar();
             });
     
             function validateVehicleSection() {
                 let isValid = true;
                 $('.error').remove();
-    
-                const vehicleFields = ['vehicleMake', 'vehicleModel', 'vehicleYear', 'bodyType', 'seatingCapacity', 'cylinderCapacity', 'vehicleValue'];
-                vehicleFields.forEach(fieldId => {
-                    const $field = $(`#${fieldId}`);
-                    if (!$field.val()) {
-                        showError($field, 'This field is required');
+                $('#vehicleSection input, #vehicleSection select').each(function() {
+                    if (!$(this).val()) {
+                        showError($(this), 'This field is required');
                         isValid = false;
                     }
                 });
-    
                 const vehicleYear = $('#vehicleYear');
                 const currentYear = new Date().getFullYear();
                 if (vehicleYear.val() < 1900 || vehicleYear.val() > currentYear) {
                     showError(vehicleYear, `Please enter a valid year between 1900 and ${currentYear}`);
                     isValid = false;
                 }
-    
                 return isValid;
+            }
+    
+            $('#phoneNumber').on('blur', function() {
+                if ($(this).val() && !/^\d{8}$/.test($(this).val())) {
+                    showError($(this), 'Please enter a valid phone number (8 digits)');
+                }
+            }).on('focus', function() {
+                $(this).removeClass('input-error');
+                $(this).closest('.form-group').find('.error').remove();
+            });
+    
+            function showError($input, message) {
+                $input.closest('.form-group').find('.error').remove();
+                const $error = $('<div>')
+                    .addClass('error')
+                    .text(message)
+                    .hide();
+                $input.closest('.form-group').append($error);
+                $error.fadeIn(300);
+                $input.addClass('input-error');
+                $input.one('input', function() {
+                    $(this).removeClass('input-error');
+                    $error.fadeOut(300, function() {
+                        $(this).remove();
+                    });
+                });
             }
     
             function validateForm() {
-                let isValid = validateVehicleSection();
+                $('.error').remove(); 
+                let isValid = true;
     
-                const personalFields = ['fullName', 'email', 'phoneNumber', 'drivingExperience', 'coveragePlan'];
-                personalFields.forEach(fieldId => {
-                    const $field = $(`#${fieldId}`);
+                const vehicleValidation = {
+                    'vehicleMake': 'Please select a vehicle brand',
+                    'vehicleModel': 'Please select a vehicle model',
+                    'vehicleYear': {
+                        required: 'Please enter the manufacturing year',
+                        range: `Year must be between 1900 and ${new Date().getFullYear()}`
+                    },
+                    'bodyType': 'Please select a body type',
+                    'seatingCapacity': {
+                        required: 'Please enter seating capacity',
+                        range: 'Seating capacity must be between 2 and 9'
+                    },
+                    'cylinderCapacity': {
+                        required: 'Please enter cylinder capacity',
+                        range: 'Cylinder capacity must be between 500 and 8000 CC'
+                    },
+                    'vehicleValue': {
+                        required: 'Please enter vehicle value',
+                        min: 'Vehicle value must be greater than 0'
+                    }
+                };
+    
+                const personalValidation = {
+                    'fullName': {
+                        required: 'Please enter your full name',
+                        pattern: 'Please enter a valid name (letters only)'
+                    },
+                    'email': {
+                        required: 'Please enter your email address',
+                        pattern: 'Please enter a valid email address'
+                    },
+                    'phoneNumber': {
+                        required: 'Please enter your phone number',
+                        pattern: 'Please enter a valid phone number (8 digits)',
+                        hint: 'Enter your 8-digit phone number (e.g., 12345678)'
+                    },
+                    'drivingExperience': {
+                        required: 'Please enter your driving experience',
+                        range: 'Driving experience must be between 0 and 70 years'
+                    },
+                    'coveragePlan': 'Please select a coverage plan'
+                };
+    
+                Object.entries(vehicleValidation).forEach(([field, rules]) => {
+                    const $field = $(`[name="${field}"]`);
                     if (!$field.val()) {
-                        showError($field, 'This field is required');
+                        showError($field, typeof rules === 'object' ? rules.required : rules);
                         isValid = false;
+                    } else if (rules.range) {
+                        switch(field) {
+                            case 'vehicleYear':
+                                if ($field.val() < 1900 || $field.val() > new Date().getFullYear()) {
+                                    showError($field, rules.range);
+                                    isValid = false;
+                                }
+                                break;
+                            case 'seatingCapacity':
+                                if ($field.val() < 2 || $field.val() > 9) {
+                                    showError($field, rules.range);
+                                    isValid = false;
+                                }
+                                break;
+                        }
                     }
                 });
     
-                const email = $('#email');
-                if (!/^\S+@\S+\.\S+$/.test(email.val())) {
-                    showError(email, 'Please enter a valid email address');
-                    isValid = false;
-                }
-    
-                const phoneNumber = $('#phoneNumber');
-                if (!/^\d+$/.test(phoneNumber.val())) {
-                    showError(phoneNumber, 'Please enter a valid phone number (numbers only)');
-                    isValid = false;
-                }
-    
-                const coveragePlan = $('#coveragePlan');
-                if (coveragePlan.val() === "") {
-                    showError(coveragePlan, 'Please select a coverage plan');
-                    isValid = false;
-                }
+                Object.entries(personalValidation).forEach(([field, rules]) => {
+                    const $field = $(`#${field}`);
+                    if (!$field.val()) {
+                        showError($field, typeof rules === 'object' ? rules.required : rules);
+                        isValid = false;
+                    } else if (rules.pattern) {
+                        switch(field) {
+                            case 'email':
+                                if (!/^\S+@\S+\.\S+$/.test($field.val())) {
+                                    showError($field, rules.pattern);
+                                    isValid = false;
+                                }
+                                break;
+                            case 'phoneNumber':
+                                if (!/^\d{8}$/.test($field.val())) {
+                                    showError($field, rules.pattern);
+                                    isValid = false;
+                                }
+                                break;
+                        }
+                    }
+                });
     
                 return isValid;
             }
     
-            function showError($input, message) {
-                const error = $('<div>').addClass('error').text(message);
-                $input.after(error);
-            }
-    
-            function displayReview() {
+            function collectFormData() {
                 const formData = new FormData(document.getElementById('insuranceForm'));
-                let reviewHTML = '<div class="review-container">';
-                reviewHTML += '<h3 style="color: #2c3e50; margin-bottom: 20px;">Please Review Your Information</h3>';
-                reviewHTML += '<div class="review-section"><h4>Vehicle Information</h4>';
-                for (let [key, value] of formData.entries()) {
-                    if (key.startsWith('vehicle') || key === 'bodyType' || key === 'seatingCapacity' || key === 'cylinderCapacity') {
-                        reviewHTML += `<div class="review-item">
-                            <span class="review-label">${formatLabel(key)}:</span>
-                            <span class="review-value">${value}</span>
-                        </div>`;
-                    }
-                }
-                reviewHTML += '</div><div class="review-section"><h4>Personal Information</h4>';
-                for (let [key, value] of formData.entries()) {
-                    if (key.startsWith('full') || key === 'email' || key === 'phoneNumber' || key === 'drivingExperience' || key === 'coveragePlan') {
-                        reviewHTML += `<div class="review-item">
-                            <span class="review-label">${formatLabel(key)}:</span>
-                            <span class="review-value">${value}</span>
-                        </div>`;
-                    }
-                }
-                reviewHTML += '</div></div>';
-                $('#reviewContent').html(reviewHTML);
-                $('#insuranceForm').fadeOut(300, function() {
-                    $('#reviewSection').fadeIn(300);
-                });
+                return {
+                    id: 'INS' + Math.random().toString(36).substr(2, 9).toUpperCase(),
+                    date: new Date().toLocaleDateString(),
+                    status: 'Pending Review',
+                    coverage: $('#coveragePlan').val(),
+                    vehicleMake: formData.get('vehicleMake'),
+                    vehicleModel: formData.get('vehicleModel'),
+                    bodyType: formData.get('bodyType'),
+                    fullName: formData.get('fullName'),
+                    email: formData.get('email')
+                };
             }
     
-            function formatLabel(key) {
-                return key.replace(/([A-Z])/g, ' $1')
-                    .replace(/^./, function(str){ return str.toUpperCase(); })
-                    .replace(/([A-Z])/g, function(str, p1) { return ' ' + p1.toLowerCase(); });
+            function displayReview(data) {
+                $('#insuranceForm').hide();
+                $('#reviewSection').show();
+                $('#reviewContent').html(`
+                    <div class="review-details">
+                        <table class="confirmation-table">
+                            <tr>
+                                <th>Reference Number</th>
+                                <td>${data.id}</td>
+                            </tr>
+                            <tr>
+                                <th>Status</th>
+                                <td>${data.status}</td>
+                            </tr>
+                            <tr>
+                                <th>Coverage Plan</th>
+                                <td>${data.coverage}</td>
+                            </tr>
+                            <tr>
+                                <th>Vehicle</th>
+                                <td>${data.vehicleMake} ${data.vehicleModel}</td>
+                            </tr>
+                            <tr>
+                                <th>Body Type</th>
+                                <td>${data.bodyType}</td>
+                            </tr>
+                            <tr>
+                                <th>Full Name</th>
+                                <td>${data.fullName}</td>
+                            </tr>
+                            <tr>
+                                <th>Email</th>
+                                <td>${data.email}</td>
+                            </tr>
+                        </table>
+                    </div>
+                `);
             }
     
-            $('#editButton').click(function() {
-                $('#reviewSection').addClass('hidden');
-                $('#insuranceForm').removeClass('hidden');
-                $('#vehicleSection').removeClass('hidden');
-                $('#personalSection').addClass('hidden');
+            $(document).on('click', '#editApplication', function() {
+                $('#reviewSection').hide();
+                $('#insuranceForm').show();
+                updateProgressBar();
             });
     
-            $('#confirmButton').click(function() {
-                $('#reviewSection').addClass('hidden');
-                $('#confirmationSection').removeClass('hidden');
-                const applicationId = 'INS' + Math.random().toString(36).substr(2, 9).toUpperCase();
-                $('#applicationId').text(applicationId);
-                updateQuotationReview();
-            });
-    
-            function showSection(sectionId) {
-                const sections = ['insuranceForm', 'reviewSection', 'confirmationSection', 'dashboard'];
-                sections.forEach(id => {
-                    $(`#${id}`).fadeOut(300);
-                });
-                $(`#${sectionId}`).delay(300).fadeIn(300);
+            $(document).on('click', '#saveApplication', function() {
+                const applicationData = collectFormData();
+                submittedApplications.set(applicationData.id, applicationData);
+                showConfirmation(applicationData);
                 
-                $('.nav-button').removeClass('active');
-                $(`.nav-button[data-section="${sectionId}"]`).addClass('active');
-            }
-    
-            function updateQuotationReview() {
-                const formData = new FormData(document.getElementById('insuranceForm'));
-                let reviewHTML = '';
-                for (let [key, value] of formData.entries()) {
-                    reviewHTML += `<p><strong>${formatLabel(key)}:</strong> ${value}</p>`;
-                }
-                $('#quotationContent').html(reviewHTML);
-            }
-    
-            $('.nav-button').click(function() {
-                showSection($(this).data('section'));
+                $('#insuranceForm')[0].reset();
+                updateDashboard();
             });
     
-            $('#applyNow').click(function() {
-                showSection('insuranceForm');
-                $('.nav-button[data-section="insuranceForm"]').addClass('active');
-                $('.nav-button[data-section="dashboard"]').removeClass('active');
+            function showConfirmation(data) {
+                $('#reviewSection').hide();
+                const confirmationHTML = `
+                    <h2>Application Submitted Successfully</h2>
+                    <p>Your application has been submitted successfully!</p>
+                    <div class="confirmation-details">
+                        <table class="confirmation-table">
+                            <tr>
+                                <th>Reference Number:</th>
+                                <td>${data.id}</td>
+                            </tr>
+                            <tr>
+                                <th>Status:</th>
+                                <td>${data.status}</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <p>You can track your application status using this reference number in the dashboard.</p>
+                    <button id="viewDashboard">Go to Dashboard</button>
+                `;
+                $('#confirmationSection').html(confirmationHTML).fadeIn(300);
+                setTimeout(() => {
+                    showDashboard();
+                }, 5000);
+            }
+    
+            $(document).on('click', '#viewDashboard', function() {
+                showDashboard();
+            });
+    
+            function showDashboard() {
+                $('#confirmationSection').hide();
+                updateDashboard();
+                showSection('dashboard');
+            }
+    
+            function updateDashboard() {
+                const searchResults = $('#searchResults');
+                searchResults.empty();
+                
+                if (submittedApplications.size === 0) {
+                    searchResults.html('<p>No applications found.</p>');
+                    return;
+                }
+    
+                submittedApplications.forEach((app, id) => {
+                    const applicationCard = `
+                        <div class="application-card">
+                            <h3>Application ${app.id}</h3>
+                            <p>Status: ${app.status}</p>
+                            <p>Vehicle: ${app.vehicleMake} ${app.vehicleModel}</p>
+                            <button class="view-details-btn" data-id="${id}">View Details</button>
+                            <button class="delete-app" data-id="${id}">Delete Application</button>
+                        </div>
+                    `;
+                    searchResults.append(applicationCard);
+                });
+            }
+    
+            $(document).on('click', '.view-details-btn', function() {
+                const appId = $(this).data('id');
+                const app = submittedApplications.get(appId);
+                if (app) {
+                    showApplicationDetails(app);
+                }
+            });
+    
+            function showApplicationDetails(app) {
+                const modalHTML = `
+                    <div class="full-details-modal">
+                        <div class="modal-content">
+                            <h3>Application Details</h3>
+                            <table class="confirmation-table">
+                                <tr>
+                                    <th>Reference Number</th>
+                                    <td>${app.id}</td>
+                                </tr>
+                                <tr>
+                                    <th>Status</th>
+                                    <td>${app.status}</td>
+                                </tr>
+                                <tr>
+                                    <th>Coverage Plan</th>
+                                    <td>${app.coverage}</td>
+                                </tr>
+                                <tr>
+                                    <th>Vehicle</th>
+                                    <td>${app.vehicleMake} ${app.vehicleModel}</td>
+                                </tr>
+                                <tr>
+                                    <th>Body Type</th>
+                                    <td>${app.bodyType}</td>
+                                </tr>
+                                <tr>
+                                    <th>Full Name</th>
+                                    <td>${app.fullName}</td>
+                                </tr>
+                                <tr>
+                                    <th>Email</th>
+                                    <td>${app.email}</td>
+                                </tr>
+                            </table>
+                            <button class="close-modal">Close</button>
+                        </div>
+                    </div>
+                `;
+                $('body').append(modalHTML);
+            }
+    
+            $(document).on('click', '.close-modal', function() {
+                $('.full-details-modal').remove();
+            });
+    
+            $(document).on('click', '.delete-app', function() {
+                const appId = $(this).data('id');
+                submittedApplications.delete(appId);
+                updateDashboard();
+            });
+    
+            $('#searchBtn').click(function() {
+                const searchTerm = $('#searchReference').val().trim().toUpperCase();
+                const searchResults = $('#searchResults');
+                searchResults.empty();
+    
+                if (!searchTerm) {
+                    updateDashboard();
+                    return;
+                }
+    
+                const matchingApplications = Array.from(submittedApplications.entries())
+                    .filter(([id, app]) => 
+                        id.includes(searchTerm) || 
+                        app.email.toLowerCase().includes(searchTerm.toLowerCase())
+                    );
+    
+                if (matchingApplications.length === 0) {
+                    searchResults.html('<p>No matching applications found.</p>');
+                    return;
+                }
+    
+                matchingApplications.forEach(([id, app]) => {
+                    const applicationCard = `
+                        <div class="application-card">
+                            <h3>Application ${app.id}</h3>
+                            <p>Status: ${app.status}</p>
+                            <p>Vehicle: ${app.vehicleMake} ${app.vehicleModel}</p>
+                            <button class="view-details-btn" data-id="${id}">View Details</button>
+                            <button class="delete-app" data-id="${id}">Delete Application</button>
+                        </div>
+                    `;
+                    searchResults.append(applicationCard);
+                });
             });
     
             $('#themeToggle').click(function() {
-                $('body').attr('data-theme', 
-                    $('body').attr('data-theme') === 'dark' ? 'light' : 'dark');
-                localStorage.setItem('theme', $('body').attr('data-theme'));
+                const currentTheme = $('body').attr('data-theme');
+                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                $('body').attr('data-theme', newTheme);
+                localStorage.setItem('theme', newTheme);
             });
     
-            // Show dashboard by default
-            showSection('dashboard');
-            $('#dashboard').hide().fadeIn(1000);
-            $('#quotationReview').hide().slideDown(800);
-            $('#websiteGuide').hide().slideDown(800);
+            $('.nav-button').click(function() {
+                const section = $(this).data('section');
+                $('#websiteGuide').hide();
+                if (section === 'insuranceForm') {
+                    initializeForm();
+                } else {
+                    showSection(section);
+                }
+            });
+    
+            $('#applyNow').click(function() {
+                initializeForm();
+            });
+    
+            initializeApp();
         });
         </script>
     </body>
