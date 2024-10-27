@@ -7,150 +7,172 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link href="css/orders.css" rel="stylesheet">
+    <script src="js/orders.js" defer></script>
 </head>
 
 <body>
     <header>
         <nav class="container">
-            <a href="home.html">
-                <div class="logo-container">
-                    <img src="./photo/lm-logo.png" alt="Legend Motor" style="width:40px;height:auto;">
-                    <div style="color: #42768c;font-size:25px;">|&nbsp;&nbsp;Legend Motor</div>
-                </div>
-            </a>
-            <ul>
-                <li><a href="home.html">Home</a></li>
-                <li><a href="vehicles.html">Vehicles</a></li>
-                <li><a href="wishlist.html">Wishlist</a></li>
-                <li><a href="orders.html">Orders</a></li>
-                <li><a href="myAccount.html">My Account</a></li>
-            </ul>
+          <a href="home.html">
+            <div class="logo-container">
+              <img src="./photo/lm-logo.png" alt="Legend Motor" style="width: 40px; height: auto" />
+              <div style="color: #42768c; font-size: 25px">
+                |&nbsp;&nbsp;Legend Motor
+              </div>
+            </div>
+          </a>
+    
+          <ul>
+            <li><a href="home.html">Home</a></li>
+            <li><a href="vehicles.html">Vehicles</a></li>
+            <li><a href="wishlist.html">Wishlist</a></li>
+            <li><a href="orders.html">Orders</a></li>
+            <li><a href="myAccount.html">My Account</a></li>
+          </ul>
+          <img class="menu-icon-open" src="photo/bars-solid.png" style="width:30px;">
+          <img class="menu-icon-close" src="./photo/xmark-solid.png" style="width:30px;" >
         </nav>
-    </header>
-    <main class="container">
-        <div class="orders-header">
-            <h1>My Orders</h1>
-            <div class="order-tabs">
-                <button class="tab active">All Orders</button>
-                <button class="tab">Processing</button>
-                <button class="tab">Completed</button>
-                <button class="tab">Cancelled</button>
-            </div>
-        </div>
-        <div class="orders-container">
-            <!-- Active Order -->
-            <div class="order-card">
-                <div class="order-header">
-                    <span class="order-id">Order #LM2024001</span>
-                    <span class="order-date">Ordered on January 15, 2024</span>
+      </header>
+    <main>
+        <section class="container">
+            <div class="orders-header">
+                <div class="orders-header" style="padding:50px 0px 0px;">
+                    <h1>My Orders</h1>
                 </div>
-
-                <div class="vehicle-details">
-                    <img src="https://images.unsplash.com/photo-1555652736-e92021d28a10"
-                        alt="Mercedes-Benz S-Class, luxury sedan in silver" class="vehicle-image">
-                    <div class="vehicle-info">
-                        <h3>2024 Mercedes-Benz S-Class</h3>
-                        <div class="specs-list">
-                            <span>🛣️ 15 miles</span>
-                            <span>⚡ 429 HP</span>
-                            <span>🌍 AWD</span>
-                            <span>🎨 Silver</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="progress-tracker">
-                    <div class="progress-line">
-                        <div class="progress-line-fill" style="width: 66%;"></div>
-                    </div>
-                    <div class="progress-steps">
-                        <div class="progress-step">
-                            <div class="step-icon completed">✓</div>
-                            <div class="step-label">Order Confirmed</div>
-                        </div>
-                        <div class="progress-step">
-                            <div class="step-icon completed">✓</div>
-                            <div class="step-label">Processing</div>
-                        </div>
-                        <div class="progress-step">
-                            <div class="step-icon active">●</div>
-                            <div class="step-label">Ready for Pickup</div>
-                        </div>
-                        <div class="progress-step">
-                            <div class="step-icon">●</div>
-                            <div class="step-label">Delivered</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="order-status">
-                    <span class="status-badge status-processing">Processing</span>
-                    <div class="action-buttons">
-                        <a class="btn btn-outline">Track Order</a>
-                        <a class="btn btn-outline">View Details</a>
-                    </div>
-                </div>
-
-                <div class="tracking-details">
-                    <h4>Tracking Information</h4>
-                    <div class="tracking-timeline">
-                        <p><strong>January 15, 2024 10:00 AM</strong> - Order Confirmed</p>
-                        <p><strong>January 16, 2024 2:30 PM</strong> - Vehicle Inspection Started</p>
-                        <p><strong>January 17, 2024 11:15 AM</strong> - Documentation Processing</p>
-                        <p><strong>January 18, 2024 9:00 AM</strong> - Final Quality Check</p>
-                    </div>
-                </div>
-
-                <div class="order-details">
-                    <h4>Order Details</h4>
-                    <div class="details-grid">
-                        <p><strong>Order ID:</strong> LM2024001</p>
-                        <p><strong>Purchase Price:</strong> $95,000</p>
-                        <p><strong>Payment Method:</strong> Financing</p>
-                        <p><strong>Delivery Method:</strong> Dealership Pickup</p>
-                        <p><strong>Estimated Delivery:</strong> January 25, 2024</p>
-                        <p><strong>Sales Representative:</strong> John Smith</p>
-                    </div>
+                <div class="order-tabs">
+                    <button class="tab active">All Orders</button>
+                    <button class="tab">Processing</button>
+                    <button class="tab">Completed</button>
+                    <button class="tab">Cancelled</button>
                 </div>
             </div>
-            <!-- Completed Order -->
-            <div class="order-card">
-                <div class="order-header">
-                    <span class="order-id">Order #LM2023089</span>
-                    <span class="order-date">Completed on December 20, 2023</span>
-                </div>
-                <div class="vehicle-details">
-                    <img src="./photo/Porsche.jpg" alt="Porsche 911, sports car in red" class="vehicle-image">
-                    <div class="vehicle-info">
-                        <h3>2023 Porsche 911 Carrera S</h3>
-                        <div class="specs-list">
-                            <span>🛣️ 250 miles</span>
-                            <span>⚡ 443 HP</span>
-                            <span>🌍 RWD</span>
-                            <span>🎨 Red</span>
+            <section class="orders-container">
+                <!-- Active Order -->
+                <div class="order-card">
+                    <div class="order-header">
+                        <span class="order-id">Order #LM2024001</span>
+                        <span class="order-date">Ordered on January 15, 2024</span>
+                    </div>
+
+                    <div class="vehicle-details">
+                        <img src="https://images.unsplash.com/photo-1555652736-e92021d28a10"
+                            alt="Mercedes-Benz S-Class, luxury sedan in silver" class="vehicle-image">
+                        <div class="vehicle-info">
+                            <h3>2024 Mercedes-Benz S-Class</h3>
+                            <div class="specs-list">
+                                <span>🛣️ 15 miles</span>
+                                <span>⚡ 429 HP</span>
+                                <span>🌍 AWD</span>
+                                <span>🎨 Silver</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="progress-tracker">
+                        <div class="progress-line">
+                            <div class="progress-line-fill" style="width: 63%;"></div>
+                        </div>
+                        <div class="progress-steps">
+                            <div class="progress-step">
+                                <div class="step-icon completed">✓</div>
+                                <div class="step-label">Order Confirmed</div>
+                            </div>
+                            <div class="progress-step">
+                                <div class="step-icon completed">✓</div>
+                                <div class="step-label">Processing</div>
+                            </div>
+                            <div class="progress-step">
+                                <div class="step-icon active">●</div>
+                                <div class="step-label">Ready for Pickup</div>
+                            </div>
+                            <div class="progress-step">
+                                <div class="step-icon">●</div>
+                                <div class="step-label">Delivered</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="order-status">
+                        <span class="status-badge status-processing">Processing</span>
+                        <div class="action-buttons">
+                            <a class="btn btn-outline track-order">Track Order</a>
+                            <a class="btn btn-outline view-details">View Details</a>
+                        </div>
+                    </div>
+
+                    <div class="tracking-details">
+                        <h4>Tracking Information</h4>
+                        <div class="tracking-timeline">
+                            <p><strong>January 15, 2024 10:00 AM</strong> - Order Confirmed</p>
+                            <p><strong>January 16, 2024 2:30 PM</strong> - Vehicle Inspection Started</p>
+                            <p><strong>January 17, 2024 11:15 AM</strong> - Documentation Processing</p>
+                            <p><strong>January 18, 2024 9:00 AM</strong> - Final Quality Check</p>
+                        </div>
+                    </div>
+
+                    <div class="order-details">
+                        <h4>Order Details</h4>
+                        <div class="details-grid">
+                            <p><strong>Order ID:</strong> LM2024001</p>
+                            <p><strong>Purchase Price:</strong> $95,000</p>
+                            <p><strong>Payment Method:</strong> Financing</p>
+                            <p><strong>Delivery Method:</strong> Dealership Pickup</p>
+                            <p><strong>Estimated Delivery:</strong> January 25, 2024</p>
+                            <p><strong>Sales Representative:</strong> John Smith</p>
                         </div>
                     </div>
                 </div>
-                <div class="order-status">
-                    <span class="status-badge status-completed">Completed</span>
-                    <div class="action-buttons">
-                        <a href="#" class="btn btn-outline view-details">View Details</a>
+                <!-- Completed Order -->
+                <div class="order-card">
+                    <div class="order-header">
+                        <span class="order-id">Order #LM2023089</span>
+                        <span class="order-date">Completed on December 20, 2023</span>
                     </div>
-                </div>
+                    <div class="vehicle-details">
+                        <img src="./photo/Porsche.jpg" alt="Porsche 911, sports car in red" class="vehicle-image">
+                        <div class="vehicle-info">
+                            <h3>2023 Porsche 911 Carrera S</h3>
+                            <div class="specs-list">
+                                <span>🛣️ 250 miles</span>
+                                <span>⚡ 443 HP</span>
+                                <span>🌍 RWD</span>
+                                <span>🎨 Red</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="order-status">
+                        <span class="status-badge status-completed">Completed</span>
+                        <div class="action-buttons">
+                            <a class="btn btn-outline view-details">View Details</a>
+                        </div>
+                    </div>
 
-                <div class="order-details">
-                    <h4>Order Details</h4>
-                    <div class="details-grid">
-                        <p><strong>Order ID:</strong> LM2023089</p>
-                        <p><strong>Purchase Price:</strong> $85,000</p>
-                        <p><strong>Payment Method:</strong> Cash</p>
-                        <p><strong>Delivery Method:</strong> Home Delivery</p>
-                        <p><strong>Delivery Date:</strong> December 20, 2023</p>
-                        <p><strong>Sales Representative:</strong> Jane Doe</p>
+                    <div class="order-details">
+                        <h4>Order Details</h4>
+                        <div class="details-grid">
+                            <p><strong>Order ID:</strong> LM2023089</p>
+                            <p><strong>Purchase Price:</strong> $85,000</p>
+                            <p><strong>Payment Method:</strong> Cash</p>
+                            <p><strong>Delivery Method:</strong> Home Delivery</p>
+                            <p><strong>Delivery Date:</strong> December 20, 2023</p>
+                            <p><strong>Sales Representative:</strong> Jane Doe</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
+            </section>
+        </section>
     </main>
+
+    <div class="mobile-menu">
+        <ul>
+            <li><a href="home.html">Home</a></li>
+            <li><a href="vehicles.html">Vehicles</a></li>
+            <li><a href="wishlist.html">Wishlist</a></li>
+            <li><a href="orders.html">Orders</a></li>
+            <li><a href="myAccount.html">My Account</a></li>
+        </ul>
+    </div>
+
+</body>
 
 </html>
