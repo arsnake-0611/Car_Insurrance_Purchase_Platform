@@ -29,20 +29,19 @@ $(document).ready(function () {
         $(".menu-icon-open").show();
     });
 
-    // Handle track order button click
     $(".track-order").on("click", function () {
         var orderCard = $(this).closest(".order-card");
         var trackingDetails = orderCard.find(".tracking-details");
+        
         trackingDetails.slideToggle();
-        $(".track-order").css({"background-color":"var(--secondary-color)","color":"white"});
-    
-        $(".track-order").css({"background-color":"white","color":"var(--seoncdary-color)"});
+        
+        if ($("trackingDetails.active")) {
+            $(this).css({"background-color": "var(--secondary-color)", "color": "white"});
+        } else {
+            $(this).css({"background-color": "white", "color": "var(--secondary-color)"});
+        }
     });
-    });
-
-       
-
-    // Handle view details button click
+  
     $(".view-details").on("click", function () {
         var orderCard = $(this).closest(".order-card");
         var detailsContent = orderCard.find(".order-details");
