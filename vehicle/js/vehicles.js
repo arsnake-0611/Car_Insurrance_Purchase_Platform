@@ -12,67 +12,59 @@ $(document).ready(function () {
         $(".menu-icon-open").show();
     });
 
-    // Filter functionality
-    $("select").on("change", function () {
-        var selectedBrand = $("#brand").val();
-        var selectedType = $("#type").val();
-        var selectedPrice = $("#price").val();
-        var selectedYear = $("#year").val();
+   // Filter functionality
+$("select").on("change", function () {
+    var selectedBrand = $("#brand").val();
+    var selectedType = $("#type").val();
+    var selectedPrice = $("#price").val();
+    var selectedYear = $("#year").val();
     
-        $(".vehicle-card").each(function () {
-            var vehicleName = $(this).find(".vehicle-content h3").text();
-            var cardPrice = parseInt($(this).find(".vehicle-price").text().slice(1));
-    
-            // Enhanced brand filtering
-            if (selectedBrand!== "" && selectedBrand!== "All Brands") {
-                var knownBrands = {
-                    "audi": /audi/i,
-                    "bmw": /bmw/i,
-                    "mercedes": /mercedes(-benz)?/i,
-                    "porsche": /porsche/i
-                };
-                var brandRegex = knownBrands[selectedBrand];
-                if (!brandRegex ||!vehicleName.match(brandRegex)) {
-                    $(this).hide();
-                    return;
-                }
-            }
-    
-            // Enhanced vehicle type filtering
-            var vehicleTypeKeywords = {
-                "sedan": /sedan|saloon/i,
-                "suv": /suv|sport utility vehicle/i,
-                "coupe": /coupe/i,
-                "convertible": /convertible/i
+    $(".vehicle-card").each(function () {
+        var vehicleName = $(this).find(".vehicle-content h3").text();
+        var cardPrice = parseInt($(this).find(".vehicle-price").text().slice(1));
+        var drivetrainType = $(this).find(".spec-item").eq(2).text().trim(); // Assuming drivetrain type is the third spec item
+
+        // Enhanced brand filtering
+        if (selectedBrand !== "" && selectedBrand !== "All Brands") {
+            var knownBrands = {
+                "audi": /audi/i,
+                "bmw": /bmw/i,
+                "mercedes": /mercedes(-benz)?/i,
+                "porsche": /porsche/i
             };
-            var cardType = null;
-            for (var type in vehicleTypeKeywords) {
-                if (vehicleName.match(vehicleTypeKeywords[type])) {
-                    cardType = type;
-                    break;
-                }
-            }
-            if (selectedType!== "" && selectedType!== "All Types" && cardType!== selectedType) {
+            var brandRegex = knownBrands[selectedBrand];
+            if (!brandRegex || !vehicleName.match(brandRegex)) {
                 $(this).hide();
                 return;
             }
-    
-            // Enhanced year filtering
-            var yearRegex = /(\d{4})/;
-            var cardYear = parseInt(vehicleName.match(yearRegex)[1]);
-            if (selectedYear!== "" && selectedYear!== "All Years" && selectedYear!== cardYear.toString()) {
+        }
+
+        // Enhanced drivetrain type filtering
+        if (selectedType !== "" && selectedType !== "All Types") {
+            if (!drivetrainType.includes(selectedType)) {
                 $(this).hide();
                 return;
             }
-    
-            if (selectedPrice!== "" && (selectedPrice === "200000" && cardPrice < 200000 || cardPrice > parseInt(selectedPrice))) {
-                $(this).hide();
-                return;
-            }
-    
-            $(this).show();
-        });
+        }
+
+        // Enhanced year filtering
+        var yearRegex = /(\d{4})/;
+        var cardYear = parseInt(vehicleName.match(yearRegex)[1]);
+        if (selectedYear !== "" && selectedYear !== "All Years" && selectedYear !== cardYear.toString()) {
+            $(this).hide();
+            return;
+        }
+
+        // Enhanced price filtering
+        if (selectedPrice !== "" && (selectedPrice === "200000" && cardPrice < 200000 || cardPrice > parseInt(selectedPrice))) {
+            $(this).hide();
+            return;
+        }
+
+        // Show the vehicle card if it passes all filters
+        $(this).show();
     });
+});
 
    // Add to Wishlist functionality
    $(".add-to-wishlist").click(function () {

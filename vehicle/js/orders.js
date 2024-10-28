@@ -34,7 +34,13 @@ $(document).ready(function () {
         var orderCard = $(this).closest(".order-card");
         var trackingDetails = orderCard.find(".tracking-details");
         trackingDetails.slideToggle();
+        $(".track-order").css({"background-color":"var(--secondary-color)","color":"white"});
+    
+        $(".track-order").css({"background-color":"white","color":"var(--seoncdary-color)"});
     });
+    });
+
+       
 
     // Handle view details button click
     $(".view-details").on("click", function () {

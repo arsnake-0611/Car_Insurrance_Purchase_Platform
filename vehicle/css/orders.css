@@ -280,6 +280,14 @@ nav a:hover {
     display: block;
 }
 
+.tracking-timeline p{
+    padding-top: 10px ;
+}
+
+.details-grid p{
+    padding-top: 10px ;
+}
+
 .btn {
     padding: 8px 15px;
     border: none;
