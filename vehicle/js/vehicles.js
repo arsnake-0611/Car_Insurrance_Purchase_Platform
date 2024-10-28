@@ -117,4 +117,3 @@ $(document).ready(function () {
         $(this).addClass("active");
         // Here you would typically make an API call to get the next page of results
     });
-});
