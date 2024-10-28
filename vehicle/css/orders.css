@@ -290,18 +290,14 @@ nav a:hover {
 
 .btn {
     padding: 8px 15px;
-    border: none;
+    border: 1px solid var(--secondary-color);
     border-radius: 4px;
     cursor: pointer;
     font-size: 0.9rem;
     text-decoration: none;
     transition: background-color 0.3s ease;
-}
-
-.btn-outline {
-    border: 1px solid var(--secondary-color);
-    color: var(--secondary-color);
-    background: transparent;
+    background-color: var(--background-color);
+    color: var(--secondary-color)
 }
 
 .btn-outline:hover {
