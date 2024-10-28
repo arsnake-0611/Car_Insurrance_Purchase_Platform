@@ -21,7 +21,7 @@ $("select").on("change", function () {
     
     $(".vehicle-card").each(function () {
         var vehicleName = $(this).find(".vehicle-content h3").text();
-        var cardPrice = parseInt($(this).find(".vehicle-price").text().slice(1));
+        var cardPrice = parseInt($(this).find(".vehicle-price").text().replace(/[^0-9]/g, ''));
         var drivetrainType = $(this).find(".spec-item").eq(2).text().trim(); // Assuming drivetrain type is the third spec item
 
         // Enhanced brand filtering
@@ -56,9 +56,11 @@ $("select").on("change", function () {
         }
 
         // Enhanced price filtering
-        if (selectedPrice !== "" && (selectedPrice === "200000" && cardPrice < 200000 || cardPrice > parseInt(selectedPrice))) {
-            $(this).hide();
-            return;
+        if (selectedPrice!== "" && selectedPrice!== "Any Price") {
+            if (selectedPrice === "200000" && cardPrice < 200000 || cardPrice > parseInt(selectedPrice)) {
+                $(this).hide();
+                return;
+            }
         }
 
         // Show the vehicle card if it passes all filters
