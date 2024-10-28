@@ -79,8 +79,15 @@ nav a:hover {
 }
 .order-tabs {
     display: flex;
-    gap: 20px;
+    gap: 10px;
     justify-content: center;
+}
+
+.filter-status-active {
+    background-color: var(--secondary-color);
+    color: white;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    animation: tabSelectAnimation 0.5s ease;
 }
 
 .tab {
@@ -91,6 +98,7 @@ nav a:hover {
     font-size: 1rem;
     color: var(--text-color);
     border-bottom: 2px solid transparent;
+    transition: all 0.3s ease;
 }
 
 .tab.active {
@@ -308,6 +316,19 @@ nav a:hover {
 .btn.active {
     background: var(--secondary-color);
     color: white;
+}
+
+
+@keyframes tabSelectAnimation {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+    100% {
+        transform: translateY(0);
+    }
 }
 
 @media (max-width: 768px) {

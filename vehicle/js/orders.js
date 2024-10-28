@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    // Handle tab click
+    // Order status filter functionality
     $(".order-tabs button").on("click", function () {
         $(".order-tabs button").removeClass("active");
         $(this).addClass("active");
@@ -17,6 +17,7 @@ $(document).ready(function () {
         }
     });
 
+    // Mobile menu functionality
     $(".menu-icon-close").hide();
     $(".menu-icon-open").click(function () {
         $(".mobile-menu").show();
@@ -29,22 +30,35 @@ $(document).ready(function () {
         $(".menu-icon-open").show();
     });
 
+    // Status filter button animation
+    $(".tab").on("click", function () {
+        $(".tab").removeClass("filter-status-active");
+        $(this).addClass("filter-status-active");
+    });
+
+    // Track order button functionality
     $(".track-order").on("click", function () {
         var orderCard = $(this).closest(".order-card");
         var trackingDetails = orderCard.find(".tracking-details");
-        
         trackingDetails.slideToggle();
-        
-        if ($("trackingDetails.active")) {
-            $(this).css({"background-color": "var(--secondary-color)", "color": "white"});
+        $(this).toggleClass("active-track-order");
+        if ($(this).hasClass("active-track-order")) {
+            $(this).css({ "background-color": "var(--secondary-color)", "color": "white" });
         } else {
-            $(this).css({"background-color": "white", "color": "var(--secondary-color)"});
+            $(this).css({ "background-color": "white", "color": "var(--secondary-color)" });
         }
     });
-  
+
+    // View details button functionality
     $(".view-details").on("click", function () {
         var orderCard = $(this).closest(".order-card");
         var detailsContent = orderCard.find(".order-details");
         detailsContent.slideToggle();
+        $(this).toggleClass("active-view-details");
+        if ($(this).hasClass("active-view-details")) {
+            $(this).css({ "background-color": "var(--secondary-color)", "color": "white" });
+        } else {
+            $(this).css({ "background-color": "white", "color": "var(--secondary-color)" });
+        }
     });
 });
