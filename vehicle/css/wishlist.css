@@ -4,6 +4,9 @@
     --accent-color: #ff4081;
     --text-color: #333;
     --background-color: #f8f9fa;
+    --success-color: #4CAF50;
+    --warning-color: #ff9800;
+    --danger-color: #f44336;
 }
 
 * {
@@ -76,6 +79,7 @@ nav a:hover {
 
 .wishlist-container {
     margin-top: 20px;
+    animation: slideIn 0.8s ease;
 }
 
 .wishlist-item {
@@ -199,11 +203,16 @@ nav a:hover {
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
-.empty-wishlist svg {
-    width: 100px;
-    height: 100px;
-    margin-bottom: 20px;
-}
+@keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 
 @media (max-width: 768px) {
     .menu-icon-close, .menu-icon-open {
@@ -220,6 +229,7 @@ nav a:hover {
         height: 100%;
         background-color: rgba(0, 0, 0,0.9);
         z-index: 999;
+        animation: slideIn 0.8s ease;
     }
     
     .mobile-menu ul {

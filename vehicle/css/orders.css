@@ -4,9 +4,6 @@
     --accent-color: #ff4081;
     --text-color: #333;
     --background-color: #f8f9fa;
-    --success-color: #4caf50;
-    --warning-color: #ff9800;
-    --danger-color: #f44336;
 }
 
 * {
@@ -87,7 +84,7 @@ nav a:hover {
     background-color: var(--secondary-color);
     color: white;
     transition: background-color 0.3s ease, color 0.3s ease;
-    animation: tabSelectAnimation 0.5s ease;
+    animation: tabSelectAnimation 1s ease;
 }
 
 .tab {
@@ -98,7 +95,6 @@ nav a:hover {
     font-size: 1rem;
     color: var(--text-color);
     border-bottom: 2px solid transparent;
-    transition: all 0.3s ease;
 }
 
 .tab.active {
@@ -112,6 +108,7 @@ nav a:hover {
     padding: 20px;
     margin-bottom: 20px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    animation: slideIn 0.8s ease;
 }
 
 .order-header {
@@ -318,6 +315,16 @@ nav a:hover {
     color: white;
 }
 
+@keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 
 @keyframes tabSelectAnimation {
     0% {
@@ -346,6 +353,7 @@ nav a:hover {
         height: 100%;
         background-color: rgba(0, 0, 0, 0.9);
         z-index: 999;
+        animation: slideIn 0.8s ease;
     }
 
   .mobile-menu ul {

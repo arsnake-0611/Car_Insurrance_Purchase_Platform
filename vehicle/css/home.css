@@ -78,6 +78,7 @@ nav a:hover {
     align-items: center;
     text-align: center;
     color: white;
+    animation: slideIn 1s ease;
 }
 
 .hero-content {
@@ -99,6 +100,7 @@ nav a:hover {
     animation-fill-mode: forwards;
 }
 
+
 .cta-button {
     display: inline-block;
     padding: 15px 30px;
@@ -110,15 +112,19 @@ nav a:hover {
     animation: fadeInUp 1s ease 0.4s;
     opacity: 0;
     animation-fill-mode: forwards;
+    text-align: center;
 }
 
 .cta-button:hover {
-    background-color: #357abd;
+    background-color: white;
+    border: 1px solid var(--secondary-color);
+    color: var(--secondary-color);
 }
 
 .featured-section {
     padding: 80px 0;
     background-color: var(--background-color);
+    animation: slideIn 1s ease;
 }
 
 .section-title {
@@ -157,6 +163,7 @@ nav a:hover {
 .services-section {
     padding: 80px 0;
     background-color: white;
+    animation: slideIn 1s ease;
 }
 
 .services-grid {
@@ -188,6 +195,17 @@ nav a:hover {
     }
 }
 
+@keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
 @media (max-width: 768px) {
    .menu-icon-close, .menu-icon-open {
         display: block;
@@ -203,6 +221,7 @@ nav a:hover {
         height: 100%;
         background-color: rgba(0, 0, 0,0.9);
         z-index: 999;
+        animation: slideIn 0.8s ease;
     }
     
     .mobile-menu ul {
@@ -230,6 +249,14 @@ nav a:hover {
         background-color:var(--secondary-color), transparent;
     }
     
+    #explore{
+        width:auto;
+        margin:10px;
+    }
+
+    .cta-button{
+        width:100%;
+    }
 
     nav ul {
         display: none;
