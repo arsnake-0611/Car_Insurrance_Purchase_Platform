@@ -4,6 +4,9 @@
     --accent-color: #ff4081;
     --text-color: #333;
     --background-color: #f8f9fa;
+    --success-color: #4CAF50;
+    --warning-color: #ff9800;
+    --danger-color: #f44336;
 }
 
 * {
@@ -393,6 +396,10 @@ nav a:hover {
   .order-header {
         flex-direction: column;
         gap: 10px;
+    }
+
+    .order-tabs {
+        gap: 0;
     }
 
   .progress-steps {
