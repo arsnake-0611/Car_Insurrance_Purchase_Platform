@@ -27,7 +27,8 @@ $(document).ready(function () {
         'seatingCapacity': 'Enter seating capacity (2-9)',
         'cylinderCapacity': 'Enter CC value (500-8000)',
         'vehicleValue': 'Enter vehicle value should be higer than HKD$ 50000',
-        'drivingExperience': 'Enter years of driving experience (1-70)'
+        'drivingExperience': 'Enter years of driving experience (1-70)',
+        'paymentMethod' : 'Enter your payment method'
     };
 
     Object.entries(hints).forEach(([id, hint]) => {
@@ -41,11 +42,14 @@ $(document).ready(function () {
         $(`#${sectionId}`).show();
         $('.nav-button').removeClass('active');
         $(`.nav-button[data-section="${sectionId}"]`).addClass('active');
+        $('#coverage-option').show()
 
         if (sectionId === 'applicationHistory') {
             $('#progressBar').hide();
+            $('#coverage-option').hide()
         } else if (sectionId === 'insuranceForm') {
             $('#progressBar').show();
+            $('#coverage-option').hide()
         }
     }
 
@@ -224,7 +228,9 @@ $(document).ready(function () {
                 required: 'Please enter your driving experience',
                 range: 'Driving experience must be between 0 and 70 years'
             },
-            'coveragePlan': 'Please select a coverage plan'
+            'coveragePlan': 'Please select a coverage plan',
+
+            'paymentMethod': 'Please select a valid payment method'
         };
 
         Object.entries(vehicleValidation).forEach(([field, rules]) => {
@@ -287,7 +293,8 @@ $(document).ready(function () {
             vehicleModel: formData.get('vehicleModel'),
             bodyType: formData.get('bodyType'),
             fullName: formData.get('fullName'),
-            email: formData.get('email')
+            email: formData.get('email'),
+            paymentMethod: formData.get('paymentMethod')
         };
     }
 
@@ -324,6 +331,10 @@ $(document).ready(function () {
                   <tr>
                       <th>Email</th>
                       <td>${data.email}</td>
+                  </tr>
+                  <tr>
+                      <th>Payment Method</th>
+                      <td>${data.paymentMethod}</td>
                   </tr>
               </table>
           </div>
@@ -474,6 +485,7 @@ $(document).ready(function () {
             showApplicationHistory();
         } else if (section === 'insuranceGuide') {
             $('#insuranceGuide').show();
+            $('#coverage-option').show()
         } else {
             $('#websiteGuide').show();
         }
@@ -500,9 +512,7 @@ $(document).ready(function () {
                       <tr><th>Full Name</th><td>${application.fullName}</td></tr>
                       <tr><th>Email</th><td>${application.email}</td></tr>
                   </table>
-                  <div class="action-buttons">
-                      <button class="nav-button" onclick="updateApplicationHistory()">Back to History</button>
-                  </div>
+                  
               </div>
           `);
         }
