@@ -2,7 +2,7 @@ body,
 html {
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
     sans-serif;
-  background: #79aae1;
+  background: #FFFFF0;
   margin: 0;
   padding: 8px;
   border-radius: 24px;
@@ -11,14 +11,14 @@ body {
   width: calc(100% - 16px);
   max-width: 800px;
   margin: 0 auto;
-  background: #c9ddf4;
+  background: #F6F6F8;
   border-radius: 10px;
   padding: 20px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 body[data-theme="dark"] {
-  background: #202124;
-  color: #faf9f6;
+  background: #252C36;
+  color: #FCFCF7;
 }
 h1,
 h2 {
@@ -28,13 +28,13 @@ body[data-theme="dark"] h1,
 body[data-theme="dark"] h2,
 body[data-theme="dark"] h3,
 body[data-theme="dark"] h4 {
-  color: #e8eaed;
+  color: #F8F7F4;
 }
 .form-section {
   width: 760px;
   margin: 0 auto 30px;
   padding: 20px;
-  background: #ffffff;
+  background: #D4D4D4;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   animation: slideIn 0.5s ease-out;
@@ -50,7 +50,7 @@ select {
   width: 100%;
   max-width: 100%;
   padding: 12px;
-  border: 2px solid #c9ddf4;
+  border: 1px solid #888888;
   border-radius: 8px;
   font-size: 16px;
   box-sizing: border-box;
@@ -82,8 +82,8 @@ body[data-theme="dark"] select {
 #editButton,
 #confirmButton,
 button[type="submit"] {
-  background-color: #4a90e2;
-  color: white;
+  background-color: #f0cc1f;
+  color: #939597;
   border: none;
   padding: 12px 20px;
   cursor: pointer;
@@ -105,53 +105,17 @@ button[type="submit"] {
 #editButton:hover,
 #confirmButton:hover,
 button[type="submit"]:hover {
-  background-color: #357abd;
+  background-color: #F5DF4D;
   transform: translateY(-2px);
 }
 .nav-button.active {
-  background-color: #357abd;
+  background-color: #e0b412;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
-#websiteGuide {
-  width: calc(100% - 40px);
-  max-width: 760px;
-  margin: 20px auto;
-  padding: 20px;
-  background: #ffffff;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-body[data-theme="dark"] #websiteGuide {
-  background: #303134;
-  border: 1px solid #5f6368;
-}
-.guide-content {
-  padding: 20px;
-}
-.guide-section {
-  margin-bottom: 25px;
-}
-.guide-section h4 {
-  color: #2c3e50;
-  margin-bottom: 15px;
-}
-body[data-theme="dark"] .guide-section h4 {
-  color: #e8eaed;
-}
-.guide-section ul,
-.guide-section ol {
-  padding-left: 20px;
-  margin-bottom: 15px;
-}
-.guide-section li {
-  margin-bottom: 8px;
-}
 #insuranceGuide {
-  background: linear-gradient(to bottom right, #79aae1, #4a90e2);
-  color: white;
-  padding: 30px;
+  margin-top: 100px;
   border-radius: 12px;
-  margin-bottom: 30px;
+  margin-bottom: 50px;
 }
 #insuranceGuide h3 {
   margin-top: 0;
@@ -216,7 +180,7 @@ body[data-theme="dark"] #progressBar {
   );
   background-size: 40px 40px;
   animation: progress-bar-stripes 1s linear infinite;
-  color: white;
+  color: #F6F6F8;
   text-align: center;
   line-height: 24px;
   font-weight: bold;
@@ -226,7 +190,7 @@ body[data-theme="dark"] #progressBar {
   width: 100%;
   border-collapse: collapse;
   margin: 20px 0;
-  background: #ffffff;
+  background: #F6F6F8;
   border-radius: 8px;
   overflow: hidden;
 }
@@ -254,7 +218,7 @@ body[data-theme="dark"] .confirmation-table th {
   color: #e8eaed;
 }
 .confirmation-table tr:hover {
-  background: #f1f3f4;
+  background: #F5DF4D;
 }
 body[data-theme="dark"] .confirmation-table tr:hover {
   background: #3c4043;
@@ -266,8 +230,8 @@ body[data-theme="dark"] .confirmation-table tr:hover {
   visibility: hidden;
   transform: translateY(-5px);
   transition: all 0.1s ease;
-  background: #ff6b6b;
-  color: white;
+  background: #c18c0d;
+  color: #3f2209;
   padding: 4px;
   border-radius: 10px;
   pointer-events: none;
@@ -321,41 +285,6 @@ body[data-theme="dark"] .input-hint {
   border-radius: 4px;
   margin: 10px 0;
 }
-.coverage-option {
-  background: rgba(255, 255, 255, 0.1);
-  padding: 20px;
-  border-radius: 8px;
-  margin: 20px 0;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-}
-.coverage-option h4 {
-  color: white;
-  margin-top: 0;
-}
-.coverage-option ul {
-  list-style-type: none;
-  padding-left: 0;
-}
-.coverage-option ul li {
-  padding: 8px 0;
-  padding-left: 24px;
-  position: relative;
-}
-.coverage-option ul li:before {
-  content: "✓";
-  position: absolute;
-  left: 0;
-  color: #4ae279;
-}
-.recommended-tag {
-  display: inline-block;
-  background: #4ae279;
-  color: white;
-  padding: 4px 12px;
-  border-radius: 20px;
-  font-size: 0.9em;
-  margin-top: 10px;
-}
 .applications-list {
   display: flex;
   flex-direction: column;
@@ -388,8 +317,7 @@ body[data-theme="dark"] .application-card h3 {
 }
 .view-details-btn,
 .delete-app {
-  background-color: #4a90e2;
-  color: white;
+  background-color: #f9ef8f;
   border: none;
   padding: 12px 20px;
   cursor: pointer;
@@ -404,14 +332,16 @@ body[data-theme="dark"] .application-card h3 {
 }
 .view-details-btn:hover,
 .delete-app:hover {
-  background-color: #357abd;
+  background-color: #f5df4d;
   transform: translateY(-2px);
 }
 .delete-app {
-  background-color: #e24a4a;
+  background-color: #f54d63 ;
+  color: #4c0516;
 }
 .delete-app:hover {
-  background-color: #c43e3e;
+  background-color: #e11d40;
+  color: #4c0516;
 }
 @keyframes progress-bar-stripes {
   from {
@@ -421,7 +351,7 @@ body[data-theme="dark"] .application-card h3 {
     background-position: 0 0;
   }
 }
-@media (max-width: 500px) {
+@media (max-width: 480px) {
   .form-section,
   #websiteGuide,
   #insuranceGuide,

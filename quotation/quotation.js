@@ -41,11 +41,14 @@ $(document).ready(function () {
         $(`#${sectionId}`).show();
         $('.nav-button').removeClass('active');
         $(`.nav-button[data-section="${sectionId}"]`).addClass('active');
+        $('#coverage-option').show()
 
         if (sectionId === 'applicationHistory') {
             $('#progressBar').hide();
+            $('#coverage-option').hide()
         } else if (sectionId === 'insuranceForm') {
             $('#progressBar').show();
+            $('#coverage-option').hide()
         }
     }
 
@@ -474,6 +477,7 @@ $(document).ready(function () {
             showApplicationHistory();
         } else if (section === 'insuranceGuide') {
             $('#insuranceGuide').show();
+            $('#coverage-option').show()
         } else {
             $('#websiteGuide').show();
         }
@@ -500,9 +504,7 @@ $(document).ready(function () {
                       <tr><th>Full Name</th><td>${application.fullName}</td></tr>
                       <tr><th>Email</th><td>${application.email}</td></tr>
                   </table>
-                  <div class="action-buttons">
-                      <button class="nav-button" onclick="updateApplicationHistory()">Back to History</button>
-                  </div>
+                  
               </div>
           `);
         }
