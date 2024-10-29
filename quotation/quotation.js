@@ -21,20 +21,6 @@ $(document).ready(function() {
       $('#insuranceForm').fadeIn(300);
       $('.nav-button').removeClass('active');
       $('.nav-button[data-section="insuranceForm"]').addClass('active');
-
-      const hints = {
-          'vehicleYear': 'Enter 4 digits for year (1900-2024)',
-          'seatingCapacity': 'Enter seating capacity (2-9)',
-          'cylinderCapacity': 'Enter CC value (500-8000)',
-          'vehicleValue': 'Enter vehicle value in HKD',
-          'drivingExperience': 'Enter years of driving experience (0-70)'
-      };
-
-      Object.entries(hints).forEach(([id, hint]) => {
-          const input = $(`#${id}`);
-          const hintDiv = $('<div>').addClass('input-hint').text(hint);
-          input.closest('.form-group').append(hintDiv);
-      });
   }
 
   function showSection(sectionId) {
@@ -51,10 +37,10 @@ $(document).ready(function() {
   }
 
   const carModels = {
-      'Audi': ['A3', 'A4', 'A6', 'Q5', 'Q7'],
-      'BMW': ['3 Series', '5 Series', 'X3', 'X5', 'Z4'],
-      'Ford': ['Focus', 'Fiesta', 'Mustang', 'Explorer', 'F-150'],
-      'Honda': ['Civic', 'Accord', 'CR-V', 'HR-V', 'Jazz'],
+      'Audi': ['A6 2.4', 'A8 L','Q8 e-tron'],
+      'BMW': ['X3', 'X5', 'Z4'],
+      'Ford': [ 'Mustang', 'Explorer', 'F-150'],
+      'Porsche': ['Cayenne S Coupé', '911 Carrera S', '911 GT3'],
       'Toyota': ['Corolla', 'Camry', 'RAV4', 'Prius', 'Yaris']
   };
 

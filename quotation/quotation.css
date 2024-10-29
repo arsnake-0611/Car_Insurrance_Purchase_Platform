@@ -259,30 +259,6 @@ body[data-theme="dark"] .confirmation-table th {
 body[data-theme="dark"] .confirmation-table tr:hover {
   background: #3c4043;
 }
-.input-hint {
-  position: absolute;
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(-10px);
-  transition: all 0.3s ease;
-  background: #ff6b6b;
-  color: white;
-  padding: 8px;
-  border-radius: 4px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  pointer-events: none;
-  z-index: 100;
-  top: 100%;
-  left: 0;
-  width: 200px;
-  box-sizing: border-box;
-  margin-top: 5px;
-}
-body[data-theme="dark"] .input-hint {
-  background: #ff4757;
-  color: white;
-  border: none;
-}
 .form-group {
   position: relative;
   width: 100%;
