@@ -1,4 +1,6 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
     <title>Legend Motor - Vehicle Inventory</title>
     <meta charset="UTF-8">
@@ -8,15 +10,150 @@
     <link href="css/vehicles.css" rel="stylesheet">
     <script src="js/vehicles.js" defer></script>
 </head>
+
 <body>
-<header>
-    <nav class="container">
-        <a href="home.html">
-            <div class="logo-container">
-                <img src="./photo/lm-logo.png" alt="Legend Motor" style="width:40px;height:auto;">
-                <div style="color: #42768c;font-size:25px;">|&nbsp;&nbsp;Legend Motor</div>
+    <header>
+        <nav class="container">
+            <a href="home.html">
+                <div class="logo-container">
+                    <img src="./photo/lm-logo.png" alt="Legend Motor" style="width:40px;height:auto;">
+                    <div style="color: #42768c;font-size:25px;">|&nbsp;&nbsp;Legend Motor</div>
+                </div>
+            </a>
+            <ul>
+                <li><a href="home.html">Home</a></li>
+                <li><a href="vehicles.html">Vehicles</a></li>
+                <li><a href="wishlist.html">Wishlist</a></li>
+                <li><a href="orders.html">Orders</a></li>
+                <li><a href="myAccount.html">My Account</a></li>
+            </ul>
+            <img class="menu-icon-open" src="photo/bars-solid.png" style="width:30px;">
+            <img class="menu-icon-close" src="./photo/xmark-solid.png" style="width:30px;">
+        </nav>
+    </header>
+
+    <main class="container">
+        <div class="vehicle-header">
+            <h1>Browse Our Vehicle Inventory</h1>
+            <p>Find the perfect vehicle that fits your lifestyle and budget</p>
+        </div>
+        <section class="filters">
+            <div class="filter-grid">
+                <div class="filter-group">
+                    <label for="brand">Brand</label>
+                    <select id="brand">
+                        <option value="">All Brands</option>
+                        <option value="mercedes">Mercedes-Benz</option>
+                        <option value="bmw">BMW</option>
+                        <option value="audi">Audi</option>
+                        <option value="porsche">Porsche</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="type">Drivetrain Type</label>
+                    <select id="type">
+                        <option value="">All Types</option>
+                        <option value="AWD">AWD</option>
+                        <option value="FWD">FWD</option>
+                        <option value="RWD">RWD</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="price">Price Range</label>
+                    <select id="price">
+                        <option value="">Any Price</option>
+                        <option value="50000">Under $50,000</option>
+                        <option value="100000">Under $100,000</option>
+                        <option value="150000">Under $150,000</option>
+                        <option value="200000">$200,000+</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="year">Year</label>
+                    <select id="year">
+                        <option value="">All Years</option>
+                        <option value="2024">2024</option>
+                        <option value="2023">2023</option>
+                        <option value="2022">2022</option>
+                        <option value="2021">2021</option>
+                    </select>
+                </div>
             </div>
-        </a>
+        </section>
+
+        <section class="vehicle-grid">
+            <article class="vehicle-card">
+                <img src="./photo/AudiA8.jpg" alt="Audi A8 L, luxury sedan in silver" class="vehicle-image">
+                <div class="vehicle-price">$125,000</div>
+                <div class="vehicle-content">
+                    <h3>2024 Audi A8 L</h3>
+                    <div class="vehicle-specs">
+                        <div class="spec-item">🛣️ 15 miles</div>
+                        <div class="spec-item">⚡ 429 HP</div>
+                        <div class="spec-item">🌍 AWD</div>
+                        <div class="spec-item">🎨 Silver</div>
+                    </div>
+                    <div class="vehicle-actions">
+                        <a href="https://www.audi.com.hk/hk/web/tc/models/a8/a8-l.html">
+                            <button class="btn btn-outline">View Details</button>
+                        </a>
+                        <button class="add-to-wishlist">Add To Wishlist</button>
+                    </div>
+                </div>
+            </article>
+
+            <article class="vehicle-card">
+                <img src="./photo/Porsche.jpg" alt="Porsche 911, sports car in red" class="vehicle-image">
+                <div class="vehicle-price">$165,000</div>
+                <div class="vehicle-content">
+                    <h3>2023 Porsche 911 Carrera S</h3>
+                    <div class="vehicle-specs">
+                        <div class="spec-item">🛣️ 250 miles</div>
+                        <div class="spec-item">⚡ 443 HP</div>
+                        <div class="spec-item">🌍 RWD</div>
+                        <div class="spec-item">🎨 Red</div>
+                    </div>
+                    <div class="vehicle-actions">
+                        <a href="https://www.porsche.com/pap/_hong-kong_/models/911/">
+                            <button class="btn btn-outline">View Details</button>
+                        </a>
+                        <button class="add-to-wishlist">Add To Wishlist</button>
+                    </div>
+                </div>
+            </article>
+
+            <article class="vehicle-card">
+                <img src="./photo/rangeRoverSport.jpg" alt="Range Rover Sport, luxury SUV in black"
+                    class="vehicle-image">
+                <div class="vehicle-price">$98,000</div>
+                <div class="vehicle-content">
+                    <h3>2024 Range Rover Sport</h3>
+                    <div class="vehicle-specs">
+                        <div class="spec-item">🛣️ 12 miles</div>
+                        <div class="spec-item">⚡ 355 HP</div>
+                        <div class="spec-item">🌍 AWD</div>
+                        <div class="spec-item">🎨 Black</div>
+                    </div>
+                    <div class="vehicle-actions">
+                        <a href="https://www.landrover.com.hk/zh/range-rover/new-range-rover-sport/sv">
+                            <button class="btn btn-outline">View Details</button>
+                        </a>
+                        <button class="add-to-wishlist">Add To Wishlist</button>
+                    </div>
+                </div>
+            </article>
+        </section>
+
+        <div class="pagination">
+            <button class="page-btn active">1</button>
+            <button class="page-btn">2</button>
+            <button class="page-btn">3</button>
+            <button class="page-btn">4</button>
+            <button class="page-btn">Next →</button>
+        </div>
+    </main>
+
+    <div class="mobile-menu">
         <ul>
             <li><a href="home.html">Home</a></li>
             <li><a href="vehicles.html">Vehicles</a></li>
@@ -24,140 +161,8 @@
             <li><a href="orders.html">Orders</a></li>
             <li><a href="myAccount.html">My Account</a></li>
         </ul>
-        <img class="menu-icon-open" src="photo/bars-solid.png" style="width:30px;">
-        <img class="menu-icon-close" src="./photo/xmark-solid.png" style="width:30px;">
-    </nav>
-</header>
-
-<main class="container">
-<div class="vehicle-header">
-    <h1>Browse Our Vehicle Inventory</h1>
-    <p>Find the perfect vehicle that fits your lifestyle and budget</p>
-</div>
-    <section class="filters">
-        <div class="filter-grid">
-            <div class="filter-group">
-                <label for="brand">Brand</label>
-                <select id="brand">
-                    <option value="">All Brands</option>
-                    <option value="mercedes">Mercedes-Benz</option>
-                    <option value="bmw">BMW</option>
-                    <option value="audi">Audi</option>
-                    <option value="porsche">Porsche</option>
-                </select>
-            </div>
-            <div class="filter-group">
-                <label for="type">Drivetrain Type</label>
-                <select id="type">
-                    <option value="">All Types</option>
-                    <option value="AWD">AWD</option>
-                    <option value="FWD">FWD</option>
-                    <option value="RWD">RWD</option>
-                </select>
-            </div>
-            <div class="filter-group">
-                <label for="price">Price Range</label>
-                <select id="price">
-                    <option value="">Any Price</option>
-                    <option value="50000">Under $50,000</option>
-                    <option value="100000">Under $100,000</option>
-                    <option value="150000">Under $150,000</option>
-                    <option value="200000">$200,000+</option>
-                </select>
-            </div>
-            <div class="filter-group">
-                <label for="year">Year</label>
-                <select id="year">
-                    <option value="">All Years</option>
-                    <option value="2024">2024</option>
-                    <option value="2023">2023</option>
-                    <option value="2022">2022</option>
-                    <option value="2021">2021</option>
-                </select>
-            </div>
-        </div>
-    </section>
-
-    <section class="vehicle-grid">
-        <article class="vehicle-card">
-            <img src="./photo/AudiA8.jpg" alt="Audi A8 L, luxury sedan in silver" class="vehicle-image">
-            <div class="vehicle-price">$125,000</div>
-            <div class="vehicle-content">
-                <h3>2024 Audi A8 L</h3>
-                <div class="vehicle-specs">
-                    <div class="spec-item">🛣️ 15 miles</div>
-                    <div class="spec-item">⚡ 429 HP</div>
-                    <div class="spec-item">🌍 AWD</div>
-                    <div class="spec-item">🎨 Silver</div>
-                </div>
-                <div class="vehicle-actions">
-                    <a href="https://www.audi.com.hk/hk/web/tc/models/a8/a8-l.html">
-                        <button class="btn btn-outline">View Details</button>
-                    </a>
-                    <button class="add-to-wishlist">Add To Wishlist</button>
-                </div>
-            </div>
-        </article>
-
-        <article class="vehicle-card">
-            <img src="./photo/Porsche.jpg" alt="Porsche 911, sports car in red" class="vehicle-image">
-            <div class="vehicle-price">$165,000</div>
-            <div class="vehicle-content">
-                <h3>2023 Porsche 911 Carrera S</h3>
-                <div class="vehicle-specs">
-                    <div class="spec-item">🛣️ 250 miles</div>
-                    <div class="spec-item">⚡ 443 HP</div>
-                    <div class="spec-item">🌍 RWD</div>
-                    <div class="spec-item">🎨 Red</div>
-                </div>
-                <div class="vehicle-actions">
-                    <a href="https://www.porsche.com/pap/_hong-kong_/models/911/">
-                        <button class="btn btn-outline">View Details</button>
-                    </a>
-                    <button class="add-to-wishlist">Add To Wishlist</button>
-                </div>
-            </div>
-        </article>
-
-        <article class="vehicle-card">
-            <img src="./photo/rangeRoverSport.jpg" alt="Range Rover Sport, luxury SUV in black" class="vehicle-image">
-            <div class="vehicle-price">$98,000</div>
-            <div class="vehicle-content">
-                <h3>2024 Range Rover Sport</h3>
-                <div class="vehicle-specs">
-                    <div class="spec-item">🛣️ 12 miles</div>
-                    <div class="spec-item">⚡ 355 HP</div>
-                    <div class="spec-item">🌍 AWD</div>
-                    <div class="spec-item">🎨 Black</div>
-                </div>
-                <div class="vehicle-actions">
-                    <a href="https://www.landrover.com.hk/zh/range-rover/new-range-rover-sport/sv">
-                        <button class="btn btn-outline">View Details</button>
-                    </a>
-                    <button class="add-to-wishlist">Add To Wishlist</button>
-                </div>
-            </div>
-        </article>
-    </section>
-
-    <div class="pagination">
-        <button class="page-btn active">1</button>
-        <button class="page-btn">2</button>
-        <button class="page-btn">3</button>
-        <button class="page-btn">4</button>
-        <button class="page-btn">Next →</button>
     </div>
-</main>
-
-<div class="mobile-menu">
-    <ul>
-        <li><a href="home.html">Home</a></li>
-        <li><a href="vehicles.html">Vehicles</a></li>
-        <li><a href="wishlist.html">Wishlist</a></li>
-        <li><a href="orders.html">Orders</a></li>
-        <li><a href="myAccount.html">My Account</a></li>
-    </ul>
-</div>
 
 </body>
+
 </html>
