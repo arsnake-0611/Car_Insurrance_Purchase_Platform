@@ -1,54 +1,268 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vehicle Insurance Application</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <link rel="stylesheet" href="quotation.css">
-    <script src ="quotation.js"></script>
-
+    <!-- <link rel="stylesheet" href="quotation.css"> -->
+    <link rel="stylesheet" href="info.css">
+    <script src="quotation.js"></script>
+    <script src="info.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Gill+Sans&display=swap" rel="stylesheet">
   </head>
-  <body>
-<h3>Insurance Coverage Guide</h3>
 
-<div class="coverage-option">
-  <h4>Third Party Liability Insurance</h4>
-  <p>Essential coverage for accidents involving third parties:</p>
-  <ul>
-    <li>Third party death or injury compensation</li>
-    <li>Property damage protection</li>
-    <li>Legal liability coverage</li>
-    <li>Emergency roadside assistance</li>
-  </ul>
-  <p class="recommended-tag">
-    Recommended for: Budget-conscious drivers seeking basic legal
-    protection
-  </p>
-</div>
+<body>
 
-<div class="coverage-option">
-  <h4>Comprehensive Motor Insurance</h4>
-  <p>Complete protection for your vehicle and third parties:</p>
-  <ul>
-    <li>All Third Party Liability benefits</li>
-    <li>Vehicle damage coverage</li>
-    <li>Natural disaster protection</li>
-    <li>Theft protection</li>
-    <li>Personal accident coverage</li>
-    <li>24/7 roadside assistance</li>
-  </ul>
-  <p class="recommended-tag">
-    Recommended for: New vehicles and drivers wanting complete peace of
-    mind
-  </p>
-</div>
+  <section class="hero">
+    <img src="logo/lm.png" alt="Legend Motor Insurance Logo" class="company-logo" width="200" height="60">
+    <h1>Protect Your Journey</h1>
+    <p>Get comprehensive auto insurance coverage tailored to your needs</p>
+    <a href="quotation.html">
+      <button class="cta-button">Get a Quote Now</button>
+    </a>
+  </section>
 
-<div>
-    <button a>
-        Enter
-    </button>
-</div>
-  </body>
+  <section class="features">
+    <div class="feature-card">
+      <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="#ff6b6b" stroke-width="2">
+        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+      </svg>
+      <h3>Third Party Liability Insurance</h3>
+      <p>Essential coverage for damage to third party property and injury</p>
+    </div>
+    <div class="feature-card">
+      <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="#ff6b6b" stroke-width="2">
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+      </svg>
+      <h3>Comprehensive Motor Insurance</h3>
+      <p>Complete protection for your vehicle against all risks</p>
+    </div>
+    <div class="feature-card">
+      <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="#ff6b6b" stroke-width="2">
+        <path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H7" />
+      </svg>
+      <h3>24/7 Claims Assistance</h3>
+      <p>Round-the-clock support when you need it most</p>
+    </div>
+    <div class="feature-card">
+      <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="#ff6b6b" stroke-width="2">
+        <circle cx="12" cy="12" r="10" />
+        <path d="M12 6v6l4 2" />
+      </svg>
+      <h3>Quick Digital Claims</h3>
+      <p>Easy online claims processing system</p>
+    </div>
+  </section>
+
+  <section class="stats">
+    <h2>Our Track Record</h2>
+    <div class="graph-container">
+      <svg width="600" height="400" viewBox="0 0 600 400">
+        <g class="grid-lines">
+          <line x1="50" y1="350" x2="550" y2="350" stroke="#ddd" />
+          <line x1="50" y1="280" x2="550" y2="280" stroke="#ddd" />
+          <line x1="50" y1="210" x2="550" y2="210" stroke="#ddd" />
+          <line x1="50" y1="140" x2="550" y2="140" stroke="#ddd" />
+          <line x1="50" y1="70" x2="550" y2="70" stroke="#ddd" />
+        </g>
+
+        <g class="graph-bar">
+          <rect x="100" y="350" width="80" height="0" fill="url(#gradient1)">
+            <animate attributeName="height" from="0" to="280" dur="1.5s" fill="freeze" />
+            <animate attributeName="y" from="350" to="70" dur="1.5s" fill="freeze" />
+          </rect>
+          <text x="140" y="380" class="graph-label" text-anchor="middle">Customer Satisfaction</text>
+          <text x="140" y="60" class="graph-value" text-anchor="middle">95%</text>
+        </g>
+
+        <g class="graph-bar">
+          <rect x="260" y="350" width="80" height="0" fill="url(#gradient2)">
+            <animate attributeName="height" from="0" to="250" dur="1.5s" fill="freeze" />
+            <animate attributeName="y" from="350" to="100" dur="1.5s" fill="freeze" />
+          </rect>
+          <text x="300" y="380" class="graph-label" text-anchor="middle">Claims Processing</text>
+          <text x="300" y="90" class="graph-value" text-anchor="middle">92%</text>
+        </g>
+
+        <g class="graph-bar">
+          <rect x="420" y="350" width="80" height="0" fill="url(#gradient3)">
+            <animate attributeName="height" from="0" to="220" dur="1.5s" fill="freeze" />
+            <animate attributeName="y" from="350" to="130" dur="1.5s" fill="freeze" />
+          </rect>
+          <text x="460" y="380" class="graph-label" text-anchor="middle">Customer Retention</text>
+          <text x="460" y="120" class="graph-value" text-anchor="middle">89%</text>
+        </g>
+
+        <defs>
+          <linearGradient id="gradient1" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#1e3c72" />
+            <stop offset="100%" stop-color="#2a5298" />
+          </linearGradient>
+          <linearGradient id="gradient2" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#2a5298" />
+            <stop offset="100%" stop-color="#3a63b8" />
+          </linearGradient>
+          <linearGradient id="gradient3" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#3a63b8" />
+            <stop offset="100%" stop-color="#4a74d1" />
+          </linearGradient>
+        </defs>
+      </svg>
+    </div>
+  </section>
+
+  <section class="faq-section">
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq-item">
+      <div class="faq-question">What types of coverage do you offer?</div>
+      <div class="faq-answer">We offer comprehensive, collision, liability, and personal injury protection coverage,
+        along with additional options tailored to your needs.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question">How can I file a claim?</div>
+      <div class="faq-answer">You can file a claim 24/7 through our online portal, mobile app, or by calling our
+        dedicated claims hotline.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question">What factors affect my insurance premium?</div>
+      <div class="faq-answer">Factors include your driving history, vehicle type, age, location, and annual mileage.
+      </div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question">Do you offer multi-car discounts?</div>
+      <div class="faq-answer">Yes, we offer significant discounts for insuring multiple vehicles under the same policy.
+      </div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question">What is the claims process?</div>
+      <div class="faq-answer">Our claims process is simple: report the incident, provide documentation, and we'll guide
+        you through the rest.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question">Are there any safe driver discounts?</div>
+      <div class="faq-answer">Yes, we reward safe drivers with discounts up to 20% on their premiums.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question">What is the minimum coverage required?</div>
+      <div class="faq-answer">Minimum coverage varies by state. Our agents can help determine your state's requirements.
+      </div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question">How can I pay my premium?</div>
+      <div class="faq-answer">We offer multiple payment options including online, automatic payments, and monthly
+        installments.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question">Do you cover rental cars?</div>
+      <div class="faq-answer">Yes, we offer rental car coverage as part of our comprehensive insurance packages.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question">What is your cancellation policy?</div>
+      <div class="faq-answer">You can cancel your policy at any time. Any unused premium will be refunded.</div>
+    </div>
+  </section>
+
+  <section class="testimonials">
+    <h2>What Our Customers Say</h2>
+    <div class="testimonial-grid">
+      <div class="testimonial-card">
+        <img alt="profile picture of Sarah J., smiling woman with brown hair" src="avatar1.jpg" width="60" height="60">
+        <h3>Sarah J.</h3>
+        <p>"Legend Motor Insurance made filing a claim so easy. Their customer service is exceptional!"</p>
+      </div>
+      <div class="testimonial-card">
+        <img alt="profile picture of Michael R., middle-aged man with glasses" src="avatar2.jpg" width="60" height="60">
+        <h3>Michael R.</h3>
+        <p>"I've saved over $500 annually since switching to Legend Motor. Best decision ever!"</p>
+      </div>
+      <div class="testimonial-card">
+        <img alt="profile picture of Emma T., young professional woman" src="avatar3.jpg" width="60" height="60">
+        <h3>Emma T.</h3>
+        <p>"Their 24/7 roadside assistance saved me multiple times. Couldn't be happier with the service!"</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="coverage-guide">
+    <h3>Insurance Coverage Guide</h3>
+
+    <div class="coverage-option">
+      <h4>Third Party Liability Insurance</h4>
+      <p>Essential coverage for accidents involving third parties:</p>
+      <ul>
+        <li>Third party death or injury compensation</li>
+        <li>Property damage protection</li>
+        <li>Legal liability coverage</li>
+        <li>Emergency roadside assistance</li>
+      </ul>
+      <p class="recommended-tag">
+        Recommended for: Budget-conscious drivers seeking basic legal protection
+      </p>
+    </div>
+
+    <div class="coverage-option">
+      <h4>Comprehensive Motor Insurance</h4>
+      <p>Complete protection for your vehicle and third parties:</p>
+      <ul>
+        <li>All Third Party Liability benefits</li>
+        <li>Vehicle damage coverage</li>
+        <li>Natural disaster protection</li>
+        <li>Theft protection</li>
+        <li>Personal accident coverage</li>
+        <li>24/7 roadside assistance</li>
+      </ul>
+      <p class="recommended-tag">
+        Recommended for: New vehicles and drivers wanting complete peace of mind
+      </p>
+    </div>
+
+    <a href="quotation.html">
+      <button class="nav-button">Enter</button>
+    </a>
+  </section>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>Insurance Products</h3>
+        <ul>
+          <li>Third Party Liability</li>
+          <li>Comprehensive Motor</li>
+          <li>Policy Add-ons</li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <ul>
+          <li>File a Claim</li>
+          <li>Renew Policy</li>
+          <li>Download Policy</li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Support</h3>
+        <ul>
+          <li>Contact Us</li>
+          <li>FAQs</li>
+          <li>24/7 Emergency</li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Legal</h3>
+        <ul>
+          <li>Privacy Policy</li>
+          <li>Terms of Service</li>
+          <li>Disclaimers</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2024 Legend Motor Insurance. All rights reserved.</p>
+    </div>
+  </footer>
+
+</body>
+
 </html>
