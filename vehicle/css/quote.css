@@ -79,6 +79,7 @@ nav a:hover {
     padding: 20px;
     background: white;
     border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
 .quote-step {
@@ -123,6 +124,7 @@ nav a:hover {
     padding: 30px;
     border-radius: 8px;
     animation: slideIn 1s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
 @keyframes slideIn {
@@ -207,7 +209,7 @@ nav a:hover {
     border: 1px solid var(--secondary-color);
 }
 
-.btn-submit {
+.btn-next, .btn-submit {
     background: var(--secondary-color);
     color: white;
     padding: 15px 30px;
@@ -218,7 +220,7 @@ nav a:hover {
     transition: background-color 0.3s ease;
 }
 
-.btn-submit:hover {
+.btn-submit:hover ,.btn-next:hover {
     background-color: white;
     border: 1px solid var(--secondary-color);
     color: var(--secondary-color);
