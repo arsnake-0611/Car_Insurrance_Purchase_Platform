@@ -1,5 +1,5 @@
-<html>
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <title>Legend Motor - Request a Quote</title>
     <meta charset="UTF-8">
@@ -53,7 +53,6 @@
     </div>
 
     <form onsubmit="validateForms(event)" class="quote-form">
-        <main class="personal-info">
             <div class="form-section">
                 <h3>Selected Vehicle from Wishlist</h3>
                 <div class="selected-vehicle">
@@ -121,87 +120,9 @@
                 </div>
                 <div class="actions-button">
                     <a href="wishlist.html"><button class="btn-back">Back</button></a>
-                    <button class="btn-next">Next</button>
+                    <a href="payment.html"><button class="btn-next">Next</button></a>
                 </div>
             </div>
-        </main>
-
-
-        <main class="payment-form">
-            <div class="form-section">
-                <h3>Payment Summary</h3>
-                <div class="payment-summary">
-                    <div class="summary-row">
-                        <span>Vehicle Price</span>
-                        <span>$110,000</span>
-                    </div>
-                    <div class="summary-row">
-                        <span>Deposit Required (10%)</span>
-                        <span>$11,000</span>
-                    </div>
-                    <div class="summary-row">
-                        <span>Processing Fee</span>
-                        <span>$195</span>
-                    </div>
-                    <div class="summary-row">
-                        <span>Total Due Now</span>
-                        <span>$11,195</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-section">
-                <h3>Payment Method</h3>
-                <div class="payment-methods">
-                    <div class="payment-method active">
-                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2">
-                            <rect x="1" y="4" width="22" height="16" rx="2" />
-                            <line x1="1" y1="10" x2="23" y2="10" />
-                        </svg>
-                        <div>Credit Card</div>
-                    </div>
-                    <div class="payment-method">
-                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2">
-                            <path
-                                d="M4 8h16M4 8a2 2 0 012-2h12a2 2 0 012 2M4 8v8a2 2 0 002 2h12a2 2 0 002-2V8m-4 0v3" />
-                        </svg>
-                        <div>Bank Transfer</div>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label>Card Number</label>
-                    <div class="card-wrapper">
-                        <input type="text" class="card-input" placeholder="**** **** **** ****" maxlength="19">
-                    </div>
-                </div>
-
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-                    <div class="form-group">
-                        <label>Expiry Date</label>
-                        <input type="text" class="card-input" placeholder="MM/YY" maxlength="5">
-                    </div>
-                    <div class="form-group">
-                        <label>CVV</label>
-                        <input type="text" class="card-input" placeholder="***" maxlength="3">
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label>Name on Card</label>
-                    <input type="text" class="card-input" placeholder="Enter name as shown on card">
-                </div>
-            </div>
-
-            <div class="actions-button personalInfo">
-                <a href="wishlist.html"><button class="btn-back">Back</button></a>
-                <button class="btn-submit">Complete Payment</button>
-            </div>
-            <div class="success-message">Payment processed successfully! You will receive a confirmation email shortly.
-            </div>
-        </main>
     </form>
 
     <div class="mobile-menu">

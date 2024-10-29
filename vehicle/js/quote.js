@@ -1,12 +1,4 @@
 $(document).ready(function () {
-    //$('.payment-form').hide();
-    $('.btn-next').click(function () {
-        if (validateForms()) {
-            $('.payment-form').show();
-            $('.person-info').hide();
-        }
-    });
-
     // Mobile menu functionality
     $(".menu-icon-close").hide();
     $(".menu-icon-open").click(function () {
@@ -20,8 +12,24 @@ $(document).ready(function () {
         $(".menu-icon-close").hide();
         $(".menu-icon-open").show();
     });
-});
 
+    // $(".btn-next").click(function () {
+    //     if (validateForms()) {
+    //         window.location.href = $(this).parent().attr("href");
+    //     }
+    // });
+
+    $(".btn-next").click(function () {
+        window.location.href = $(this).parent().attr("href");
+    });
+
+    $(".btn-back").off("click");
+
+    $(".btn-back").click(function () {
+        window.location.href = $(this).parent().attr("href");
+    });
+});
+    
 function validateForms(event) {
     if (!event) return false;
     event.preventDefault();
@@ -82,18 +90,7 @@ function validateForms(event) {
             errorFields.push(checkboxErrorMsg);
         }
 
-        const submitButton = document.querySelector('#quoteForm button[type="submit"]');
-        if (submitButton) {
-            if (hasErrors) {
-                submitButton.disabled = true;
-                submitButton.setAttribute('data-tooltip', errorFields.join(', '));
-            } else {
-                submitButton.disabled = false;
-                submitButton.removeAttribute('data-tooltip');
-            }
-        }
-
-        return!hasErrors;
+        return false;
     } catch (err) {
         console.error('Quote error:', err);
         return false;
