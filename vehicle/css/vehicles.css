@@ -284,6 +284,58 @@ nav a:hover {
     box-shadow: 0 2px 5px rgba(74, 144, 226, 0.5); 
 }
 
+footer {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 40px 0;
+    margin-top: 50px;
+   
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    padding:0 100px 0;
+}
+
+.footer-section h4 {
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+}
+
+.footer-section ul {
+    list-style: none;
+}
+
+.footer-section ul li {
+    margin-bottom: 10px;
+}
+
+.footer-section a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-section a:hover {
+    color: var(--secondary-color);
+}
+
+.footer-bottom {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+.social-links {
+    display: flex;
+    gap: 15px;
+    margin-top: 15px;
+}
+
 @keyframes slideIn {
     from {
       opacity: 0;
@@ -324,5 +376,12 @@ nav a:hover {
 
   .filter-grid {
         grid-template-columns: 1fr;
+    }
+
+    .footer-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+        padding: 0 20px 0;
     }
 }
