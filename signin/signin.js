@@ -116,7 +116,7 @@ function handleLogin(event) {
     }
 
     if (isValidCredentials) {
-      window.location.href = 'options.html';
+      window.location.href = '../option.html';
     } else {
       alert('Invalid credentials. Please try again.');
     }
