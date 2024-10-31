@@ -1,11 +1,38 @@
+Sign In
+
 Customer: 
-Email address: john.doe@example.com
+Email address: chris.wong@gmail.com
 Password: 123456!A
 
 Vehicle Sales:
-Email Address: johnjohn@example.com
-Password: John123!A
+Email Address: chris@gmail.com
+Password: Chris123!A
 
-Insurrance Sales:
-Username: John Doe
-Password: johnDoe!A1
+Insurance Sales:
+Username: Chris Wong
+Password: chrisWong!A1
+
+Register:
+
+Customer: 
+Full Name: Chris Wong
+Email Address: chris.wong@gmail.com
+Phone Number: 91111111
+Password: 123456!A
+Confirm Password: 123456!A
+
+Vehicle Sales:
+Full Name: Chris Wong
+Email Address: chris@gmail.com
+Phone Number: 954018911
+Password: Chris123!A
+Confirm Password: Chris123!A
+
+Insurance Sales:
+Full Name: Chris Wong
+Email Address: s101424@gmail.com
+Staff Number: 101424
+Username: Chris Wong
+Phone Number: 93099999
+Password: chrisWong!A1
+Confirm Password: chrisWong!A1

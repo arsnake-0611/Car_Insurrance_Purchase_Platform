@@ -93,32 +93,32 @@ function handleLogin(event) {
     const usernameEmail = document.getElementById('username-email').value;
     const password = document.getElementById('password').value;
 
-    let isValidCredentials = false;
+    let isValidLogin = false;
 
     switch (loginType) {
       case 'customer':
-        if (usernameEmail === 'john.doe@example.com' && password === '123456!A') {
-          isValidCredentials = true;
+        if (usernameEmail === 'chris.wong@gmail.com' && password === '123456!A') {
+          isValidLogin = true;
         }
         break;
 
       case 'vehicle-sales':
-        if (usernameEmail === 'johnjohn@example.com' && password === 'John123!A') {
-          isValidCredentials = true;
+        if (usernameEmail === 'chris@gmail.com' && password === 'Chris123!A') {
+          isValidLogin = true;
         }
         break;
 
       case 'insurance-sales':
-        if (usernameEmail === 'John Doe' && password === 'johnDoe!A1') {
-          isValidCredentials = true;
+        if (usernameEmail === 'Chris Wong' && password === 'Chris Wong') {
+          isValidLogin = true;
         }
         break;
     }
 
-    if (isValidCredentials) {
+    if (isValidLogin) {
       window.location.href = '../option.html';
     } else {
-      alert('Invalid credentials. Please try again.');
+      alert('Invalid Email or Password. Please try again.');
     }
 
   } catch (err) {
