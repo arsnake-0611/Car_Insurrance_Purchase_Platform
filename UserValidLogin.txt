@@ -1,0 +1,11 @@
+Customer: 
+Email address: john.doe@example.com
+Password: 123456!A
+
+Vehicle Sales:
+Email Address: johnjohn@example.com
+Password: John123!A
+
+Insurrance Sales:
+Username: John Doe
+Password: johnDoe!A1
