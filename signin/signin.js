@@ -10,7 +10,7 @@ function toggleTheme() {
 function switchTab(tab) {
   const tabs = document.querySelectorAll('.tab');
   tabs.forEach(t => t.classList.remove('active'));
-  
+
   document.querySelector(`.tab[data-tab="${tab}"]`).classList.add('active');
 
   document.getElementById('login-form').style.display = tab === 'login' ? 'block' : 'none';
@@ -21,7 +21,7 @@ function switchTab(tab) {
 function updateLoginForm() {
   const loginType = document.getElementById('login-type').value;
   const usernameEmailLabel = document.getElementById('username-email-label');
-  
+
   if (loginType === 'insurance-sales') {
     usernameEmailLabel.textContent = 'Username';
   } else {
@@ -34,16 +34,16 @@ function showRegistrationForm(role) {
   document.getElementById('register-form').style.display = 'none';
   document.getElementById('registration-details').style.display = 'block';
   document.getElementById('registration-title').textContent = `${role.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')} Registration`;
-  
+
   const staffNumberContainer = document.getElementById('staff-number-container');
   const usernameContainer = document.getElementById('username-container');
-  
+
   if (role === 'vehicle-sales' || role === 'insurance-sales') {
     staffNumberContainer.style.display = 'block';
   } else {
     staffNumberContainer.style.display = 'none';
   }
-  
+
   if (role === 'insurance-sales') {
     usernameContainer.style.display = 'block';
   } else {
@@ -62,14 +62,14 @@ function hideForgotPassword() {
 }
 
 // Add ESC key handler
-document.addEventListener('keydown', function(e) {
+document.addEventListener('keydown', function (e) {
   if (e.key === 'Escape') {
     hideForgotPassword();
   }
 });
 
 // Close modal when clicking outside
-document.getElementById('forgot-password-modal').addEventListener('click', function(e) {
+document.getElementById('forgot-password-modal').addEventListener('click', function (e) {
   if (e.target === this) {
     hideForgotPassword();
   }
@@ -92,7 +92,7 @@ function handleLogin(event) {
     const loginType = document.getElementById('login-type')?.value || '';
     const usernameEmail = document.getElementById('username-email')?.value || '';
     const password = document.getElementById('password')?.value || '';
-    
+
     console.log('Login attempted:', { loginType, usernameEmail, password });
   } catch (err) {
     console.error('Login error:', err);
@@ -102,7 +102,7 @@ function handleLogin(event) {
 function handleRegistration(event) {
   if (!event) return;
   event.preventDefault();
-  
+
   try {
     // Initialize currentRole if not set
     if (typeof currentRole === 'undefined') {
@@ -116,7 +116,7 @@ function handleRegistration(event) {
         msg.style.display = 'none';
       });
     }
-    
+
     const inputFields = document.querySelectorAll('.input-field');
     if (inputFields) {
       inputFields.forEach(input => {
@@ -126,7 +126,7 @@ function handleRegistration(event) {
 
     let hasErrors = false;
     let errorFields = [];
-    
+
     // Validate name
     const nameInput = document.getElementById('reg-name');
     if (nameInput && (!nameInput.value || !nameInput.value.trim())) {
@@ -162,7 +162,7 @@ function handleRegistration(event) {
     // Validate password
     const passwordInput = document.getElementById('reg-password');
     const confirmInput = document.getElementById('reg-confirm-password');
-    
+
     if (passwordInput && confirmInput && passwordInput.value !== confirmInput.value) {
       confirmInput.classList.add('error');
       const matchError = document.getElementById('password-match-error');
@@ -188,23 +188,23 @@ function handleRegistration(event) {
       const messageElement = document.getElementById('registration-message');
       if (messageElement) {
         messageElement.style.display = 'block';
-        messageElement.textContent = currentRole === 'insurance-sales' 
+        messageElement.textContent = currentRole === 'insurance-sales'
           ? 'Your registration will be validated by an admin. You will be notified once approved.'
           : 'Registration successful! You can now login.';
       }
     }
-    
+
   } catch (err) {
     console.error('Registration error:', err);
   }
 }
 
 // Add toggle password functionality
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   const togglePassword = document.querySelectorAll('.password-toggle');
-  
+
   togglePassword.forEach(toggle => {
-    toggle.addEventListener('click', function() {
+    toggle.addEventListener('click', function () {
       const passwordInput = this.previousElementSibling;
       if (passwordInput.type === 'password') {
         passwordInput.type = 'text';
@@ -220,55 +220,55 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // Initialize on page load
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   try {
     currentRole = '';
-    
+
     // Get password input and requirements list
     const passwordInput = document.getElementById('reg-password');
     const confirmInput = document.getElementById('reg-confirm-password');
     const strengthBar = document.querySelector('.strength-bar-fill');
     const strengthMessage = document.getElementById('strength-message');
-    
+
     const minReq = document.getElementById('min');
     const upperReq = document.getElementById('oneUpper');
     const numReq = document.getElementById('oneNum');
     const specialReq = document.getElementById('oneSpecial');
 
     // Add input event listener to password field
-    passwordInput.addEventListener('input', function() {
+    passwordInput.addEventListener('input', function () {
       const password = this.value;
-      
+
       // Check requirements
       const hasMinLength = password.length >= 8;
       const hasUpper = /[A-Z]/.test(password);
       const hasNumber = /[0-9]/.test(password);
       const hasSpecial = /[!@#$%^&*]/.test(password);
-      
+
       // Update requirement indicators
       minReq.classList.toggle('valid', hasMinLength);
-      upperReq.classList.toggle('valid', hasUpper); 
+      upperReq.classList.toggle('valid', hasUpper);
       numReq.classList.toggle('valid', hasNumber);
       specialReq.classList.toggle('valid', hasSpecial);
 
       // Calculate strength
       let strength = 0;
-      if(hasMinLength) strength += 25;
-      if(hasUpper) strength += 25;
-      if(hasNumber) strength += 25;
-      if(hasSpecial) strength += 25;
+      if (hasMinLength) strength += 25;
+      if (hasUpper) strength += 25;
+      if (hasNumber) strength += 25;
+      if (hasSpecial) strength += 25;
 
       // Update strength bar
       strengthBar.style.width = strength + '%';
-      
+
       // Set color based on strength
-      if(strength <= 25) {
+      if (strength <= 25) {
         strengthBar.style.backgroundColor = '#ff4444';
         strengthMessage.textContent = 'Weak';
-      } else if(strength <= 50) {
+      } else if (strength <= 50) {
         strengthBar.style.backgroundColor = '#ffbb33';
         strengthMessage.textContent = 'Fair';
-      } else if(strength <= 75) {
+      } else if (strength <= 75) {
         strengthBar.style.backgroundColor = '#00C851';
         strengthMessage.textContent = 'Good';
       } else {
@@ -289,10 +289,10 @@ document.addEventListener('DOMContentLoaded', function() {
       const form = document.querySelector('#registration-details form');
       const submitButton = form.querySelector('button[type="submit"]');
       const termsCheckbox = form.querySelector('input[type="checkbox"]');
-      
+
       const requiredFields = form.querySelectorAll('input[required]');
       let allFieldsFilled = true;
-      
+
       requiredFields.forEach(field => {
         if (!field.value) {
           allFieldsFilled = false;
@@ -300,16 +300,16 @@ document.addEventListener('DOMContentLoaded', function() {
       });
 
       // Check password requirements
-      const meetsRequirements = 
+      const meetsRequirements =
         password.length >= 8 &&
         /[A-Z]/.test(password) &&
         /[0-9]/.test(password) &&
         /[!@#$%^&*]/.test(password);
 
       // Enable button only if all conditions are met
-      submitButton.disabled = !(allFieldsFilled && meetsRequirements && 
-                          password === confirmPassword && 
-                          termsCheckbox.checked);
+      submitButton.disabled = !(allFieldsFilled && meetsRequirements &&
+        password === confirmPassword &&
+        termsCheckbox.checked);
     }
 
     // Add event listener for checkbox

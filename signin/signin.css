@@ -40,12 +40,12 @@ body[data-theme="dark"] .theme-toggle {
 
 body[data-theme="dark"] .input-field {
   border-color: #cacde0;
-  background-color: 	#f4f2f1;
-  color:		#242320;
+  background-color: #f4f2f1;
+  color: #242320;
 }
 
 .input-field:focus {
-  border-color:#c9c6b5;
+  border-color: #c9c6b5;
   background-color: #d4dbde;
 }
 
@@ -76,7 +76,7 @@ body[data-theme="dark"] .error-message {
 .btn {
   width: 100%;
   padding: 12px;
-  background-color: 	#DDF1ED  ;
+  background-color: #DDF1ED;
   color: #202124;
   border: none;
   border-radius: 20px;
@@ -176,7 +176,7 @@ body[data-theme="dark"] #registration-message {
   padding: 30px;
 }
 
-.logo{
+.logo {
   flex-direction: row;
 }
 
@@ -233,19 +233,19 @@ body[data-theme="dark"] .tab:hover {
   color: #1a73e8;
 }
 
-.tab1:hover ~ .indicator {
+.tab1:hover~.indicator {
   left: 2px;
 }
 
-.tab2:hover ~ .indicator {
+.tab2:hover~.indicator {
   left: calc(50% - 2px);
 }
 
-.tab1.active ~ .indicator {
+.tab1.active~.indicator {
   left: 2px;
 }
 
-.tab2.active ~ .indicator {
+.tab2.active~.indicator {
   left: calc(50% - 2px);
 }
 
@@ -304,6 +304,7 @@ body[data-theme="dark"] .password-toggle:hover {
     opacity: 0;
     transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -350,7 +351,7 @@ body[data-theme="dark"] .password-toggle:hover {
 }
 
 .password-requirements li:not(.valid)::before {
-  content: '✕';  
+  content: '✕';
   position: absolute;
   left: -20px;
   color: #d93025;
@@ -439,7 +440,7 @@ body[data-theme="dark"] .password-toggle:hover {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0,0,0,0.5);
+  background: rgba(0, 0, 0, 0.5);
   z-index: 1000;
   align-items: center;
   justify-content: center;
@@ -456,7 +457,7 @@ body[data-theme="dark"] #forgot-password-modal .modal-content {
   border-radius: 20px;
   width: 90%;
   max-width: 400px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   position: relative;
 }
 
@@ -486,19 +487,19 @@ body[data-theme="dark"] #forgot-password-modal .modal-content {
     padding: 15px;
     margin: 10px;
   }
-  
-  .logo{
+
+  .logo {
     position: relative;
   }
 
   .role-selection {
     grid-template-columns: 1fr;
   }
-  
+
   .form-group {
     margin-bottom: 10px;
   }
-  
+
   .input-field {
     padding: 10px;
   }
