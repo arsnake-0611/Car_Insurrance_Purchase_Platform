@@ -1,98 +1,141 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vehicle Insurance Application</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <link rel="stylesheet" href="info.css">
-    <script src ="info.js"></script>
+    <link rel="stylesheet" href="info.css" />
+    <script src="info.js"></script>
   </head>
-<body>
+  <body>
     <header class="header">
-        <div class="logo">Legend Motor <img src="/icon/lm-logo.png" alt="Legend Motor Company Logo" width="30px" height="30px"></div>
-        <nav class="nav-links">
-            <a href="quotation.html">Quotation</a>
-            <a href="#plans">Plans</a>
-        </nav>
+      <div class="logo">
+        Legend Motor
+        <img
+          src="/icon/lm-logo.png"
+          alt="Legend Motor Company Logo"
+          width="30px"
+          height="30px"
+        />
+      </div>
+      <nav class="nav-links">
+        <a href="quotation.html">Quotation</a>
+        <a href="#plans">Plans</a>
+        <a href="/option.html">Return To Main</a>
+      </nav>
     </header>
 
     <section class="hero">
-        <div class="hero-content">
-            <h1>Protect Your Journey with Legend Motor</h1>
-            <p>Get comprehensive car insurance coverage tailored to your needs. Drive with confidence knowing you're protected by the best.</p>
-            <a href="quotation.html" class="cta-button">Get Your Quote Now</a>
-        </div>
+      <div class="hero-content">
+        <h1>Protect Your Journey with Legend Motor</h1>
+        <p>
+          Get comprehensive car insurance coverage tailored to your needs. Drive
+          with confidence knowing you're protected by the best.
+        </p>
+        <a href="quotation.html" class="cta-button">Get Your Quote Now</a>
+      </div>
     </section>
 
     <section class="features">
-        <div class="feature-card">
-            <div class="feature-icon">🛡️</div>
-            <h3>Comprehensive Coverage</h3>
-            <p>Full protection for your vehicle against accidents, theft, and natural disasters.</p>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <img
+            src="/icon/car-sales.png"
+            alt="Trustworthy"
+            width="50px"
+            height="50px"
+          />
         </div>
-        <div class="feature-card">
-            <div class="feature-icon">💰</div>
-            <h3>Competitive Rates</h3>
-            <p>Get the best coverage at the most competitive prices in the market.</p>
-        </div>
-        <div class="feature-card">
-            <div class="feature-icon">⚡</div>
-            <h3>24/7 Support</h3>
-            <p>Our customer service team is always ready to assist you, day or night.</p>
-        </div>
-        <div class="feature-card">
-            <div class="feature-icon">🚗</div>
-            <h3>Quick Claims Process</h3>
-            <p>Easy and hassle-free claims process to get you back on the road quickly.</p>
-        </div>
+        <h3>Care as family</h3>
+        <p class="text">
+            Your safety and peace of mind are our top priorities. Trust us to protect what matters most to you.
+        </p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">💰</div>
+        <h3>Competitive Rates</h3>
+        <p class="text">
+          Get the best coverage at the most competitive prices in the market.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">⚡</div>
+        <h3>24/7 Support</h3>
+        <p class="text">
+          Our customer service team is always ready to assist you, day or night.
+        </p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🚗</div>
+        <h3>Quick Claims Process</h3>
+        <p class="text">
+          Easy and hassle-free claims process to get you back on the road
+          quickly.
+        </p>
+      </div>
     </section>
-<section class="plans">
-    <div id="plans">
-      <table class="coverage-table">
-        <thead>
+    <section class="plans">
+      <div id="plans">
+        <table class="coverage-table">
+          <thead>
             <tr>
-                <th>Benefit & Coverage</th>
-                <th>Third Party Coverage</th>
-                <th>Comprehensive Coverage</th>
+              <th>Aspect & Coverage</th>
+              <th>Third Party Coverage</th>
+              <th>Comprehensive Coverage</th>
             </tr>
-        </thead>
-        <tbody>
+          </thead>
+          <tbody>
             <tr>
-                <td>Your Liability to Third Parties</td>
-                <td>Death and/or physical injury up to HKD100,000,000 and property damage up to HKD2,000,000</td>
-                <td>Death and/or physical injury up to HKD100,000,000 and property damage up to HKD2,000,000</td>
-            </tr>
-            <tr>
-                <td>Your Car</td>
-                <td>Not applicable</td>
-                <td>Loss of or damage to your motor car and/or its accessories or spare parts</td>
+              <td>Basic Coverage</td>
+              <td>Covers damage to other people's property</td>
+              <td>
+                Covers damages to others' property, injury to others, and your
+                own vehicle
+              </td>
             </tr>
             <tr>
-                <td>Medical Expenses</td>
-                <td>Not applicable</td>
-                <td>Medical expenses for the insured driver(s) and any occupant(s) up to HKD4,000 per policy year</td>
+              <td>Personal Accident Cover</td>
+              <td>Not applicable</td>
+              <td>
+                Often includes personal accident cover for driver and passengers
+              </td>
             </tr>
             <tr>
-                <td>Free Additional Benefits</td>
-                <td>24-hour emergency hotline service</td>
-                <td>24-hour emergency service and more free additional benefits are provided</td>
+              <td>Medical Expenses</td>
+              <td>Not applicable</td>
+              <td>
+                Coverage includes medical expenses for the insured driver and
+                any occupants, up to HKD4,000 per policy year.
+              </td>
             </tr>
-        </tbody>
-    </table>
-    
-  </div>
-</section>
+            <tr>
+              <td>Coverage for Car</td>
+              <td>Does not cover damages to your own vehicle</td>
+              <td>
+                Covers damages to your own vehicle due to accidents, vandalism,
+                and other incidents
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
     <section class="testimonials">
-        <div class="testimonial">
-            <p class="testimonial-text">"Legend Motor Insurance has been fantastic! Their quick response and professional service made my claim process smooth and stress-free. I couldn't be happier with their service!"</p>
-            <p class="testimonial-author">- Sarah Johnson</p>
-        </div>
+      <div class="testimonial">
+        <p class="testimonial-text">
+          "Legend Motor Insurance has been fantastic! Their quick response and
+          professional service made my claim process smooth and stress-free. I
+          couldn't be happier with their service!"
+        </p>
+        <p class="testimonial-author">Bills Gate, Apple Inc.</p>
+      </div>
     </section>
 
     <footer>
-        <p>© 2024 Legend Motor Vehicle. All rights reserved.</p>
-        <p>Contact us: insurance@lm.com</p>
+      <p>© 2024 Legend Motor Vehicle. All rights reserved.</p>
+      <p>Contact us: insurance@lm.com</p>
     </footer>
-</body>
+  </body>
 </html>
