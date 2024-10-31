@@ -89,13 +89,41 @@ function handleForgotPassword(event) {
 function handleLogin(event) {
   event.preventDefault();
   try {
-    const loginType = document.getElementById('login-type')?.value || '';
-    const usernameEmail = document.getElementById('username-email')?.value || '';
-    const password = document.getElementById('password')?.value || '';
+    const loginType = document.getElementById('login-type').value;
+    const usernameEmail = document.getElementById('username-email').value;
+    const password = document.getElementById('password').value;
 
-    console.log('Login attempted:', { loginType, usernameEmail, password });
+    let isValidCredentials = false;
+
+    switch (loginType) {
+      case 'customer':
+        if (usernameEmail === 'john.doe@example.com' && password === '123456!A') {
+          isValidCredentials = true;
+        }
+        break;
+
+      case 'vehicle-sales':
+        if (usernameEmail === 'johnjohn@example.com' && password === 'John123!A') {
+          isValidCredentials = true;
+        }
+        break;
+
+      case 'insurance-sales':
+        if (usernameEmail === 'John Doe' && password === 'johnDoe!A1') {
+          isValidCredentials = true;
+        }
+        break;
+    }
+
+    if (isValidCredentials) {
+      window.location.href = 'options.html';
+    } else {
+      alert('Invalid credentials. Please try again.');
+    }
+
   } catch (err) {
     console.error('Login error:', err);
+    alert('An error occurred during login. Please try again.');
   }
 }
 
