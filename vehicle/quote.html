@@ -52,7 +52,7 @@
         <h1>Request a Quote</h1>
     </div>
 
-    <form onsubmit="validateForms(event)" class="quote-form">
+    <form onsubmit="goForward(event)" class="quote-form">
         <main class="personal-info">
             <div class="form-section">
                 <h3>Selected Vehicle from Wishlist</h3>
@@ -121,8 +121,8 @@
                         conditions.</div>
                 </div>
                 <div class="actions-button">
-                    <a href="wishlist.html"><button class="btn-back">Back</button></a>
-                    <a href="payment.html"><button class="btn-next">Next</button></a>
+                    <a href="wishlist.html"><button onclick="goBack()" class="btn-back">Back</button></a>
+                    <a href="payment.html"><button type="submit" class="btn-next">Next</button></a>
                 </div>
             </div>
         </main>

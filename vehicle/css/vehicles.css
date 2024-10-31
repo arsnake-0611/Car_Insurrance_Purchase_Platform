@@ -210,7 +210,10 @@ nav a:hover {
     align-items: center;
     gap: 5px;
 }
-
+.spec-item img{
+    width: 20px;
+    height: 20px;
+}
 .btn {
     padding: 8px 15px;
     border: none;
