@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Vehicle Insurance Application</title>
+  <title>Vehicle Insurance Quotation</title>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <link rel="stylesheet" href="quotation.css">
   <script src="quotation.js"></script>
@@ -12,8 +12,9 @@
 </head>
 
 <body>
+  <button class="nav-button" onclick="location.href='info.html'">HOME</button>
+  <h1>Vehicle Insurance Request Quotation Form</h1>
   <button id="themeToggle" class="theme-toggle">🌓</button>
-  <h1>Vehicle Insurance Application</h1>
   <nav id="mainNav">
     <button class="nav-button active" data-section="insuranceGuide">
       Insurance Guide
@@ -22,7 +23,6 @@
     <button class="nav-button" data-section="applicationHistory">
       Application History
     </button>
-    <button class="nav-button" onclick="location.href='info.html'">HOME</button>
   </nav>
 
   <div id="progressBar">
@@ -79,7 +79,7 @@
     <div id="vehicleSection" class="form-section visible">
       <h2>Vehicle Information</h2>
       <div class="form-group">
-        <label for="vehicleMake">Vehicle Brand Name:</label>
+        <label for="vehicleMake">Vehicle Brand Name: *</label>
         <select id="vehicleMake" name="vehicleMake" required>
           <option value="">Select Brand</option>
           <option value="Audi">Audi</option>
@@ -90,18 +90,18 @@
         </select>
       </div>
       <div class="form-group">
-        <label for="vehicleModel">Vehicle Model:</label>
+        <label for="vehicleModel">Vehicle Model: *</label>
         <select id="vehicleModel" name="vehicleModel" required>
           <option value="">Select Model</option>
         </select>
       </div>
       <div class="form-group">
-        <label for="vehicleYear">Manufacturing Year:</label>
-        <input type="number" id="vehicleYear" name="vehicleYear" min="2000" max="2024" required pattern="[0-9]{4}"
+        <label for="vehicleYear">Manufacturing Year: *</label>
+        <input type="number" id="vehicleYear" name="vehicleYear" min="2000" max="2024" maxlength="4" required pattern="[0-9]{4}"
           placeholder="YYYY" title="Enter a 4-digit year between 2000 and 2024" />
       </div>
       <div class="form-group">
-        <label for="bodyType">Body Type:</label>
+        <label for="bodyType">Body Type: *</label>
         <select id="bodyType" name="bodyType" required>
           <option value="">Select Body Type</option>
           <option value="Saloon">Saloon</option>
@@ -112,17 +112,17 @@
         </select>
       </div>
       <div class="form-group">
-        <label for="seatingCapacity">Seating Capacity:</label>
+        <label for="seatingCapacity">Seating Capacity: *</label>
         <input type="number" id="seatingCapacity" name="seatingCapacity" min="2" max="9" required pattern="[2-9]"
           title="Enter a number between 2 and 9" />
       </div>
       <div class="form-group">
-        <label for="cylinderCapacity">Cylinder Capacity (C.C.):</label>
+        <label for="cylinderCapacity">Cylinder Capacity (C.C.): *</label>
         <input type="number" id="cylinderCapacity" name="cylinderCapacity" min="500" max="8000" step="100" required
           pattern="[5-8][0-9]{2}0" title="Enter cylinder capacity between 500-8000 CC" />
       </div>
       <div class="form-group">
-        <label for="vehicleValue">Estimated Vehicle Value (HK$):</label>
+        <label for="vehicleValue">Estimated Vehicle Value (HK$): *</label>
         <input type="number" id="vehicleValue" name="vehicleValue" min="50000" step="1000" required />
       </div>
       <div class="action-buttons">
@@ -133,23 +133,23 @@
     <div id="personalSection" class="form-section hidden">
       <h2>Personal Information</h2>
       <div class="form-group">
-        <label for="fullName">Full Name:</label>
+        <label for="fullName">Full Name: *</label>
         <input type="text" id="fullName" name="fullName" required />
       </div>
       <div class="form-group">
-        <label for="email">Email Address:</label>
+        <label for="email">Email Address: *</label>
         <input type="email" id="email" name="email" required />
       </div>
       <div class="form-group">
-        <label for="phoneNumber">Phone Number:</label>
-        <input type="text" id="phoneNumber" name="phoneNumber" required pattern="\d{8}" />
+        <label for="phoneNumber">Phone Number: *</label>
+        <input type="text" id="phoneNumber" name="phoneNumber" required pattern="\d{8}" maxlength="8"/>
       </div>
       <div class="form-group">
-        <label for="drivingExperience">Driving Experience (years):</label>
+        <label for="drivingExperience">Driving Experience (years): *</label>
         <input type="number" id="drivingExperience" name="drivingExperience" min="1" max="70" required />
       </div>
       <div class="form-group">
-        <label for="coveragePlan">Select Coverage Plan:</label>
+        <label for="coveragePlan">Select Coverage Plan: *</label>
         <select id="coveragePlan" name="coveragePlan" required>
           <option value="">Select a plan</option>
           <option value="comprehensive">Comprehensive Coverage</option>
@@ -157,7 +157,7 @@
         </select>
       </div>
       <div class="form-group">
-        <label for="paymentMethod">Select Preferred Payment Method:</label>
+        <label for="paymentMethod">Select Preferred Payment Method: *</label>
         <select id="paymentMethod" name="paymentMethod" required>
           <option value="">Select a method</option>
           <option value="BankTransfer">Bank Transfer</option>
@@ -183,7 +183,7 @@
   <div id="confirmationSection" class="hidden">
     <h2>Application Submitted Successfully</h2>
     <p>
-      Your application has been submitted. Your estimated processing time is
+      Your quotation has been submitted. Your quotation can be seen around
       2-3 business days.
     </p>
     <p>
@@ -197,13 +197,13 @@
 
   <div id="applicationHistory" class="hidden">
     <div class="dashboard-header">
-      <h2>Welcome to Your Application History</h2>
+      <h2>Welcome to Your Quotation History</h2>
     </div>
     <div class="search-section">
       <input type="text" id="searchReference" placeholder="Search by Reference Number or Email" />
       <button id="searchBtn">Search</button>
       <div id="searchResults">
-        <p>No insurance applications found.</p>
+        <p>No insurance quotation found.</p>
         <div class="action-buttons">
           <button id="applyNow" class="btn">Apply Now</button>
         </div>

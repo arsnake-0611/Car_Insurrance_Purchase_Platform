@@ -26,7 +26,7 @@ $(document).ready(function () {
         'vehicleYear': 'Enter 4 digits for year (2000-2024)',
         'seatingCapacity': 'Enter seating capacity (2-9)',
         'cylinderCapacity': 'Enter CC value (500-8000)',
-        'vehicleValue': 'Enter vehicle value should be higer than HKD$ 50000',
+        'vehicleValue': 'Enter vehicle value should be higher than HKD$ 50000',
         'drivingExperience': 'Enter years of driving experience (1-70)',
         'paymentMethod' : 'Enter your payment method'
     };
@@ -95,11 +95,16 @@ $(document).ready(function () {
 
     $('#insuranceForm').submit(function (e) {
         e.preventDefault();
+        const $submitButton = $(this).find('button[type="submit"]');
+        $submitButton.prop('disabled', true); 
         if (validateForm()) {
             const applicationData = collectFormData();
             displayReview(applicationData);
             $('#insuranceForm').hide();
             $('#reviewSection').show();
+        }
+        else {
+            $submitButton.prop('disabled', false); // Re-enable the button if validation fails
         }
     });
 
@@ -108,6 +113,9 @@ $(document).ready(function () {
             $('#vehicleSection').slideUp(300);
             $('#personalSection').delay(300).slideDown(300);
             updateProgressBar();
+        }
+        else{
+            alert('Please input all the required information.');
         }
     });
 
@@ -151,7 +159,7 @@ $(document).ready(function () {
         });
         const vehicleYear = $('#vehicleYear');
         const currentYear = 2024;
-        if (vehicleYear.val() < 1900 || vehicleYear.val() > currentYear) {
+        if (vehicleYear.val() < 1999 || vehicleYear.val() > currentYear) {
             showError(vehicleYear, `Please enter a valid year between 1900 and ${currentYear}`);
             isValid = false;
         }
@@ -187,6 +195,7 @@ $(document).ready(function () {
     function validateForm() {
         $('.error').remove();
         let isValid = true;
+        let errorMessages = [];
 
         const vehicleValidation = {
             'vehicleMake': 'Please select a vehicle brand',
@@ -237,7 +246,9 @@ $(document).ready(function () {
             const $field = $(`[name="${field}"]`);
             if (!$field.val()) {
                 showError($field, typeof rules === 'object' ? rules.required : rules);
+                errorMessages.push(typeof rules === 'object' ? rules.required : rules); 
                 isValid = false;
+                alert('Please enter validate information!')
             } else if (rules.range) {
                 switch (field) {
                     case 'vehicleYear':
@@ -260,6 +271,7 @@ $(document).ready(function () {
             const $field = $(`#${field}`);
             if (!$field.val()) {
                 showError($field, typeof rules === 'object' ? rules.required : rules);
+                errorMessages.push(typeof rules === 'object' ? rules.required : rules); 
                 isValid = false;
             } else if (rules.pattern) {
                 switch (field) {
@@ -281,6 +293,8 @@ $(document).ready(function () {
 
         return isValid;
     }
+
+    
 
     function collectFormData() {
         const formData = new FormData(document.getElementById('insuranceForm'));
