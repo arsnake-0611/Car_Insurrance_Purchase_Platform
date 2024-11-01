@@ -71,6 +71,10 @@ body[data-theme="dark"] select {
 
 .theme-toggle {
  margin: 15px;
+ border: none;
+ background-color: none;
+ font-size: 48px; 
+ border-radius: 36px;
 }
 
 
