@@ -130,15 +130,6 @@ nav a:hover {
     gap: 5px;
 }
 
-.price-change {
-    color: #4CAF50;
-    font-size: 0.9rem;
-}
-
-.price-increase {
-    color: #f44336;
-}
-
 .actions {
     display: flex;
     flex-direction: column;
@@ -187,11 +178,6 @@ nav a:hover {
 .btn-remove:hover  {
     background-color: #f44336;
     color: white;
-}
-
-.current-price{
-    font-size: 1.1rem;
-    font-weight: bold;
 }
 
 .empty-wishlist {

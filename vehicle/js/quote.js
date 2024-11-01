@@ -13,6 +13,9 @@ $(document).ready(function () {
         $(".menu-icon-open").show();
     });
 
+    $('.btn-back').click(function () {
+        window.location.href = 'wishlist.html';
+    });
 });
 
 function goForward(event) {
@@ -28,12 +31,10 @@ function goForward(event) {
         isFormValid = false;
     }
     if (isFormValid) {
-        $(".btn-next").click(function () {
-            window.history.forward();
-        });
+        // if(window.history.length>1) 
+        //     window.history.forward();
+        // else
+            window.location.href = $('.actions-button a[href="payment.html"]').attr('href');
     }
 }
 
-function goBack() {
-    window.location.href = $('.actions-button a[href="wishlist.html"]').attr('href');
-}

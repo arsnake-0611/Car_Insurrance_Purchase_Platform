@@ -369,10 +369,11 @@ footer {
     gap: 15px;
     margin-top: 15px;
 }
-.spec-item img{
+span img{
     width: 20px;
     height: 20px;
 }
+
 @keyframes slideIn {
     from {
       opacity: 0;

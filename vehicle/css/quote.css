@@ -192,6 +192,10 @@ nav a:hover {
     margin-top: 20px;
 }
 
+.button-back{
+    padding-left:80px;
+}
+
 .btn-back {
     background-color: white;
     border: 1px solid var(--secondary-color);
@@ -209,7 +213,7 @@ nav a:hover {
     border: 1px solid var(--secondary-color);
 }
 
-.btn-next, .btn-submit {
+.btn-next{
     background: var(--secondary-color);
     color: white;
     padding: 15px 30px;
@@ -220,7 +224,7 @@ nav a:hover {
     transition: background-color 0.3s ease;
 }
 
-.btn-submit:hover ,.btn-next:hover {
+.btn-next:hover {
     background-color: white;
     border: 1px solid var(--secondary-color);
     color: var(--secondary-color);
@@ -334,6 +338,13 @@ footer {
         text-align: center;
     }
 
+    .btn-back{
+        margin-top:80px;
+    }
+
+    .button-back{
+        padding:0px;
+    }
     header{
         position: fixed;
         top: 0;
