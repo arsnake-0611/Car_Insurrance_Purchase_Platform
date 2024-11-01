@@ -53,13 +53,13 @@
         <h1>Payment Information</h1>
     </div>
 
-    <form onsubmit="validateForms(event)" class="quote-form">
+    <form onsubmit="goForward(event)" class="quote-form">
         <main class="payment-form">
             <div class="form-section">
                 <div class="form-group">
                 <label>Payment Method</label>
                 <div class="payment-methods">
-                    <div class="payment-method active">
+                    <div class="payment-method">
                         <img src="photo/credit-card.png" width="150px" height="auto" alt="Credit Card">
                         <div>Credit Card</div>
                     </div>
@@ -95,8 +95,8 @@
             </div>
 
             <div class="actions-button">
-                <a href="quote.html"><button class="btn-back">Back</button></a>
-                <a href="complete.html"><button class="btn-complete">Submit</button></a>
+                <a href="quote.html"><button onclick="goBack()" class="btn-back">Back</button></a>
+                <a href="complete.html"><button type="submit" class="btn-complete">Submit</button></a>
             </div>
         </div>
     </main>

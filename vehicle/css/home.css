@@ -186,7 +186,10 @@ nav a:hover {
     color: var(--secondary-color);
 }
 
-
+.spec-item img{
+    width: 20px;
+    height: 20px;
+}
 footer {
     background-color: var(--primary-color);
     color: white;

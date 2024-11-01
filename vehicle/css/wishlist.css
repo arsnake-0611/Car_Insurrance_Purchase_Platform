@@ -255,7 +255,10 @@ footer {
     margin-top: 15px;
 }
 
-
+.spec-item img{
+    width: 20px;
+    height: 20px;
+}
 @keyframes slideIn {
     from {
       opacity: 0;
