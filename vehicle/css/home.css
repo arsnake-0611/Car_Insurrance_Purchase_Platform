@@ -67,7 +67,7 @@ nav a {
     transition: color 0.3s ease;
 }
 
-nav a:hover {
+nav li a:hover{
     background-color: var(--background-color);
     color: var(--primary-color);
     padding: 15px;
@@ -316,7 +316,7 @@ footer {
         color: var(--secondary-color);
         background-color:var(--secondary-color), transparent;
     }
-    
+
     #explore{
         width:auto;
         margin:10px;

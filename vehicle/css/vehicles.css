@@ -102,7 +102,7 @@ nav a {
     transition: color 0.3s ease;
 }
 
-nav a:hover {
+nav li a:hover {
     background-color: var(--background-color);
     color: var(--primary-color);
     padding: 15px;
