@@ -69,7 +69,11 @@ nav a {
 }
 
 nav a:hover {
-    color: var(--secondary-color);
+    background-color: var(--background-color);
+    color: var(--primary-color);
+    padding: 15px;
+    border-radius: 10px;
+    font-size: 18px;
 }
 
 .orders-header {
