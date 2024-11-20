@@ -1,4 +1,29 @@
 $(document).ready(function () {
+    // Load selected vehicle details
+    try {
+        const quoteVehicle = JSON.parse(localStorage.getItem('quoteVehicle'));
+        console.log('Loaded vehicle:', quoteVehicle); // Debug log
+
+        if (quoteVehicle && quoteVehicle.name) {
+            $('.selected-vehicle h4').text(quoteVehicle.name);
+            $('.vehicle-details').html(`
+                <div class="vehicle-detail">
+                    <strong>Model:</strong> ${quoteVehicle.name}
+                </div>
+                <div class="vehicle-detail">
+                    <strong>Drivetrain Type:</strong> ${quoteVehicle.drivetrain}
+                </div>
+                <div class="vehicle-detail">
+                    <strong>Color:</strong> ${quoteVehicle.color}
+                </div>
+            `);
+        } else {
+            console.log('No vehicle data found'); // Debug log
+        }
+    } catch (error) {
+        console.error('Error loading vehicle data:', error); // Error log
+    }
+
     // Mobile menu functionality
     $(".menu-icon-close").hide();
     $(".menu-icon-open").click(function () {

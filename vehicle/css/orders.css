@@ -1,14 +1,3 @@
-:root {
-    --primary-color: #212121;
-    --secondary-color: #4a90e2;
-    --accent-color: #ff4081;
-    --text-color: #333;
-    --background-color: #f8f9fa;
-    --success-color: #4CAF50;
-    --warning-color: #ff9800;
-    --danger-color: #f44336;
-}
-
 * {
     margin: 0;
     padding: 0;
@@ -18,69 +7,15 @@
 body {
     font-family: "Roboto", sans-serif;
     line-height: 1.6;
-}
-
-header {
-    background-color: var(--primary-color);
-    color: white;
-    position: fixed;
-    padding: 1rem 0;
-    width: 100%;
-    z-index: 1000;
-}
-
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
-.logo-container {
-    display: flex;
-    align-items: center;
-    font-family: "Copperplate", "Papyrus", fantasy;
-}
-
-.menu-icon-open,
-.menu-icon-close {
-    display: none;
-}
-
-.mobile-menu {
-    display: none;
-}
-
-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-nav ul {
-    list-style: none;
-    display: flex;
-    gap: 20px;
-}
-
-nav a {
-    color: white;
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-nav li a:hover {
-    background-color: var(--background-color);
-    color: var(--primary-color);
-    padding: 15px;
-    border-radius: 10px;
-    font-size: 18px;
+    padding-top: 10px;
 }
 
 .orders-header {
     text-align: center;
-    padding: 40px 20px 20px; /* Adjust padding to push it down */
+    padding: 40px 20px 20px;
     position: relative;
 }
+
 .order-tabs {
     display: flex;
     gap: 10px;
@@ -268,6 +203,28 @@ nav li a:hover {
     gap: 10px;
 }
 
+.btn {
+    padding: 8px 15px;
+    border: 1px solid var(--secondary-color);
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    background-color: var(--background-color);
+    color: var(--secondary-color)
+}
+
+.btn-outline:hover {
+    background: var(--secondary-color);
+    color: white;
+}
+
+.btn.active {
+    background: var(--secondary-color);
+    color: white;
+}
+
 .order-details {
     display: none;
     padding: 20px;
@@ -292,102 +249,26 @@ nav li a:hover {
     display: block;
 }
 
-.tracking-timeline p{
-    padding-top: 10px ;
+.tracking-timeline p,
+.details-grid p {
+    padding-top: 10px;
 }
 
-.details-grid p{
-    padding-top: 10px ;
-}
-
-.btn {
-    padding: 8px 15px;
-    border: 1px solid var(--secondary-color);
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 0.9rem;
-    text-decoration: none;
-    transition: background-color 0.3s ease;
-    background-color: var(--background-color);
-    color: var(--secondary-color)
-}
-
-.btn-outline:hover {
-    background: var(--secondary-color);
-    color: white;
-}
-
-.btn.active {
-    background: var(--secondary-color);
-    color: white;
-}
-
-footer {
-    background-color: var(--primary-color);
-    color: white;
-    padding: 40px 0;
-    margin-top: 50px;
-   
-}
-
-.footer-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 30px;
-    padding:0 100px 0;
-}
-
-.footer-section h4 {
-    margin-bottom: 20px;
-    font-size: 1.2rem;
-}
-
-.footer-section ul {
-    list-style: none;
-}
-
-.footer-section ul li {
-    margin-bottom: 10px;
-}
-
-.footer-section a {
-    color: #fff;
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-.footer-section a:hover {
-    color: var(--secondary-color);
-}
-
-.footer-bottom {
-    margin-top: 30px;
-    padding-top: 20px;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    text-align: center;
-    font-size: 0.9rem;
-}
-
-.social-links {
-    display: flex;
-    gap: 15px;
-    margin-top: 15px;
-}
-span img{
+span img {
     width: 20px;
     height: 20px;
 }
 
 @keyframes slideIn {
     from {
-      opacity: 0;
-      transform: translateY(20px);
+        opacity: 0;
+        transform: translateY(20px);
     }
     to {
-      opacity: 1;
-      transform: translateY(0);
+        opacity: 1;
+        transform: translateY(0);
     }
-  }
+}
 
 @keyframes tabSelectAnimation {
     0% {
@@ -402,58 +283,16 @@ span img{
 }
 
 @media (max-width: 768px) {
-  .menu-icon-close,
-  .menu-icon-open {
-        display: block;
-    }
-
-  .mobile-menu {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.9);
-        z-index: 999;
-        animation: slideIn 0.8s ease;
-    }
-
-  .mobile-menu ul {
-        list-style: none;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        text-align: center;
-    }
-
-  .mobile-menu li {
-        margin-bottom: 20px;
-    }
-
-  .mobile-menu a {
-        color: white;
-        text-decoration: none;
-        font-size: 1.5rem;
-        transition: color 0.3s ease;
-    }
-
-  .mobile-menu a:hover {
-        color: var(--secondary-color);
-        background-color: var(--secondary-color), transparent;
-    }
-
-  .vehicle-details {
+    .vehicle-details {
         grid-template-columns: 1fr;
     }
 
-  .vehicle-image {
+    .vehicle-image {
         width: 100%;
         height: 200px;
     }
 
-  .order-header {
+    .order-header {
         flex-direction: column;
         gap: 10px;
     }
@@ -462,23 +301,12 @@ span img{
         gap: 0;
     }
 
-  .progress-steps {
+    .progress-steps {
         flex-direction: column;
         gap: 20px;
     }
 
-  .progress-line {
+    .progress-line {
         display: none;
-    }
-
-    nav ul {
-        display: none;
-    }
-
-    .footer-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 20px;
-        padding: 0 20px 0;
     }
 }

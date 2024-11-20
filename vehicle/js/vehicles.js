@@ -71,35 +71,31 @@ $("select").on("change", function () {
    // Add to Wishlist functionality
    $(".add-to-wishlist").click(function () {
     var vehicleCard = $(this).closest(".vehicle-card");
-    var vehicleName = vehicleCard.find(".vehicle-content h3").text();
-    var vehiclePrice = vehicleCard.find(".vehicle-price").text();
-    var vehicleImage = vehicleCard.find(".vehicle-image img").attr("src");
+    var vehicle = {
+        name: vehicleCard.find(".vehicle-content h3").text(),
+        image: vehicleCard.find(".vehicle-image").attr("src"),
+        specs: {
+            mileage: vehicleCard.find(".spec-item").eq(0).text().trim(),
+            horsepower: vehicleCard.find(".spec-item").eq(1).text().trim(),
+            drivetrain: vehicleCard.find(".spec-item").eq(2).text().trim(),
+            color: vehicleCard.find(".spec-item").eq(3).text().trim()
+        },
+        detailsUrl: vehicleCard.find("a").attr("href")
+    };
 
-    // Check if the item is already in the wishlist
-    if ($(".wishlist-item").find("h3").text() === vehicleName) {
-        alert("This item is already in your wishlist.");
+    // Get existing wishlist
+    let wishlist = JSON.parse(localStorage.getItem('vehicleWishlist')) || [];
+
+    // Check if vehicle already exists in wishlist
+    if (wishlist.some(item => item.name === vehicle.name)) {
+        alert("This vehicle is already in your wishlist!");
         return;
     }
 
-    var wishlistItem = $("<div>", {
-        class: "wishlist-item"
-    }).append(
-        $("<img>", {
-            src: vehicleImage,
-            alt: vehicleName
-        }),
-        $("<div>").append(
-            $("<h3>").text(vehicleName),
-            $("<p>").text(vehiclePrice)
-        )
-    );
-
-    $(".wishlist-items").append(wishlistItem);
-
-    // Provide visual feedback (fade in the added item)
-    wishlistItem.hide().fadeIn(300);
-
-    alert(vehicleName + " added to wishlist");
+    // Add to wishlist
+    wishlist.push(vehicle);
+    localStorage.setItem('vehicleWishlist', JSON.stringify(wishlist));
+    alert(vehicle.name + " added to wishlist!");
 });
 });
 

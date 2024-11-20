@@ -209,9 +209,19 @@ footer {
 
 .footer-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 30px;
-    padding:0 100px 0;
+    padding: 0 50px;
+}
+
+.map-section {
+    grid-column: 1;
+}
+
+.map-container {
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
 
 .footer-section h4 {
@@ -335,9 +345,15 @@ footer {
     }
 
     .footer-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 20px;
-        padding: 0 20px 0;
+        grid-template-columns: 1fr;
+        padding: 0 20px;
+    }
+
+    .map-section {
+        grid-column: auto;
+    }
+
+    .map-container {
+        margin-bottom: 20px;
     }
 }

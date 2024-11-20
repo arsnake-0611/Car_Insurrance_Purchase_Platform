@@ -1,14 +1,3 @@
-:root {
-    --primary-color: #212121;
-    --secondary-color: #4a90e2;
-    --accent-color: #ff4081;
-    --text-color: #333;
-    --background-color: #f8f9fa;
-    --success-color: #4CAF50;
-    --warning-color: #ff9800;
-    --danger-color: #f44336;
-}
-
 * {
     margin: 0;
     padding: 0;
@@ -18,62 +7,10 @@
 body {
     font-family: "Roboto", sans-serif;
     line-height: 1.6;
+    padding-top: 80px; /* Add padding for fixed header */
 }
 
-header {
-    background-color: var(--primary-color);
-    color: white;
-    padding: 1rem 0;
-    width: 100%;
-    z-index: 1000;
-}
-
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
-.logo-container {
-    display: flex;
-    align-items: center;
-    font-family: "Copperplate", "Papyrus", fantasy;
-}
-
-.menu-icon-open,
-.menu-icon-close {
-    display: none;
-}
-
-.mobile-menu {
-    display: none;
-}
-
-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-nav ul {
-    list-style: none;
-    display: flex;
-    gap: 20px;
-}
-
-nav a {
-    color: white;
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-nav li a:hover {
-    background-color: var(--background-color);
-    color: var(--primary-color);
-    padding: 15px;
-    border-radius: 10px;
-    font-size: 18px;
-}
+/* Quote Steps */
 .quote-steps {
     display: flex;
     justify-content: space-between;
@@ -122,6 +59,7 @@ nav li a:hover {
     padding: 10px;
 }
 
+/* Quote Form */
 .quote-form {
     max-width: 1000px;
     margin: 10px auto;
@@ -130,18 +68,6 @@ nav li a:hover {
     border-radius: 8px;
     animation: slideIn 1s ease;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-@keyframes slideIn {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
 }
 
 .form-section h3 {
@@ -170,6 +96,7 @@ nav li a:hover {
     font-size: 16px;
 }
 
+/* Action Buttons */
 .actions-button {
     display: flex;
     justify-content: space-between;
@@ -210,6 +137,7 @@ nav li a:hover {
     color: var(--secondary-color);
 }
 
+/* Payment Summary */
 .payment-summary {
     background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
@@ -238,6 +166,7 @@ nav li a:hover {
     font-weight: bold;
 }
 
+/* Payment Methods */
 .payment-methods {
     display: flex;
     gap: 20px;
@@ -246,7 +175,7 @@ nav li a:hover {
 
 .payment-method {
     flex: 1;
-    padding: 20px;
+    padding: 0;
     border: 2px solid #ddd;
     border-radius: 8px;
     text-align: center;
@@ -258,9 +187,38 @@ nav li a:hover {
 
 .payment-method:hover {
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
 }
 
+.payment-method input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.payment-method input[type="radio"]:checked + label {
+    background-color: var(--secondary-color);
+    color: white;
+    transition: all 0.3s ease;
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+}
+
+.payment-method label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    padding: 10px;
+    width: 100%;
+    height: 100%;
+    border: none;
+    transition: all 0.3s ease;
+}
+
+/* Error Messages */
 .error-message {
     color: #d93025;
     font-size: 12px;
@@ -272,104 +230,20 @@ nav li a:hover {
     border-color: red;
 }
 
-footer {
-    background-color: var(--primary-color);
-    color: white;
-    padding: 40px 0;
-    margin-top: 50px;
-   
+/* Animations */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-.footer-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 30px;
-    padding:0 100px 0;
-}
-
-.footer-section h4 {
-    margin-bottom: 20px;
-    font-size: 1.2rem;
-}
-
-.footer-section ul {
-    list-style: none;
-}
-
-.footer-section ul li {
-    margin-bottom: 10px;
-}
-
-.footer-section a {
-    color: #fff;
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-.footer-section a:hover {
-    color: var(--secondary-color);
-}
-
-.footer-bottom {
-    margin-top: 30px;
-    padding-top: 20px;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    text-align: center;
-    font-size: 0.9rem;
-}
-
-.social-links {
-    display: flex;
-    gap: 15px;
-    margin-top: 15px;
-}
-
-
+/* Mobile Responsive */
 @media (max-width: 768px) {
-
-    .menu-icon-close,
-    .menu-icon-open {
-        display: block;
-        z-index: 998;
-    }
-
-    .mobile-menu {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.9);
-        z-index: 999;
-        animation: slideIn 0.8s ease;
-    }
-
-    .mobile-menu ul {
-        list-style: none;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        text-align: center;
-    }
-
-    .mobile-menu li {
-        margin-bottom: 20px;
-    }
-
-    .mobile-menu a {
-        color: white;
-        text-decoration: none;
-        font-size: 1.5rem;
-        transition: color 0.3s ease;
-    }
-
-    .mobile-menu a:hover {
-        color: var(--secondary-color);
-        background-color: var(--secondary-color), transparent;
-    }
-
     .quote-step {
         padding: 50px 10px 0;
         text-align: center;
@@ -377,21 +251,5 @@ footer {
 
     .payment-methods {
         flex-direction: column;
-    }
-
-    header {
-        position: fixed;
-        top: 0;
-    }
-
-    nav ul {
-        display: none;
-    }
-
-    .footer-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 20px;
-        padding: 0 20px 0;
     }
 }
