@@ -1,0 +1,11 @@
+(using the Jquery, css and Html and read json only, not using the svg, path, root color)
+
+Create the Sales Portal: 
+	- enables the company to efficiently manage incoming quotation requests
+	- track the status of quotations 
+	- communicate with customers regarding any queries or updates related to their insurance quotes (can real time update)
+	- provide a slidebar that followed by the user-friendly
+	- have the setting
+		- Change passcode (approved by admin)
+		- Change profile pic 
+		- Adjust their perference on slidebar
