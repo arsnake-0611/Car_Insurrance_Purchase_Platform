@@ -4,6 +4,15 @@ window.addEventListener('unload', function() {
   localStorage.removeItem('userData');
 });
 
+function toggleTheme() {
+  const body = document.body;
+  if (body.getAttribute('data-theme') === 'dark') {
+    body.removeAttribute('data-theme');
+  } else {
+    body.setAttribute('data-theme', 'dark');
+  }
+}
+
 function initializeUserData() {
   fetch('../data/users.json')
       .then(response => response.json())
