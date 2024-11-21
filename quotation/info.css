@@ -25,29 +25,29 @@
   padding: 20px;
 }
 
+.coverage-table th, tr :first-of-type{
+  background-color: #a8ff00;
+
+}
+
+.coverage-tabl tr,td:hover{
+    background-color: #ffd700;
+}
+
 .coverage-table th,
 .coverage-table td {
-  padding: 20px 30px;  /* Increased padding: top/bottom 20px, left/right 30px */
-  border: 1px solid 	#ffd700;
+  padding: 20px 30px; 
   text-align: left;
   line-height: 1.5; 
 }
 
-.coverage-table th {
+.coverage-table tr:first {
   background-color: #ff5700;
   font-size: 16px; 
   font-weight: 500;
 }
 
-.coverage-table td:first-child {
-  font-weight: 500;
-  width: 200px; 
-}
 
-.coverage-table tr:nth-child(2n){
-  background-color: #a8ff00;
-
-}
 
 @keyframes headerFade {
     from {
@@ -255,7 +255,7 @@ footer {
     .coverage-table td:first-child {
         width: auto;  /* Auto width on mobile */
     }
-}
+
 
     footer {
         padding: 1.5rem 1rem;
