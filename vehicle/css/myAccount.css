@@ -258,3 +258,14 @@ body {
         text-align: center;
     }
 }
+
+.form-control.error {
+    border-color: #d93025;
+}
+
+.error-message {
+    color: #d93025;
+    font-size: 12px;
+    margin-top: 4px;
+    display: block;
+}

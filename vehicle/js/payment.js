@@ -13,146 +13,240 @@ $(document).ready(function () {
         $(".menu-icon-open").show();
     });
 
-    // Load saved form data if exists
+    // Load saved form data and set up event listeners
     loadSavedFormData();
+    $('.quote-form input').on('change input', saveFormData);
 
-    // Save form data when inputs change
-    $('.quote-form input').on('change input', function() {
-        saveFormData();
-    });
-
-    $(".payment-method").on("click", function () {
-        // Remove active state from all payment methods
-        $(".payment-method").removeClass("active");
-        $(".payment-method").css({
+    // Payment method selection
+    $('input[name="paymentMethod"]').on('change', function() {
+        // Reset all payment methods to default style
+        $('.payment-method').removeClass('active').css({
             "background-color": "white",
             "color": "black",
             "border": "2px solid #ddd"
         });
-        
-        // Add active state to clicked payment method
-        $(this).addClass("active").trigger('change');  // Add trigger change
-        $(this).css({
+
+        // Highlight selected payment method
+        $(this).closest('.payment-method').addClass('active').css({
             "background-color": "var(--secondary-color)",
             "color": "white",
             "border": "1px solid var(--primary-color)"
         });
+
+        // Hide both forms first
+        $('#creditCardForm, #bankTransferForm').hide();
+
+        // Show the selected form
+        const isBankTransfer = $(this).val() === 'bankTransfer';
+        if (isBankTransfer) {
+            $('#bankTransferForm').fadeIn(300);
+        } else {
+            $('#creditCardForm').fadeIn(300);
+        }
         
         saveFormData();
     });
+
+    // Set up card input formatting
+    setupCardFormatting();
 });
 
-// Function to save form data
 function saveFormData() {
     const formData = {
-        paymentMethod: $('.payment-method.active').index('.payment-method'),  // Save the index of selected payment
+        paymentMethod: $('input[name="paymentMethod"]:checked').val(),
+        // Credit card details
         cardNumber: $('#cardNumber').val(),
         expiryDate: $('#expiryDate').val(),
         cvv: $('input[placeholder="***"]').val(),
-        nameOnCard: $('input[placeholder="Enter name as shown on card"]').val()
+        nameOnCard: $('input[placeholder="Enter name as shown on card"]').val(),
+        // Bank transfer details
+        bankAccountNumber: $('#bankAccountNumber').val(),
+        accountHolderName: $('#accountHolderName').val(),
+        // Save the selected payment method's style state
+        selectedMethod: $('.payment-method.active').index()
     };
     localStorage.setItem('paymentFormData', JSON.stringify(formData));
 }
 
-// Function to load saved form data
 function loadSavedFormData() {
     const savedData = localStorage.getItem('paymentFormData');
     if (savedData) {
         const formData = JSON.parse(savedData);
         
-        // Restore payment method selection
-        if (formData.paymentMethod >= 0) {
-            const selectedPayment = $('.payment-method').eq(formData.paymentMethod);
-            // Simulate a click on the payment method
-            selectedPayment.trigger('click');
+        // Set payment method and trigger the change event
+        if (formData.paymentMethod) {
+            const radioButton = $(`input[name="paymentMethod"][value="${formData.paymentMethod}"]`);
+            radioButton.prop('checked', true);
+            
+            // Apply the saved style
+            $('.payment-method').css({
+                "background-color": "white",
+                "color": "black",
+                "border": "2px solid #ddd"
+            });
+
+            radioButton.closest('.payment-method').css({
+                "background-color": "var(--secondary-color)",
+                "color": "white",
+                "border": "1px solid var(--primary-color)"
+            });
+
+            // Show the correct form
+            $('#creditCardForm, #bankTransferForm').hide();
+            if (formData.paymentMethod === 'bankTransfer') {
+                $('#bankTransferForm').show();
+            } else {
+                $('#creditCardForm').show();
+            }
         }
         
-        // Restore other form fields
+        // Load credit card details
         $('#cardNumber').val(formData.cardNumber || '');
         $('#expiryDate').val(formData.expiryDate || '');
         $('input[placeholder="***"]').val(formData.cvv || '');
         $('input[placeholder="Enter name as shown on card"]').val(formData.nameOnCard || '');
+        
+        // Load bank transfer details
+        $('#bankAccountNumber').val(formData.bankAccountNumber || '');
+        $('#accountHolderName').val(formData.accountHolderName || '');
     }
 }
 
 function goForward(event) {
     event.preventDefault();
-    var isFormValid = true;
     
-    // Check if payment method is selected
-    if ($('.payment-method.active').length === 0) {
+    const selectedPaymentMethod = $('input[name="paymentMethod"]:checked').val();
+    
+    if (!selectedPaymentMethod) {
         alert('Please select a payment method');
         return false;
     }
     
-    // Check specific required fields
-    var cardNumber = $('#cardNumber').val();
-    var expiryDate = $('#expiryDate').val();
-    var cvv = $('input[placeholder="***"]').val();
-    var nameOnCard = $('input[placeholder="Enter name as shown on card"]').val();
-    
-    if (!cardNumber || !expiryDate || !cvv || !nameOnCard) {
-        alert('Please fill in all required fields');
-        return false;
+    if (selectedPaymentMethod === 'bankTransfer') {
+        const bankAccountNumber = $('#bankAccountNumber').val().trim();
+        const accountHolderName = $('#accountHolderName').val().trim();
+        
+        if (!bankAccountNumber || !accountHolderName) {
+            alert('Please fill in all bank transfer details');
+            return false;
+        }
+    } else {
+        const cardNumber = $('#cardNumber').val();
+        const expiryDate = $('#expiryDate').val();
+        const cvv = $('input[placeholder="***"]').val();
+        const nameOnCard = $('input[placeholder="Enter name as shown on card"]').val();
+        
+        if (!cardNumber || !expiryDate || !cvv || !nameOnCard) {
+            alert('Please fill in all credit card details');
+            return false;
+        }
     }
     
-    // If we get here, form is valid
+    // Save the final form data to a different key in localStorage
+    const finalFormData = {
+        paymentMethod: selectedPaymentMethod,
+        // Credit card details
+        cardNumber: $('#cardNumber').val(),
+        expiryDate: $('#expiryDate').val(),
+        cvv: $('input[placeholder="***"]').val(),
+        nameOnCard: $('input[placeholder="Enter name as shown on card"]').val(),
+        // Bank transfer details
+        bankAccountNumber: $('#bankAccountNumber').val(),
+        accountHolderName: $('#accountHolderName').val(),
+        // Save timestamp
+        submittedAt: new Date().toISOString()
+    };
+    
+    // Save to a different key for completed payments
+    localStorage.setItem('completedPaymentData', JSON.stringify(finalFormData));
+    
+    // Remove the temporary form data
     localStorage.removeItem('paymentFormData');
+    
+    // Redirect to complete page
     window.location.href = 'complete.html';
 }
 
 function goBack(event) {
     event.preventDefault();
-    
-    // Save form data before going back
-    saveFormData();
-    
-    if (window.history.length > 1) {
-        window.history.back();
-    } else {
-        window.location.href = 'quote.html';
-    }
+    saveFormData(); // Save current state before going back
+    window.history.length > 1 ? window.history.back() : window.location.href = 'quote.html';
 }
 
-// Card number formatting
-document.getElementById('cardNumber').addEventListener('input', function(e) {
-    // Remove all non-digits
-    let value = this.value.replace(/\D/g, '');
-    
-    // Add hyphen after every 4 digits
-    value = value.replace(/(\d{4})(?=\d)/g, '$1-');
-    
-    // Update the input value
-    this.value = value;
-    
-    // Move cursor to end
-    this.selectionStart = this.selectionEnd = this.value.length;
-});
+function setupCardFormatting() {
+    // Card number formatting
+    $('#cardNumber').on('input', function() {
+        let value = this.value.replace(/\D/g, '');
+        value = value.replace(/(\d{4})(?=\d)/g, '$1-');
+        this.value = value;
+        this.selectionStart = this.selectionEnd = this.value.length;
+    }).on('keypress', function(e) {
+        if (!/^\d$/.test(e.key) && !['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight'].includes(e.key)) {
+            e.preventDefault();
+        }
+    });
 
-// Prevent non-numeric inputs
-document.getElementById('cardNumber').addEventListener('keypress', function(e) {
-    if (!/^\d$/.test(e.key) && e.key !== 'Backspace' && e.key !== 'Delete' && e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') {
-        e.preventDefault();
-    }
-});
+    // Expiry date formatting and validation
+    $('#expiryDate').on('input', function() {
+        let value = this.value.replace(/\D/g, '');
+        
+        // Format as MM/YY
+        if (value.length >= 2) {
+            value = value.slice(0,2) + '/' + value.slice(2);
+        }
+        
+        // Limit to MM/YY format
+        this.value = value.slice(0,5);
+        
+        // Validate month and year
+        if (value.length >= 2) {
+            let month = parseInt(value.slice(0,2));
+            if (month > 12) {
+                this.value = '12' + this.value.slice(2);
+            }
+            if (month < 1) {
+                this.value = '01' + this.value.slice(2);
+            }
+        }
+        
+        // Validate against current date
+        if (value.length === 4) {
+            const currentDate = new Date();
+            const currentYear = currentDate.getFullYear() % 100; // Get last 2 digits
+            const currentMonth = currentDate.getMonth() + 1; // Get current month (1-12)
+            
+            let inputMonth = parseInt(value.slice(0,2));
+            let inputYear = parseInt(value.slice(2));
+            
+            if (inputYear < currentYear || (inputYear === currentYear && inputMonth < currentMonth)) {
+                // Reset to current month/year if expired
+                const formattedMonth = currentMonth.toString().padStart(2, '0');
+                const formattedYear = currentYear.toString();
+                this.value = `${formattedMonth}/${formattedYear}`;
+            }
+        }
+    }).on('keypress', function(e) {
+        if (!/^\d$/.test(e.key) && !['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight'].includes(e.key)) {
+            e.preventDefault();
+        }
+    }).on('blur', function() {
+        // Validate format on blur
+        const value = this.value;
+        if (value.length > 0 && value.length < 5) {
+            const currentDate = new Date();
+            const currentYear = (currentDate.getFullYear() % 100).toString();
+            const currentMonth = (currentDate.getMonth() + 1).toString().padStart(2, '0');
+            this.value = `${currentMonth}/${currentYear}`;
+        }
+    });
 
-// Expiry date formatting
-document.getElementById('expiryDate').addEventListener('input', function(e) {
-    // Remove all non-digits
-    let value = this.value.replace(/\D/g, '');
-    
-    // Add forward slash after month (first 2 digits)
-    if (value.length >= 2) {
-        value = value.slice(0,2) + '/' + value.slice(2);
-    }
-    
-    // Limit to 5 characters (MM/YY)
-    this.value = value.slice(0,5);
-});
-
-// Prevent non-numeric inputs for expiry date
-document.getElementById('expiryDate').addEventListener('keypress', function(e) {
-    if (!/^\d$/.test(e.key) && e.key !== 'Backspace' && e.key !== 'Delete' && e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') {
-        e.preventDefault();
-    }
-});
+    // Bank account number formatting
+    $('#bankAccountNumber').on('input', function() {
+        let value = this.value.replace(/\D/g, '');
+        this.value = value;
+    }).on('keypress', function(e) {
+        if (!/^\d$/.test(e.key) && !['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight'].includes(e.key)) {
+            e.preventDefault();
+        }
+    });
+}
