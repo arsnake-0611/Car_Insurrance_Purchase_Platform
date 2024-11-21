@@ -49,32 +49,6 @@ header {
     display: none;
 }
 
-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-nav ul {
-    list-style: none;
-    display: flex;
-    gap: 20px;
-}
-
-nav a {
-    color: white;
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-nav li a:hover{
-    background-color: var(--background-color);
-    color: var(--primary-color);
-    padding: 15px;
-    border-radius: 10px;
-    font-size: 18px;
-}
-
 .hero {
     height: 100vh;
     background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),

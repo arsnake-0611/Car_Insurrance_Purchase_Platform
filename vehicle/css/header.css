@@ -55,12 +55,28 @@ nav ul {
 nav a {
     color: white;
     text-decoration: none;
-    transition: color 0.3s ease;
+    transition: color 0.5s ease;
 }
 
-nav li a:hover {
-    color: var(--secondary-color);
+nav a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.5s ease;
 }
+
+nav a:hover {
+    color: var(--secondary-color); 
+}
+
+nav li{
+    padding: 10px;
+}
+
+nav li:hover{
+    background-color: #6d6d6d;
+    border-radius: 10px;
+}
+
 
 /* Mobile menu styles */
 @media (max-width: 768px) {
