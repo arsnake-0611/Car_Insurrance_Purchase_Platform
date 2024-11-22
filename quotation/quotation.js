@@ -1,7 +1,5 @@
 $(document).ready(function () {
     const submittedApplications = new Map();
-    const savedTheme = localStorage.getItem('theme') || 'light';
-    $('body').attr('data-theme', savedTheme);
 
     function initializeApp() {
         $('#insuranceForm, #applicationHistory, #reviewSection, #confirmationSection, #websiteGuide').hide();

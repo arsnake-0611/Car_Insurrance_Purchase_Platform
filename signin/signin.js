@@ -6,10 +6,14 @@ window.addEventListener('unload', function() {
 
 function toggleTheme() {
   const body = document.body;
+  const button = document.querySelector('.theme-toggle');
+
   if (body.getAttribute('data-theme') === 'dark') {
     body.removeAttribute('data-theme');
+    button.innerHTML = "🌕"; // Change to the light theme icon
   } else {
     body.setAttribute('data-theme', 'dark');
+    button.innerHTML = "🌑"; // Change to the dark theme icon
   }
 }
 
