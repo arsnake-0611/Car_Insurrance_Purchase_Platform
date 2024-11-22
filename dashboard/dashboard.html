@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <title>Insurance Quotation Management System</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="dashboard.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    
+    <script src="dashboard.js" defer></script>
+    </head>
+    <body>
+    <div class="sidebar">
+        <h3>Insurance Portal</h3>
+        <ul class="sidebar-menu">
+            <li><a href="#dashboard">Dashboard</a></li>
+            <li><a href="#quotations">Quotations</a></li>
+            <li><a href="#settings">Settings</a></li>
+            <li><a href="#reports">Reports</a></li>
+        </ul>
+        <div class="sidebar-bottom">
+            <button class="sign-out-btn">Sign Out</button>
+        </div>
+    </div>
+    
+    <div class="main-header">
+        <h2>Insurance Quotation Management</h2>
+        <div class="user-info">
+            <span>Welcome, Admin</span>
+        </div>
+    </div>
+    
+    <div class="container main-content">
+        <h1 class="text-center mb-4">Insurance Quotation Management System</h1>
+        
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <input type="text" id="searchQuote" class="form-control search-box" placeholder="Search quotations...">
+            </div>
+            <div class="col-md-6 text-end">
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newQuoteModal">
+                    New Quotation
+                </button>
+            </div>
+        </div>
+    
+        <!-- Filter Section -->
+        <div class="filter-section">
+            <div class="row">
+                <div class="col-md-4">
+                    <label class="form-label">Date From</label>
+                    <input type="date" class="form-control" id="dateFrom">
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">Date To</label>
+                    <input type="date" class="form-control" id="dateTo">
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">Status</label>
+                    <select class="form-control" id="statusFilter">
+                        <option value="">All</option>
+                        <option value="pending">Pending</option>
+                        <option value="approved">Approved</option>
+                        <option value="rejected">Rejected</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    
+        <div class="row">
+            <div class="col-md-8">
+                <div class="quote-list" id="quoteList">
+                    <!-- Quotes will be dynamically loaded here -->
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="dashboard-card">
+                    <h3>Quick Statistics</h3>
+                    <div class="mt-3">
+                        <p>Total Quotations: <span id="totalQuotes">0</span></p>
+                        <p>Pending: <span id="pendingQuotes">0</span></p>
+                        <p>Approved: <span id="approvedQuotes">0</span></p>
+                        <p>Rejected: <span id="rejectedQuotes">0</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- New Quotation Modal -->
+    <div class="modal fade" id="newQuoteModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">New Quotation Request</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="quotationForm">
+                        <h6>Vehicle Information</h6>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Vehicle Brand</label>
+                                <input type="text" class="form-control" id="vehicleMake" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Vehicle Model</label>
+                                <input type="text" class="form-control" id="vehicleModel" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Manufacturing Year</label>
+                                <input type="number" class="form-control" id="vehicleYear" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Body Type</label>
+                                <input type="text" class="form-control" id="bodyType" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Seating Capacity</label>
+                                <input type="number" class="form-control" id="seatingCapacity" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Cylinder Capacity (C.C.)</label>
+                                <input type="number" class="form-control" id="cylinderCapacity" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Estimated Vehicle Value (HK$)</label>
+                                <input type="number" class="form-control" id="vehicleValue" required>
+                            </div>
+                        </div>
+    
+                        <h6 class="mt-4">Personal Information</h6>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Full Name</label>
+                                <input type="text" class="form-control" id="fullName" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Email Address</label>
+                                <input type="email" class="form-control" id="email" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Phone Number</label>
+                                <input type="tel" class="form-control" id="phoneNumber" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Driving Experience (years)</label>
+                                <input type="number" class="form-control" id="drivingExperience" required>
+                            </div>
+                        </div>
+    
+                        <h6 class="mt-4">Coverage Selection</h6>
+                        <div class="mb-3">
+                            <label class="form-label">Coverage Plan</label>
+                            <select class="form-control" id="coveragePlan" required>
+                                <option value="">Select Coverage Plan</option>
+                                <option value="comprehensive">Comprehensive Coverage</option>
+                                <option value="thirdParty">Third Party</option>
+                            </select>
+                        </div>
+    
+                        <div class="mb-3">
+                            <label class="form-label">Payment Method</label>
+                            <select class="form-control" id="paymentMethod" required>
+                                <option value="">Select Payment Method</option>
+                                <option value="bankTransfer">Bank Transfer</option>
+                                <option value="creditCard">Credit Card</option>
+                            </select>
+                        </div>
+    
+                        <button type="submit" class="btn btn-primary">Submit Quote Request</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="notification" id="notification"></div>
+    
+
+    </body></html>
