@@ -1,5 +1,5 @@
 body {
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, sans-serif;
     background-color: #f5f8fa;
     padding: 20px;
 }
@@ -120,6 +120,7 @@ body {
 }
 
 .details-section {
+    display: none;
     background: #f8f9fa;
     border-radius: 8px;
     padding: 20px;
@@ -231,4 +232,119 @@ body {
     .dashboard-card {
         padding: 15px;
     }
+
+    .hamburger-menu {
+        display: block;
+    }
+}
+
+.hamburger-menu {
+    display: none;
+    cursor: pointer;
+    padding: 10px;
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    z-index: 1001;
+}
+
+.hamburger-menu div {
+    width: 25px;
+    height: 3px;
+    background-color: #333;
+    margin: 5px 0;
+    transition: 0.3s;
+}
+
+.sidebar.active {
+    transform: translateX(0);
+}
+
+.chatbox {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 300px;
+    height: 400px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    z-index: 1000;
+    transition: 0.3s;
+    transform: translateY(120%);
+}
+
+.chatbox.active {
+    transform: translateY(0);
+}
+
+.chat-header {
+    padding: 10px;
+    background: #2c3e50;
+    color: white;
+    border-radius: 10px 10px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.chat-messages {
+    flex-grow: 1;
+    padding: 10px;
+    overflow-y: auto;
+}
+
+.chat-input {
+    padding: 10px;
+    border-top: 1px solid #ddd;
+    display: flex;
+}
+
+.chat-input input {
+    flex-grow: 1;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-right: 5px;
+}
+
+.chat-input button {
+    padding: 8px 15px;
+    background: #2c3e50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1rem;
+}
+
+.table th, .table td {
+    padding: 0.75rem;
+    border: 1px solid #dee2e6;
+}
+
+.table th {
+    background-color: #f8f9fa;
+    font-weight: bold;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.view-details {
+    float: none;
+    margin-top: 0;
+    margin-right: 10px;
+}
+
+.chat-toggle {
+    display: none; 
 }

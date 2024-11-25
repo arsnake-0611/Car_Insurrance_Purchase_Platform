@@ -1,21 +1,442 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta charset="utf-8">
+<html><head><base href="."><meta charset="utf-8">
     <title>Insurance Quotation Management System</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <link rel="stylesheet" href="dashboard.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <style>
+    body {
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, sans-serif;
+        background-color: #f5f8fa;
+        padding: 20px;
+    }
     
-    <script src="dashboard.js" defer></script>
+    .sidebar {
+        position: fixed;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 250px;
+        background-color: #2c3e50;
+        color: white;
+        padding: 20px;
+        box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+    }
+    
+    .main-header {
+        position: fixed;
+        top: 0;
+        right: 0;
+        left: 250px;
+        height: 60px;
+        background-color: white;
+        padding: 0 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        z-index: 100;
+    }
+    
+    .main-content {
+        margin-left: 250px;
+        margin-top: 60px;
+        padding: 20px;
+        transition: all 0.3s ease;
+    }
+    
+    .quotation-card {
+        position: relative;
+        padding: 25px;
+        padding-top: 60px; /* Add more top padding to accommodate the buttons */
+        background: white;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        transition: transform 0.2s;
+    }
+    
+    .quotation-card:hover {
+        transform: translateY(-5px);
+    }
+    
+    .quotation-actions {
+        display: flex;
+        gap: 10px;
+        position: absolute;
+        top: 20px;
+        right: 20px;
+    }
+    
+    .action-buttons {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        justify-content: flex-end;
+        margin-top: 10px;
+    }
+    
+    .quotation-status {
+        padding: 5px 10px;
+        border-radius: 15px;
+        font-size: 0.9em;
+    }
+    
+    .quotation-status--pending {
+        background-color: #ffd700;
+        color: #000;
+    }
+    
+    .quotation-status--approved {
+        background-color: #90EE90;
+        color: #000;
+    }
+    
+    .quotation-status--rejected {
+        background-color: #ffcccb;
+        color: #000;
+    }
+    
+    .notification {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        padding: 15px;
+        border-radius: 5px;
+        background-color: #4CAF50;
+        color: white;
+        display: none;
+        z-index: 1000;
+    }
+    
+    .search-box {
+        margin-bottom: 20px;
+        padding: 10px;
+        border-radius: 5px;
+    }
+    
+    .filter-section {
+        background: white;
+        padding: 15px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    
+    .quote-list {
+        max-height: 600px;
+        overflow-y: auto;
+    }
+    
+    #quotationForm {
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    
+    .details-section {
+        display: none;
+        background: #f8f9fa;
+        border-radius: 8px;
+        padding: 20px;
+        margin-top: 20px;
+        box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
+    }
+    
+    .editable-field {
+        margin-bottom: 15px;
+    }
+    
+    .editable-field label {
+        display: block;
+        font-weight: 500;
+        margin-bottom: 5px;
+        color: #666;
+    }
+    
+    .edit-field {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        transition: all 0.3s ease;
+    }
+    
+    .edit-field:focus {
+        border-color: #4CAF50;
+        box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+    }
+    
+    .edit-buttons {
+        margin-top: 10px;
+    }
+    
+    .sidebar-menu {
+        list-style: none;
+        padding: 0;
+        margin-top: 30px;
+    }
+    
+    .sidebar-menu li {
+        margin-bottom: 15px;
+    }
+    
+    .sidebar-menu a {
+        color: white;
+        text-decoration: none;
+        display: block;
+        padding: 10px;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+    }
+    
+    .sidebar-menu a:hover {
+        background-color: #34495e;
+    }
+    
+    .reference-number {
+        font-family: monospace;
+        color: #666;
+        font-size: 0.9em;
+    }
+    
+    .sidebar-bottom {
+        position: absolute;
+        bottom: 20px;
+        left: 20px;
+        right: 20px;
+    }
+    
+    .sign-out-btn {
+        width: 100%;
+        padding: 10px;
+        background-color: #e74c3c;
+        border: none;
+        border-radius: 5px;
+        color: white;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+    
+    .sign-out-btn:hover {
+        background-color: #c0392b;
+    }
+    
+    /* Responsive styles */
+    @media (max-width: 500px) {
+        .sidebar {
+            transform: translateX(-100%);
+            z-index: 1000;
+        }
+        
+        .main-content {
+            margin-left: 0;
+        }
+        
+        .main-header {
+            left: 0;
+        }
+        
+        .quotation-actions {
+            position: relative;
+            top: 0;
+            right: 0;
+            margin-top: 15px;
+        }
+        
+        .quotation-card {
+            padding: 15px;
+        }
+    
+        .hamburger-menu {
+            display: block;
+        }
+    }
+    
+    .hamburger-menu {
+        display: none;
+        cursor: pointer;
+        padding: 10px;
+        position: fixed;
+        top: 10px;
+        left: 10px;
+        z-index: 1001;
+    }
+    
+    .hamburger-menu div {
+        width: 25px;
+        height: 3px;
+        background-color: #333;
+        margin: 5px 0;
+        transition: 0.3s;
+    }
+    
+    .sidebar.active {
+        transform: translateX(0);
+    }
+    
+    .chatbox {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 300px;
+        height: 400px;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        display: flex;
+        flex-direction: column;
+        z-index: 1000;
+        transition: 0.3s;
+        transform: translateY(120%);
+    }
+    
+    .chatbox.active {
+        transform: translateY(0);
+    }
+    
+    .chat-header {
+        padding: 10px;
+        background: #2c3e50;
+        color: white;
+        border-radius: 10px 10px 0 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .chat-messages {
+        flex-grow: 1;
+        padding: 10px;
+        overflow-y: auto;
+        max-height: calc(100% - 120px); /* Account for header and input area */
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .message-container {
+        overflow: hidden;
+        margin-bottom: 10px;
+        width: 100%;
+    }
+    
+    .message {
+        margin: 10px 0;
+        padding: 10px;
+        border-radius: 10px;
+        max-width: 80%;
+        clear: both;
+    }
+    
+    .customer-message {
+        background-color: #e9ecef;
+        color: #333;
+        float: left;
+    }
+    
+    .staff-message {
+        background-color: #2c3e50;
+        color: white;
+        float: right;
+    }
+    
+    .message-info {
+        font-size: 0.8em;
+        margin-bottom: 2px;
+        color: #666;
+    }
+    
+    .staff-message .message-info {
+        text-align: right;
+        color: #ccc;
+    }
+    
+    .chat-input {
+        padding: 10px;
+        border-top: 1px solid #ddd;
+        display: flex;
+    }
+    
+    .chat-input input {
+        flex-grow: 1;
+        padding: 8px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        margin-right: 5px;
+    }
+    
+    .chat-input button {
+        padding: 8px 15px;
+        background: #2c3e50;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 1rem;
+    }
+    
+    .table th, .table td {
+        padding: 0.75rem;
+        border: 1px solid #dee2e6;
+    }
+    
+    .table th {
+        background-color: #f8f9fa;
+        font-weight: bold;
+    }
+    
+    .text-right {
+        text-align: right;
+    }
+    
+    .view-details {
+        float: none;
+        margin-top: 0;
+        margin-right: 10px;
+    }
+    
+    .chat-toggle {
+        display: none; /* Hide the floating chat button */
+    }
+    
+    .support-button {
+        background-color: #2c3e50 !important;
+        color: white !important;
+        border: none !important;
+        padding: 6px 12px !important;
+    }
+    
+    .support-button:hover {
+        background-color: #34495e !important;
+    }
+    
+    .support-icon {
+        margin-right: 5px;
+    }
+    
+    .dashboard-card {
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        margin-bottom: 20px;
+    }
+    </style>
     </head>
     <body>
+    <div class="hamburger-menu">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+    
     <div class="sidebar">
         <h3>Insurance Portal</h3>
         <ul class="sidebar-menu">
-            <li><a href="#dashboard">Dashboard</a></li>
             <li><a href="#quotations">Quotations</a></li>
             <li><a href="#settings">Settings</a></li>
             <li><a href="#reports">Reports</a></li>
@@ -33,14 +454,14 @@
     </div>
     
     <div class="container main-content">
-        <h1 class="text-center mb-4">Insurance Quotation Management System</h1>
+        <h1 style="text-align: center; margin-bottom: 1.5rem;">Insurance Quotation Management System</h1>
         
-        <div class="row mb-4">
+        <div class="row" style="margin-bottom: 1.5rem;">
             <div class="col-md-6">
                 <input type="text" id="searchQuote" class="form-control search-box" placeholder="Search quotations...">
             </div>
-            <div class="col-md-6 text-end">
-                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newQuoteModal">
+            <div class="col-md-6" style="text-align: right;">
+                <button class="btn btn-primary" style="margin-left: auto;" data-bs-toggle="modal" data-bs-target="#newQuoteModal">
                     New Quotation
                 </button>
             </div>
@@ -79,7 +500,7 @@
             <div class="col-md-4">
                 <div class="dashboard-card">
                     <h3>Quick Statistics</h3>
-                    <div class="mt-3">
+                    <div style="margin-top: 1rem;">
                         <p>Total Quotations: <span id="totalQuotes">0</span></p>
                         <p>Pending: <span id="pendingQuotes">0</span></p>
                         <p>Approved: <span id="approvedQuotes">0</span></p>
@@ -180,5 +601,369 @@
     
     <div class="notification" id="notification"></div>
     
-
+    <div class="chatbox">
+        <div class="chat-header">
+            <h4>Customer Support</h4>
+            <button class="close-chat">×</button>
+        </div>
+        <div class="chat-messages">
+            <div class="message-container">
+                <div class="message customer-message">
+                    <div class="message-info">Customer</div>
+                    Hello, I need help with my insurance quote.
+                </div>
+            </div>
+            <div class="message-container">
+                <div class="message staff-message">
+                    <div class="message-info">Support Staff</div>
+                    Welcome! How can I assist you with your insurance quote today?
+                </div>
+            </div>
+        </div>
+        <div class="chat-input">
+            <input type="text" placeholder="Type your message...">
+            <button>Send</button>
+        </div>
+    </div>
+    
+    <script>
+    /*
+    Quote JSON Structure:
+    {
+        id: number,                    // Unique identifier
+        referenceNumber: string,       // Format: QT<YEAR><SEQUENTIAL_NUMBER>
+        vehicleMake: string,          // Vehicle manufacturer
+        vehicleModel: string,         // Vehicle model name
+        vehicleYear: number,          // Manufacturing year
+        bodyType: string,             // Vehicle body type
+        seatingCapacity: number,      // Number of seats
+        cylinderCapacity: number,     // Engine CC
+        vehicleValue: number,         // Value in HKD
+        fullName: string,             // Customer's full name
+        email: string,                // Customer's email
+        phoneNumber: string,          // Contact number
+        drivingExperience: number,    // Years of driving experience
+        coveragePlan: string,         // "comprehensive" or "thirdParty"
+        paymentMethod: string,        // "bankTransfer" or "creditCard"
+        status: string,               // "pending", "approved", or "rejected"
+        date: string                  // ISO date string (YYYY-MM-DD)
+    }
+    
+    Example Quote:
+    {
+        "id": 1,
+        "referenceNumber": "QT2023001",
+        "vehicleMake": "Toyota",
+        "vehicleModel": "Camry",
+        "vehicleYear": 2020,
+        "bodyType": "Sedan",
+        "seatingCapacity": 5,
+        "cylinderCapacity": 2000,
+        "vehicleValue": 200000,
+        "fullName": "John Doe",
+        "email": "john@example.com",
+        "phoneNumber": "1234567890",
+        "drivingExperience": 5,
+        "coveragePlan": "comprehensive",
+        "paymentMethod": "creditCard",
+        "status": "pending",
+        "date": "2023-07-20"
+    }
+    */
+    
+    $(document).ready(function() {
+        let quotes = [
+            {
+                id: 1,
+                referenceNumber: 'QT2023001',
+                vehicleMake: "Toyota",
+                vehicleModel: "Camry",
+                vehicleYear: 2020,
+                bodyType: "Sedan",
+                seatingCapacity: 5,
+                cylinderCapacity: 2000,
+                vehicleValue: 200000,
+                fullName: "John Doe",
+                email: "john@example.com",
+                phoneNumber: "1234567890",
+                drivingExperience: 5,
+                coveragePlan: "comprehensive",
+                paymentMethod: "creditCard",
+                status: "pending",
+                date: "2023-07-20"
+            }
+        ];
+    
+        function displayQuotes(quotesToShow = quotes) {
+            const quoteList = $('#quoteList');
+            quoteList.empty();
+    
+            quotesToShow.forEach(quote => {
+                const quoteCard = $(`
+                    <div class="quotation-card">
+                        <span class="quotation-reference">Ref: ${quote.referenceNumber}</span>
+                        
+                        <div class="row">
+                            <div class="col-md-8">
+                                <p>Vehicle: ${quote.vehicleMake} ${quote.vehicleModel}</p>
+                                <p>Date: ${quote.date}</p>
+                                <span class="quotation-status quotation-status--${quote.status}">${quote.status.toUpperCase()}</span>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="quotation-actions">
+                                    <button class="btn btn-danger btn-sm reject-quote" data-id="${quote.id}">Reject</button>
+                                    <button class="btn btn-success btn-sm approve-quote" data-id="${quote.id}">Approve</button>
+                                </div>
+                            </div>
+                        </div>
+    
+                        <div class="action-buttons">
+                            <button class="btn btn-secondary btn-sm view-details" data-id="${quote.id}">View Details</button>
+                            <button class="btn support-button btn-sm">
+                                <span class="support-icon">💬</span>Support Chat
+                            </button>
+                        </div>
+                        
+                        <div class="details-section" id="details-${quote.id}">
+                            <table class="table">
+                                <tr>
+                                    <th colspan="2">Vehicle Information</th>
+                                </tr>
+                                <tr>
+                                    <td>Manufacturing Year:</td>
+                                    <td>${quote.vehicleYear}</td>
+                                </tr>
+                                <tr>
+                                    <td>Body Type:</td>
+                                    <td>${quote.bodyType}</td>
+                                </tr>
+                                <tr>
+                                    <td>Seating Capacity:</td>
+                                    <td>${quote.seatingCapacity}</td>
+                                </tr>
+                                <tr>
+                                    <td>Cylinder Capacity:</td>
+                                    <td>${quote.cylinderCapacity}</td>
+                                </tr>
+                                <tr>
+                                    <td>Vehicle Value (HK$):</td>
+                                    <td>${quote.vehicleValue}</td>
+                                </tr>
+                                <tr>
+                                    <th colspan="2">Personal Information</th>
+                                </tr>
+                                <tr>
+                                    <td>Full Name:</td>
+                                    <td>${quote.fullName}</td>
+                                </tr>
+                                <tr>
+                                    <td>Phone:</td>
+                                    <td>${quote.phoneNumber}</td>
+                                </tr>
+                                <tr>
+                                    <td>Email:</td>
+                                    <td>${quote.email}</td>
+                                </tr>
+                                <tr>
+                                    <td>Driving Experience:</td>
+                                    <td>${quote.drivingExperience} years</td>
+                                </tr>
+                                <tr>
+                                    <td>Payment Method:</td>
+                                    <td>${quote.paymentMethod}</td>
+                                </tr>
+                            </table>
+                            <div style="text-align: right;">
+                                <button class="btn btn-primary edit-quote" data-id="${quote.id}">Edit</button>
+                            </div>
+                        </div>
+                    </div>
+                `).hide().fadeIn(500);
+                quoteList.append(quoteCard);
+            });
+    
+            updateStatistics();
+        }
+    
+        $(document).on('click', '.view-details', function() {
+            const id = $(this).data('id');
+            $(`#details-${id}`).slideToggle();
+        });
+    
+        $('#searchQuote').on('input', function() {
+            const searchTerm = $(this).val().toLowerCase();
+            const filteredQuotes = quotes.filter(quote => 
+                quote.fullName.toLowerCase().includes(searchTerm) ||
+                quote.vehicleMake.toLowerCase().includes(searchTerm) ||
+                quote.vehicleModel.toLowerCase().includes(searchTerm) ||
+                quote.email.toLowerCase().includes(searchTerm)
+            );
+            displayQuotes(filteredQuotes);
+        });
+    
+        $('#dateFrom, #dateTo, #statusFilter').on('change', function() {
+            const dateFrom = $('#dateFrom').val();
+            const dateTo = $('#dateTo').val();
+            const status = $('#statusFilter').val();
+            const searchTerm = $('#searchQuote').val().toLowerCase();
+            
+            const filteredQuotes = quotes.filter(quote => {
+                const matchesSearch = quote.fullName.toLowerCase().includes(searchTerm) ||
+                    quote.vehicleMake.toLowerCase().includes(searchTerm) ||
+                    quote.vehicleModel.toLowerCase().includes(searchTerm) ||
+                    quote.email.toLowerCase().includes(searchTerm);
+                    
+                const matchesStatus = !status || quote.status === status;
+                const matchesDate = (!dateFrom || quote.date >= dateFrom) && 
+                                   (!dateTo || quote.date <= dateTo);
+                
+                return matchesSearch && matchesStatus && matchesDate;
+            });
+            
+            displayQuotes(filteredQuotes);
+        });
+    
+        $('#quotationForm').on('submit', function(e) {
+            e.preventDefault();
+            const newQuote = {
+                id: quotes.length + 1,
+                referenceNumber: `QT${new Date().getFullYear()}${(quotes.length + 1).toString().padStart(3, '0')}`,
+                vehicleMake: $('#vehicleMake').val(),
+                vehicleModel: $('#vehicleModel').val(),
+                vehicleYear: parseInt($('#vehicleYear').val()),
+                bodyType: $('#bodyType').val(),
+                seatingCapacity: parseInt($('#seatingCapacity').val()),
+                cylinderCapacity: parseInt($('#cylinderCapacity').val()),
+                vehicleValue: parseInt($('#vehicleValue').val()),
+                fullName: $('#fullName').val(),
+                email: $('#email').val(),
+                phoneNumber: $('#phoneNumber').val(),
+                drivingExperience: parseInt($('#drivingExperience').val()),
+                coveragePlan: $('#coveragePlan').val(),
+                paymentMethod: $('#paymentMethod').val(),
+                status: 'pending',
+                date: new Date().toISOString().split('T')[0]
+            };
+    
+            quotes.unshift(newQuote);
+            displayQuotes();
+            showNotification('New quotation added successfully!');
+            $('#newQuoteModal').modal('hide');
+            this.reset();
+        });
+    
+        $(document).on('click', '.approve-quote', function() {
+            const id = $(this).data('id');
+            const quote = quotes.find(q => q.id === id);
+            quote.status = 'approved';
+            displayQuotes();
+            showNotification('Quote approved successfully!');
+        });
+    
+        $(document).on('click', '.reject-quote', function() {
+            const id = $(this).data('id');
+            const quote = quotes.find(q => q.id === id);
+            quote.status = 'rejected';
+            displayQuotes();
+            showNotification('Quote rejected successfully!');
+        });
+    
+        $(document).on('click', '.edit-quote', function() {
+            window.location.hash = '#quotations';
+        });
+    
+        $(window).on('hashchange', function() {
+            if(window.location.hash === '#quotations') {
+                $('.main-content').show();
+            } else if(window.location.hash === '#dashboard') {
+                $('.main-content').hide();
+            }
+        });
+    
+        function updateStatistics() {
+            $('#totalQuotes').text(quotes.length);
+            $('#pendingQuotes').text(quotes.filter(q => q.status === 'pending').length);
+            $('#approvedQuotes').text(quotes.filter(q => q.status === 'approved').length);
+            $('#rejectedQuotes').text(quotes.filter(q => q.status === 'rejected').length);
+        }
+    
+        function showNotification(message) {
+            const notification = $('#notification');
+            notification.text(message).fadeIn();
+            setTimeout(() => notification.fadeOut(), 3000);
+        }
+    
+        $('.sign-out-btn').on('click', function() {
+            if(confirm('Are you sure you want to sign out?')) {
+                window.location.href = "https://example.com/login"; // Replace with actual login page URL
+            }
+        });
+    
+        // Hamburger menu functionality
+        $('.hamburger-menu').click(function() {
+            $('.sidebar').toggleClass('active');
+        });
+    
+        // Chat support functionality
+        $(document).on('click', '.support-button', function() {
+            $('.chatbox').addClass('active');
+        });
+    
+        $('.close-chat').click(function() {
+            $('.chatbox').removeClass('active');
+            $('.chat-toggle').show();
+        });
+    
+        $('.chat-input button').click(function() {
+            const message = $('.chat-input input').val();
+            if (message.trim() !== '') {
+                $('.chat-messages').append(`
+                    <div class="message-container">
+                        <div class="message staff-message">
+                            <div class="message-info">Support Staff</div>
+                            ${message}
+                        </div>
+                    </div>
+                `);
+                $('.chat-input input').val('');
+                
+                // Auto scroll to bottom
+                $('.chat-messages').scrollTop($('.chat-messages')[0].scrollHeight);
+                
+                // Simulate customer response
+                setTimeout(() => {
+                    $('.chat-messages').append(`
+                        <div class="message-container">
+                            <div class="message customer-message">
+                                <div class="message-info">Customer</div>
+                                Thank you for your response!
+                            </div>
+                        </div>
+                    `);
+                    // Auto scroll to bottom again
+                    $('.chat-messages').scrollTop($('.chat-messages')[0].scrollHeight);
+                }, 1000);
+            }
+        });
+    
+        // Handle Enter key in chat input
+        $('.chat-input input').keypress(function(e) {
+            if (e.which == 13) {
+                $('.chat-input button').click();
+            }
+        });
+    
+        // Close sidebar when clicking outside on mobile
+        $(document).click(function(event) {
+            if ($(window).width() <= 500) {
+                if (!$(event.target).closest('.sidebar').length && 
+                    !$(event.target).closest('.hamburger-menu').length) {
+                    $('.sidebar').removeClass('active');
+                }
+            }
+        });
+    
+        displayQuotes();
+    });
+    </script>
     </body></html>
