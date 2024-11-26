@@ -1,30 +1,14 @@
-let userData = null;
-
-window.addEventListener('unload', function() {
-  localStorage.removeItem('userData');
-});
-
 function toggleTheme() {
   const body = document.body;
   const button = document.querySelector('.theme-toggle');
 
   if (body.getAttribute('data-theme') === 'dark') {
     body.removeAttribute('data-theme');
-    button.innerHTML = "🌕"; // Change to the light theme icon
+    button.innerHTML = "🌑"; // Change to the light theme icon
   } else {
     body.setAttribute('data-theme', 'dark');
-    button.innerHTML = "🌑"; // Change to the dark theme icon
+    button.innerHTML = "🌕"; // Change to the dark theme icon
   }
-}
-
-function initializeUserData() {
-  fetch('../data/users.json')
-      .then(response => response.json())
-      .then(data => {
-          userData = data;
-          localStorage.setItem('userData', JSON.stringify(userData));
-      })
-      .catch(err => console.error('Error loading user data:', err));
 }
 
 function switchTab(tab) {
@@ -113,31 +97,32 @@ function handleLogin(event) {
     const usernameEmail = document.getElementById('username-email').value;
     const password = document.getElementById('password').value;
 
-    // Get stored user data
-    const userData = JSON.parse(localStorage.getItem('userData'));
-    
-    if (!userData) {
-      alert('No user data found. Please register first.');
-      return;
-    }
-
     let isValidLogin = false;
 
-    if (loginType === 'insurance-sales') {
-      // Check insurance sales array
-      isValidLogin = userData['insurance-sales'].some(user => 
-        user.username === usernameEmail && user.password === password
-      );
-    } else {
-      // Check customer or vehicle-sales object
-      const user = userData[loginType];
-      isValidLogin = user && user.email === usernameEmail && user.password === password;
+    switch (loginType) {
+      case 'customer':
+        if (usernameEmail === 'chris.wong@gmail.com' && password === '123456!A') {
+          isValidLogin = true;
+        }
+        break;
+
+      case 'vehicle-sales':
+        if (usernameEmail === 'chris@gmail.com' && password === 'Chris123!A') {
+          isValidLogin = true;
+        }
+        break;
+
+      case 'insurance-sales':
+        if (usernameEmail === 'Chris Wong' && password === 'Chris Wong') {
+          isValidLogin = true;
+        }
+        break;
     }
 
     if (isValidLogin) {
       window.location.href = '../option.html';
     } else {
-      alert('Invalid credentials. Please try again.');
+      alert('Invalid Email or Password. Please try again.');
     }
 
   } catch (err) {
@@ -145,8 +130,6 @@ function handleLogin(event) {
     alert('An error occurred during login. Please try again.');
   }
 }
-
-document.addEventListener('DOMContentLoaded', initializeUserData);
 
 function handleRegistration(event) {
   if (!event) return;
@@ -160,19 +143,28 @@ function handleRegistration(event) {
 
     // Reset all errors
     const errorMessages = document.querySelectorAll('.error-message');
-    errorMessages.forEach(msg => msg.style.display = 'none');
+    if (errorMessages) {
+      errorMessages.forEach(msg => {
+        msg.style.display = 'none';
+      });
+    }
 
     const inputFields = document.querySelectorAll('.input-field');
-    inputFields.forEach(input => input.classList.remove('error'));
+    if (inputFields) {
+      inputFields.forEach(input => {
+        input.classList.remove('error');
+      });
+    }
 
     let hasErrors = false;
     let errorFields = [];
 
     // Validate name
     const nameInput = document.getElementById('reg-name');
-    if (!nameInput.value || !nameInput.value.trim()) {
+    if (nameInput && (!nameInput.value || !nameInput.value.trim())) {
       nameInput.classList.add('error');
-      document.getElementById('name-error').style.display = 'block';
+      const nameError = document.getElementById('name-error');
+      if (nameError) nameError.style.display = 'block';
       hasErrors = true;
       errorFields.push('Full Name');
     }
@@ -180,9 +172,10 @@ function handleRegistration(event) {
     // Validate email
     const emailInput = document.getElementById('reg-email');
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailInput.value || !emailRegex.test(emailInput.value)) {
+    if (emailInput && (!emailInput.value || !emailRegex.test(emailInput.value))) {
       emailInput.classList.add('error');
-      document.getElementById('email-error').style.display = 'block';
+      const emailError = document.getElementById('email-error');
+      if (emailError) emailError.style.display = 'block';
       hasErrors = true;
       errorFields.push('Email Address');
     }
@@ -190,9 +183,10 @@ function handleRegistration(event) {
     // Validate phone
     const phoneInput = document.getElementById('reg-phone');
     const phoneRegex = /^\d{8}$/;
-    if (!phoneInput.value || !phoneRegex.test(phoneInput.value)) {
+    if (phoneInput && (!phoneInput.value || !phoneRegex.test(phoneInput.value))) {
       phoneInput.classList.add('error');
-      document.getElementById('phone-error').style.display = 'block';
+      const phoneError = document.getElementById('phone-error');
+      if (phoneError) phoneError.style.display = 'block';
       hasErrors = true;
       errorFields.push('Phone Number');
     }
@@ -200,63 +194,40 @@ function handleRegistration(event) {
     // Validate password
     const passwordInput = document.getElementById('reg-password');
     const confirmInput = document.getElementById('reg-confirm-password');
-    if (passwordInput.value !== confirmInput.value) {
+
+    if (passwordInput && confirmInput && passwordInput.value !== confirmInput.value) {
       confirmInput.classList.add('error');
-      document.getElementById('password-match-error').style.display = 'block';
+      const matchError = document.getElementById('password-match-error');
+      if (matchError) matchError.style.display = 'block';
       hasErrors = true;
       errorFields.push('Password Match');
     }
 
-    if (!hasErrors) {
-      // Get existing users or initialize new object
-      let userData = JSON.parse(localStorage.getItem('userData')) || {
-        "customer": {},
-        "vehicle-sales": {},
-        "insurance-sales": []
-      };
-
-      // Create new user object
-      const newUser = {
-        fullName: nameInput.value,
-        email: emailInput.value,
-        phone: phoneInput.value,
-        password: passwordInput.value
-      };
-
-      // Add role-specific fields for insurance sales
-      if (currentRole === 'insurance-sales') {
-        newUser.staffNumber = document.getElementById('staff-number').value;
-        newUser.username = document.getElementById('username').value;
-        userData['insurance-sales'].push(newUser);
+    const termsCheckbox = document.querySelector('#registration-details input[type="checkbox"]');
+    const submitButton = document.querySelector('#registration-details button[type="submit"]');
+    if (submitButton) {
+      if (hasErrors || !termsCheckbox.checked) {
+        submitButton.disabled = true;
+        submitButton.setAttribute('data-tooltip', 'Please complete: ' + errorFields.join(', ') + (termsCheckbox.checked ? '' : ', agree to terms'));
       } else {
-        // For customer and vehicle-sales, just update the object
-        userData[currentRole] = newUser;
+        submitButton.disabled = false;
+        submitButton.removeAttribute('data-tooltip');
       }
+    }
 
-      // Save to localStorage
-      localStorage.setItem('userData', JSON.stringify(userData));
-
-      // Show success message
+    // Show success message if no errors
+    if (!hasErrors) {
       const messageElement = document.getElementById('registration-message');
-      messageElement.style.display = 'block';
-      messageElement.textContent = 'Registration successful! You can now login.';
-
-      // Clear form
-      event.target.reset();
-      
-      // Reset password strength indicators
-      document.querySelectorAll('.password-requirements li').forEach(li => {
-        li.classList.remove('valid');
-      });
-      const strengthBar = document.querySelector('.strength-bar-fill');
-      if (strengthBar) {
-        strengthBar.style.width = '0%';
+      if (messageElement) {
+        messageElement.style.display = 'block';
+        messageElement.textContent = currentRole === 'insurance-sales'
+          ? 'Your registration will be validated by an admin. You will be notified once approved.'
+          : 'Registration successful! You can now login.';
       }
     }
 
   } catch (err) {
     console.error('Registration error:', err);
-    alert('An error occurred during registration. Please try again.');
   }
 }
 
