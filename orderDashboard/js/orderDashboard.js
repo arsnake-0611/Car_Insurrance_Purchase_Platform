@@ -1,4 +1,6 @@
 $(document).ready(function() {
+    let isMenuOpen = false;
+
     // Initialize sales chart with enhanced styling
     const ctx = document.getElementById('salesChart').getContext('2d');
     const salesChart = new Chart(ctx, {
@@ -137,61 +139,98 @@ $(document).ready(function() {
         }
     });
 
-    // Mobile menu toggle
+    // Mobile menu toggle handler
     $('.menu-toggle').click(function(e) {
         e.stopPropagation();
-        $('.sidebar, .sidebar-overlay').addClass('show');
-    });
-
-    // Close sidebar when clicking overlay or outside
-    $('.sidebar-overlay, body').click(function(e) {
-        if (!$(e.target).closest('.sidebar, .menu-toggle').length) {
-            $('.sidebar, .sidebar-overlay').removeClass('show');
+        isMenuOpen = !isMenuOpen;
+        
+        if (isMenuOpen) {
+            $('.sidebar').addClass('show');
+            $('.sidebar-overlay').css('display', 'block');
+            requestAnimationFrame(() => {
+                $('.sidebar-overlay').addClass('show');
+            });
+            $('body').css('overflow', 'hidden');
+        } else {
+            closeMobileMenu();
         }
     });
 
-    // Prevent sidebar closing when clicking inside
-    $('.sidebar').click(function(e) {
-        e.stopPropagation();
+    // Close menu when clicking overlay
+    $('.sidebar-overlay').click(function() {
+        closeMobileMenu();
     });
 
-    // Handle window resize
-    $(window).resize(function() {
-        if (window.innerWidth > 768) {
-            $('.sidebar, .sidebar-overlay').removeClass('show');
-        }
-    });
+    function closeMobileMenu() {
+        isMenuOpen = false;
+        $('.sidebar').removeClass('show');
+        $('.sidebar-overlay').removeClass('show');
+        $('body').css('overflow', '');
+        
+        // Wait for transition to complete before hiding overlay
+        setTimeout(() => {
+            if (!$('.sidebar-overlay').hasClass('show')) {
+                $('.sidebar-overlay').css('display', 'none');
+            }
+        }, 300);
+    }
 
-    // Add touch support for mobile
-    let touchStartX = 0;
-    let touchEndX = 0;
-
-    document.addEventListener('touchstart', e => {
-        touchStartX = e.changedTouches[0].screenX;
-    });
-
-    document.addEventListener('touchend', e => {
-        touchEndX = e.changedTouches[0].screenX;
-        handleSwipe();
-    });
-
-    function handleSwipe() {
-        const swipeDistance = touchEndX - touchStartX;
-        if (swipeDistance > 50) { // Right swipe
-            $('.sidebar, .sidebar-overlay').addClass('show');
-        } else if (swipeDistance < -50) { // Left swipe
-            $('.sidebar, .sidebar-overlay').removeClass('show');
+    // Update handleResize function
+    function handleResize() {
+        if (window.innerWidth <= 768) {
+            // Mobile view - remove all hover handlers
+            $('.sidebar').off('mouseenter mouseleave');
+            
+            // Force show text in mobile view
+            $('.nav-text, .main-nav h3, .settings-nav h3').css({
+                'opacity': '1',
+                'visibility': 'visible',
+                'position': 'static',
+                'width': 'auto'
+            });
+            
+            if (!isMenuOpen) {
+                $('.sidebar').removeClass('show');
+                $('.sidebar-overlay').removeClass('show').css('display', 'none');
+            }
+        } else {
+            // Desktop view
+            closeMobileMenu();
+            $('.sidebar').css({
+                'transform': '',
+                'left': '',
+                'width': ''
+            });
+            
+            // Reattach hover handlers for desktop only
+            initializeDesktopHover();
         }
     }
 
+    // Separate function for desktop hover functionality
+    function initializeDesktopHover() {
+        if (window.innerWidth > 768) {
+            $('.sidebar').hover(
+                function() {
+                    $(this).addClass('expanded');
+                },
+                function() {
+                    $(this).removeClass('expanded');
+                }
+            );
+        }
+    }
+
+    // Initial check and window resize handler
+    handleResize();
+    $(window).resize(handleResize);
+
     // Update chart responsiveness
     const updateChartResponsiveness = () => {
-        if (window.innerWidth < 576) {
-            salesChart.options.plugins.legend.position = 'bottom';
-            salesChart.options.aspectRatio = 1;
-        } else {
+        if (window.innerWidth > 768) {
+            salesChart.options.maintainAspectRatio = false;
             salesChart.options.plugins.legend.position = 'top';
-            salesChart.options.aspectRatio = 2;
+            salesChart.options.scales.y.beginAtZero = true;
         }
         salesChart.update();
     };
@@ -345,24 +384,53 @@ $(document).ready(function() {
 
     // Theme handling
     function updateChartTheme(isDark) {
-        salesChart.options.scales.y.grid.color = isDark ? '#333333' : '#f0f0f0';
-        salesChart.options.scales.x.grid.color = isDark ? '#333333' : '#f0f0f0';
-        salesChart.options.plugins.legend.labels.color = isDark ? '#E8E8E8' : '#333';
-        salesChart.options.scales.y.ticks.color = isDark ? '#BDBDBD' : '#666';
-        salesChart.options.scales.x.ticks.color = isDark ? '#BDBDBD' : '#666';
+        const colors = {
+            light: {
+                grid: '#f0f0f0',
+                text: '#333',
+                muted: '#666',
+                dataset1: {
+                    border: '#A76F6F',
+                    background: 'rgba(167, 111, 111, 0.1)'
+                },
+                dataset2: {
+                    border: '#435B66',
+                    background: 'rgba(67, 91, 102, 0.1)'
+                }
+            },
+            dark: {
+                grid: '#333333',
+                text: '#E8E8E8',
+                muted: '#BDBDBD',
+                dataset1: {
+                    border: '#8FB3D9',
+                    background: 'rgba(143, 179, 217, 0.1)'
+                },
+                dataset2: {
+                    border: '#E6C3C3',
+                    background: 'rgba(230, 195, 195, 0.1)'
+                }
+            }
+        };
+
+        const theme = colors[isDark ? 'dark' : 'light'];
         
-        // Update dataset colors for dark mode
-        if (isDark) {
-            salesChart.data.datasets[0].borderColor = '#8FB3D9';
-            salesChart.data.datasets[0].backgroundColor = 'rgba(143, 179, 217, 0.1)';
-            salesChart.data.datasets[1].borderColor = '#E6C3C3';
-            salesChart.data.datasets[1].backgroundColor = 'rgba(230, 195, 195, 0.1)';
-        } else {
-            salesChart.data.datasets[0].borderColor = '#A76F6F';
-            salesChart.data.datasets[0].backgroundColor = 'rgba(167, 111, 111, 0.1)';
-            salesChart.data.datasets[1].borderColor = '#435B66';
-            salesChart.data.datasets[1].backgroundColor = 'rgba(67, 91, 102, 0.1)';
-        }
+        // Update chart colors
+        Object.assign(salesChart.options.scales.y.grid, { color: theme.grid });
+        Object.assign(salesChart.options.scales.x.grid, { color: theme.grid });
+        Object.assign(salesChart.options.plugins.legend.labels, { color: theme.text });
+        Object.assign(salesChart.options.scales.y.ticks, { color: theme.muted });
+        Object.assign(salesChart.options.scales.x.ticks, { color: theme.muted });
+        
+        // Update datasets
+        Object.assign(salesChart.data.datasets[0], {
+            borderColor: theme.dataset1.border,
+            backgroundColor: theme.dataset1.background
+        });
+        Object.assign(salesChart.data.datasets[1], {
+            borderColor: theme.dataset2.border,
+            backgroundColor: theme.dataset2.background
+        });
         
         salesChart.update();
     }
@@ -417,4 +485,60 @@ $(document).ready(function() {
             }
         }
     };
+
+    // Sidebar hover handling with improved intent detection
+    let hoverTimeout;
+    let leaveTimeout;
+    let hoverStartTime;
+    let minHoverTime = 200; // Increased minimum hover time
+    let isIntentional = false;
+
+    $('.sidebar').hover(
+        function() {
+            // On mouse enter
+            clearTimeout(leaveTimeout);
+            hoverStartTime = Date.now();
+            
+            hoverTimeout = setTimeout(() => {
+                // Only expand if mouse has been hovering for minimum time
+                if (Date.now() - hoverStartTime >= minHoverTime) {
+                    isIntentional = true;
+                    $(this).addClass('expanded');
+                }
+            }, 200); // Increased delay to prevent accidental triggers
+        },
+        function() {
+            // On mouse leave
+            clearTimeout(hoverTimeout);
+            isIntentional = false;
+            $(this).removeClass('expanded');
+        }
+    );
+
+    // Prevent hover state on mobile
+    function handleResize() {
+        if (window.innerWidth <= 768) {
+            $('.sidebar').off('mouseenter mouseleave');
+        } else {
+            // Reattach hover handlers if needed
+            $('.sidebar').hover(
+                function() {
+                    clearTimeout(leaveTimeout);
+                    hoverTimeout = setTimeout(() => {
+                        $(this).addClass('expanded');
+                    }, 300);
+                },
+                function() {
+                    clearTimeout(hoverTimeout);
+                    leaveTimeout = setTimeout(() => {
+                        $(this).removeClass('expanded');
+                    }, 300);
+                }
+            );
+        }
+    }
+
+    // Initial check and window resize handler
+    handleResize();
+    $(window).resize(handleResize);
 });
