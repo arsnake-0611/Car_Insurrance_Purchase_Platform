@@ -691,19 +691,6 @@ $(document).ready(function() {
                 </div>
             `);
             
-            // Add staff follow-up
-            setTimeout(() => {
-                $('.chat-messages').append(`
-                    <div class="message-container">
-                        <div class="message staff-message">
-                            <div class="message-info">Support Staff (${timestamp})</div>
-                            You're welcome! If you have any questions about these changes or need further assistance, please don't hesitate to ask. We're here to help!
-                        </div>
-                    </div>
-                `);
-                $('.chat-messages').scrollTop($('.chat-messages')[0].scrollHeight);
-            }, 1000);
-            
             $('.chat-messages').scrollTop($('.chat-messages')[0].scrollHeight);
         }, 1000);
     }
