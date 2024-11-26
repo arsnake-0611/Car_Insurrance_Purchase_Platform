@@ -221,27 +221,31 @@
     
     #quotationForm {
         display: grid;
-        gap: 30px;  /* Increased gap */
+        gap: 50px;  /* Increased gap between sections */
+        padding: 40px;  /* Increased padding */
         background: white;
-        padding: 35px;  /* Increased padding */
-        border-radius: 15px;
-        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-        margin-top: 20px; /* Added margin top */
+        border-radius: 20px;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+        margin-top: 30px; /* Increased margin top */
     }
     
     #quotationForm .row {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
-        gap: 15px;
-        margin: 0;  /* Reset margin */
+        gap: 25px; /* Increased gap between form elements */
+        margin: 0;
     }
     
-    #quotationForm .form-control {
-        padding: 12px 15px;
-        border: 2px solid #e2e8f0;
-        border-radius: 8px;
-        transition: all 0.3s ease;
-        margin-bottom: 0;  /* Reset margin */
+    .form-group {
+        margin-bottom: 30px; /* Increased spacing between form groups */
+    }
+    
+    .form-group label {
+        display: block;
+        margin-bottom: 12px; /* Increased label spacing */
+        font-weight: 500;
+        color: #2c3e50;
+        font-size: 15px;
     }
     
     .details-section {
@@ -694,101 +698,107 @@
     }
     
     .modal-content {
-        background: #fff;
-        border-radius: 15px; 
-        padding: 35px;  /* Increased padding */
-        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        position: relative; /* Added for close button positioning */
+        background: linear-gradient(to bottom right, #ffffff, #f8f9fa);
+        border-radius: 20px;
+        padding: 60px;
+        margin: 40px;
+        box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        position: relative;
     }
     
     .modal-header {
-        padding: 0 0 30px 0; /* Increased bottom padding */
-        margin-bottom: 35px; /* Increased margin */
-        border-bottom: 1px solid #dee2e6;
+        padding: 0 0 35px 0;
+        margin-bottom: 40px;
+        border-bottom: 2px solid rgba(44, 62, 80, 0.1);
+    }
+    
+    .modal-header h5 {
+        font-size: 24px;
+        color: #2c3e50;
+        font-weight: 600;
+        text-align: center;
     }
     
     /* Add close button styles */
     .modal-close {
         position: absolute;
-        right: 25px;
-        top: 25px;
-        width: 32px;
-        height: 32px;
-        cursor: pointer;
+        right: 30px;
+        top: 30px;
+        width: 40px;
+        height: 40px;
         background: #f8f9fa;
-        border: none;
+        border: 2px solid rgba(44, 62, 80, 0.1);
         border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 20px;
+        font-size: 24px;
         color: #2c3e50;
+        cursor: pointer;
         transition: all 0.3s ease;
-        padding: 0;
     }
     
     .modal-close:hover {
         background: #e9ecef;
         transform: rotate(90deg);
+        border-color: #2c3e50;
     }
     
-    /* Form section updates */
-    #quotationForm {
-        display: grid;
-        gap: 30px;  /* Increased gap */
-        background: white;
-        padding: 35px;  /* Increased padding */
-        border-radius: 15px;
-        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-        margin-top: 20px; /* Added margin top */
-    }
-    
-    #quotationForm .row {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 15px;
-        margin: 0;  /* Reset margin */
-    }
-    
-    #quotationForm .form-control {
-        padding: 12px 15px;
-        border: 2px solid #e2e8f0;
-        border-radius: 8px;
-        transition: all 0.3s ease;
-        margin-bottom: 0;  /* Reset margin */
-    }
-    
+    /* Add section transitions */
     .form-section {
+        transition: all 0.4s ease;
+    }
+    
+    .form-section.hidden {
         opacity: 0;
-        transform: translateY(20px);
-        transition: all 0.3s ease;
+        transform: translateX(-20px);
     }
     
     .form-section.visible {
         opacity: 1;
-        transform: translateY(0);
+        transform: translateX(0);
     }
     
-    /* Submit button container */
-    .submit-container {
-        text-align: center;
-        margin-top: 25px;
+    /* Enhance form controls */
+    .form-control {
+        width: 100%;
+        padding: 15px 20px;
+        border: 2px solid #e2e8f0;
+        border-radius: 12px;
+        font-size: 15px;
+        transition: all 0.3s ease;
+        background: #f8f9fa;
     }
     
-    .submit-btn {
+    .form-control:focus {
+        border-color: #3e502c;
+        box-shadow: 0 0 0 4px rgba(62, 80, 44, 0.1);
+        background: #ffffff;
+    }
+    
+    /* Improve button styling */
+    #nextButton, .submit-btn {
         background: linear-gradient(145deg, #2c3e50, #3e502c);
         color: white;
-        padding: 12px 35px;
+        padding: 15px 35px;
         border: none;
-        border-radius: 8px;
+        border-radius: 12px;
         font-size: 16px;
+        font-weight: 500;
         cursor: pointer;
         transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     }
     
-    .submit-btn:hover {
+    #nextButton:hover, .submit-btn:hover {
         transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    }
+    
+    /* Add required field indicator */
+    .form-group label.required:after {
+        content: " *";
+        color: #502c3e;
     }
     
     /* Enhanced modified indicator */
@@ -1079,6 +1089,61 @@
         const notification = $('#notification');
         notification.text(message).fadeIn();
         setTimeout(() => notification.fadeOut(), 3000);
+    }
+    
+    // Add required indicator to labels
+    $(document).ready(function() {
+        $('.form-group label').each(function() {
+            const input = $(this).closest('.form-group').find('input, select');
+            if (input.prop('required')) {
+                $(this).addClass('required');
+            }
+        });
+    
+        // Smooth scroll to form errors
+        $('.form-control').on('invalid', function(e) {
+            e.preventDefault();
+            const $this = $(this);
+            $this.closest('.form-group').addClass('has-error');
+            
+            $('html, body').animate({
+                scrollTop: $this.offset().top - 100
+            }, 500);
+        });
+    
+        // Remove error state on input
+        $('.form-control').on('input', function() {
+            $(this).closest('.form-group').removeClass('has-error');
+        });
+    
+        // Enhance form navigation
+        $('#nextButton').click(function() {
+            if (validateSection('vehicleSection')) {
+                $('#vehicleSection').removeClass('visible').addClass('hidden');
+                setTimeout(() => {
+                    $('#personalSection').removeClass('hidden').addClass('visible');
+                }, 300);
+            }
+        });
+    });
+    
+    function validateSection(sectionId) {
+        const section = $(`#${sectionId}`);
+        const inputs = section.find('input, select');
+        let isValid = true;
+        
+        inputs.each(function() {
+            if (!this.checkValidity()) {
+                isValid = false;
+                $(this).closest('.form-group').addClass('has-error');
+            }
+        });
+        
+        if (!isValid) {
+            showNotification('Please fill all required fields');
+        }
+        
+        return isValid;
     }
     
     // Update vehicle make change handler
@@ -1728,14 +1793,14 @@
             }
         });
     
-        // Update showChangesInChat function to be more conversational
+        // Update showChangesInChat function to remove customer reply simulation
         function showChangesInChat(changes, quote) {
             const timestamp = new Date().toLocaleString();
             const changeMessage = changes.map(change => 
                 `• ${change.field}: "${change.from}" → "${change.to}"`
             ).join('\n');
     
-            // Add staff update message
+            // Add staff update message only
             $('.chat-messages').append(`
                 <div class="message-container">
                     <div class="message staff-message">
@@ -1743,36 +1808,13 @@
                         Hello ${quote.fullName}, I wanted to inform you that we've updated your insurance quote (${quote.referenceNumber}). Here are the changes that have been made:
                         <br><br>
                         ${changeMessage.split('\n').join('<br>')}
+                        <br><br>
+                        If you have any questions about these changes, please don't hesitate to ask.
                     </div>
                 </div>
             `);
-    
-            // Simulate customer acknowledgment
-            setTimeout(() => {
-                $('.chat-messages').append(`
-                    <div class="message-container">
-                        <div class="message customer-message">
-                            <div class="message-info">Customer (${timestamp})</div>
-                            Thank you for notifying me about the changes to my quote. I have received the update details.
-                        </div>
-                    </div>
-                `);
-                
-                // Add staff follow-up
-                setTimeout(() => {
-                    $('.chat-messages').append(`
-                        <div class="message-container">
-                            <div class="message staff-message">
-                                <div class="message-info">Support Staff (${timestamp})</div>
-                                You're welcome! If you have any questions about these changes or need further assistance, please don't hesitate to ask. We're here to help!
-                            </div>
-                        </div>
-                    `);
-                    $('.chat-messages').scrollTop($('.chat-messages')[0].scrollHeight);
-                }, 1000);
-                
-                $('.chat-messages').scrollTop($('.chat-messages')[0].scrollHeight);
-            }, 1000);
+            
+            $('.chat-messages').scrollTop($('.chat-messages')[0].scrollHeight);
         }
     
         $(document).on('click', '.approve-quote', function() {
@@ -1892,34 +1934,18 @@
             if (message !== '') {
                 const timestamp = new Date().toLocaleTimeString();
                 
-                // Add customer message
+                // Add staff message only
                 $('.chat-messages').append(`
                     <div class="message-container">
-                        <div class="message customer-message">
-                            <div class="message-info">You (${timestamp})</div>
-                            ${message}
+                        <div class="message staff-message">
+                            <div class="message-info">Support Staff (${timestamp})</div>
+                            Thank you for your message. How can I assist you today?
                         </div>
                     </div>
                 `);
                 
-                // Clear input
                 input.val('');
-                
-                // Scroll to bottom
                 $('.chat-messages').scrollTop($('.chat-messages')[0].scrollHeight);
-                
-                // Simulate staff response
-                setTimeout(() => {
-                    $('.chat-messages').append(`
-                        <div class="message-container">
-                            <div class="message staff-message">
-                                <div class="message-info">Support Staff (${timestamp})</div>
-                                Thank you for your message. How can I assist you today?
-                            </div>
-                        </div>
-                    `);
-                    $('.chat-messages').scrollTop($('.chat-messages')[0].scrollHeight);
-                }, 1000);
             }
         }
     
