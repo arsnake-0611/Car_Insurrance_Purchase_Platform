@@ -930,3 +930,81 @@ $('#quotationForm').on('submit', function(e) {
     this.reset();
     closeModal('newQuoteModal');
 });
+
+document.getElementById('quotationForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    // Generate a random reference number
+    const refNumber = 'QT' + Date.now().toString().slice(-6);
+    
+    // Get form data
+    const formData = {
+        referenceNumber: refNumber,
+        vehicleMake: document.getElementById('vehicleMake').value,
+        vehicleModel: document.getElementById('vehicleModel').value,
+        vehicleYear: document.getElementById('vehicleYear').value,
+        bodyType: document.getElementById('bodyType').value,
+        seatingCapacity: document.getElementById('seatingCapacity').value,
+        cylinderCapacity: document.getElementById('cylinderCapacity').value,
+        vehicleValue: document.getElementById('vehicleValue').value,
+        status: 'pending',
+        date: new Date().toISOString().split('T')[0]
+    };
+
+    // Create new quotation card
+    const quoteCard = createQuotationCard(formData);
+    
+    // Add to quote list
+    document.getElementById('quoteList').insertBefore(quoteCard, document.getElementById('quoteList').firstChild);
+    
+    // Update statistics
+    updateQuoteStatistics();
+    
+    // Show success notification
+    showNotification('Quotation submitted successfully!');
+    
+    // Close modal and reset form
+    closeModal('newQuoteModal');
+    this.reset();
+});
+
+function createQuotationCard(data) {
+    const card = document.createElement('div');
+    card.className = 'quotation-card';
+    card.innerHTML = `
+        <span class="quotation-status quotation-status--${data.status}">${data.status}</span>
+        <h3>Reference: ${data.referenceNumber}</h3>
+        <p>Vehicle: ${data.vehicleMake} ${data.vehicleModel} (${data.vehicleYear})</p>
+        <p>Body Type: ${data.bodyType}</p>
+        <p>Value: HK$ ${parseFloat(data.vehicleValue).toLocaleString()}</p>
+        <p>Date: ${data.date}</p>
+        <div class="action-buttons">
+            <button class="btn btn-primary btn-sm view-details">View Details</button>
+            <button class="btn btn-success btn-sm">Approve</button>
+            <button class="btn btn-danger btn-sm">Reject</button>
+        </div>
+    `;
+    return card;
+}
+
+function updateQuoteStatistics() {
+    const totalQuotes = document.querySelectorAll('.quotation-card').length;
+    const pendingQuotes = document.querySelectorAll('.quotation-status--pending').length;
+    const approvedQuotes = document.querySelectorAll('.quotation-status--approved').length;
+    const rejectedQuotes = document.querySelectorAll('.quotation-status--rejected').length;
+
+    document.getElementById('totalQuotes').textContent = totalQuotes;
+    document.getElementById('pendingQuotes').textContent = pendingQuotes;
+    document.getElementById('approvedQuotes').textContent = approvedQuotes;
+    document.getElementById('rejectedQuotes').textContent = rejectedQuotes;
+}
+
+function showNotification(message) {
+    const notification = document.getElementById('notification');
+    notification.textContent = message;
+    notification.style.display = 'block';
+    
+    setTimeout(() => {
+        notification.style.display = 'none';
+    }, 3000);
+}
