@@ -5,6 +5,23 @@
     --background-color: #F8F9FA;
     --text-color: #333;
     --border-color: #E9ECEF;
+    --card-bg: white;
+    --hover-bg: #e9ecef;
+    --task-bg: #F8F9FA;
+}
+
+[data-theme="dark"] {
+    --primary-color: #8FB3D9;
+    --secondary-color: #A8C5E4;
+    --accent-color: #E6C3C3;
+    --background-color: #1A1A1A;
+    --text-color: #E8E8E8;
+    --border-color: #333333;
+    --card-bg: #242424;
+    --hover-bg: #2F2F2F;
+    --task-bg: #2A2A2A;
+    --muted-text: #BDBDBD;
+    --chart-grid: #333333;
 }
 
 * {
@@ -21,13 +38,15 @@ body {
 
 .container {
     display: grid;
-    grid-template-columns: 250px 1fr;
+    grid-template-columns: auto 1fr;
     min-height: 100vh;
 }
 
 /* Sidebar Styles */
 .sidebar {
-    background-color: white;
+    width: 250px;
+    transition: all 0.3s ease;
+    background-color: var(--card-bg);
     padding: 2rem;
     border-right: 1px solid var(--border-color);
     position: relative;
@@ -122,6 +141,7 @@ header {
 .header-actions {
     display: flex;
     gap: 1rem;
+    align-items: center;
 }
 
 .primary-btn {
@@ -142,11 +162,16 @@ header {
 
 .sales-target,
 .sales-analytics,
-.schedule {
-    background-color: white;
+.daily-tasks,
+.calendar-card {
+    background-color: var(--card-bg);
     border-radius: 12px;
     padding: 1.5rem;
     box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    height: 400px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
 }
 
 /* Progress Circle */
@@ -227,15 +252,54 @@ header {
 
 .analytics-chart {
     padding: 1rem;
-    background-color: white;
+    background-color: var(--card-bg);
     border-radius: 8px;
     height: 300px;
 }
 
 /* Responsive Design */
-@media (max-width: 1024px) {
+@media (max-width: 1200px) {
     .dashboard-grid {
         grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .sales-target, 
+    .daily-tasks, 
+    .sales-analytics, 
+    .calendar-card {
+        height: auto;
+        min-height: 350px;
+    }
+}
+
+@media (max-width: 992px) {
+    .container {
+        grid-template-columns: 80px 1fr;
+    }
+
+    /* Collapsed sidebar */
+    .sidebar {
+        padding: 1rem 0.5rem;
+    }
+
+    .logo img {
+        height: 40px;
+    }
+
+    .main-nav h3, 
+    .settings-nav h3,
+    nav ul li a span {
+        display: none;
+    }
+
+    nav ul li a {
+        justify-content: center;
+        padding: 0.8rem;
+    }
+
+    .nav-icon {
+        margin-right: 0;
     }
 }
 
@@ -243,9 +307,100 @@ header {
     .container {
         grid-template-columns: 1fr;
     }
-    
+
     .sidebar {
-        display: none;
+        position: fixed;
+        left: -250px;
+        top: 0;
+        width: 250px;
+        height: 100vh;
+        z-index: 1000;
+        transition: left 0.3s ease;
+        padding: 1.5rem;
+    }
+
+    .sidebar.show {
+        left: 0;
+    }
+
+    /* Add hamburger menu */
+    .menu-toggle {
+        display: block;
+        position: fixed;
+        top: 1rem;
+        left: 1rem;
+        z-index: 1001;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0.5rem;
+    }
+
+    .main-content {
+        padding: 1rem;
+        margin-top: 3rem;
+    }
+
+    /* Restore sidebar text */
+    .main-nav h3, 
+    .settings-nav h3,
+    nav ul li a span {
+        display: block;
+    }
+
+    nav ul li a {
+        justify-content: flex-start;
+        padding: 0.8rem;
+    }
+
+    .nav-icon {
+        margin-right: 0.5rem;
+    }
+
+    /* Header adjustments */
+    header {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: flex-start;
+    }
+
+    .header-actions {
+        width: 100%;
+        justify-content: space-between;
+    }
+}
+
+@media (max-width: 576px) {
+    .progress-circle {
+        width: 150px;
+        height: 150px;
+    }
+
+    .progress-circle::before {
+        width: 120px;
+        height: 120px;
+        top: 15px;
+        left: 15px;
+    }
+
+    .progress-number {
+        font-size: 2.5rem;
+    }
+
+    .analytics-tabs {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .tab {
+        padding: 0.6rem 1rem;
+        font-size: 0.9rem;
+    }
+
+    .calendar th, 
+    .calendar td {
+        padding: 5px;
+        font-size: 0.9rem;
     }
 }
 
@@ -305,6 +460,7 @@ header {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 1.5rem;
+    flex-shrink: 0;
 }
 
 .section-header h3 {
@@ -345,12 +501,8 @@ header {
 
 /* Daily Tasks Card Styles */
 .daily-tasks {
-    background-color: white;
-    border-radius: 12px;
-    padding: 1.5rem;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-    margin-top: 2rem;
-    grid-column: span 1;
+    margin-top: 0;
+    grid-column: auto;
 }
 
 .daily-tasks h3 {
@@ -359,8 +511,9 @@ header {
 }
 
 .daily-tasks ul {
-    list-style: none;
-    padding-left: 0;
+    flex: 1;
+    overflow-y: auto;
+    margin-bottom: 1rem;
 }
 
 .daily-tasks ul li {
@@ -368,13 +521,13 @@ header {
     align-items: center;
     margin-bottom: 0.5rem;
     padding: 0.5rem;
-    background-color: var(--background-color);
+    background-color: var(--task-bg);
     border-radius: 8px;
     transition: background-color 0.3s ease;
 }
 
 .daily-tasks ul li:hover {
-    background-color: #e9ecef;
+    background-color: var(--hover-bg);
 }
 
 .daily-tasks ul li input[type="checkbox"] {
@@ -387,8 +540,8 @@ header {
 }
 
 .add-task-btn {
-    display: block;
-    margin-top: 1rem;
+    margin-top: auto;
+    width: 100%;
     padding: 0.5rem 1rem;
     background-color: var(--primary-color);
     color: white;
@@ -412,7 +565,7 @@ header {
 }
 
 .calendar-card {
-    background-color: white;
+    background-color: var(--card-bg);
     border-radius: 12px;
     padding: 1.5rem;
     box-shadow: 0 2px 4px rgba(0,0,0,0.05);
@@ -438,7 +591,7 @@ header {
 
 /* Calendar Specific Styles */
 .calendar-card {
-    background-color: white;
+    background-color: var(--card-bg);
     border-radius: 12px;
     padding: 1.5rem;
     box-shadow: 0 2px 4px rgba(0,0,0,0.05);
@@ -456,7 +609,7 @@ header {
 }
 
 .calendar th {
-    background-color: var(--background-color);
+    background-color: var(--task-bg);
     color: var(--primary-color);
     font-weight: 500;
 }
@@ -467,7 +620,7 @@ header {
 }
 
 .calendar td:hover {
-    background-color: var(--background-color);
+    background-color: var(--hover-bg);
 }
 
 .calendar .today {
@@ -549,5 +702,235 @@ nav ul li a {
 
 .search-btn:hover, .notification-btn:hover {
     background-color: var(--background-color);
+}
+
+/* Update theme toggle button styles */
+.theme-toggle {
+    padding: 8px;
+    border-radius: 50%;
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    cursor: pointer;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.theme-toggle:hover {
+    transform: scale(1.1);
+    background-color: var(--hover-bg);
+}
+
+.theme-toggle img {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+}
+
+/* Remove the fixed positioning styles */
+.theme-toggle {
+    position: static;
+    bottom: auto;
+    right: auto;
+    z-index: auto;
+}
+
+/* Update header actions spacing */
+.header-actions {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+/* Update calendar styles for dark mode */
+[data-theme="dark"] .calendar th {
+    background-color: var(--task-bg);
+}
+
+[data-theme="dark"] .calendar td:hover {
+    background-color: var(--hover-bg);
+}
+
+/* Chart styles for dark mode */
+[data-theme="dark"] .analytics-chart {
+    background-color: var(--card-bg);
+}
+
+/* Update specific dark mode styles */
+[data-theme="dark"] {
+    /* Text contrast improvements */
+    .section-header h3 {
+        color: var(--text-color);
+    }
+
+    .progress-label {
+        color: var(--muted-text);
+    }
+
+    .order-item .customer {
+        color: var(--muted-text);
+        background-color: var(--task-bg);
+    }
+
+    /* Card and container improvements */
+    .sales-target,
+    .daily-tasks,
+    .sales-analytics,
+    .calendar-card {
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        border: 1px solid var(--border-color);
+    }
+
+    /* Progress circle adjustments */
+    .progress-circle::before {
+        background: var(--card-bg);
+    }
+
+    .progress-circle {
+        background: conic-gradient(var(--accent-color) 75%, #404040 0);
+    }
+
+    /* Tab improvements */
+    .tab {
+        color: var(--muted-text);
+    }
+
+    .tab.active {
+        background-color: var(--primary-color);
+        color: white;
+    }
+
+    /* Calendar improvements */
+    .calendar td {
+        color: var(--text-color);
+        opacity: 0.9;
+    }
+
+    .calendar th {
+        color: var(--primary-color);
+        opacity: 0.95;
+    }
+
+    .calendar .today {
+        background-color: var(--primary-color);
+        color: white;
+    }
+
+    /* Chart adjustments */
+    .analytics-chart {
+        border: 1px solid var(--border-color);
+    }
+
+    /* Softer text and backgrounds */
+    .section-header h3 {
+        color: var(--text-color);
+        opacity: 0.95;
+    }
+
+    .progress-label {
+        color: var(--muted-text);
+        opacity: 0.9;
+    }
+
+    /* Softer hover states */
+    .order-item:hover {
+        background-color: var(--hover-bg);
+        transform: translateX(5px);
+        transition: all 0.3s ease;
+    }
+
+    /* Softer active states */
+    .tab.active {
+        background-color: var(--primary-color);
+        opacity: 0.9;
+    }
+
+    /* Improved button states */
+    .add-sale-btn {
+        background-color: var(--accent-color);
+        opacity: 0.9;
+    }
+
+    .add-sale-btn:hover {
+        opacity: 1;
+    }
+
+    /* Softer calendar */
+    .calendar td {
+        color: var(--text-color);
+        opacity: 0.9;
+    }
+
+    .calendar th {
+        color: var(--primary-color);
+        opacity: 0.95;
+    }
+}
+
+/* Update chart configuration in JavaScript */
+
+.nav-text {
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.sidebar:not(:hover) .nav-text {
+    opacity: 0;
+    visibility: hidden;
+    display: none;
+}
+
+.nav-icon {
+    margin-right: 12px;
+}
+
+.sidebar:not(:hover) .nav-icon {
+    margin-right: 0;
+}
+
+/* Add collapsed state */
+.sidebar:not(:hover) {
+    width: 80px;
+    padding: 2rem 1rem;
+}
+
+/* Update logo styles */
+.sidebar:not(:hover) .logo img {
+    height: 40px;
+}
+
+/* Update nav items for collapsed state */
+.sidebar:not(:hover) nav ul li a {
+    justify-content: center;
+    padding: 0.8rem;
+}
+
+.sidebar:not(:hover) .nav-icon {
+    margin-right: 0;
+}
+
+/* Hide text elements when collapsed */
+.sidebar:not(:hover) .nav-text,
+.sidebar:not(:hover) .main-nav h3,
+.sidebar:not(:hover) .settings-nav h3 {
+    opacity: 0;
+    visibility: hidden;
+    width: 0;
+    position: absolute;
+}
+
+/* Update main container to adjust with sidebar */
+.container {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    min-height: 100vh;
+}
+
+/* Update main content to adjust with sidebar */
+.main-content {
+    transition: margin-left 0.3s ease;
+    width: 100%;
 }
 

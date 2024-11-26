@@ -138,9 +138,67 @@ $(document).ready(function() {
     });
 
     // Mobile menu toggle
-    $('.menu-toggle').click(function() {
-        $('.sidebar').toggleClass('show');
+    $('.menu-toggle').click(function(e) {
+        e.stopPropagation();
+        $('.sidebar, .sidebar-overlay').addClass('show');
     });
+
+    // Close sidebar when clicking overlay or outside
+    $('.sidebar-overlay, body').click(function(e) {
+        if (!$(e.target).closest('.sidebar, .menu-toggle').length) {
+            $('.sidebar, .sidebar-overlay').removeClass('show');
+        }
+    });
+
+    // Prevent sidebar closing when clicking inside
+    $('.sidebar').click(function(e) {
+        e.stopPropagation();
+    });
+
+    // Handle window resize
+    $(window).resize(function() {
+        if (window.innerWidth > 768) {
+            $('.sidebar, .sidebar-overlay').removeClass('show');
+        }
+    });
+
+    // Add touch support for mobile
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    document.addEventListener('touchstart', e => {
+        touchStartX = e.changedTouches[0].screenX;
+    });
+
+    document.addEventListener('touchend', e => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+    });
+
+    function handleSwipe() {
+        const swipeDistance = touchEndX - touchStartX;
+        if (swipeDistance > 50) { // Right swipe
+            $('.sidebar, .sidebar-overlay').addClass('show');
+        } else if (swipeDistance < -50) { // Left swipe
+            $('.sidebar, .sidebar-overlay').removeClass('show');
+        }
+    }
+
+    // Update chart responsiveness
+    const updateChartResponsiveness = () => {
+        if (window.innerWidth < 576) {
+            salesChart.options.plugins.legend.position = 'bottom';
+            salesChart.options.aspectRatio = 1;
+        } else {
+            salesChart.options.plugins.legend.position = 'top';
+            salesChart.options.aspectRatio = 2;
+        }
+        salesChart.update();
+    };
+
+    // Call on load and resize
+    updateChartResponsiveness();
+    $(window).resize(updateChartResponsiveness);
 
     // Add daily tasks card next to sales target
     const dailyTasksCard = `
@@ -284,4 +342,79 @@ $(document).ready(function() {
 
     // Initialize calendar
     Calendar();
+
+    // Theme handling
+    function updateChartTheme(isDark) {
+        salesChart.options.scales.y.grid.color = isDark ? '#333333' : '#f0f0f0';
+        salesChart.options.scales.x.grid.color = isDark ? '#333333' : '#f0f0f0';
+        salesChart.options.plugins.legend.labels.color = isDark ? '#E8E8E8' : '#333';
+        salesChart.options.scales.y.ticks.color = isDark ? '#BDBDBD' : '#666';
+        salesChart.options.scales.x.ticks.color = isDark ? '#BDBDBD' : '#666';
+        
+        // Update dataset colors for dark mode
+        if (isDark) {
+            salesChart.data.datasets[0].borderColor = '#8FB3D9';
+            salesChart.data.datasets[0].backgroundColor = 'rgba(143, 179, 217, 0.1)';
+            salesChart.data.datasets[1].borderColor = '#E6C3C3';
+            salesChart.data.datasets[1].backgroundColor = 'rgba(230, 195, 195, 0.1)';
+        } else {
+            salesChart.data.datasets[0].borderColor = '#A76F6F';
+            salesChart.data.datasets[0].backgroundColor = 'rgba(167, 111, 111, 0.1)';
+            salesChart.data.datasets[1].borderColor = '#435B66';
+            salesChart.data.datasets[1].backgroundColor = 'rgba(67, 91, 102, 0.1)';
+        }
+        
+        salesChart.update();
+    }
+
+    // Update the setTheme function
+    function setTheme(theme) {
+        document.documentElement.setAttribute('data-theme', theme);
+        localStorage.setItem('theme', theme);
+        
+        const isDark = theme === 'dark';
+        updateChartTheme(isDark);
+        
+        // Toggle icon visibility
+        $('.dark-icon').toggle(!isDark);
+        $('.light-icon').toggle(isDark);
+    }
+
+    // Initialize theme
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    setTheme(savedTheme);
+
+    // Theme toggle handler
+    $('#theme-toggle').click(function() {
+        const currentTheme = document.documentElement.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        setTheme(newTheme);
+    });
+
+    // Update chart configuration
+    const chartConfig = {
+        // ... existing chart config ...
+        options: {
+            // ... existing options ...
+            plugins: {
+                legend: {
+                    labels: {
+                        color: savedTheme === 'dark' ? '#E1E1E1' : '#333'
+                    }
+                }
+            },
+            scales: {
+                y: {
+                    grid: {
+                        color: savedTheme === 'dark' ? '#2D2D2D' : '#f0f0f0'
+                    }
+                },
+                x: {
+                    grid: {
+                        color: savedTheme === 'dark' ? '#2D2D2D' : '#f0f0f0'
+                    }
+                }
+            }
+        }
+    };
 });

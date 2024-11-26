@@ -83,6 +83,11 @@ body {
     border-radius: 8px;
     display: none;
     border: 1px solid #ddd;
+    transition: opacity 0.3s ease;
+}
+
+#profile-preview.hiding {
+    opacity: 0;
 }
 
 #profile-upload {
@@ -103,7 +108,11 @@ body {
     cursor: pointer;
     display: none;
     margin-top: 10px;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, opacity 0.3s ease;
+}
+
+.remove-image-btn.hiding {
+    opacity: 0;
 }
 
 .remove-image-btn:hover {

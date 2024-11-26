@@ -5,10 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vehicle Sales Dashboard</title>
-    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/orderDashboard.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="js/dashboard.js"></script>
+    <script src="js/orderDashboard.js"></script>
 </head>
 
 <body>
@@ -19,46 +19,47 @@
                 <img src="../icon/lm.png" alt="Logo">
             </div>
             <nav class="main-nav">
-                <h3>MAIN</h3>
+                <h3 class="nav-text">MAIN</h3>
                 <ul>
                     <li class="active">
                         <a href="#">
-                            <img src="./icon/dashboard-icon.png" alt="Dashboard Icon" class="nav-icon">
-                            Dashboard
+                            <img src="./icon/house-solid.png" alt="Dashboard Icon" class="nav-icon">
+                            <span class="nav-text">Dashboard</span>
                         </a>
                     </li>
                     <li>
                         <a href="#">
-                            <img src="./icon/orders-icon.png" alt="Orders Icon" class="nav-icon">
-                            Orders
+                            <img src="./icon/file-invoice-solid.png" alt="Orders Icon" class="nav-icon">
+                            <span class="nav-text">Orders</span>
                         </a>
                     </li>
                     <li>
                         <a href="#">
-                            <img src="./icon/customers-icon.png" alt="Customers Icon" class="nav-icon">
-                            Customers
+                            <img src="./icon/user-solid.png" alt="Customers Icon" class="nav-icon">
+                            <span class="nav-text">Customers</span>
                         </a>
                     </li>
                     <li>
                         <a href="#">
-                            <img src="./icon/tasks-icon.png" alt="Tasks Icon" class="nav-icon">
-                            Tasks &amp; Follow-up
+                            <img src="./icon/list-check-solid.png" alt="Tasks Icon" class="nav-icon">
+                            <span class="nav-text">Tasks &amp; Follow-up</span>
                         </a>
                     </li>
                 </ul>
             </nav>
             <nav class="settings-nav">
+
                 <ul>
                     <li>
                         <a href="#">
                             <img src="./icon/gear-solid.png" alt="Settings Icon" class="nav-icon">
-                            Settings
+                            <span class="nav-text">Settings</span>
                         </a>
                     </li>
                     <li>
                         <a href="#">
                             <img src="./icon/handshake-angle-solid.png" alt="Support Icon" class="nav-icon">
-                            Support
+                            <span class="nav-text">Support</span>
                         </a>
                     </li>
                 </ul>
@@ -82,6 +83,10 @@
                     </button>
                     <button class="notification-btn">
                         <img src="../icon/notification-icon.png" alt="Notification Icon" class="header-icon">
+                    </button>
+                    <button class="theme-toggle" id="theme-toggle">
+                        <img src="../icon/moon.png" alt="Dark Mode" class="dark-icon">
+                        <img src="../icon/sun.png" alt="Light Mode" class="light-icon" style="display: none;">
                     </button>
                     <button class="primary-btn">+ New Order</button>
                 </div>

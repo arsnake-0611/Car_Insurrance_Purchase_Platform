@@ -104,52 +104,103 @@ $(document).ready(function () {
         const phone = $('#profile-form input[type="tel"]').val().trim();
         const address = $('#user-address').val().trim();
         
+        // Clear previous errors
         $('.form-control').removeClass('error');
         $('.error-message').remove();
         
         // Validation
-        if (!fullName || !email || !phone || !address || !isValidEmail(email)) {
-            !fullName && showFieldError($('#profile-form input[type="text"]').first(), 'Full Name is required');
-            !email && showFieldError($('#profile-form input[type="email"]'), 'Email is required');
-            email && !isValidEmail(email) && showFieldError($('#profile-form input[type="email"]'), 'Please enter a valid email');
-            !phone && showFieldError($('#profile-form input[type="tel"]'), 'Phone number is required');
-            !address && showFieldError($('#user-address'), 'Address is required');
-            return;
+        let hasError = false;
+        if (!fullName) {
+            showFieldError($('#profile-form input[type="text"]').first(), 'Full Name is required');
+            hasError = true;
         }
+        if (!email) {
+            showFieldError($('#profile-form input[type="email"]'), 'Email is required');
+            hasError = true;
+        } else if (!isValidEmail(email)) {
+            showFieldError($('#profile-form input[type="email"]'), 'Please enter a valid email');
+            hasError = true;
+        }
+        if (!phone) {
+            showFieldError($('#profile-form input[type="tel"]'), 'Phone number is required');
+            hasError = true;
+        }
+        if (!address) {
+            showFieldError($('#user-address'), 'Address is required');
+            hasError = true;
+        }
+        
+        if (hasError) return;
+        
+        // Get existing data to preserve other fields
+        const existingData = JSON.parse(localStorage.getItem('userData')) || {};
         
         // Save data
         const userData = {
+            ...existingData,
             fullName,
             email,
             phone,
             address,
-            emailNotifications: $('#settings-form select').val(),
-            memberSince: JSON.parse(localStorage.getItem('userData'))?.memberSince || 'October 2024',
-            profileImage: JSON.parse(localStorage.getItem('userData'))?.profileImage || null
+            memberSince: existingData.memberSince || 'October 2024'
         };
         
         localStorage.setItem('userData', JSON.stringify(userData));
-        showNotification('Profile updated successfully!', 'success');
+        
+        // Update UI
         $('.account-header h2').text(`Welcome, ${userData.fullName}`);
-        $('.profile-picture').text(getInitials(userData.fullName));
+        
+        // Reset profile image preview and remove button
+        $('#profile-preview').hide();
+        $('.remove-image-btn').hide();
+        $('#profile-upload').val('');
+        
+        // Update profile picture with initials if no image
+        if (!userData.profileImage) {
+            $('.profile-picture')
+                .removeClass('has-image')
+                .css('background-image', 'none')
+                .text(getInitials(userData.fullName));
+        }
+        
+        showNotification('Profile updated successfully!', 'success');
     });
 
     $('#settings-form').on('submit', function(e) {
         e.preventDefault();
+        
+        const currentPassword = $('input[placeholder="Current Password"]').val();
         const newPassword = $('input[placeholder="New Password"]').val();
         const confirmPassword = $('input[placeholder="Confirm New Password"]').val();
+        const emailNotifications = $('#settings-form select').val();
 
-        if (newPassword && newPassword !== confirmPassword) {
-            showNotification('New passwords do not match!', 'error');
-            return;
+        // Clear previous errors
+        $('.form-control').removeClass('error');
+        $('.error-message').remove();
+
+        // Password validation
+        if (newPassword || confirmPassword || currentPassword) {
+            if (!currentPassword) {
+                showFieldError($('input[placeholder="Current Password"]'), 'Current password is required');
+                return;
+            }
+            if (newPassword !== confirmPassword) {
+                showFieldError($('input[placeholder="Confirm New Password"]'), 'Passwords do not match');
+                return;
+            }
         }
 
+        // Get existing data and update settings
         const userData = JSON.parse(localStorage.getItem('userData')) || {};
-        userData.emailNotifications = $('#settings-form select').val();
+        userData.emailNotifications = emailNotifications;
+        
+        // Save updated data
         localStorage.setItem('userData', JSON.stringify(userData));
         
-        showNotification('Settings saved successfully!', 'success');
+        // Clear password fields
         $('#settings-form input[type="password"]').val('');
+        
+        showNotification('Settings saved successfully!', 'success');
     });
 
     // Tab switching
@@ -163,3 +214,48 @@ $(document).ready(function () {
     loadUserData();
     handleProfileImage();
 });
+
+// Update the handleProfileImage function
+function handleProfileImage() {
+    $('#profile-upload').on('change', function(e) {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const imageData = e.target.result;
+                
+                // Update preview and profile picture
+                $('#profile-preview').attr('src', imageData).show();
+                $('.profile-picture')
+                    .css('background-image', `url(${imageData})`)
+                    .text('')
+                    .addClass('has-image');
+                $('.remove-image-btn').show();
+
+                // Save to localStorage
+                const userData = JSON.parse(localStorage.getItem('userData')) || {};
+                userData.profileImage = imageData;
+                localStorage.setItem('userData', JSON.stringify(userData));
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+
+    // Add remove image functionality
+    $('.remove-image-btn').click(function() {
+        const userData = JSON.parse(localStorage.getItem('userData')) || {};
+        const fullName = userData.fullName || $('#profile-form input[type="text"]').first().val();
+        
+        $('#profile-preview').hide().attr('src', '');
+        $('.profile-picture')
+            .css('background-image', 'none')
+            .text(getInitials(fullName))
+            .removeClass('has-image');
+        $(this).hide();
+        $('#profile-upload').val('');
+
+        // Update localStorage
+        userData.profileImage = null;
+        localStorage.setItem('userData', JSON.stringify(userData));
+    });
+}
