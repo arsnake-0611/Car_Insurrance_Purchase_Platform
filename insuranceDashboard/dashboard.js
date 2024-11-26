@@ -680,19 +680,19 @@ $(document).ready(function() {
             </div>
         `);
 
-        // Simulate customer acknowledgment
-        setTimeout(() => {
-            $('.chat-messages').append(`
-                <div class="message-container">
-                    <div class="message customer-message">
-                        <div class="message-info">Customer (${timestamp})</div>
-                        Thank you for notifying me about the changes to my quote. I have received the update details.
-                    </div>
-                </div>
-            `);
+        // // Simulate customer acknowledgment
+        // setTimeout(() => {
+        //     $('.chat-messages').append(`
+        //         <div class="message-container">
+        //             <div class="message customer-message">
+        //                 <div class="message-info">Customer (${timestamp})</div>
+        //                 Thank you for notifying me about the changes to my quote. I have received the update details.
+        //             </div>
+        //         </div>
+        //     `);
             
-            $('.chat-messages').scrollTop($('.chat-messages')[0].scrollHeight);
-        }, 1000);
+        //     $('.chat-messages').scrollTop($('.chat-messages')[0].scrollHeight);
+        // }, 1000);
     }
 
     $(document).on('click', '.approve-quote', function() {
