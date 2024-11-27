@@ -51,27 +51,25 @@ $('#quotationForm').find('input[name="phoneNumber"]').attr({
 });
 
 function showModal(modalId) {
-    document.getElementById(modalId).classList.add('show');
+    const modal = document.getElementById(modalId);
+    modal.classList.add('show');
+    document.body.style.overflow = 'hidden';
 }
 
 function closeModal(modalId) {
     const modal = document.getElementById(modalId);
     modal.classList.remove('show');
-    // Reset form when closing
+    document.body.style.overflow = '';
+    // Reset form when modal is closed
     document.getElementById('quotationForm').reset();
-    // Reset sections visibility
-    document.getElementById('vehicleSection').classList.add('visible');
-    document.getElementById('vehicleSection').classList.remove('hidden');
-    document.getElementById('personalSection').classList.remove('visible');
-    document.getElementById('personalSection').classList.add('hidden');
 }
 
 // Close modal when clicking outside
-window.onclick = function(event) {
+window.addEventListener('click', function(event) {
     if (event.target.classList.contains('modal')) {
-        event.target.classList.remove('show');
+        closeModal(event.target.id);
     }
-}
+});
 $(document).ready(function() {
     // Move the showNotification function inside document.ready
     function showNotification(message) {
@@ -929,4 +927,192 @@ $('#quotationForm').on('submit', function(e) {
     // Reset form and close modal
     this.reset();
     closeModal('newQuoteModal');
+});
+
+// Vehicle models data
+const vehicleModels = {
+    'Audi': ['A3', 'A4', 'A6', 'Q5', 'Q7'],
+    'BMW': ['3 Series', '5 Series', 'X3', 'X5', 'M3'],
+    'Ford': ['Focus', 'Fiesta', 'Mustang', 'Explorer', 'F-150'],
+    'Porsche': ['911', 'Cayenne', 'Macan', 'Panamera', 'Boxster'],
+    'Toyota': ['Camry', 'Corolla', 'RAV4', 'Highlander', 'Prius']
+};
+
+// Update vehicle models when brand is selected
+document.getElementById('vehicleMake').addEventListener('change', function() {
+    const modelSelect = document.getElementById('vehicleModel');
+    modelSelect.innerHTML = '<option value="">Select Model</option>';
+    
+    const brand = this.value;
+    if (brand && vehicleModels[brand]) {
+        vehicleModels[brand].forEach(model => {
+            const option = document.createElement('option');
+            option.value = model;
+            option.textContent = model;
+            modelSelect.appendChild(option);
+        });
+    }
+});
+
+// Function to format currency
+function formatCurrency(value) {
+    return 'HK$ ' + Number(value).toLocaleString();
+}
+
+// Function to generate reference number
+function generateRefNumber() {
+    const date = new Date();
+    const year = date.getFullYear();
+    const randomNum = Math.floor(Math.random() * 1000).toString().padStart(3, '0');
+    return `QT${year}${randomNum}`;
+}
+
+// Function to create a new quotation card
+function createQuotationCard(data) {
+    const card = document.createElement('div');
+    card.className = 'quotation-card';
+    card.innerHTML = `
+        <div class="card-header">
+            <div class="ref-number">Ref: <span>${data.referenceNumber}</span></div>
+            <span class="quotation-status quotation-status--${data.status.toLowerCase()}">${data.status}</span>
+        </div>
+        
+        <div class="card-content">
+            <div class="section">
+                <h4>Insurance Information</h4>
+                <div class="info-row">
+                    <span class="label">Coverage Type:</span>
+                    <span class="value">${data.coveragePlan === 'comprehensive' ? 'Comprehensive Coverage' : 'Third-Party Coverage'}</span>
+                </div>
+            </div>
+
+            <div class="section">
+                <h4>Vehicle Information</h4>
+                <div class="info-row">
+                    <span class="label">Vehicle:</span>
+                    <span class="value">${data.vehicleMake} ${data.vehicleModel}</span>
+                </div>
+                <div class="info-row">
+                    <span class="label">Manufacturing Year:</span>
+                    <span class="value">${data.vehicleYear}</span>
+                </div>
+                <div class="info-row">
+                    <span class="label">Body Type:</span>
+                    <span class="value">${data.bodyType}</span>
+                </div>
+                <div class="info-row">
+                    <span class="label">Seating Capacity:</span>
+                    <span class="value">${data.seatingCapacity}</span>
+                </div>
+                <div class="info-row">
+                    <span class="label">Cylinder Capacity:</span>
+                    <span class="value">${data.cylinderCapacity} CC</span>
+                </div>
+                <div class="info-row">
+                    <span class="label">Vehicle Value:</span>
+                    <span class="value">${formatCurrency(data.vehicleValue)}</span>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="info-row">
+                    <span class="label">Date:</span>
+                    <span class="value">${new Date().toLocaleDateString()}</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="action-buttons">
+            <button class="btn btn-primary btn-sm view-details">View Details</button>
+            <button class="btn btn-success btn-sm">Approve</button>
+            <button class="btn btn-danger btn-sm">Reject</button>
+        </div>
+    `;
+    return card;
+}
+
+// Function to update statistics
+function updateStatistics() {
+    const totalQuotes = document.querySelectorAll('.quotation-card').length;
+    const pendingQuotes = document.querySelectorAll('.quotation-status--pending').length;
+    const approvedQuotes = document.querySelectorAll('.quotation-status--approved').length;
+    const rejectedQuotes = document.querySelectorAll('.quotation-status--rejected').length;
+
+    document.getElementById('totalQuotes').textContent = totalQuotes;
+    document.getElementById('pendingQuotes').textContent = pendingQuotes;
+    document.getElementById('approvedQuotes').textContent = approvedQuotes;
+    document.getElementById('rejectedQuotes').textContent = rejectedQuotes;
+}
+
+// Function to show notification
+function showNotification(message, type = 'success') {
+    const notification = document.getElementById('notification');
+    notification.textContent = message;
+    notification.className = `notification ${type}`;
+    notification.style.display = 'block';
+    
+    setTimeout(() => {
+        notification.style.display = 'none';
+    }, 3000);
+}
+
+// Handle form submission
+document.getElementById('quotationForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    // Collect form data
+    const formData = {
+        referenceNumber: generateRefNumber(),
+        status: 'PENDING',
+        vehicleMake: document.getElementById('vehicleMake').value,
+        vehicleModel: document.getElementById('vehicleModel').value,
+        vehicleYear: document.getElementById('vehicleYear').value,
+        bodyType: document.getElementById('bodyType').value,
+        seatingCapacity: document.getElementById('seatingCapacity').value,
+        cylinderCapacity: document.getElementById('cylinderCapacity').value,
+        vehicleValue: document.getElementById('vehicleValue').value,
+        coveragePlan: document.getElementById('coveragePlan').value,
+        date: new Date().toISOString().split('T')[0]
+    };
+
+    // Create new quotation card
+    const quoteCard = createQuotationCard(formData);
+    
+    // Add to quote list at the beginning
+    const quoteList = document.getElementById('quoteList');
+    quoteList.insertBefore(quoteCard, quoteList.firstChild);
+    
+    // Update statistics
+    updateStatistics();
+    
+    // Show success notification
+    showNotification('Quotation submitted successfully!');
+    
+    // Close modal and reset form
+    closeModal('newQuoteModal');
+    this.reset();
+});
+
+// Add event listeners for approve/reject buttons
+document.getElementById('quoteList').addEventListener('click', function(e) {
+    if (e.target.classList.contains('btn-success')) {
+        const card = e.target.closest('.quotation-card');
+        const statusElement = card.querySelector('.quotation-status');
+        statusElement.className = 'quotation-status quotation-status--approved';
+        statusElement.textContent = 'APPROVED';
+        updateStatistics();
+        showNotification('Quotation approved successfully!');
+    } else if (e.target.classList.contains('btn-danger')) {
+        const card = e.target.closest('.quotation-card');
+        const statusElement = card.querySelector('.quotation-status');
+        statusElement.className = 'quotation-status quotation-status--rejected';
+        statusElement.textContent = 'REJECTED';
+        updateStatistics();
+        showNotification('Quotation rejected.');
+    }
+});
+
+// Initialize statistics on page load
+document.addEventListener('DOMContentLoaded', function() {
+    updateStatistics();
 });
