@@ -380,12 +380,19 @@ $(document).ready(function() {
         const detailsSection = $(`#details-${id}`);
         const quote = quotes.find(q => q.id === id);
         
-        // Auto-fill payment method
+        // Auto-fill payment method and body type
         const paymentMethodField = detailsSection.find('select[class="edit-field"]').filter(function() {
             return $(this).closest('tr').find('td:first').text().trim().toLowerCase() === 'payment method:';
         });
         if (paymentMethodField.length) {
             paymentMethodField.val(quote.paymentMethod);
+        }
+
+        const bodyTypeField = detailsSection.find('select[class="edit-field"]').filter(function() {
+            return $(this).closest('tr').find('td:first').text().trim().toLowerCase() === 'body type:';
+        });
+        if (bodyTypeField.length) {
+            bodyTypeField.val(quote.bodyType);
         }
 
         // Replace table data cells with appropriate input types
@@ -404,12 +411,23 @@ $(document).ready(function() {
             let input;
             
             switch(label) {
-                case 'coverage type:':
+                case 'body type:':
                     input = $('<select>')
                         .attr('class', 'edit-field')
-                        .append('<option value="comprehensive">Comprehensive Coverage</option>')
-                        .append('<option value="thirdParty">Third-Party Coverage</option>');
-                    input.val(currentValue.toLowerCase().includes('comprehensive') ? 'comprehensive' : 'thirdParty');
+                        .append('<option value="Saloon">Saloon</option>')
+                        .append('<option value="Hatchback">Hatchback</option>')
+                        .append('<option value="SUV">SUV</option>')
+                        .append('<option value="Coupe">Coupe</option>')
+                        .append('<option value="Convertible">Convertible</option>');
+                    input.val(quote.bodyType); // Use quote.bodyType directly
+                    break;
+                    
+                case 'payment method:':
+                    input = $('<select>')
+                        .attr('class', 'edit-field')
+                        .append('<option value="bankTransfer">Bank Transfer</option>')
+                        .append('<option value="creditCard">Credit Card</option>');
+                    input.val(quote.paymentMethod.toLowerCase()); // Convert to lowercase for matching
                     break;
                     
                 case 'manufacturing year:':
@@ -419,17 +437,6 @@ $(document).ready(function() {
                         .attr('min', '2000')
                         .attr('max', '2024')
                         .attr('value', currentValue);
-                    break;
-                    
-                case 'body type:':
-                    input = $('<select>')
-                        .attr('class', 'edit-field')
-                        .append('<option value="Saloon">Saloon</option>')
-                        .append('<option value="Hatchback">Hatchback</option>')
-                        .append('<option value="SUV">SUV</option>')
-                        .append('<option value="Coupe">Coupe</option>')
-                        .append('<option value="Convertible">Convertible</option>');
-                    input.val(currentValue);
                     break;
                     
                 case 'seating capacity:':
@@ -488,14 +495,6 @@ $(document).ready(function() {
                         .attr('min', '1')
                         .attr('max', '70')
                         .attr('value', currentValue.replace(' years', ''));
-                    break;
-                    
-                case 'payment method:':
-                    input = $('<select>')
-                        .attr('class', 'edit-field')
-                        .append('<option value="BankTransfer">Bank Transfer</option>')
-                        .append('<option value="CreditCard">Credit Card</option>');
-                    input.val(currentValue.replace(' ', ''));
                     break;
                     
                 default:
@@ -900,18 +899,18 @@ $(document).ready(function() {
 });
 
 // Add this JavaScript function to handle section navigation
-function showPersonalSection() {
-    $('#vehicleSection').removeClass('visible').addClass('hidden');
+function showVehicleSection() {
+    $('#personalSection').removeClass('visible').addClass('hidden');
     setTimeout(() => {
-        $('#personalSection').removeClass('hidden').addClass('visible');
+        $('#vehicleSection').removeClass('hidden').addClass('visible');
     }, 300);
 }
 
-// Add event listener for the Next button
+// Update Next button event listener
 $('#nextButton').on('click', function() {
-    // Validate first section
-    const vehicleSection = $('#vehicleSection');
-    const inputs = vehicleSection.find('input, select');
+    // Validate personal section
+    const personalSection = $('#personalSection');
+    const inputs = personalSection.find('input, select');
     let isValid = true;
     
     inputs.each(function() {
@@ -927,18 +926,9 @@ $('#nextButton').on('click', function() {
         return;
     }
     
-    // Show next section
-    vehicleSection.removeClass('visible').addClass('hidden');
-    $('#personalSection').removeClass('hidden').addClass('visible');
-    
-    // Add submit button if not exists
-    if (!$('#submitQuotation').length) {
-        $('#personalSection').append(`
-            <div class="submit-container">
-                <button type="submit" id="submitQuotation" class="submit-btn">Submit Quotation</button>
-            </div>
-        `);
-    }
+    // Show vehicle section
+    personalSection.removeClass('visible').addClass('hidden');
+    $('#vehicleSection').removeClass('hidden').addClass('visible');
 });
 
 // Update form submission
@@ -967,7 +957,7 @@ $('#quotationForm').on('submit', function(e) {
         drivingExperience: parseInt($('#drivingExperience').val()),
         coveragePlan: $('#coveragePlan').val(),
         paymentMethod: $('#paymentMethod').val(),
-        status: 'pending',
+        status: 'approved',
         date: new Date().toISOString().split('T')[0]
     };
     
