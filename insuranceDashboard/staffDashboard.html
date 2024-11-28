@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staff Dashboard - Insurance Management</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="staffDashboard.css">
+</head>
+<body>
+    <div class="notification" id="notification"></div>
+    
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <img src="../icon.png" alt="Insurance Logo" width="30" height="30">
+            <h3>Staff Portal</h3>
+        </div>
+        <ul class="sidebar-menu">
+            <li><a href="#dashboard" class="active">Dashboard</a></li>
+            <li><a href="dashboard.html">Quotations</a></li>
+            <li><a href="#reports">Reports</a></li>
+            <li><a href="#settings">Settings</a></li>
+        </ul>
+        <div class="sidebar-footer">
+            <button class="sign-out-btn">Sign Out</button>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <header>
+            <div class="header-content">
+                <h2>Staff Dashboard</h2>
+                <div class="user-info">
+                    <span>Welcome, Staff Member</span>
+                </div>
+            </div>
+        </header>
+
+        <div class="content-wrapper">
+            <!-- Statistics Dashboard -->
+            <div class="dashboard-container">
+                <div class="dashboard-header">
+                    <h3>Insurance Quotations Overview</h3>
+                    <div class="date-filter">
+                        <select id="timeRange">
+                            <option value="today">Today</option>
+                            <option value="week">This Week</option>
+                            <option value="month">This Month</option>
+                            <option value="all" selected>All Time</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="dashboard-stats">
+                    <div class="stats-card total">
+                        <div class="stats-icon">📊</div>
+                        <div class="stats-info">
+                            <h3>Total Quotations</h3>
+                            <p id="totalQuotes">0</p>
+                        </div>
+                    </div>
+                    <div class="stats-card pending">
+                        <div class="stats-icon">⏳</div>
+                        <div class="stats-info">
+                            <h3>Pending Review</h3>
+                            <p id="pendingQuotes">0</p>
+                        </div>
+                    </div>
+                    <div class="stats-card approved">
+                        <div class="stats-icon">✅</div>
+                        <div class="stats-info">
+                            <h3>Approved</h3>
+                            <p id="approvedQuotes">0</p>
+                        </div>
+                    </div>
+                    <div class="stats-card rejected">
+                        <div class="stats-icon">❌</div>
+                        <div class="stats-info">
+                            <h3>Rejected</h3>
+                            <p id="rejectedQuotes">0</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Activity -->
+                <div class="recent-activity">
+                    <h3>Recent Activity</h3>
+                    <div class="activity-list" id="activityList">
+                        <!-- Activity items will be added here dynamically -->
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="quick-actions">
+                    <h3>Quick Actions</h3>
+                    <div class="action-buttons">
+                        <button class="action-btn" id="newQuoteBtn">
+                            <span>➕</span>New Quote
+                        </button>
+                        <button class="action-btn" id="pendingReviewBtn">
+                            <span>📋</span>Pending Review
+                        </button>
+                        <button class="action-btn" id="generateReportBtn">
+                            <span>📊</span>Generate Report
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="staffDashboard.js"></script>
+</body>
+</html>
