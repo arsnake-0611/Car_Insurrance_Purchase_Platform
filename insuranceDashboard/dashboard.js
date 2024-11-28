@@ -326,46 +326,51 @@ $(document).ready(function() {
         filterQuotes();
     });
 
-    $('#quotationForm').on('submit', function(e) {
-        e.preventDefault();
-        
-        if (!this.checkValidity()) {
-            showNotification('Please fill all required fields');
-            return;
-        }
-
-        // Create new quote object
-        const newQuote = {
-            id: quotes.length + 1,
-            referenceNumber: `QT${new Date().getFullYear()}${(quotes.length + 1).toString().padStart(3, '0')}`,
-            vehicleMake: $('#vehicleMake').val(),
-            vehicleModel: $('#vehicleModel').val(),
-            vehicleYear: parseInt($('#vehicleYear').val()),
-            bodyType: $('#bodyType').val(),
-            seatingCapacity: parseInt($('#seatingCapacity').val()),
-            cylinderCapacity: parseInt($('#cylinderCapacity').val()),
-            vehicleValue: parseInt($('#vehicleValue').val()),
-            fullName: $('#fullName').val(),
-            email: $('#email').val(),
-            phoneNumber: $('#phoneNumber').val(),
-            drivingExperience: parseInt($('#drivingExperience').val()),
-            coveragePlan: $('#coveragePlan').val(),
-            paymentMethod: $('#paymentMethod').val(),
-            status: 'pending',
-            date: new Date().toISOString().split('T')[0]
-        };
-
-        // Add quote and update display
-        quotes.unshift(newQuote);
-        displayQuotes();
-        updateStatistics();
-        
-        // Show confirmation
-        showNotification('Quote submitted successfully!');
-        
-        // Reset form and close modal
-        this.reset();
-        closeModal('newQuoteModal');
+    // Update form submission handler
+    $(document).ready(function() {
+        // Add event delegation for the submit button
+        $(document).on('click', '#submitQuotation', function(e) {
+            e.preventDefault();
+            const form = $('#quotationForm')[0];
+            
+            if (!form.checkValidity()) {
+                showNotification('Please fill all required fields');
+                return;
+            }
+            
+            // Create new quote object
+            const newQuote = {
+                id: quotes.length + 1,
+                referenceNumber: `QT${new Date().getFullYear()}${(quotes.length + 1).toString().padStart(3, '0')}`,
+                vehicleMake: $('#vehicleMake').val(),
+                vehicleModel: $('#vehicleModel').val(),
+                vehicleYear: parseInt($('#vehicleYear').val()),
+                bodyType: $('#bodyType').val(),
+                seatingCapacity: parseInt($('#seatingCapacity').val()),
+                cylinderCapacity: parseInt($('#cylinderCapacity').val()),
+                vehicleValue: parseInt($('#vehicleValue').val()),
+                fullName: $('#fullName').val(),
+                email: $('#email').val(),
+                phoneNumber: $('#phoneNumber').val(),
+                drivingExperience: parseInt($('#drivingExperience').val()),
+                coveragePlan: $('#coveragePlan').val(),
+                paymentMethod: $('#paymentMethod').val(),
+                status: 'pending',
+                date: new Date().toISOString().split('T')[0]
+            };
+            
+            // Add quote and update display
+            quotes.unshift(newQuote);
+            displayQuotes();
+            updateStatistics();
+            
+            // Show confirmation
+            showNotification('Quote submitted successfully!');
+            
+            // Reset form and close modal
+            form.reset();
+            closeModal('newQuoteModal');
+        });
     });
 
     // Handle edit button click
