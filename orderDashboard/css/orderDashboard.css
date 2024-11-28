@@ -45,7 +45,7 @@ body {
 /* Sidebar Styles */
 .sidebar {
     position: fixed;
-    height: 100vh;
+    height: 100%;
     background-color: var(--card-bg);
     padding: 2rem;
     transition: all 0.3s ease;
@@ -83,7 +83,7 @@ body {
     padding-bottom: 2rem;
 }
 
-.main-nav h3, .settings-nav h3 {
+.main-nav h3{
     font-size: 0.8rem;
     color: #666;
     margin-bottom: 1rem;
@@ -147,15 +147,6 @@ header {
     display: flex;
     gap: 1rem;
     align-items: center;
-}
-
-.primary-btn {
-    background-color: var(--primary-color);
-    color: white;
-    border: none;
-    padding: 0.8rem 1.5rem;
-    border-radius: 8px;
-    cursor: pointer;
 }
 
 /* Dashboard Grid */
@@ -294,45 +285,6 @@ header {
     }
 }
 
-@media (max-width: 768px) {
-    .dashboard-grid {
-        display: flex;
-        flex-direction: column;
-        gap: 1.5rem;
-        padding: 1rem;
-        height: auto;
-        overflow-y: visible;
-        align-items: center;
-    }
-
-    /* Adjust card widths and center content */
-    .sales-target,
-    .sales-analytics,
-    .daily-tasks,
-    .calendar-card {
-        min-height: auto;
-        margin-bottom: 1.5rem;
-        width: 90%;
-        max-width: 500px;
-    }
-
-    /* Center header and main content */
-    .dashboard-header,
-    .section-header {
-        width: 90%;
-        max-width: 500px;
-        margin: 0 auto 1rem auto;
-    }
-
-    .main-content {
-        padding: 0;
-        margin-top: 60px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-}
-
 @media (max-width: 576px) {
     .main-content {
         padding: 0.75rem;
@@ -356,11 +308,6 @@ header {
     .analytics-chart {
         height: 250px;
     }
-}
-
-.order-item .status.booked {
-    background-color: #E8F5E9;
-    color: #4CAF50;
 }
 
 .target-list {
@@ -529,13 +476,6 @@ header {
 .calendar-card h3 {
     font-size: 1.2rem;
     margin-bottom: 1rem;
-}
-
-/* Dashboard Grid */
-.dashboard-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 2rem;
 }
 
 .sales-target, .daily-tasks, .sales-analytics, .calendar-card {
@@ -1283,5 +1223,3 @@ nav ul li a {
         align-items: center;
     }
 }
-
-

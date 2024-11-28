@@ -4,13 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vehicle Sales Dashboard</title>
-    <link rel="stylesheet" href="css/orderDashboard.css">
+    <title>Vehicle Sales Order Management</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="js/orderDashboard.js"></script>
-    <link rel="stylesheet" href="css/sidebar.css">
     <script src="js/sidebar.js"></script>
+    <link rel="stylesheet" href="css/sidebar.css">
 </head>
 
 <body>
@@ -26,14 +24,14 @@
             </div>
             <nav class="main-nav">
                 <ul>
-                    <li class="active">
-                        <a>
+                    <li>
+                        <a href="orderDashboard.html">
                             <img src="./icon/house-black.png" alt="Dashboard Icon" class="nav-icon">
                             <span class="nav-text">Dashboard</span>
                         </a>
                     </li>
-                    <li>
-                        <a href="orderManagement.html">
+                    <li class="active">
+                        <a>
                             <img src="./icon/file-invoice-black.png" alt="Orders Icon" class="nav-icon">
                             <span class="nav-text">Orders</span>
                         </a>
@@ -50,7 +48,7 @@
                             <span class="nav-text">Sales</span>
                         </a>
                     </li>
-                    
+
                     <li>
                         <a href="#">
                             <img src="./icon/list-check-black.png" alt="Tasks Icon" class="nav-icon">
@@ -79,10 +77,6 @@
                             <span class="nav-text">Support</span>
                         </a>
                     </li>
-                    <!-- <button class="theme-toggle" id="theme-toggle">
-                        <img src="../icon/moon.png" alt="Dark Mode" class="dark-icon">
-                        <img src="../icon/sun.png" alt="Light Mode" class="light-icon" style="display: none;">
-                    </button> -->
                 </ul>
             </nav>
         </aside>
@@ -91,56 +85,21 @@
         <main class="main-content">
             <!-- Header -->
             <header>
-                <div class="user-info">
-                    <img src="assets/user-avatar.png" alt="User Avatar">
-                    <div class="user-details">
-                        <h2>Welcome back, Sales Agent</h2>
-                        l <span>👋</span>
-                    </div>
-                </div>
+
                 <div class="header-actions">
-                  
+
                 </div>
             </header>
 
-            <!-- Dashboard Content -->
-            <div class="dashboard-grid">
-                <!-- Sales Target Section -->
-                <section class="sales-target">
-                    <div class="section-header">
-                        <h3>Sales Target (July)</h3>
-                        <a href="#">See All</a>
-                    </div>
-                    <div class="target-progress">
-                        <div class="progress-circle">
-                            <div class="progress-circle-inner">
-                                <span class="progress-number">15</span>
-                                <span class="progress-label">OUT OF 20</span>
-                            </div>
-                        </div>
-                        <div class="target-list">
-                            <!-- Vehicle orders list will be populated by JS -->
-                        </div>
-                    </div>
-                </section>
 
-                <!-- Sales Analytics Section -->
-                <section class="sales-analytics">
-                    <div class="section-header">
-                        <h3>Your Sales</h3>
-                        <button class="add-sale-btn">+ Add Sale</button>
-                    </div>
-                    <div class="analytics-tabs">
-                        <button class="tab active">Goal</button>
-                        <button class="tab">Statistic</button>
-                    </div>
-                    <div class="analytics-chart">
-                        <canvas id="salesChart"></canvas>
-                    </div>
-                </section>
-            </div>
         </main>
     </div>
+    <script>
+        // Initialize the sidebar when document is ready
+        $(document).ready(function () {
+            new Sidebar();
+        });
+    </script>
 </body>
 
 </html>
