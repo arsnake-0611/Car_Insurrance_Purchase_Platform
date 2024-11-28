@@ -121,26 +121,173 @@ header {
 
 /* Quotation card styles */
 .quotation-card {
-    transition: all 0.3s ease;
+    background: white;
     border-radius: 12px;
-    padding: 25px;
-    max-width: 100%;
-    margin: 0 0 30px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-    background: linear-gradient(to bottom right, #ffffff, #f8f9fa);
-    border: 1px solid #eaeaea; /* Added border */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.quotation-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.card-header {
+    background: #f8f9fa;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+}
+
+.ref-number {
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.quotation-status {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.quotation-status--pending {
+    background: #ffeeba;
+    color: #856404;
+}
+
+.quotation-status--approved {
+    background: #d4edda;
+    color: #155724;
+}
+
+.quotation-status--rejected {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+.card-content {
+    padding: 20px;
+}
+
+.section {
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+.section:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.section h4 {
+    color: #2c3e50;
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+}
+
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+}
+
+.info-row:last-child {
+    margin-bottom: 0;
+}
+
+.info-row .label {
+    color: #6c757d;
+    font-weight: 500;
+}
+
+.info-row .value {
+    color: #2c3e50;
+    font-weight: 500;
+}
+
+.action-buttons {
+    padding: 15px 20px;
+    background: #f8f9fa;
+    border-top: 1px solid #eee;
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+}
+
+.btn {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-sm {
+    padding: 6px 12px;
+    font-size: 0.875rem;
+}
+
+.btn-primary {
+    background: #007bff;
+    color: white;
+}
+
+.btn-success {
+    background: #28a745;
+    color: white;
+}
+
+.btn-danger {
+    background: #dc3545;
+    color: white;
+}
+
+.btn:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+
+/* Container for quotation cards */
+#quoteList {
+    display: grid;
+    gap: 20px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+    .quotation-card {
+        margin-bottom: 15px;
+    }
+
+    .card-header {
+        padding: 12px 15px;
+    }
+
+    .card-content {
+        padding: 15px;
+    }
+
+    .action-buttons {
+        padding: 12px 15px;
+    }
 }
 
 .form-group{
     padding: 5px 5px 5px ;
 }
 
-.quotation-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
-}
-
-/* Quotation actions styles */
 .quotation-actions {
     display: flex;
     gap: 12px;

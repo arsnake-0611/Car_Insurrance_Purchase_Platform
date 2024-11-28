@@ -1063,33 +1063,9 @@ function createQuotationCard(data) {
             </div>
 
             <div class="section">
-                <h4>Personal Information</h4>
-                <div class="info-row">
-                    <span class="label">Full Name:</span>
-                    <span class="value">${data.fullName}</span>
-                </div>
-                <div class="info-row">
-                    <span class="label">Email:</span>
-                    <span class="value">${data.email}</span>
-                </div>
-                <div class="info-row">
-                    <span class="label">Phone:</span>
-                    <span class="value">${data.phoneNumber}</span>
-                </div>
-                <div class="info-row">
-                    <span class="label">Driving Experience:</span>
-                    <span class="value">${data.drivingExperience} years</span>
-                </div>
-                <div class="info-row">
-                    <span class="label">Payment Method:</span>
-                    <span class="value">${data.paymentMethod === 'bankTransfer' ? 'Bank Transfer' : 'Credit Card'}</span>
-                </div>
-            </div>
-
-            <div class="section">
                 <div class="info-row">
                     <span class="label">Date:</span>
-                    <span class="value">${new Date(data.date).toLocaleDateString()}</span>
+                    <span class="value">${new Date().toLocaleDateString()}</span>
                 </div>
             </div>
         </div>
@@ -1132,11 +1108,10 @@ function showNotification(message, type = 'success') {
 document.getElementById('quotationForm').addEventListener('submit', function(e) {
     e.preventDefault();
     
-    // Collect form data including personal information
+    // Collect form data
     const formData = {
         referenceNumber: generateRefNumber(),
         status: 'PENDING',
-        // Vehicle Information
         vehicleMake: document.getElementById('vehicleMake').value,
         vehicleModel: document.getElementById('vehicleModel').value,
         vehicleYear: document.getElementById('vehicleYear').value,
@@ -1145,16 +1120,10 @@ document.getElementById('quotationForm').addEventListener('submit', function(e) 
         cylinderCapacity: document.getElementById('cylinderCapacity').value,
         vehicleValue: document.getElementById('vehicleValue').value,
         coveragePlan: document.getElementById('coveragePlan').value,
-        // Personal Information
-        fullName: document.getElementById('fullName').value,
-        email: document.getElementById('email').value,
-        phoneNumber: document.getElementById('phoneNumber').value,
-        drivingExperience: document.getElementById('drivingExperience').value,
-        paymentMethod: document.getElementById('paymentMethod').value,
         date: new Date().toISOString().split('T')[0]
     };
 
-    // Update the createQuotationCard function to include personal information
+    // Create new quotation card
     const quoteCard = createQuotationCard(formData);
     
     // Add to quote list at the beginning
