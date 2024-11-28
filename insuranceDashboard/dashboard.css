@@ -121,173 +121,26 @@ header {
 
 /* Quotation card styles */
 .quotation-card {
-    background: white;
+    transition: all 0.3s ease;
     border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
-    overflow: hidden;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.quotation-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-}
-
-.card-header {
-    background: #f8f9fa;
-    padding: 15px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid #eee;
-}
-
-.ref-number {
-    font-weight: 600;
-    color: #2c3e50;
-}
-
-.quotation-status {
-    padding: 6px 12px;
-    border-radius: 20px;
-    font-size: 0.85rem;
-    font-weight: 500;
-    text-transform: uppercase;
-}
-
-.quotation-status--pending {
-    background: #ffeeba;
-    color: #856404;
-}
-
-.quotation-status--approved {
-    background: #d4edda;
-    color: #155724;
-}
-
-.quotation-status--rejected {
-    background: #f8d7da;
-    color: #721c24;
-}
-
-.card-content {
-    padding: 20px;
-}
-
-.section {
-    margin-bottom: 20px;
-    padding-bottom: 15px;
-    border-bottom: 1px solid #eee;
-}
-
-.section:last-child {
-    margin-bottom: 0;
-    padding-bottom: 0;
-    border-bottom: none;
-}
-
-.section h4 {
-    color: #2c3e50;
-    margin-bottom: 15px;
-    font-size: 1.1rem;
-}
-
-.info-row {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 8px;
-    font-size: 0.95rem;
-}
-
-.info-row:last-child {
-    margin-bottom: 0;
-}
-
-.info-row .label {
-    color: #6c757d;
-    font-weight: 500;
-}
-
-.info-row .value {
-    color: #2c3e50;
-    font-weight: 500;
-}
-
-.action-buttons {
-    padding: 15px 20px;
-    background: #f8f9fa;
-    border-top: 1px solid #eee;
-    display: flex;
-    gap: 10px;
-    justify-content: flex-end;
-}
-
-.btn {
-    padding: 8px 16px;
-    border: none;
-    border-radius: 6px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-.btn-sm {
-    padding: 6px 12px;
-    font-size: 0.875rem;
-}
-
-.btn-primary {
-    background: #007bff;
-    color: white;
-}
-
-.btn-success {
-    background: #28a745;
-    color: white;
-}
-
-.btn-danger {
-    background: #dc3545;
-    color: white;
-}
-
-.btn:hover {
-    opacity: 0.9;
-    transform: translateY(-1px);
-}
-
-/* Container for quotation cards */
-#quoteList {
-    display: grid;
-    gap: 20px;
-    padding: 20px;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-@media (max-width: 768px) {
-    .quotation-card {
-        margin-bottom: 15px;
-    }
-
-    .card-header {
-        padding: 12px 15px;
-    }
-
-    .card-content {
-        padding: 15px;
-    }
-
-    .action-buttons {
-        padding: 12px 15px;
-    }
+    padding: 25px;
+    max-width: 100%;
+    margin: 0 0 30px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    background: linear-gradient(to bottom right, #ffffff, #f8f9fa);
+    border: 1px solid #eaeaea; /* Added border */
 }
 
 .form-group{
     padding: 5px 5px 5px ;
 }
 
+.quotation-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+/* Quotation actions styles */
 .quotation-actions {
     display: flex;
     gap: 12px;
@@ -810,123 +663,135 @@ header {
 
 /* Modal styles */
 .modal {
+    padding: 20px;
+    overflow-y: auto;
     display: none;
     position: fixed;
-    top: 10;
+    top: 0;
     left: 0;
-    width: 50%;
-    height: 50%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 1050;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1100;
 }
 
 .modal.show {
-    display: block;
-}
-
-.modal-dialog {
-    position: relative;
-    width: 90%;
-    max-width: 800px;
-    margin: 1.75rem auto;
-}
-
-.modal-content {
-    background: #fff;
-    border-radius: 15px; 
-    padding: 35px;  /* Increased padding */
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-    position: relative; /* Added for close button positioning */
-}
-
-.modal-header {
-    padding: 0 0 30px 0; /* Increased bottom padding */
-    margin-bottom: 35px; /* Increased margin */
-    border-bottom: 1px solid #dee2e6;
-}
-
-/* Add close button styles */
-.modal-close {
-    position: absolute;
-    right: 25px;
-    top: 25px;
-    width: 32px;
-    height: 32px;
-    cursor: pointer;
-    background: #f8f9fa;
-    border: none;
-    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 20px;
-    color: #2c3e50;
-    transition: all 0.3s ease;
-    padding: 0;
 }
 
-.modal-close:hover {
-    background: #e9ecef;
-    transform: rotate(90deg);
-}
-
-/* Form section updates */
-#quotationForm {
-    display: grid;
-    gap: 30px;  /* Increased gap */
+.modal-dialog {
+    width: 90%;
+    max-width: 800px;
+    max-height: 90vh; /* Limit height to 90% of viewport height */
+    margin: auto;
     background: white;
-    padding: 35px;  /* Increased padding */
-    border-radius: 15px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-    margin-top: 20px; /* Added margin top */
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    position: relative;
+    overflow-y: auto; /* Enable scrolling within modal if needed */
 }
 
-#quotationForm .row {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
-    margin: 0;  /* Reset margin */
-}
-
-#quotationForm .form-control {
-    padding: 12px 15px;
-    border: 2px solid #e2e8f0;
-    border-radius: 8px;
-    transition: all 0.3s ease;
-    margin-bottom: 0;  /* Reset margin */
+.modal-content {
+    padding: 1.5rem; /* Reduced padding */
 }
 
 .form-section {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: all 0.3s ease;
+    margin-bottom: 1.5rem; /* Reduced margin */
 }
 
-.form-section.visible {
-    opacity: 1;
-    transform: translateY(0);
+.form-section h3 {
+    margin-bottom: 1rem;
+    font-size: 1.2rem; /* Slightly smaller heading */
+    color: #2c3e50;
 }
 
-/* Submit button container */
-.submit-container {
-    text-align: center;
-    margin-top: 25px;
+.form-group {
+    margin-bottom: 0.8rem; /* Reduced margin */
 }
 
-.submit-btn {
-    background: linear-gradient(145deg, #2c3e50, #3e502c);
-    color: white;
-    padding: 12px 35px;
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: all 0.3s ease;
+.form-group label {
+    display: block;
+    margin-bottom: 0.3rem; /* Reduced margin */
+    color: #2c3e50;
+    font-weight: 500;
+    font-size: 0.9rem; /* Slightly smaller label */
 }
 
-.submit-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 0.5rem; /* Reduced padding */
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    font-size: 0.9rem; /* Slightly smaller font */
+}
+
+.form-actions {
+    margin-top: 1rem;
+    text-align: right;
+    padding: 0.5rem 0;
+}
+
+.btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+}
+
+/* Add responsive adjustments */
+@media (max-height: 800px) {
+    .modal-dialog {
+        margin: 1rem auto;
+    }
+    
+    .form-group {
+        margin-bottom: 0.6rem;
+    }
+    
+    .form-section {
+        margin-bottom: 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .modal {
+        padding: 10px;
+    }
+    
+    .modal-content {
+        padding: 1rem;
+    }
+    
+    .modal-dialog {
+        width: 95%;
+        margin: 0.5rem auto;
+    }
+}
+
+/* Improve scrollbar styling */
+.modal-dialog::-webkit-scrollbar {
+    width: 8px;
+}
+
+.modal-dialog::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.modal-dialog::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+
+.modal-dialog::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* Required field indicator */
+label[for]::after {
+    content: " *";
+    color: #e74c3c;
 }
 
 /* Enhanced modified indicator */
@@ -957,4 +822,32 @@ header {
     background: linear-gradient(145deg, #f8f9fa, #e9ecef);
     color: #2c3e50;
     border: 1px solid #dee2e6;
+}
+
+/* Records table styling */
+.records-table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.records-table th,
+.records-table td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.records-table th {
+    background-color: #f8f9fa;
+    font-weight: 600;
+}
+
+.records-table td {
+    background-color: #ffffff;
 }
