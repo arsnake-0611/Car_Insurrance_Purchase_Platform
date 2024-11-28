@@ -107,7 +107,7 @@
     
     <!-- New Quotation Modal -->
     <div class="modal" id="newQuoteModal">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">New Quotation Request</h5>
@@ -137,7 +137,7 @@
                             <div class="form-group">
                                 <label for="vehicleYear">Manufacturing Year: *</label>
                                 <input type="number" id="vehicleYear" name="vehicleYear" 
-                                    min="2000" max="2024" maxlength="4" required 
+                                    min="2000" max="2024" maxlength="4" required
                                     pattern="[0-9]{4}" placeholder="YYYY" 
                                     title="Enter a 4-digit year between 2000 and 2024" />
                             </div>
@@ -170,6 +170,31 @@
                                 <input type="number" id="vehicleValue" name="vehicleValue" 
                                     min="50000" step="1000" required />
                             </div>
+                            <div class="action-buttons">
+                                <button type="button" id="nextButton">Next</button>
+                            </div>
+                        </div>
+                        <div id="personalSection" class="form-section hidden">
+                            <h2>Personal Information</h2>
+                            <div class="form-group">
+                                <label for="fullName">Full Name: *</label>
+                                <input type="text" id="fullName" name="fullName" required />
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email Address: *</label>
+                                <input type="email" id="email" name="email" required />
+                            </div>
+                            <div class="form-group">
+                                <label for="phoneNumber">Phone Number: *</label>
+                                <input type="text" id="phoneNumber" name="phoneNumber" 
+                                    required pattern="[0-9]{8}" maxlength="8" 
+                                    title="Please enter exactly 8 digits" />
+                            </div>
+                            <div class="form-group">
+                                <label for="drivingExperience">Driving Experience (years): *</label>
+                                <input type="number" id="drivingExperience" name="drivingExperience" 
+                                    min="1" max="70" required />
+                            </div>
                             <div class="form-group">
                                 <label for="coveragePlan">Select Coverage Plan: *</label>
                                 <select id="coveragePlan" name="coveragePlan" required>
@@ -178,8 +203,15 @@
                                     <option value="thirdParty">Third-Party Coverage</option>
                                 </select>
                             </div>
+                            <div class="form-group">
+                                <label for="paymentMethod">Select Preferred Payment Method: *</label>
+                                <select id="paymentMethod" name="paymentMethod" required>
+                                    <option value="">Select a method</option>
+                                    <option value="BankTransfer">Bank Transfer</option>
+                                    <option value="CreditCard">Credit Card</option>
+                                </select>
+                            </div>
                             <div class="submit-container">
-                                <button type="button" class="btn btn-secondary" onclick="closeModal('newQuoteModal')">Cancel</button>
                                 <button type="submit" id="submitQuotation" class="submit-btn">Submit Quotation</button>
                             </div>
                         </div>
