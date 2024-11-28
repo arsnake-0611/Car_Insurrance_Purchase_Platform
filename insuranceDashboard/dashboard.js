@@ -757,21 +757,39 @@ $(document).ready(function() {
         }
     });
 
-    // Hamburger menu functionality
-    $('.hamburger-menu').click(function(e) {
+    // Hamburger menu and sidebar functionality
+    const $hamburger = $('.hamburger-menu');
+    const $sidebar = $('.sidebar');
+    const $content = $('.content-wrapper');
+    const $header = $('header');
+
+    // Toggle sidebar
+    $hamburger.click(function(e) {
         e.stopPropagation();
-        $('.sidebar').toggleClass('active');
-        $(this).toggleClass('active');
+        $hamburger.toggleClass('active');
+        $sidebar.toggleClass('active');
+        
+        if ($sidebar.hasClass('active')) {
+            $content.css('margin-left', '220px');
+            $header.css('left', '220px');
+        } else {
+            $content.css('margin-left', '0');
+            $header.css('left', '0');
+        }
     });
 
-    // Close sidebar when clicking outside on mobile
-    $(document).click(function(event) {
-        if ($(window).width() <= 768) {
-            if (!$(event.target).closest('.sidebar').length && 
-                !$(event.target).closest('.hamburger-menu').length) {
-                $('.sidebar').removeClass('active');
-                $('.hamburger-menu').removeClass('active');
-            }
+    // Close sidebar when clicking outside
+    $(document).click(function(e) {
+        if (!$sidebar.is(e.target) && 
+            !$hamburger.is(e.target) && 
+            $sidebar.has(e.target).length === 0 && 
+            $hamburger.has(e.target).length === 0 && 
+            $sidebar.hasClass('active')) {
+            
+            $sidebar.removeClass('active');
+            $hamburger.removeClass('active');
+            $content.css('margin-left', '0');
+            $header.css('left', '0');
         }
     });
 
@@ -780,11 +798,41 @@ $(document).ready(function() {
     $(window).resize(function() {
         clearTimeout(resizeTimer);
         resizeTimer = setTimeout(function() {
-            if ($(window).width() > 768) {
-                $('.sidebar').removeClass('active');
-                $('.hamburger-menu').removeClass('active');
+            if ($(window).width() <= 768) {
+                $sidebar.removeClass('active');
+                $hamburger.removeClass('active');
+                $content.css('margin-left', '0');
+                $header.css('left', '0');
             }
         }, 250);
+    });
+
+    // Sidebar menu item click handling
+    $('.sidebar-menu a').click(function(e) {
+        e.preventDefault();
+        
+        // Remove active class from all menu items
+        $('.sidebar-menu a').removeClass('active');
+        
+        // Add active class to clicked item
+        $(this).addClass('active');
+        
+        // On mobile, close sidebar after selection
+        if ($(window).width() <= 768) {
+            $sidebar.removeClass('active');
+            $hamburger.removeClass('active');
+            $content.css('margin-left', '0');
+            $header.css('left', '0');
+        }
+        
+        // Show notification
+        showNotification('Loading ' + $(this).text() + '...');
+    });
+
+    // Sign out button handling
+    $('.sign-out-btn').click(function() {
+        showNotification('Signing out...');
+        // Add your sign out logic here
     });
 
     // Chat support functionality
