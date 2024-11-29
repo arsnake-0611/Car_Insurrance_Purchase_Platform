@@ -338,38 +338,87 @@ $(document).ready(function() {
                 return;
             }
             
-            // Create new quote object
+            // Create new quote object with approved status
             const newQuote = {
                 id: quotes.length + 1,
                 referenceNumber: `QT${new Date().getFullYear()}${(quotes.length + 1).toString().padStart(3, '0')}`,
                 vehicleMake: $('#vehicleMake').val(),
                 vehicleModel: $('#vehicleModel').val(),
                 vehicleYear: parseInt($('#vehicleYear').val()),
-                bodyType: $('#bodyType').val(),
-                seatingCapacity: parseInt($('#seatingCapacity').val()),
-                cylinderCapacity: parseInt($('#cylinderCapacity').val()),
-                vehicleValue: parseInt($('#vehicleValue').val()),
+                bodyType: $('#bodyType').val() || 'Sedan',
+                seatingCapacity: parseInt($('#seatingCapacity').val()) || 5,
+                cylinderCapacity: parseInt($('#cylinderCapacity').val()) || 2000,
+                vehicleValue: parseInt($('#vehicleValue').val()) || 200000,
                 fullName: $('#fullName').val(),
                 email: $('#email').val(),
                 phoneNumber: $('#phoneNumber').val(),
                 drivingExperience: parseInt($('#drivingExperience').val()),
                 coveragePlan: $('#coveragePlan').val(),
                 paymentMethod: $('#paymentMethod').val(),
-                status: 'pending',
+                status: 'approved',
+                approvedBy: 'Chris Wong',
+                approvalDate: new Date().toISOString(),
                 date: new Date().toISOString().split('T')[0]
             };
             
-            // Add quote and update display
+            // Add quote to the beginning of the array
             quotes.unshift(newQuote);
-            displayQuotes();
-            updateStatistics();
+            
+            // Update display with animation
+            const quoteList = $('#quoteList');
+            const newQuoteElement = $(`
+                <div class="quotation-card" style="opacity: 0; transform: translateY(-20px);">
+                    <span class="quotation-reference">Ref: ${newQuote.referenceNumber}</span>
+                    
+                    <div class="row">
+                        <div class="col-md-8">
+                            <p>Vehicle: ${newQuote.vehicleMake} ${newQuote.vehicleModel}</p>
+                            <p>Date: ${newQuote.date}</p>
+                            <p>Coverage: ${newQuote.coveragePlan === 'comprehensive' ? 'Comprehensive Coverage' : 'Third-Party Coverage'}</p>
+                            <p>Approved by: ${newQuote.approvedBy}</p>
+                            <span class="quotation-status quotation-status--approved">APPROVED</span>
+                        </div>
+                    </div>
+
+                    <div class="action-buttons">
+                        <button class="btn support-button btn-sm">
+                            <span class="support-icon">💬</span>Support Chat
+                        </button>
+                    </div>
+                </div>
+            `);
+            
+            // Add new quote to the top of the list
+            quoteList.prepend(newQuoteElement);
+            
+            // Animate the new quote card
+            setTimeout(() => {
+                newQuoteElement.css({
+                    'transition': 'all 0.5s ease',
+                    'opacity': '1',
+                    'transform': 'translateY(0)'
+                });
+            }, 100);
             
             // Show confirmation
-            showNotification('Quote submitted successfully!');
+            showNotification('Quote approved successfully by Chris Wong!');
             
             // Reset form and close modal
-            form.reset();
+            this.reset();
             closeModal('newQuoteModal');
+            
+            // Reset vehicle model select when make is cleared
+            $('#vehicleMake').on('change', function() {
+                const modelSelect = $('#vehicleModel');
+                modelSelect.empty().append('<option value="">Select Model</option>');
+                
+                const selectedMake = $(this).val();
+                if (selectedMake && carModels[selectedMake]) {
+                    carModels[selectedMake].forEach(model => {
+                        modelSelect.append(`<option value="${model}">${model}</option>`);
+                    });
+                }
+            });
         });
     });
 
@@ -940,17 +989,17 @@ $('#quotationForm').on('submit', function(e) {
         return;
     }
     
-    // Create new quote object
+    // Create new quote object with approved status
     const newQuote = {
         id: quotes.length + 1,
         referenceNumber: `QT${new Date().getFullYear()}${(quotes.length + 1).toString().padStart(3, '0')}`,
         vehicleMake: $('#vehicleMake').val(),
         vehicleModel: $('#vehicleModel').val(),
         vehicleYear: parseInt($('#vehicleYear').val()),
-        bodyType: $('#bodyType').val(),
-        seatingCapacity: parseInt($('#seatingCapacity').val()),
-        cylinderCapacity: parseInt($('#cylinderCapacity').val()),
-        vehicleValue: parseInt($('#vehicleValue').val()),
+        bodyType: $('#bodyType').val() || 'Sedan',
+        seatingCapacity: parseInt($('#seatingCapacity').val()) || 5,
+        cylinderCapacity: parseInt($('#cylinderCapacity').val()) || 2000,
+        vehicleValue: parseInt($('#vehicleValue').val()) || 200000,
         fullName: $('#fullName').val(),
         email: $('#email').val(),
         phoneNumber: $('#phoneNumber').val(),
@@ -958,18 +1007,104 @@ $('#quotationForm').on('submit', function(e) {
         coveragePlan: $('#coveragePlan').val(),
         paymentMethod: $('#paymentMethod').val(),
         status: 'approved',
+        approvedBy: 'Chris Wong',
+        approvalDate: new Date().toISOString(),
         date: new Date().toISOString().split('T')[0]
     };
     
-    // Add quote and update display
+    // Add quote to the beginning of the array
     quotes.unshift(newQuote);
-    displayQuotes();
-    updateStatistics();
+    
+    // Update display with animation
+    const quoteList = $('#quoteList');
+    const newQuoteElement = $(`
+        <div class="quotation-card" style="opacity: 0; transform: translateY(-20px);">
+            <span class="quotation-reference">Ref: ${newQuote.referenceNumber}</span>
+            
+            <div class="row">
+                <div class="col-md-8">
+                    <p>Vehicle: ${newQuote.vehicleMake} ${newQuote.vehicleModel}</p>
+                    <p>Date: ${newQuote.date}</p>
+                    <p>Coverage: ${newQuote.coveragePlan === 'comprehensive' ? 'Comprehensive Coverage' : 'Third-Party Coverage'}</p>
+                    <p>Approved by: ${newQuote.approvedBy}</p>
+                    <span class="quotation-status quotation-status--approved">APPROVED</span>
+                </div>
+            </div>
+
+            <div class="action-buttons">
+                <button class="btn support-button btn-sm">
+                    <span class="support-icon">💬</span>Support Chat
+                </button>
+            </div>
+        </div>
+    `);
+    
+    // Add new quote to the top of the list
+    quoteList.prepend(newQuoteElement);
+    
+    // Animate the new quote card
+    setTimeout(() => {
+        newQuoteElement.css({
+            'transition': 'all 0.5s ease',
+            'opacity': '1',
+            'transform': 'translateY(0)'
+        });
+    }, 100);
     
     // Show confirmation
-    showNotification('Quote submitted successfully!');
+    showNotification('Quote approved successfully by Chris Wong!');
     
     // Reset form and close modal
     this.reset();
     closeModal('newQuoteModal');
+    
+    // Reset vehicle model select when make is cleared
+    $('#vehicleMake').on('change', function() {
+        const modelSelect = $('#vehicleModel');
+        modelSelect.empty().append('<option value="">Select Model</option>');
+        
+        const selectedMake = $(this).val();
+        if (selectedMake && carModels[selectedMake]) {
+            carModels[selectedMake].forEach(model => {
+                modelSelect.append(`<option value="${model}">${model}</option>`);
+            });
+        }
+    });
 });
+
+// Function to show notification
+function showNotification(message) {
+    const notification = $('#notification');
+    notification.text(message)
+        .fadeIn()
+        .css({
+            'transform': 'translateY(0)',
+            'opacity': '1'
+        });
+    
+    setTimeout(() => {
+        notification.css({
+            'transform': 'translateY(-20px)',
+            'opacity': '0'
+        }).fadeOut();
+    }, 3000);
+}
+
+// Function to close modal
+function closeModal(modalId) {
+    const modal = $(`#${modalId}`);
+    modal.css('opacity', '0');
+    setTimeout(() => {
+        modal.removeClass('show');
+        $('#quotationForm')[0].reset();
+    }, 300);
+}
+
+// Function to show modal
+function showModal(modalId) {
+    const modal = $(`#${modalId}`);
+    modal.addClass('show');
+    setTimeout(() => {
+        modal.css('opacity', '1');
+    }, 50);
+}
