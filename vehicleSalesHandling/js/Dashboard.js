@@ -63,26 +63,6 @@ $(document).ready(function() {
         }
     });
 
-    // Load vehicle orders
-    function loadVehicleOrders() {
-        const orders = [
-            { model: 'Sedan Model Y', status: 'Booked', customer: 'Mathew' }
-        ];
-
-        const ordersList = orders.map(order => `
-            <div class="order-item">
-                <span class="model">${order.model}</span>
-                <span class="status ${order.status.toLowerCase()}">${order.status}</span>
-                <span class="customer">(${order.customer})</span>
-            </div>
-        `).join('');
-
-        $('.target-list').html(ordersList);
-    }
-
-    // Initialize components
-    loadVehicleOrders();
-
     // Event handlers
     $('.add-sale-btn').click(function() {
         // Implement add sale functionality

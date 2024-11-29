@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehicle Sales Order Management</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="js/sidebar.js"></script>
+    <link rel="stylesheet" href="css/sidebar.css">
+</head>
+
+<body>
+    <button class="menu-toggle">
+        <img src="./icon/bars-black.png" alt="Menu">
+    </button>
+    <div class="sidebar-overlay"></div>
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <img src="../icon/lm.png" alt="Logo">
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li>
+                        <a href="Dashboard.html">
+                            <img src="./icon/house-black.png" alt="Dashboard Icon" class="nav-icon">
+                            <span class="nav-text">Dashboard</span>
+                        </a>
+                    </li>
+                    <li >
+                        <a href="orderManagement.html">
+                            <img src="./icon/file-invoice-black.png" alt="Orders Icon" class="nav-icon">
+                            <span class="nav-text">Orders</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="Inbox.html">
+                            <img src="./icon/comment-black.png" alt="Inbox Icon" class="nav-icon">
+                            <span class="nav-text">Inbox</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="Sales.html">
+                            <img src="./icon/chart-line-black.png" alt="Sales Icon" class="nav-icon">
+                            <span class="nav-text">Sales</span>
+                        </a>
+                    </li>
+
+                    <li class="active">
+                        <a href="Tasks.html">
+                            <img src="./icon/list-check-black.png" alt="Tasks Icon" class="nav-icon">
+                            <span class="nav-text">Tasks</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="Calender.html">
+                            <img src="./icon/calendar-days-black.png" alt="Calendar Icon" class="nav-icon">
+                            <span class="nav-text">Calendar</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="Setting.html">
+                            <img src="./icon/gear-black.png" alt="Settings Icon" class="nav-icon">
+                            <span class="nav-text">Settings</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header>
+
+                <div class="header-actions">
+
+                </div>
+            </header>
+
+
+        </main>
+    </div>
+    <script>
+        // Initialize the sidebar when document is ready
+        $(document).ready(function () {
+            new Sidebar();
+        });
+    </script>
+</body>
+
+</html>

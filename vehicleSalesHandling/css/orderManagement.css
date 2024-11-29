@@ -1,0 +1,1043 @@
+:root {
+    --primary-color: #2D4356;
+    --secondary-color: #435B66;
+    --accent-color: #A76F6F;
+    --background-color: #F8F9FA;
+    --text-color: #333;
+    --border-color: #E9ECEF;
+    --card-bg: white;
+    --hover-bg: #e9ecef;
+}
+
+/* Enhanced Header Section */
+.page-header {
+    margin-bottom: 2rem;
+}
+
+.page-title {
+    font-size: 1.75rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.header-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    background: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+/* Enhanced Search Bar */
+.search-bar {
+    display: flex;
+    align-items: center;
+    background: var(--background-color);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    width: 400px;
+    transition: all 0.3s ease;
+}
+
+.search-bar:focus-within {
+    box-shadow: 0 0 0 2px var(--primary-color);
+}
+
+.search-bar input {
+    border: none;
+    outline: none;
+    padding: 0.5rem;
+    width: 100%;
+    background: transparent;
+    font-size: 0.95rem;
+}
+
+/* Enhanced Buttons */
+.action-buttons {
+    display: flex;
+    gap: 1rem;
+}
+
+.btn {
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.btn img {
+    width: 18px;
+    height: 18px;
+    opacity: 0.8;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: var(--secondary-color);
+    transform: translateY(-1px);
+}
+
+.btn-outline {
+    border: 1px solid var(--border-color);
+    background: var(--card-bg);
+    color: var(--text-color);
+}
+
+.btn-outline:hover {
+    background: var(--background-color);
+    border-color: var(--primary-color);
+}
+
+/* Enhanced Table Styles */
+.orders-table {
+    background: var(--card-bg);
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    overflow: hidden;
+}
+
+.table-header {
+    display: grid;
+    grid-template-columns: 1fr 2fr 2fr 1.5fr 1.5fr 1.5fr;
+    padding: 1.25rem 1rem;
+    background: var(--background-color);
+    font-weight: 600;
+    color: var(--secondary-color);
+    border-bottom: 2px solid var(--border-color);
+}
+
+.order-row {
+    display: grid;
+    grid-template-columns: 1fr 2fr 2fr 1.5fr 1.5fr 1.5fr;
+    padding: 1.25rem 1rem;
+    border-bottom: 1px solid var(--border-color);
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.order-row:hover {
+    background: var(--background-color);
+    transform: translateX(5px);
+}
+
+/* Enhanced Status Badges */
+.status-badge {
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    text-align: center;
+    font-size: 0.875rem;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.status-badge::before {
+    content: '';
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+}
+
+/* Add processing status styles */
+.status-processing {
+    background: #E3F2FD;
+    color: #1976D2;
+}
+
+.status-processing::before {
+    background: #1976D2;
+}
+
+/* Existing status styles */
+.status-pending {
+    background: #FFF3E0;
+    color: #FF9800;
+}
+
+.status-pending::before {
+    background: #FF9800;
+}
+
+.status-confirmed {
+    background: #E8F5E9;
+    color: #4CAF50;
+}
+
+.status-confirmed::before {
+    background: #4CAF50;
+}
+
+.status-cancelled {
+    background: #FFEBEE;
+    color: #F44336;
+}
+
+.status-cancelled::before {
+    background: #F44336;
+}
+
+/* Completed Status Styles */
+.status-completed {
+    background: #E8F5E9;
+    color: #4CAF50;
+}
+
+.status-completed::before {
+    background: #4CAF50;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .table-header, .order-row {
+        grid-template-columns: 1fr 2fr 1.5fr 1fr 1fr;
+    }
+    
+    .hide-on-tablet {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .header-actions {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem;
+    }
+    
+    .search-bar {
+        width: 100%;
+    }
+    
+    .action-buttons {
+        width: 100%;
+        justify-content: stretch;
+    }
+    
+    .btn {
+        flex: 1;
+        justify-content: center;
+    }
+    
+    .table-header, .order-row {
+        grid-template-columns: 1fr 1.5fr 1fr;
+        font-size: 0.9rem;
+    }
+    
+    .hide-on-mobile {
+        display: none;
+    }
+}
+
+/* Order Tracking and Processing Styles */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    padding: 1rem;
+}
+
+.tracking-step::before {
+    content: '';
+    position: absolute;
+    left: 10px;
+    top: 25px;
+    bottom: -25px;
+    width: 2px;
+    background: var(--border-color);
+}
+
+.tracking-step:last-child::before {
+    display: none;
+}
+
+.step-content {
+    flex: 1;
+}
+
+.step-content h4 {
+    margin: 0;
+    color: var(--text-color);
+}
+
+.step-content p {
+    margin: 0.5rem 0 0;
+    color: var(--secondary-color);
+    font-size: 0.875rem;
+}
+
+.btn-action {
+    background: transparent;
+    border: none;
+    padding: 0.5rem;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+}
+
+.btn-action:hover {
+    opacity: 1;
+}
+
+.order-actions-menu {
+    position: absolute;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    min-width: 200px;
+    z-index: 1100;
+    animation: menuFadeIn 0.2s ease;
+    overflow: hidden;
+}
+
+.order-actions-menu button {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: none;
+    background: none;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.order-actions-menu button:hover {
+    background: var(--hover-bg);
+}
+
+.order-actions-menu button img {
+    width: 18px;
+    height: 18px;
+}
+
+@keyframes menuFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Modal Styles */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    padding: 1rem;
+}
+
+.tracking-modal,
+.details-modal {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    width: 90%;
+    max-width: 600px;
+    position: relative;
+    animation: modalFadeIn 0.3s ease;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.modal-header h3 {
+    margin: 0;
+    color: var(--primary-color);
+}
+
+.btn-close {
+    background: transparent;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    line-height: 1;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+}
+
+.btn-close:hover {
+    opacity: 1;
+}
+
+/* Details Modal Styles */
+.details-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.detail-row {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem;
+    background: var(--background-color);
+    border-radius: 8px;
+}
+
+.detail-label {
+    font-weight: 600;
+    color: var(--secondary-color);
+    width: 100px;
+}
+
+.detail-value {
+    color: var(--text-color);
+}
+
+/* Animation */
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Processing Modal Styles */
+.processing-modal {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    width: 90%;
+    max-width: 600px;
+    position: relative;
+    animation: modalFadeIn 0.3s ease;
+}
+
+.processing-steps {
+    margin: 1.5rem 0;
+}
+
+.processing-step {
+    padding: 1rem;
+    border-radius: 8px;
+    background: var(--background-color);
+    margin-bottom: 0.75rem;
+}
+
+.step-label {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    cursor: pointer;
+}
+
+.step-name {
+    flex: 1;
+    font-weight: 500;
+    color: var(--text-color);
+}
+
+.step-date {
+    color: var(--secondary-color);
+    font-size: 0.875rem;
+}
+
+.processing-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+
+input[type="checkbox"]:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+/* Confirmation Modal Styles */
+.confirmation-modal {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    animation: modalFadeIn 0.3s ease;
+}
+
+.confirmation-modal h3 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.confirmation-modal p {
+    color: var(--text-color);
+    margin-bottom: 2rem;
+}
+
+.confirmation-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    color: white;
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+}
+
+/* Action Buttons Styles */
+.btn-track,
+.btn-action {
+    background: var(--background-color);
+    border: none;
+    border-radius: 8px;
+    padding: 0.6rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 0.3rem;
+}
+
+.btn-track:hover,
+.btn-action:hover {
+    background: var(--hover-bg);
+    transform: translateY(-2px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.btn-track:active,
+.btn-action:active {
+    transform: translateY(0);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+.btn-track img,
+.btn-action img {
+    width: 22px;
+    height: 22px;
+    transition: all 0.3s ease;
+}
+
+/* Specific button styles */
+.btn-track {
+    background: #E3F2FD;  /* Light blue background */
+}
+
+.btn-track:hover {
+    background: #BBDEFB;
+}
+
+.btn-action {
+    background: #F5F5F5;  /* Light gray background */
+}
+
+.btn-action:hover {
+    background: #EEEEEE;
+}
+
+/* Disabled state */
+.btn-track:disabled,
+.btn-action:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+/* Modal Overlay and Details Modal Styles */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    padding: 1rem;
+}
+
+.details-modal {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+    animation: modalFadeIn 0.3s ease;
+    margin: auto;
+}
+
+/* Animation for modal appearance */
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .details-modal {
+        width: 95%;
+        padding: 1.5rem;
+        margin: 1rem;
+    }
+}
+
+/* Tracking Modal Styles */
+.tracking-modal {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    width: 90%;
+    max-width: 600px;
+    position: relative;
+    animation: modalFadeIn 0.3s ease;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.tracking-timeline {
+    margin-top: 2rem;
+    padding: 0 1rem;
+}
+
+.tracking-step {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+    position: relative;
+    padding-left: 1rem;
+}
+
+.step-indicator {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--border-color);
+    position: relative;
+    z-index: 2;
+    border: 2px solid white;
+    box-shadow: 0 0 0 2px var(--border-color);
+}
+
+.tracking-step.completed .step-indicator {
+    background: var(--primary-color);
+    box-shadow: 0 0 0 2px var(--primary-color);
+}
+
+.tracking-step::before {
+    content: '';
+    position: absolute;
+    left: 1.85rem;
+    top: 24px;
+    bottom: -24px;
+    width: 2px;
+    background: var(--border-color);
+    z-index: 1;
+}
+
+.tracking-step:last-child::before {
+    display: none;
+}
+
+.step-content {
+    flex: 1;
+    padding-bottom: 1rem;
+}
+
+.step-content h4 {
+    margin: 0;
+    color: var(--text-color);
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.step-content p {
+    margin: 0.5rem 0 0;
+    color: var(--secondary-color);
+    font-size: 0.875rem;
+}
+
+/* Modal Overlay (shared between tracking and details modals) */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    padding: 1rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .tracking-modal {
+        width: 95%;
+        padding: 1.5rem;
+    }
+    
+    .tracking-timeline {
+        padding: 0 0.5rem;
+    }
+    
+    .tracking-step {
+        gap: 1rem;
+        padding-left: 0.5rem;
+    }
+}
+
+/* Update order actions column styles */
+.order-actions {
+    display: flex;
+    flex-direction: column;  /* Change to vertical arrangement */
+    gap: 0.75rem;           /* Add gap between elements */
+    align-items: flex-start; /* Align items to the start */
+}
+
+/* Update status badge for vertical layout */
+.status-badge {
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    text-align: center;
+    font-size: 0.875rem;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;  /* Add margin bottom */
+}
+
+/* Group action buttons together */
+.action-buttons-group {
+    display: flex;
+    gap: 0.5rem;
+}
+
+/* Update button sizes for vertical layout */
+.btn-track,
+.btn-action {
+    padding: 0.5rem;
+    width: 35px;           /* Set fixed width */
+    height: 35px;          /* Set fixed height */
+}
+
+/* Enhanced Order Actions Menu */
+.order-actions-menu {
+    position: absolute;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    min-width: 200px;
+    z-index: 1100;
+    animation: menuFadeIn 0.2s ease;
+    overflow: hidden;
+}
+
+.order-actions-menu button {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: none;
+    background: none;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.order-actions-menu button:hover {
+    background: var(--hover-bg);
+}
+
+.order-actions-menu button img {
+    width: 18px;
+    height: 18px;
+}
+
+/* Mobile-specific styles */
+@media (max-width: 768px) {
+    .order-actions-menu {
+        position: fixed;
+        left: 50% !important;
+        bottom: 0;
+        transform: translateX(-50%);
+        width: 100%;
+        max-width: 100%;
+        border-radius: 12px 12px 0 0;
+        animation: slideUp 0.3s ease;
+    }
+}
+
+/* Enhanced animations */
+@keyframes slideUp {
+    from {
+        transform: translate(-50%, 100%);
+    }
+    to {
+        transform: translate(-50%, 0);
+    }
+}
+
+/* Add backdrop for mobile */
+.actions-backdrop {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .actions-backdrop {
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 1050;
+        animation: fadeIn 0.2s ease;
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Filter Modal Styles */
+.filter-modal {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+    animation: modalFadeIn 0.3s ease;
+}
+
+.filter-content {
+    margin: 1.5rem 0;
+}
+
+.filter-group {
+    margin-bottom: 1.5rem;
+}
+
+.filter-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    color: var(--secondary-color);
+}
+
+.checkbox-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.checkbox-group label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: normal;
+    cursor: pointer;
+}
+
+.date-inputs,
+.amount-inputs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.date-inputs input,
+.amount-inputs input {
+    padding: 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 0.9rem;
+}
+
+.filter-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+@media (max-width: 768px) {
+    .date-inputs,
+    .amount-inputs {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Notification Styles */
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    background: white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 1200;
+    animation: notificationSlide 0.3s ease;
+}
+
+.notification-success {
+    background: #4CAF50;
+    color: white;
+}
+
+.notification-error {
+    background: #F44336;
+    color: white;
+}
+
+@keyframes notificationSlide {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@media (max-width: 768px) {
+    .new-order-modal {
+        width: 95%;
+        padding: 1.5rem;
+    }
+    
+    .form-actions {
+        flex-direction: column-reverse;
+    }
+    
+    .form-actions button {
+        width: 100%;
+    }
+}
+
+.generate-invoice {
+    color: var(--text-color);
+}
+
+.generate-invoice:hover {
+    background: var(--hover-bg);
+}
+
+.generate-invoice img {
+    opacity: 0.7;
+}
+
+.generate-invoice:hover img {
+    opacity: 1;
+}
+
+/* Invoice Preview Modal Styles */
+.invoice-preview-modal {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    width: 90%;
+    max-width: 800px;
+    position: relative;
+    animation: modalFadeIn 0.3s ease;
+}
+
+.invoice-preview-content {
+    margin: 1.5rem 0;
+    height: 70vh;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.pdf-preview {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.invoice-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+@media (max-width: 768px) {
+    .invoice-preview-modal {
+        width: 95%;
+        padding: 1.5rem;
+    }
+    
+    .invoice-preview-content {
+        height: 60vh;
+    }
+    
+    .invoice-actions {
+        flex-direction: column-reverse;
+    }
+    
+    .invoice-actions button {
+        width: 100%;
+    }
+}

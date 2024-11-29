@@ -36,23 +36,38 @@ $(document).ready(function () {
         // Update header
         $('.account-header h2').text(`Welcome, ${userData.fullName}`);
         $('.account-header p').text(`Member since ${userData.memberSince}`);
-        $('.profile-picture').text(getInitials(userData.fullName));
 
-        // Handle profile image
+        // Handle profile image display
+        updateProfilePicture(userData);
+        
+        // Initialize profile image handling
+        handleProfileImage();
+    }
+
+    // Update the profile picture update function
+    function updateProfilePicture(userData) {
+        const fullName = userData.fullName || $('#profile-form input[type="text"]').first().val();
+        const initials = getInitials(fullName);
+        
         if (userData.profileImage) {
             $('.profile-picture')
+                .addClass('has-image')
                 .css('background-image', `url(${userData.profileImage})`)
-                .text('')
-                .addClass('has-image');
+                .text('');
             $('#profile-preview')
                 .attr('src', userData.profileImage)
                 .show();
             $('.remove-image-btn').show();
         } else {
+            // Always ensure initials are displayed when no image
             $('.profile-picture')
-                .css('background-image', 'none')
-                .text(getInitials(userData.fullName))
-                .removeClass('has-image');
+                .removeClass('has-image')
+                .css({
+                    'background-image': 'none',
+                    'background-color': '#e0e0e0',
+                    'color': '#666'
+                })
+                .text(initials || 'CW'); // Fallback to 'CW' if no initials
             $('#profile-preview').hide();
             $('.remove-image-btn').hide();
         }
@@ -135,7 +150,7 @@ $(document).ready(function () {
         // Get existing data to preserve other fields
         const existingData = JSON.parse(localStorage.getItem('userData')) || {};
         
-        // Save data
+        // Save data while preserving the profile image
         const userData = {
             ...existingData,
             fullName,
@@ -150,18 +165,8 @@ $(document).ready(function () {
         // Update UI
         $('.account-header h2').text(`Welcome, ${userData.fullName}`);
         
-        // Reset profile image preview and remove button
-        $('#profile-preview').hide();
-        $('.remove-image-btn').hide();
-        $('#profile-upload').val('');
-        
-        // Update profile picture with initials if no image
-        if (!userData.profileImage) {
-            $('.profile-picture')
-                .removeClass('has-image')
-                .css('background-image', 'none')
-                .text(getInitials(userData.fullName));
-        }
+        // Update profile picture
+        updateProfilePicture(userData);
         
         showNotification('Profile updated successfully!', 'success');
     });
@@ -210,52 +215,62 @@ $(document).ready(function () {
         $(`#${$(this).data('tab')}`).addClass('active');
     });
 
-    // Initialize
-    loadUserData();
-    handleProfileImage();
-});
-
-// Update the handleProfileImage function
-function handleProfileImage() {
-    $('#profile-upload').on('change', function(e) {
-        const file = e.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                const imageData = e.target.result;
-                
-                // Update preview and profile picture
-                $('#profile-preview').attr('src', imageData).show();
-                $('.profile-picture')
-                    .css('background-image', `url(${imageData})`)
-                    .text('')
-                    .addClass('has-image');
-                $('.remove-image-btn').show();
-
-                // Save to localStorage
-                const userData = JSON.parse(localStorage.getItem('userData')) || {};
-                userData.profileImage = imageData;
-                localStorage.setItem('userData', JSON.stringify(userData));
-            };
-            reader.readAsDataURL(file);
-        }
-    });
-
-    // Add remove image functionality
+    // Move remove image handler outside handleProfileImage
     $('.remove-image-btn').click(function() {
         const userData = JSON.parse(localStorage.getItem('userData')) || {};
         const fullName = userData.fullName || $('#profile-form input[type="text"]').first().val();
+        const initials = getInitials(fullName);
         
-        $('#profile-preview').hide().attr('src', '');
+        // Update profile picture display
         $('.profile-picture')
-            .css('background-image', 'none')
-            .text(getInitials(fullName))
-            .removeClass('has-image');
-        $(this).hide();
+            .removeClass('has-image')
+            .css({
+                'background-image': 'none',
+                'background-color': '#e0e0e0',
+                'color': '#666'
+            })
+            .text(initials || 'CW');
+
+        // Reset preview elements
+        $('#profile-preview').hide().attr('src', '');
+        $('.remove-image-btn').hide();
         $('#profile-upload').val('');
 
         // Update localStorage
         userData.profileImage = null;
         localStorage.setItem('userData', JSON.stringify(userData));
+
+        // Show notification
+        showNotification('Profile picture removed', 'success');
     });
-}
+
+    // Update handleProfileImage to only handle file upload
+    function handleProfileImage() {
+        $('#profile-upload').on('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const imageData = e.target.result;
+                    
+                    // Update preview and profile picture
+                    $('#profile-preview').attr('src', imageData).show();
+                    $('.profile-picture')
+                        .css('background-image', `url(${imageData})`)
+                        .text('')
+                        .addClass('has-image');
+                    $('.remove-image-btn').show();
+
+                    // Save to localStorage
+                    const userData = JSON.parse(localStorage.getItem('userData')) || {};
+                    userData.profileImage = imageData;
+                    localStorage.setItem('userData', JSON.stringify(userData));
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    }
+
+    // Initialize
+    loadUserData();
+});
