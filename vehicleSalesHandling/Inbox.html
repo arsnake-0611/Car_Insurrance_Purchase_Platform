@@ -8,6 +8,8 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="js/sidebar.js"></script>
     <link rel="stylesheet" href="css/sidebar.css">
+    <script src="js/Inbox.js"></script>
+    <link rel="stylesheet" href="css/Inbox.css">
 </head>
 
 <body>
@@ -68,19 +70,35 @@
                     </li>
                 </ul>
             </nav>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="/signin/signin.html">
+                            <img src="./icon/sign-out-black.png" alt="Logout Icon" class="nav-icon">
+                            <span class="nav-text">Logout</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
         </aside>
 
         <!-- Main Content -->
         <main class="main-content">
-            <!-- Header -->
-            <header>
-
-                <div class="header-actions">
-
+            <div class="inbox-container">
+                <div class="conversations-sidebar">
+                    <div class="sidebar-header">
+                        <input type="text" id="searchConversations" placeholder="Search conversations...">
+                    </div>
+                    <div class="conversation-list">
+                        <!-- Conversations will be populated here -->
+                    </div>
                 </div>
-            </header>
-
-
+                
+                <div class="chat-area">
+                    <div class="no-conversation-selected">
+                        <img src="./icon/chat-start.png" alt="Start Chat" class="empty-state">
+                    </div>
+                </div>
+            </div>
         </main>
     </div>
     <script>

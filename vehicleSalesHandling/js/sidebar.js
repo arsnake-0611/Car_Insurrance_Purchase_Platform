@@ -9,6 +9,7 @@ class Sidebar {
         this.hoverStartTime = null;
         this.minHoverTime = 200;
         this.isIntentional = false;
+        this.logoutBtn = $('.logout-btn');
 
         this.init();
     }
@@ -31,6 +32,14 @@ class Sidebar {
 
         // Desktop hover handlers
         this.initializeDesktopHover();
+
+        // Add logout handler
+        this.logoutBtn.click((e) => {
+            e.preventDefault(); // Prevent default anchor behavior
+            if (confirm('Are you sure you want to logout?')) {
+                window.location.href = 'login.html'; // or your login page URL
+            }
+        });
     }
 
     toggleMobileMenu() {
@@ -72,7 +81,7 @@ class Sidebar {
                         if (Date.now() - this.hoverStartTime >= this.minHoverTime) {
                             this.isIntentional = true;
                             this.sidebar.addClass('expanded');
-                            $('.nav-text, .main-nav h3, .settings-nav h3').css({
+                            $('.nav-text, .main-nav h3, .settings-nav h3, .logout-btn .nav-text').css({
                                 'opacity': '1',
                                 'visibility': 'visible',
                                 'position': 'static'
@@ -85,7 +94,7 @@ class Sidebar {
                     this.isIntentional = false;
                     this.sidebar.removeClass('expanded');
                     if (window.innerWidth > 768) {
-                        $('.nav-text, .main-nav h3, .settings-nav h3').css({
+                        $('.nav-text, .main-nav h3, .settings-nav h3, .logout-btn .nav-text').css({
                             'opacity': '0',
                             'visibility': 'hidden',
                             'position': 'absolute'
