@@ -732,20 +732,6 @@ $(document).ready(function() {
                 </div>
             </div>
         `);
-
-        // // Simulate customer acknowledgment
-        // setTimeout(() => {
-        //     $('.chat-messages').append(`
-        //         <div class="message-container">
-        //             <div class="message customer-message">
-        //                 <div class="message-info">Customer (${timestamp})</div>
-        //                 Thank you for notifying me about the changes to my quote. I have received the update details.
-        //             </div>
-        //         </div>
-        //     `);
-            
-        //     $('.chat-messages').scrollTop($('.chat-messages')[0].scrollHeight);
-        // }, 1000);
     }
 
     $(document).on('click', '.approve-quote', function() {
@@ -808,45 +794,14 @@ $(document).ready(function() {
 
     $('.sign-out-btn').on('click', function() {
         if(confirm('Are you sure you want to sign out?')) {
-            window.location.href = "signin.html"
+            window.location.href = "/signin/signin.html"
         }
     });
 
-    // Hamburger menu and sidebar functionality
-    const $hamburger = $('.hamburger-menu');
+    //Sidebar 
     const $sidebar = $('.sidebar');
     const $content = $('.content-wrapper');
     const $header = $('header');
-
-    // Toggle sidebar
-    $hamburger.click(function(e) {
-        e.stopPropagation();
-        $hamburger.toggleClass('active');
-        $sidebar.toggleClass('active');
-        
-        if ($sidebar.hasClass('active')) {
-            $content.css('margin-left', '220px');
-            $header.css('left', '220px');
-        } else {
-            $content.css('margin-left', '0');
-            $header.css('left', '0');
-        }
-    });
-
-    // Close sidebar when clicking outside
-    $(document).click(function(e) {
-        if (!$sidebar.is(e.target) && 
-            !$hamburger.is(e.target) && 
-            $sidebar.has(e.target).length === 0 && 
-            $hamburger.has(e.target).length === 0 && 
-            $sidebar.hasClass('active')) {
-            
-            $sidebar.removeClass('active');
-            $hamburger.removeClass('active');
-            $content.css('margin-left', '0');
-            $header.css('left', '0');
-        }
-    });
 
     // Handle window resize
     let resizeTimer;
@@ -855,7 +810,6 @@ $(document).ready(function() {
         resizeTimer = setTimeout(function() {
             if ($(window).width() <= 768) {
                 $sidebar.removeClass('active');
-                $hamburger.removeClass('active');
                 $content.css('margin-left', '0');
                 $header.css('left', '0');
             }
@@ -877,7 +831,7 @@ $(document).ready(function() {
             $header.css('left', '0');
         }
         
-        // Show notification and then navigate
+        // Show notification
         showNotification('Loading ' + $(this).text() + '...');
         
         // Allow normal link navigation
@@ -887,7 +841,6 @@ $(document).ready(function() {
     // Sign out button handling
     $('.sign-out-btn').click(function() {
         showNotification('Signing out...');
-        // Add your sign out logic here
     });
 
     // Chat support functionality
@@ -913,16 +866,6 @@ $(document).ready(function() {
         if (message !== '') {
             const timestamp = new Date().toLocaleTimeString();
             
-            // Add customer message
-            $('.chat-messages').append(`
-                <div class="message-container">
-                    <div class="message customer-message">
-                        <div class="message-info">You (${timestamp})</div>
-                        ${message}
-                    </div>
-                </div>
-            `);
-            
             // Clear input
             input.val('');
             
@@ -935,7 +878,7 @@ $(document).ready(function() {
                     <div class="message-container">
                         <div class="message staff-message">
                             <div class="message-info">Support Staff (${timestamp})</div>
-                            Thank you for your message. How can I assist you today?
+                            Hello, How can I help with your insurance quote?
                         </div>
                     </div>
                 `);
@@ -972,6 +915,42 @@ $(document).ready(function() {
                 quoteElement.removeClass('highlight-quote pulse-animation');
                 localStorage.removeItem('highlightQuoteId');
             });
+        }
+    }
+
+    // Theme toggle functionality
+    const themeToggleBtn = $('#themeToggleBtn');
+    const body = $('body');
+    
+    // Check for saved theme preference
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+        body.addClass('dark-mode');
+        updateThemeToggleButton(true);
+    }
+    
+    // Theme toggle click handler
+    themeToggleBtn.on('click', function() {
+        const isDarkMode = body.hasClass('dark-mode');
+        body.toggleClass('dark-mode');
+        localStorage.setItem('theme', isDarkMode ? 'light' : 'dark');
+        updateThemeToggleButton(!isDarkMode);
+        showNotification(`Switched to ${isDarkMode ? 'light' : 'dark'} mode`);
+    });
+    
+    function updateThemeToggleButton(isDarkMode) {
+        const lightIcon = themeToggleBtn.find('.theme-icon.light');
+        const darkIcon = themeToggleBtn.find('.theme-icon.dark');
+        const themeText = themeToggleBtn.find('.theme-text');
+        
+        if (isDarkMode) {
+            lightIcon.hide();
+            darkIcon.show();
+            themeText.text('Light Mode');
+        } else {
+            lightIcon.show();
+            darkIcon.hide();
+            themeText.text('Dark Mode');
         }
     }
 });

@@ -11,7 +11,6 @@
     <script src="recordsList.js" defer></script>
     </head>
     <body>
-    <div class="notification" id="notification"></div>
     
     <div class="sidebar">
         <div class="sidebar-header">
@@ -24,6 +23,13 @@
             <li><a href="reports.html">Reports</a></li>
             <li><a href="settings.html">Settings</a></li>
         </ul>
+        <div class="theme-toggle">
+            <button id="themeToggleBtn" class="theme-toggle-btn">
+                <span class="theme-icon light">☀️</span>
+                <span class="theme-icon dark">🌙</span>
+                <span class="theme-text">Dark Mode</span>
+            </button>
+        </div>
         <div class="sidebar-footer">
             <button class="sign-out-btn">Sign Out</button>
         </div>
@@ -33,7 +39,7 @@
         <div class="header-content">
             <h2>Insurance Quotation Management</h2>
             <div class="user-info">
-                <span>Welcome, Admin</span>
+                <span>Welcome, Chris Wong</span>
             </div>
         </div>
     </header>
@@ -102,7 +108,6 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h3>New Insurance Quotation</h3>
-                    <button type="button" class="close-modal" onclick="closeModal('newQuoteModal')">&times;</button>
                 </div>
                 <div class="modal-body">
                     <form id="quotationForm">
@@ -152,7 +157,8 @@
                             <div class="form-group">
                                 <label for="vehicleYear">Manufacturing Year *</label>
                                 <input type="number" id="vehicleYear" name="vehicleYear" 
-                                       class="form-control" min="2000" max="2024" required>
+                                       min="2000" max="2024" required 
+                                       placeholder="YYYY" />
                             </div>
                         </div>
 
@@ -193,7 +199,7 @@
             <button class="close-chat">×</button>
         </div>
         <div class="chat-messages">
-            <div class="message-container">
+            <div>
                 <div class="message customer-message">
                     <div class="message-info">Customer</div>
                     Hello, I need help with my insurance quote.

@@ -117,6 +117,42 @@ $(document).ready(function() {
     
     // Add notification check for new quotes
     checkNewQuotations();
+    
+    // Theme toggle functionality
+    const themeToggleBtn = $('#themeToggleBtn');
+    const body = $('body');
+    
+    // Check for saved theme preference
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+        body.addClass('dark-mode');
+        updateThemeToggleButton(true);
+    }
+    
+    // Theme toggle click handler
+    themeToggleBtn.on('click', function() {
+        const isDarkMode = body.hasClass('dark-mode');
+        body.toggleClass('dark-mode');
+        localStorage.setItem('theme', isDarkMode ? 'light' : 'dark');
+        updateThemeToggleButton(!isDarkMode);
+        showNotification(`Switched to ${isDarkMode ? 'light' : 'dark'} mode`);
+    });
+    
+    function updateThemeToggleButton(isDarkMode) {
+        const lightIcon = themeToggleBtn.find('.theme-icon.light');
+        const darkIcon = themeToggleBtn.find('.theme-icon.dark');
+        const themeText = themeToggleBtn.find('.theme-text');
+        
+        if (isDarkMode) {
+            lightIcon.hide();
+            darkIcon.show();
+            themeText.text('Light Mode');
+        } else {
+            lightIcon.show();
+            darkIcon.hide();
+            themeText.text('Dark Mode');
+        }
+    }
 });
 
 // Update statistics with animation
@@ -323,9 +359,7 @@ function setupEventListeners() {
     $('.sign-out-btn').on('click', function() {
         if(confirm('Are you sure you want to sign out?')) {
             showNotification('Signing out...');
-            setTimeout(() => {
-                window.location.href = 'login.html';
-            }, 1000);
+            window.location.href = '/signin/signin.html';
         }
     });
 

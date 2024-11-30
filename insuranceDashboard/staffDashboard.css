@@ -6,7 +6,7 @@
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     background: #f5f7fa;
     min-height: 100vh;
 }
@@ -19,7 +19,7 @@ body {
     width: 250px;
     height: 100vh;
     background: linear-gradient(180deg, #2c3e50 0%, #3498db 100%);
-    color: white;
+    color: #FAF9F6;
     padding: 20px;
     transition: all 0.3s ease;
 }
@@ -53,7 +53,8 @@ body {
 .sidebar-menu a:hover, .sidebar-menu a.active {
     background: rgba(255, 255, 255, 0.1);
     transform: translateX(5px);
-}
+    font-size: 20px;
+}   
 
 .sidebar-footer {
     position: absolute;
@@ -792,4 +793,177 @@ header {
     color: #2c3e50;
     font-weight: 600;
     width: 25%;
+}
+
+/* Theme Toggle Button */
+.theme-toggle {
+    padding: 15px 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.theme-toggle-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.theme-toggle-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.theme-icon {
+    font-size: 16px;
+}
+
+.theme-icon.dark {
+    display: none;
+}
+
+/* Dark Mode Styles */
+body.dark-mode {
+    background: #010028;
+    color: #5d5d72;
+}
+
+/* Container backgrounds */
+.dark-mode .dashboard-container,
+.dark-mode .main-controls,
+.dark-mode .quotations-container,
+.dark-mode .activity-item,
+.dark-mode header,
+.dark-mode .dashboard-stats .stats-card,
+.dark-mode .recent-activity,
+.dark-mode .activity-list {
+    background: #2c2c2c;
+    color: #ffffff;
+    border-color: #3d3d3d;
+}
+
+/* Activity items and cards */
+.dark-mode .activity-content,
+.dark-mode .activity-item {
+    background: #232323;
+    border-color: #3d3d3d;
+}
+
+.dark-mode .activity-summary {
+    background: #1a1a1a;
+}
+
+.dark-mode .activity-header h3,
+.dark-mode .activity-title,
+.dark-mode .quote-id,
+.dark-mode .activity-meta,
+.dark-mode .summary-item,
+.dark-mode .activity-details {
+    color: #ffffff;
+}
+
+/* Form elements and controls */
+.dark-mode select,
+.dark-mode input,
+.dark-mode .filter-controls select,
+.dark-mode .search-container input,
+.dark-mode .activity-controls select {
+    background: #232323;
+    color: #ffffff;
+    border-color: #3d3d3d;
+}
+
+.dark-mode select:focus,
+.dark-mode input:focus,
+.dark-mode .activity-controls select:focus {
+    border-color: #4a90e2;
+    box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2);
+}
+
+.dark-mode .activity-controls select:hover {
+    border-color: #4a90e2;
+}
+
+/* Buttons */
+.dark-mode .action-btn,
+.dark-mode .btn-primary,
+.dark-mode .btn-secondary {
+    background: #3d3d3d;
+    color: #ffffff;
+    border-color: #4d4d4d;
+}
+
+.dark-mode .action-btn:hover,
+.dark-mode .btn-primary:hover,
+.dark-mode .btn-secondary:hover {
+    background: #4d4d4d;
+}
+
+/* Modal styles */
+.dark-mode .modal-content {
+    background: #2c2c2c;
+    color: #ffffff;
+}
+
+.dark-mode .modal-header {
+    border-bottom-color: #3d3d3d;
+}
+
+.dark-mode .modal-footer {
+    border-top-color: #3d3d3d;
+}
+
+/* Table styles */
+.dark-mode .details-table td {
+    border-bottom-color: #3d3d3d;
+}
+
+.dark-mode .details-table .label {
+    color: #cccccc;
+}
+
+/* Notification */
+.dark-mode .notification {
+    background: #2c2c2c;
+    color: #ffffff;
+    border: 1px solid #3d3d3d;
+}
+
+/* Stats cards specific styles */
+.dark-mode .stats-card.total,
+.dark-mode .stats-card.pending,
+.dark-mode .stats-card.approved,
+.dark-mode .stats-card.rejected {
+    background: #2c2c2c;
+}
+
+.dark-mode .stats-info h3 {
+    color: #cccccc;
+}
+
+.dark-mode .stats-info p {
+    color: #ffffff;
+}
+
+/* Recent Activity Dark Mode Styles */
+.dark-mode .activity-header {
+    border-bottom-color: #3d3d3d;
+}
+
+.dark-mode .summary-item i {
+    color: #4a90e2;
+}
+
+.dark-mode .activity-actions {
+    border-top-color: #3d3d3d;
+}
+
+.dark-mode .status-badge {
+    background: #1a1a1a;
+    color: #ffffff;
 }
