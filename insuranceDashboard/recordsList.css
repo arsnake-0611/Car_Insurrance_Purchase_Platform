@@ -47,22 +47,24 @@ body {
 .sidebar-menu {
     list-style: none;
     padding: 0;
-    margin: 0;
+    margin-top: 30px;
+}
+
+.sidebar-menu li {
+    margin-bottom: 15px;
 }
 
 .sidebar-menu a {
     color: white;
     text-decoration: none;
-    display: flex;
-    align-items: center;
+    display: block;
     padding: 12px 15px;
-    margin: 8px 0;
+    margin: 5px 0;
     border-radius: 8px;
     transition: all 0.3s ease;
-    font-size: 1rem;
 }
 
-.sidebar-menu a:hover, 
+.sidebar-menu a:hover,
 .sidebar-menu a.active {
     background: rgba(255, 255, 255, 0.1);
     transform: translateX(5px);
@@ -72,8 +74,7 @@ body {
 .sidebar-footer {
     position: absolute;
     bottom: 20px;
-    left: 20px;
-    right: 20px;
+    width: calc(100% - 40px);
 }
 
 .sign-out-btn {
@@ -81,11 +82,10 @@ body {
     padding: 12px;
     background: rgba(255, 255, 255, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 8px;
     color: white;
+    border-radius: 8px;
     cursor: pointer;
     transition: all 0.3s ease;
-    font-size: 1rem;
 }
 
 .sign-out-btn:hover {
@@ -104,6 +104,14 @@ body {
     
     .content-wrapper {
         margin-left: 0;
+    }
+
+    .sidebar-footer {
+        position: relative;
+        bottom: auto;
+        left: auto;
+        right: auto;
+        margin-top: 20px;
     }
 }
 
@@ -537,21 +545,6 @@ header {
     bottom: 20px;
     left: 20px;
     right: 20px;
-}
-
-.sign-out-btn {
-    width: 100%;
-    padding: 10px;
-    background-color: #e74c3c;
-    border: none;
-    border-radius: 5px;
-    color: white;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.sign-out-btn:hover {
-    background-color: #c0392b;
 }
 
 /* Custom CSS classes */

@@ -114,6 +114,9 @@ $(document).ready(function() {
     updateStatistics();
     updateActivityList();
     setupEventListeners();
+    
+    // Add notification check for new quotes
+    checkNewQuotations();
 });
 
 // Update statistics with animation
@@ -449,10 +452,24 @@ function viewQuoteDetails(quoteId) {
     const quote = activities.find(a => a.reference === quoteId);
     if (quote) {
         showQuoteDetailsModal(quote);
+        
+        // Add animation to show each section
+        setTimeout(() => {
+            $('.details-section').each(function(index) {
+                $(this).delay(index * 100).fadeIn(300);
+            });
+        }, 100);
     }
 }
 
-// Updated showQuoteDetailsModal function with table layout
+// Add this function to close the modal
+function closeModal(modalId) {
+    $(`#${modalId}`).fadeOut(300, function() {
+        $(this).remove();
+    });
+}
+
+// Add the showQuoteDetailsModal function
 function showQuoteDetailsModal(quote) {
     const modalHtml = `
         <div class="modal" id="quoteDetailsModal">
@@ -466,83 +483,63 @@ function showQuoteDetailsModal(quote) {
                         <div class="details-section">
                             <h4><i class="fas fa-car"></i> Vehicle Information</h4>
                             <table class="details-table">
-                                <tbody>
-                                    <tr>
-                                        <td class="label">Make & Model</td>
-                                        <td class="value">${quote.details.vehicleMake} ${quote.details.vehicleModel}</td>
-                                        <td class="label">Year</td>
-                                        <td class="value">${quote.details.vehicleYear}</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="label">Body Type</td>
-                                        <td class="value">${quote.details.bodyType || 'N/A'}</td>
-                                        <td class="label">Seating Capacity</td>
-                                        <td class="value">${quote.details.seatingCapacity || 'N/A'}</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="label">Cylinder Capacity</td>
-                                        <td class="value">${quote.details.cylinderCapacity || 'N/A'} CC</td>
-                                        <td class="label">Vehicle Value</td>
-                                        <td class="value">${quote.details.vehicleValue}</td>
-                                    </tr>
-                                </tbody>
+                                <tr>
+                                    <td class="label">Make & Model</td>
+                                    <td class="value">${quote.details.vehicleMake} ${quote.details.vehicleModel}</td>
+                                    <td class="label">Year</td>
+                                    <td class="value">${quote.details.vehicleYear}</td>
+                                </tr>
+                                <tr>
+                                    <td class="label">Coverage Plan</td>
+                                    <td class="value">${quote.details.coveragePlan}</td>
+                                    <td class="label">Vehicle Value</td>
+                                    <td class="value">${quote.details.vehicleValue}</td>
+                                </tr>
                             </table>
                         </div>
 
                         <div class="details-section">
                             <h4><i class="fas fa-user"></i> Customer Information</h4>
                             <table class="details-table">
-                                <tbody>
-                                    <tr>
-                                        <td class="label">Full Name</td>
-                                        <td class="value">${quote.details.fullName}</td>
-                                        <td class="label">Email</td>
-                                        <td class="value">${quote.details.email}</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="label">Phone Number</td>
-                                        <td class="value">${quote.details.phoneNumber}</td>
-                                        <td class="label">Driving Experience</td>
-                                        <td class="value">${quote.details.drivingExperience || 'N/A'} years</td>
-                                    </tr>
-                                </tbody>
+                                <tr>
+                                    <td class="label">Full Name</td>
+                                    <td class="value">${quote.details.fullName}</td>
+                                    <td class="label">Email</td>
+                                    <td class="value">${quote.details.email}</td>
+                                </tr>
+                                <tr>
+                                    <td class="label">Phone Number</td>
+                                    <td class="value">${quote.details.phoneNumber}</td>
+                                    <td class="label">Status</td>
+                                    <td class="value"><span class="status-badge status-${quote.status}">${quote.status.toUpperCase()}</span></td>
+                                </tr>
                             </table>
                         </div>
 
                         <div class="details-section">
-                            <h4><i class="fas fa-shield-alt"></i> Insurance Details</h4>
+                            <h4><i class="fas fa-clock"></i> Timeline</h4>
                             <table class="details-table">
-                                <tbody>
-                                    <tr>
-                                        <td class="label">Coverage Plan</td>
-                                        <td class="value">${quote.details.coveragePlan}</td>
-                                        <td class="label">Payment Method</td>
-                                        <td class="value">${quote.details.paymentMethod || 'N/A'}</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="label">Status</td>
-                                        <td class="value"><span class="status-badge status-${quote.status.toLowerCase()}">${quote.status.toUpperCase()}</span></td>
-                                        <td class="label">Submission Date</td>
-                                        <td class="value">${formatTimestamp(quote.timestamp)}</td>
-                                    </tr>
-                                </tbody>
+                                <tr>
+                                    <td class="label">Submission Date</td>
+                                    <td class="value">${formatTimestamp(quote.timestamp)}</td>
+                                    <td class="label">Priority</td>
+                                    <td class="value">${quote.priority.toUpperCase()}</td>
+                                </tr>
                             </table>
                         </div>
-
-                        <div class="modal-footer">
-                            <button class="btn btn-secondary" onclick="closeModal('quoteDetailsModal')">Close</button>
-                            <button class="btn btn-primary" onclick="processQuote('${quote.reference}')">
-                                Process Quote
-                            </button>
-                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" onclick="closeModal('quoteDetailsModal')">Close</button>
+                        <button class="btn btn-primary" onclick="processQuote('${quote.reference}')">Process Quote</button>
                     </div>
                 </div>
             </div>
         </div>
     `;
 
+    // Add modal to body and show it
     $('body').append(modalHtml);
-    $('#quoteDetailsModal').fadeIn();
+    $('#quoteDetailsModal').fadeIn(300);
 }
 
 // Add new export function
@@ -583,4 +580,52 @@ function exportQuoteData() {
         console.error('Export failed:', error);
         showNotification('Export failed. Please try again.');
     }
+}
+
+// Add this new function
+function checkNewQuotations() {
+    // Simulate checking for new quotations
+    const pendingQuotes = quotes.filter(q => q.status === 'pending').length;
+    
+    if (pendingQuotes > 0) {
+        const notification = {
+            title: 'New Quotations',
+            message: `You have ${pendingQuotes} new quotation${pendingQuotes > 1 ? 's' : ''} pending review`,
+            type: 'info'
+        };
+        
+        showEnhancedNotification(notification);
+    }
+}
+
+// Add enhanced notification function
+function showEnhancedNotification(notification) {
+    // Remove existing notification if present
+    $('.enhanced-notification').remove();
+    
+    const notificationHtml = `
+        <div class="enhanced-notification fade-in">
+            <div class="notification-content">
+                <div class="notification-title">${notification.title}</div>
+                <div class="notification-message">${notification.message}</div>
+            </div>
+            <button class="notification-close">&times;</button>
+        </div>
+    `;
+    
+    $('body').append(notificationHtml);
+    
+    // Add event listener for close button
+    $('.notification-close').on('click', function() {
+        $('.enhanced-notification').fadeOut(300, function() {
+            $(this).remove();
+        });
+    });
+    
+    // Auto-hide after 5 seconds
+    setTimeout(() => {
+        $('.enhanced-notification').fadeOut(300, function() {
+            $(this).remove();
+        });
+    }, 5000);
 }

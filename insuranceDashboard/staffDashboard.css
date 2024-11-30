@@ -644,3 +644,152 @@ header {
         width: 100%;
     }
 }
+
+/* Enhanced Notification Styles */
+.enhanced-notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: linear-gradient(135deg, #3498db, #2c3e50);
+    color: white;
+    padding: 15px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    z-index: 1000;
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    min-width: 300px;
+    max-width: 400px;
+}
+
+.notification-content {
+    flex: 1;
+}
+
+.notification-title {
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.notification-message {
+    font-size: 0.9em;
+    opacity: 0.9;
+}
+
+.notification-close {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 0 5px;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+}
+
+.notification-close:hover {
+    opacity: 1;
+}
+
+/* Animation for notification */
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.enhanced-notification {
+    animation: slideIn 0.3s ease-out;
+}
+
+/* Add these modal-specific styles if not already present */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+.modal-dialog {
+    width: 90%;
+    max-width: 900px;
+    margin: 40px auto;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.close-modal {
+    background: none;
+    border: none;
+    font-size: 28px;
+    cursor: pointer;
+    color: #666;
+    padding: 8px;
+    line-height: 1;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    position: relative;
+    margin: -8px;
+}
+
+.close-modal:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+    color: #2c3e50;
+    transform: rotate(90deg);
+}
+
+.close-modal:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+}
+
+.close-modal:active {
+    background-color: rgba(0, 0, 0, 0.1);
+    transform: rotate(90deg) scale(0.95);
+}
+
+.details-section {
+    display: none;
+    margin-bottom: 20px;
+}
+
+.details-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-bottom: 20px;
+}
+
+.details-table td {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+}
+
+.details-table .label {
+    color: #666;
+    font-weight: 500;
+    width: 25%;
+}
+
+.details-table .value {
+    color: #2c3e50;
+    font-weight: 600;
+    width: 25%;
+}

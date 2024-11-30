@@ -100,6 +100,8 @@ $(document).ready(function () {
             displayReview(applicationData);
             $('#insuranceForm').hide();
             $('#reviewSection').show();
+            localStorage.setItem('newQuotation', 'true');
+            localStorage.setItem('quotationTimestamp', new Date().toISOString());
         }
         else {
             $submitButton.prop('disabled', false); // Re-enable the button if validation fails
