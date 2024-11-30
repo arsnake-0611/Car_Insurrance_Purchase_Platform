@@ -86,7 +86,24 @@
 
                 <!-- Recent Activity -->
                 <div class="recent-activity">
-                    <h3>Recent Activity</h3>
+                    <div class="activity-header">
+                        <h3>Recent Activity</h3>
+                        <div class="activity-controls">
+                            <select id="activityFilter">
+                                <option value="all">All Activities</option>
+                                <option value="new_quote">New Quotes</option>
+                                <option value="status_change">Status Changes</option>
+                                <option value="payment">Payments</option>
+                                <option value="claim">Claims</option>
+                            </select>
+                            <select id="activitySort">
+                                <option value="newest">Newest First</option>
+                                <option value="oldest">Oldest First</option>
+                                <option value="priority">Priority</option>
+                                <option value="value">Vehicle Value</option>
+                            </select>
+                        </div>
+                    </div>
                     <div class="activity-list" id="activityList">
                         <!-- Activity items will be added here dynamically -->
                     </div>
@@ -102,8 +119,8 @@
                         <button class="action-btn" id="pendingReviewBtn">
                             <span>📋</span>Pending Review
                         </button>
-                        <button class="action-btn" id="generateReportBtn">
-                            <span>📊</span>Generate Report
+                        <button class="action-btn" id="exportDataBtn">
+                            <span>📤</span>Export Data
                         </button>
                     </div>
                 </div>

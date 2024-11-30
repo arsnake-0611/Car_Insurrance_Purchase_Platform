@@ -33,18 +33,79 @@ let quotes = [
 let activities = [
     {
         type: 'new_quote',
-        message: 'New quotation submitted by John Doe',
-        timestamp: '2024-01-15 09:30:00'
+        title: 'New Quote Submission',
+        message: 'Luxury vehicle insurance quote',
+        details: {
+            fullName: 'John Doe',
+            email: 'john.doe@email.com',
+            phoneNumber: '12345678',
+            vehicleMake: 'BMW',
+            vehicleModel: 'X5',
+            vehicleYear: '2023',
+            coveragePlan: 'Comprehensive',
+            vehicleValue: 'HK$ 750,000'
+        },
+        status: 'pending',
+        reference: 'QT2023001',
+        timestamp: '2024-01-15 09:30:00',
+        priority: 'high'
     },
     {
         type: 'status_change',
-        message: 'Quotation QT2023002 approved',
-        timestamp: '2024-01-14 14:45:00'
+        title: 'Quote Approved',
+        message: 'Standard coverage approved',
+        details: {
+            fullName: 'Jane Smith',
+            email: 'jane.smith@email.com',
+            phoneNumber: '87654321',
+            vehicleMake: 'Toyota',
+            vehicleModel: 'Camry',
+            vehicleYear: '2022',
+            coveragePlan: 'Third-Party',
+            vehicleValue: 'HK$ 280,000'
+        },
+        status: 'approved',
+        reference: 'QT2023002',
+        timestamp: '2024-01-14 15:45:00',
+        priority: 'medium'
+    },
+    {
+        type: 'new_quote',
+        title: 'New Quote Submission',
+        message: 'Sports car insurance quote',
+        details: {
+            fullName: 'Mike Johnson',
+            email: 'mike.j@email.com',
+            phoneNumber: '23456789',
+            vehicleMake: 'Porsche',
+            vehicleModel: '911',
+            vehicleYear: '2023',
+            coveragePlan: 'Comprehensive',
+            vehicleValue: 'HK$ 1,200,000'
+        },
+        status: 'pending',
+        reference: 'QT2023003',
+        timestamp: '2024-01-13 11:20:00',
+        priority: 'high'
     },
     {
         type: 'status_change',
-        message: 'Quotation QT2023003 rejected',
-        timestamp: '2024-01-13 16:20:00'
+        title: 'Quote Rejected',
+        message: 'Insufficient documentation',
+        details: {
+            fullName: 'Sarah Wilson',
+            email: 'sarah.w@email.com',
+            phoneNumber: '34567890',
+            vehicleMake: 'Ford',
+            vehicleModel: 'Focus',
+            vehicleYear: '2021',
+            coveragePlan: 'Third-Party',
+            vehicleValue: 'HK$ 180,000'
+        },
+        status: 'rejected',
+        reference: 'QT2023004',
+        timestamp: '2024-01-12 14:15:00',
+        priority: 'low'
     }
 ];
 
@@ -57,11 +118,67 @@ $(document).ready(function() {
 
 // Update statistics with animation
 function updateStatistics() {
+    const sortValue = $('#activitySort').val();
+    const timeRange = $('#timeRange').val();
+    let sortedQuotes = [...quotes];
+    
+    // First apply time range filter
+    const now = new Date();
+    switch(timeRange) {
+        case 'today':
+            sortedQuotes = sortedQuotes.filter(quote => 
+                new Date(quote.date).toDateString() === now.toDateString()
+            );
+            break;
+        case 'week':
+            const weekAgo = new Date(now.getTime() - (7 * 24 * 60 * 60 * 1000));
+            sortedQuotes = sortedQuotes.filter(quote => 
+                new Date(quote.date) >= weekAgo
+            );
+            break;
+        case 'month':
+            const monthAgo = new Date(now.setMonth(now.getMonth() - 1));
+            sortedQuotes = sortedQuotes.filter(quote => 
+                new Date(quote.date) >= monthAgo
+            );
+            break;
+        // 'all' case will use all quotes
+    }
+
+    // Then apply sorting
+    switch(sortValue) {
+        case 'newest':
+            sortedQuotes.sort((a, b) => new Date(b.date) - new Date(a.date));
+            break;
+        case 'oldest':
+            sortedQuotes.sort((a, b) => new Date(a.date) - new Date(b.date));
+            break;
+        case 'value':
+            sortedQuotes.sort((a, b) => {
+                const getVehicleValue = (str) => {
+                    const match = str.match(/\d+/);
+                    return match ? parseInt(match[0]) : 0;
+                };
+                return getVehicleValue(b.vehicleDetails) - getVehicleValue(a.vehicleDetails);
+            });
+            break;
+        case 'priority':
+            sortedQuotes.sort((a, b) => {
+                const priorityOrder = {
+                    'pending': 3,
+                    'approved': 2,
+                    'rejected': 1
+                };
+                return priorityOrder[b.status] - priorityOrder[a.status];
+            });
+            break;
+    }
+    
     const stats = {
-        total: quotes.length,
-        pending: quotes.filter(q => q.status === 'pending').length,
-        approved: quotes.filter(q => q.status === 'approved').length,
-        rejected: quotes.filter(q => q.status === 'rejected').length
+        total: sortedQuotes.length,
+        pending: sortedQuotes.filter(q => q.status === 'pending').length,
+        approved: sortedQuotes.filter(q => q.status === 'approved').length,
+        rejected: sortedQuotes.filter(q => q.status === 'rejected').length
     };
     
     // Animate statistics update
@@ -81,6 +198,10 @@ function updateStatistics() {
             }
         });
     });
+
+    // Update the quotes array with sorted data
+    quotes = sortedQuotes;
+    updateActivityList();
 }
 
 // Update activity list
@@ -88,18 +209,69 @@ function updateActivityList() {
     const activityList = $('#activityList');
     activityList.empty();
 
-    activities.slice(0, 5).forEach(activity => {
-        const activityItem = $(`
-            <div class="activity-item fade-in">
-                <div class="activity-icon">${getActivityIcon(activity.type)}</div>
-                <div class="activity-details">
-                    <p>${activity.message}</p>
-                    <small>${formatTimestamp(activity.timestamp)}</small>
-                </div>
-            </div>
-        `);
+    // Get filter and sort values
+    const filterValue = $('#activityFilter').val();
+    const sortValue = $('#activitySort').val();
+
+    // Filter activities
+    let filteredActivities = activities;
+    if (filterValue !== 'all') {
+        filteredActivities = activities.filter(activity => activity.type === filterValue);
+    }
+
+    // Sort activities
+    filteredActivities = sortActivities(filteredActivities, sortValue);
+
+    // Create activity items
+    filteredActivities.forEach(activity => {
+        const activityItem = createActivityItem(activity);
         activityList.append(activityItem);
     });
+}
+
+// Create activity item HTML
+function createActivityItem(activity) {
+    const statusClass = `status-${activity.status.toLowerCase()}`;
+    const priorityClass = `priority-${activity.priority || 'normal'}`;
+    
+    return $(`
+        <div class="activity-item fade-in ${priorityClass}">
+            <div class="activity-content">
+                <div class="activity-header">
+                    <div class="activity-title-group">
+                        <span class="quote-id">#${activity.reference}</span>
+                        <h4 class="activity-title">${activity.details.fullName}</h4>
+                        <span class="status-badge ${statusClass}">${activity.status.toUpperCase()}</span>
+                    </div>
+                    <div class="activity-meta">
+                        <span class="timestamp">${formatTimestamp(activity.timestamp)}</span>
+                    </div>
+                </div>
+                <div class="activity-summary">
+                    <div class="summary-item">
+                        <i class="fas fa-car"></i>
+                        <span>${activity.details.vehicleMake} ${activity.details.vehicleModel} (${activity.details.vehicleYear})</span>
+                    </div>
+                    <div class="summary-item">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>${activity.details.coveragePlan}</span>
+                    </div>
+                    <div class="summary-item">
+                        <i class="fas fa-dollar-sign"></i>
+                        <span>${activity.details.vehicleValue}</span>
+                    </div>
+                </div>
+                <div class="activity-actions">
+                    <button class="action-btn view-details" onclick="viewQuoteDetails('${activity.reference}')">
+                        <i class="fas fa-eye"></i> View Details
+                    </button>
+                    <button class="action-btn process-quote" onclick="processQuote('${activity.reference}')">
+                        <i class="fas fa-cog"></i> Process Quote
+                    </button>
+                </div>
+            </div>
+        </div>
+    `);
 }
 
 // Helper function to get activity icons
@@ -107,6 +279,8 @@ function getActivityIcon(type) {
     const icons = {
         new_quote: '📝',
         status_change: '🔄',
+        payment: '💰',
+        claim: '🚗',
         approved: '✅',
         rejected: '❌'
     };
@@ -137,9 +311,9 @@ function setupEventListeners() {
         // Add your pending review logic here
     });
 
-    $('#generateReportBtn').on('click', function() {
-        showNotification('Generating report...');
-        // Add your report generation logic here
+    $('#exportDataBtn').on('click', function() {
+        showNotification('Preparing data export...');
+        exportQuoteData();
     });
 
     // Sign out button
@@ -150,6 +324,16 @@ function setupEventListeners() {
                 window.location.href = 'login.html';
             }, 1000);
         }
+    });
+
+    // Activity filters
+    $('#activityFilter, #activitySort').on('change', function() {
+        updateActivityList();
+    });
+
+    // Add sort change listener
+    $('#activitySort').on('change', function() {
+        updateStatistics();
     });
 }
 
@@ -227,4 +411,176 @@ function addActivity(type, message) {
     
     activities.unshift(newActivity);
     updateActivityList();
+}
+
+// Enhanced sorting function
+function sortActivities(activities, sortValue) {
+    return activities.sort((a, b) => {
+        switch(sortValue) {
+            case 'newest':
+                return new Date(b.timestamp) - new Date(a.timestamp);
+            case 'oldest':
+                return new Date(a.timestamp) - new Date(b.timestamp);
+            case 'priority':
+                const priorityOrder = { high: 3, medium: 2, low: 1 };
+                return (priorityOrder[b.priority] || 0) - (priorityOrder[a.priority] || 0);
+            case 'value':
+                const getValue = (str) => {
+                    const match = str.match(/[\d,]+/);
+                    return match ? parseInt(match[0].replace(/,/g, '')) : 0;
+                };
+                return getValue(b.details.vehicleValue) - getValue(a.details.vehicleValue);
+            default:
+                return new Date(b.timestamp) - new Date(a.timestamp);
+        }
+    });
+}
+
+// Function to handle processing quote
+function processQuote(quoteId) {
+    // Store the quote ID in localStorage for access in recordsList
+    localStorage.setItem('processingQuoteId', quoteId);
+    // Redirect to recordsList.html
+    window.location.href = 'recordsList.html';
+}
+
+// Function to view quote details
+function viewQuoteDetails(quoteId) {
+    const quote = activities.find(a => a.reference === quoteId);
+    if (quote) {
+        showQuoteDetailsModal(quote);
+    }
+}
+
+// Updated showQuoteDetailsModal function with table layout
+function showQuoteDetailsModal(quote) {
+    const modalHtml = `
+        <div class="modal" id="quoteDetailsModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3>Quote Details #${quote.reference}</h3>
+                        <button type="button" class="close-modal" onclick="closeModal('quoteDetailsModal')">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="details-section">
+                            <h4><i class="fas fa-car"></i> Vehicle Information</h4>
+                            <table class="details-table">
+                                <tbody>
+                                    <tr>
+                                        <td class="label">Make & Model</td>
+                                        <td class="value">${quote.details.vehicleMake} ${quote.details.vehicleModel}</td>
+                                        <td class="label">Year</td>
+                                        <td class="value">${quote.details.vehicleYear}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="label">Body Type</td>
+                                        <td class="value">${quote.details.bodyType || 'N/A'}</td>
+                                        <td class="label">Seating Capacity</td>
+                                        <td class="value">${quote.details.seatingCapacity || 'N/A'}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="label">Cylinder Capacity</td>
+                                        <td class="value">${quote.details.cylinderCapacity || 'N/A'} CC</td>
+                                        <td class="label">Vehicle Value</td>
+                                        <td class="value">${quote.details.vehicleValue}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="details-section">
+                            <h4><i class="fas fa-user"></i> Customer Information</h4>
+                            <table class="details-table">
+                                <tbody>
+                                    <tr>
+                                        <td class="label">Full Name</td>
+                                        <td class="value">${quote.details.fullName}</td>
+                                        <td class="label">Email</td>
+                                        <td class="value">${quote.details.email}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="label">Phone Number</td>
+                                        <td class="value">${quote.details.phoneNumber}</td>
+                                        <td class="label">Driving Experience</td>
+                                        <td class="value">${quote.details.drivingExperience || 'N/A'} years</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="details-section">
+                            <h4><i class="fas fa-shield-alt"></i> Insurance Details</h4>
+                            <table class="details-table">
+                                <tbody>
+                                    <tr>
+                                        <td class="label">Coverage Plan</td>
+                                        <td class="value">${quote.details.coveragePlan}</td>
+                                        <td class="label">Payment Method</td>
+                                        <td class="value">${quote.details.paymentMethod || 'N/A'}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="label">Status</td>
+                                        <td class="value"><span class="status-badge status-${quote.status.toLowerCase()}">${quote.status.toUpperCase()}</span></td>
+                                        <td class="label">Submission Date</td>
+                                        <td class="value">${formatTimestamp(quote.timestamp)}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button class="btn btn-secondary" onclick="closeModal('quoteDetailsModal')">Close</button>
+                            <button class="btn btn-primary" onclick="processQuote('${quote.reference}')">
+                                Process Quote
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+
+    $('body').append(modalHtml);
+    $('#quoteDetailsModal').fadeIn();
+}
+
+// Add new export function
+function exportQuoteData() {
+    try {
+        // Convert quotes data to CSV format
+        let csvContent = "data:text/csv;charset=utf-8,";
+        
+        // Add headers
+        csvContent += "Reference,Customer Name,Date,Status,Vehicle Details,Coverage Type\n";
+        
+        // Add data rows
+        quotes.forEach(quote => {
+            const row = [
+                quote.referenceNumber,
+                quote.customerName,
+                quote.date,
+                quote.status,
+                quote.vehicleDetails,
+                quote.coverageType
+            ].join(",");
+            csvContent += row + "\n";
+        });
+
+        // Create download link
+        const encodedUri = encodeURI(csvContent);
+        const link = document.createElement("a");
+        link.setAttribute("href", encodedUri);
+        link.setAttribute("download", `insurance_quotes_${new Date().toISOString().split('T')[0]}.csv`);
+        
+        // Trigger download
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+
+        showNotification('Export completed successfully!');
+    } catch (error) {
+        console.error('Export failed:', error);
+        showNotification('Export failed. Please try again.');
+    }
 }

@@ -945,6 +945,35 @@ $(document).ready(function() {
     }
 
     displayQuotes();
+
+    // Check if there's a quote to highlight
+    const highlightQuoteId = localStorage.getItem('highlightQuoteId');
+    
+    if (highlightQuoteId) {
+        // Find the quote element and add highlight effect
+        const quoteElement = $(`[data-quote-id="${highlightQuoteId}"]`);
+        
+        if (quoteElement.length) {
+            // Scroll to the element
+            $('html, body').animate({
+                scrollTop: quoteElement.offset().top - 100
+            }, 500);
+
+            // Add highlight effect
+            quoteElement.addClass('highlight-quote');
+            
+            // Pulse animation
+            setTimeout(() => {
+                quoteElement.addClass('pulse-animation');
+            }, 500);
+
+            // Remove highlight after user interaction
+            $(document).one('click', function() {
+                quoteElement.removeClass('highlight-quote pulse-animation');
+                localStorage.removeItem('highlightQuoteId');
+            });
+        }
+    }
 });
 
 // Add this JavaScript function to handle section navigation

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insurance Staff Chat</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="chatroom.css">
+</head>
+<body>
+    <div class="chat-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h3>Insurance Chat</h3>
+            </div>
+            <ul class="sidebar-menu">
+                <li><a href="#inbox" class="active" id="inboxBtn">Inbox</a></li>
+                <li><a href="#archived" id="archivedBtn">Archived</a></li>
+                <li><a href="#groups" id="groupsBtn">Groups</a></li>
+                <li><a href="#settings" id="settingsBtn">Settings</a></li>
+            </ul>
+            <div class="chat-list" id="chatList">
+                <!-- Chat list will be populated dynamically -->
+            </div>
+            <div class="sidebar-footer">
+                <button class="sign-out-btn" id="signOutBtn">Sign Out</button>
+            </div>
+        </div>
+
+        <!-- Main Chat Area -->
+        <div class="main-chat">
+            <div class="chat-header">
+                <div class="chat-contact-info">
+                    <div class="contact-details">
+                        <h3 class="contact-name">Select a chat</h3>
+                        <span class="contact-status">No chat selected</span>
+                    </div>
+                </div>
+                <div class="chat-actions">
+                    <button class="search-chat-btn" id="searchChatBtn">Search</button>
+                    <button class="archive-btn" id="archiveBtn">Archive</button>
+                    <button class="more-actions-btn" id="moreActionsBtn">More</button>
+                </div>
+            </div>
+
+            <div class="chat-messages" id="chatMessages">
+                <!-- Messages will be populated dynamically -->
+            </div>
+
+            <div class="chat-input-area">
+                <button class="emoji-btn" id="emojiBtn">Emoji</button>
+                <button class="attach-btn" id="attachBtn">Attach</button>
+                <div class="message-input">
+                    <input type="text" placeholder="Type a message" id="messageInput">
+                </div>
+                <button class="send-btn" id="sendBtn">Send</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="chatroom.js"></script>
+</body>
+</html>
