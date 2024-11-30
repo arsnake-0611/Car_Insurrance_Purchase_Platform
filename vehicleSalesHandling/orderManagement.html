@@ -12,6 +12,7 @@
     <script src="js/orderManagement.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
+    <script src="js/Setting.js"></script>
 </head>
 
 <body>
@@ -59,7 +60,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="Calender.html">
+                        <a href="Calendar.html">
                             <img src="./icon/calendar-days-black.png" alt="Calendar Icon" class="nav-icon">
                             <span class="nav-text">Calendar</span>
                         </a>
@@ -74,7 +75,7 @@
             </nav>
             <nav class="main-nav">
                 <ul>
-                    <li><a href="/signin/signin.html">
+                    <li> <a class="logout-btn">
                             <img src="./icon/sign-out-black.png" alt="Logout Icon" class="nav-icon">
                             <span class="nav-text">Logout</span>
                         </a>
@@ -108,9 +109,10 @@
         </main>
     </div>
     <script>
-        // Initialize the sidebar when document is ready
+        // Initialize the sidebar and settings when document is ready
         $(document).ready(function () {
             new Sidebar();
+            Settings.initializeSettingsListener();
         });
     </script>
 </body>

@@ -1,0 +1,274 @@
+:root {
+    --primary-color: #2D4356;
+    --secondary-color: #435B66;
+    --accent-color: #A76F6F;
+    --background-color: #F8F9FA;
+    --text-color: #333;
+    --border-color: #E9ECEF;
+    --card-bg: white;
+    --hover-bg: #e9ecef;
+}
+
+[data-theme="dark"] {
+    --primary-color: #8FB3D9;
+    --secondary-color: #A8C5E4;
+    --accent-color: #C8A2A2;
+    --background-color: #232733;
+    --text-color: #E1E5EE;
+    --border-color: #363C4B;
+    --card-bg: #2A2F3D;
+    --hover-bg: #313847;
+    --muted-text: #B4BAC8;
+    --chart-grid: #363C4B;
+}
+
+.sales-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    padding: 1.5rem;
+    background-color: var(--background-color);
+}
+
+/* Overview Cards */
+.sales-overview {
+    grid-column: 1 / -1;
+}
+
+.overview-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+}
+
+.card {
+    background-color: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+}
+
+.card h4 {
+    color: var(--text-color);
+    margin-bottom: 1rem;
+}
+
+.card .number {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.trend {
+    font-size: 0.9rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+}
+
+.trend.positive {
+    background: #e8f5e9;
+    color: #4caf50;
+}
+
+.trend.negative {
+    background: #ffebee;
+    color: #f44336;
+}
+
+.progress-bar {
+    height: 8px;
+    background: #e9ecef;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: 1rem;
+}
+
+.progress {
+    height: 100%;
+    background: var(--accent-color);
+    border-radius: 4px;
+    transition: width 0.3s ease;
+}
+
+/* Sales Chart */
+.sales-chart {
+    background: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    grid-column: 1 / -1;
+}
+
+.chart-controls {
+    display: flex;
+    gap: 1rem;
+}
+
+.chart-controls select {
+    padding: 0.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background: var(--card-bg);
+    color: var(--text-color);
+}
+
+.chart-container {
+    height: 400px;
+    margin-top: 1rem;
+}
+
+/* Recent Sales Table */
+.recent-sales {
+    background: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    grid-column: 1 / -1;
+}
+
+.sales-table {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+th, td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+}
+
+th {
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+td {
+    color: var(--text-color);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .sales-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .overview-cards {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Add these styles from Dashboard.css */
+.dashboard-grid {
+    padding: 1.5rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+}
+
+.sales-target, .sales-analytics {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 4px var(--shadow-color);
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.section-header h3 {
+    color: var(--text-color);
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.section-header a {
+    color: var(--accent-color);
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.target-progress {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem 0;
+}
+
+.progress-circle {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: var(--hover-bg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.progress-circle-inner {
+    text-align: center;
+}
+
+.progress-number {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: var(--primary-color);
+    display: block;
+}
+
+.progress-label {
+    font-size: 0.9rem;
+    color: var(--muted-text);
+    margin-top: 0.5rem;
+}
+
+.analytics-tabs {
+    display: flex;
+    gap: 1rem;
+}
+
+.tab {
+    padding: 0.5rem 1rem;
+    border: none;
+    background: none;
+    color: var(--text-color);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+}
+
+.tab.active {
+    color: var(--primary-color);
+    border-bottom-color: var(--primary-color);
+}
+
+.analytics-chart {
+    height: 300px;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .progress-circle {
+        width: 150px;
+        height: 150px;
+    }
+    
+    .progress-number {
+        font-size: 2rem;
+    }
+}

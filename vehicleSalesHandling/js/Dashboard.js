@@ -222,9 +222,11 @@ $(document).ready(function() {
     // Add daily tasks card next to sales target
     const dailyTasksCard = `
         <div class="daily-tasks">
-            <h3>Daily Tasks</h3>
+            <div class="section-header">
+                <h3>Daily Tasks For Today</h3>
+            </div>
             <ul>
-                <li>
+                <li> 
                     <input type="checkbox" id="task1">
                     <label for="task1">Follow up with client A</label>
                 </li>
@@ -241,10 +243,35 @@ $(document).ready(function() {
                     <label for="task4">Call supplier for inventory</label>
                 </li>
             </ul>
-            <button class="add-task-btn">Add Task</button>
+            <button class="add-task-btn"><a style="text-decoration: none; color: white;" href="./Tasks.html">Add Task</a></button>
+            <button class="remove-task-btn">Remove Completed Tasks</button>
         </div>
     `;
     $('.dashboard-grid').append(dailyTasksCard);
+
+    // Load saved tasks state
+    loadTasksState();
+
+    // Handle task completion
+    $('.daily-tasks ul').on('change', 'input[type="checkbox"]', function() {
+        const taskItem = $(this).closest('li');
+        if (this.checked) {
+            taskItem.addClass('completed');
+            saveTasksState();
+        }
+    });
+
+    // Handle remove completed tasks
+    $('.remove-task-btn').click(function() {
+        $('.daily-tasks ul li').each(function() {
+            if ($(this).find('input[type="checkbox"]').is(':checked')) {
+                $(this).fadeOut(300, function() {
+                    $(this).remove();
+                    saveTasksState();
+                });
+            }
+        });
+    });
 
     // Move "Your sales" card below the sales target and daily tasks
     const yourSalesCard = $('.sales-analytics').detach();
@@ -522,3 +549,28 @@ $(document).ready(function() {
     handleResize();
     $(window).resize(handleResize);
 });
+
+function saveTasksState() {
+    const tasks = [];
+    $('.daily-tasks ul li').each(function() {
+        tasks.push({
+            id: $(this).find('input[type="checkbox"]').attr('id'),
+            text: $(this).find('label').text(),
+            completed: $(this).find('input[type="checkbox"]').is(':checked')
+        });
+    });
+    localStorage.setItem('dailyTasks', JSON.stringify(tasks));
+}
+
+function loadTasksState() {
+    const savedTasks = localStorage.getItem('dailyTasks');
+    if (savedTasks) {
+        const tasks = JSON.parse(savedTasks);
+        tasks.forEach(task => {
+            if (task.completed) {
+                $(`#${task.id}`).prop('checked', true)
+                    .closest('li').addClass('completed');
+            }
+        });
+    }
+}
