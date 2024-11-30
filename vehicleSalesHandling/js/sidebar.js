@@ -9,7 +9,6 @@ class Sidebar {
         this.hoverStartTime = null;
         this.minHoverTime = 200;
         this.isIntentional = false;
-        this.logoutBtn = $('.logout-btn');
 
         this.init();
     }
@@ -18,6 +17,20 @@ class Sidebar {
         this.attachEventListeners();
         this.handleResize();
         $(window).resize(() => this.handleResize());
+
+        this.initLogoutHandler();
+    }
+
+    initLogoutHandler() {
+        $('.logout-btn').off('click');
+        
+        $('.logout-btn').on('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            if (confirm('Are you sure you want to logout?')) {
+                window.location.href = '../signin/signin.html';
+            }
+        });
     }
 
     attachEventListeners() {
@@ -32,14 +45,6 @@ class Sidebar {
 
         // Desktop hover handlers
         this.initializeDesktopHover();
-
-        // Add logout handler
-        this.logoutBtn.click((e) => {
-            e.preventDefault(); // Prevent default anchor behavior
-            if (confirm('Are you sure you want to logout?')) {
-                window.location.href = 'login.html'; // or your login page URL
-            }
-        });
     }
 
     toggleMobileMenu() {
@@ -125,3 +130,8 @@ class Sidebar {
         }
     }
 }
+
+// Add this at the end of the file
+$(document).ready(() => {
+    new Sidebar();
+});

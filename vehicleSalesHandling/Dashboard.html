@@ -11,6 +11,8 @@
     <script src="js/Dashboard.js"></script>
     <link rel="stylesheet" href="css/sidebar.css">
     <script src="js/sidebar.js"></script>
+    <link rel="stylesheet" href="css/Setting.css">
+    <script src="js/Setting.js"></script>
 </head>
 
 <body>
@@ -58,7 +60,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="Calender.html">
+                        <a href="Calendar.html">
                             <img src="./icon/calendar-days-black.png" alt="Calendar Icon" class="nav-icon">
                             <span class="nav-text">Calendar</span>
                         </a>
@@ -71,13 +73,10 @@
                     </li>
                 </ul>
             </nav>
-            <!-- <button class="theme-toggle" id="theme-toggle">
-                        <img src="../icon/moon.png" alt="Dark Mode" class="dark-icon">
-                        <img src="../icon/sun.png" alt="Light Mode" class="light-icon" style="display: none;">
-                    </button> -->
             <nav class="main-nav">
                 <ul>
-                    <li><a href="/signin/signin.html">
+                    <li>
+                        <a class="logout-btn">
                             <img src="./icon/sign-out-black.png" alt="Logout Icon" class="nav-icon">
                             <span class="nav-text">Logout</span>
                         </a>
@@ -91,10 +90,9 @@
             <!-- Header -->
             <header>
                 <div class="user-info">
-                    <img src="assets/user-avatar.png" alt="User Avatar">
+                    <img src="./icon/user-black.png" alt="User Avatar">
                     <div class="user-details">
-                        <h2>Welcome back, Sales Agent</h2>
-                        l <span>👋</span>
+                        <h2>Welcome back, Sales Agent👋</h2>
                     </div>
                 </div>
                 <div class="header-actions">
@@ -108,7 +106,7 @@
                 <section class="sales-target">
                     <div class="section-header">
                         <h3>Sales Target (July)</h3>
-                        <a href="#">See All</a>
+                        <a href="Sales.html">See All</a>
                     </div>
                     <div class="target-progress">
                         <div class="progress-circle">
@@ -117,17 +115,16 @@
                                 <span class="progress-label">OUT OF 20</span>
                             </div>
                         </div>
-                        <div class="target-list">
-                            <!-- Vehicle orders list will be populated by JS -->
-                        </div>
                     </div>
                 </section>
+
+
 
                 <!-- Sales Analytics Section -->
                 <section class="sales-analytics">
                     <div class="section-header">
                         <h3>Your Sales</h3>
-                        <button class="add-sale-btn">+ Add Sale</button>
+                        <a href="Sales.html">See All</a>
                     </div>
                     <div class="analytics-tabs">
                         <button class="tab active">Goal</button>

@@ -9,6 +9,20 @@
     --hover-bg: #e9ecef;
 }
 
+[data-theme="dark"] {
+    --primary-color: #8FB3D9;
+    --secondary-color: #A8C5E4;
+    --accent-color: #C8A2A2;
+    --background-color: #232733;
+    --text-color: #E1E5EE;
+    --border-color: #363C4B;
+    --card-bg: #2A2F3D;
+    --hover-bg: #313847;
+    --status-processing: #B8A65C;
+    --status-completed: #6B9E6F;
+    --status-cancelled: #A66D6D;
+}
+
 /* Enhanced Header Section */
 .page-header {
     margin-bottom: 2rem;
