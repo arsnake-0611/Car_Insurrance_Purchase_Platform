@@ -273,3 +273,374 @@ header {
         transform: translateY(0);
     }
 }
+
+/* Update the activity details grid to better display recordsList fields */
+.activity-details-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    margin: 15px 0;
+}
+
+.detail-item {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 10px;
+    background: white;
+    border-radius: 6px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.detail-label {
+    font-size: 12px;
+    color: #666;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
+.detail-value {
+    font-size: 14px;
+    color: #2c3e50;
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+    .activity-details-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .activity-details-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .activity-details-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Updated activity item styling for cleaner interface */
+.activity-item {
+    background: white;
+    border-radius: 12px;
+    margin-bottom: 15px;
+    padding: 16px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.activity-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.activity-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.activity-title-group {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.quote-id {
+    color: #666;
+    font-size: 0.9em;
+    font-family: monospace;
+}
+
+.activity-title {
+    font-size: 1.1em;
+    color: #2c3e50;
+    margin: 0;
+}
+
+.activity-summary {
+    display: flex;
+    gap: 24px;
+    margin: 12px 0;
+    padding: 12px 0;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+}
+
+.summary-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #666;
+}
+
+.summary-item i {
+    color: #3498db;
+    width: 16px;
+}
+
+.activity-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.status-badge {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.priority-high {
+    border-left: 4px solid #f44336;
+}
+
+.priority-medium {
+    border-left: 4px solid #ff9800;
+}
+
+.priority-low {
+    border-left: 4px solid #4caf50;
+}
+
+/* Enhanced modal styles with better padding and table layout */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 1000;
+}
+
+.modal-dialog {
+    width: 90%;
+    max-width: 900px;
+    margin: 40px auto;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.modal-content {
+    position: relative;
+}
+
+.modal-header {
+    padding: 20px 30px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header h3 {
+    margin: 0;
+    color: #2c3e50;
+    font-size: 1.5em;
+}
+
+.modal-body {
+    padding: 30px;
+}
+
+.details-section {
+    margin-bottom: 30px;
+    display: none; /* Initially hidden for fade-in animation */
+}
+
+.details-section h4 {
+    color: #2c3e50;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.details-section h4 i {
+    color: #3498db;
+}
+
+.details-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-bottom: 20px;
+}
+
+.details-table td {
+    padding: 12px;
+    transition: all 0.3s ease;
+    border-bottom: 1px solid #eee;
+}
+
+.details-table tr:last-child td {
+    border-bottom: none;
+}
+
+.details-table .label {
+    color: #666;
+    font-weight: 500;
+    width: 25%;
+}
+
+.details-table .value {
+    color: #2c3e50;
+    font-weight: 600;
+    width: 25%;
+}
+
+.details-table tr:hover td {
+    background-color: #f8f9fa;
+}
+
+.modal-footer {
+    padding: 20px 30px;
+    border-top: 1px solid #eee;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.btn {
+    padding: 10px 20px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    background: #3498db;
+    color: white;
+}
+
+.btn-secondary {
+    background: #e9ecef;
+    color: #2c3e50;
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* Highlight effect for table rows */
+.details-table td.highlight {
+    position: relative;
+}
+
+.details-table td.highlight::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(52, 152, 219, 0.05);
+    pointer-events: none;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .modal-dialog {
+        width: 95%;
+        margin: 20px auto;
+    }
+
+    .details-table td {
+        display: block;
+        width: 100%;
+    }
+
+    .details-table tr {
+        margin-bottom: 15px;
+        display: block;
+    }
+
+    .details-table .label {
+        background: #f8f9fa;
+        font-weight: 600;
+    }
+}
+
+/* Activity controls styling */
+.activity-controls {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.activity-controls select {
+    padding: 8px 12px;
+    border: 1px solid #e1e8ed;
+    border-radius: 6px;
+    background: white;
+    color: #2c3e50;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 140px;
+}
+
+.activity-controls select:hover {
+    border-color: #3498db;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.activity-controls select:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+}
+
+/* Activity header styling */
+.activity-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #e1e8ed;
+}
+
+.activity-header h3 {
+    color: #2c3e50;
+    font-size: 1.2em;
+    margin: 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .activity-header {
+        flex-direction: column;
+        gap: 15px;
+        align-items: flex-start;
+    }
+
+    .activity-controls {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .activity-controls select {
+        width: 100%;
+    }
+}
