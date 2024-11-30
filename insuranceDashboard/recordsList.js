@@ -864,8 +864,6 @@ $(document).ready(function() {
 
     // Sidebar menu item click handling
     $('.sidebar-menu a').click(function(e) {
-        e.preventDefault();
-        
         // Remove active class from all menu items
         $('.sidebar-menu a').removeClass('active');
         
@@ -875,13 +873,15 @@ $(document).ready(function() {
         // On mobile, close sidebar after selection
         if ($(window).width() <= 768) {
             $sidebar.removeClass('active');
-            $hamburger.removeClass('active');
             $content.css('margin-left', '0');
             $header.css('left', '0');
         }
         
-        // Show notification
+        // Show notification and then navigate
         showNotification('Loading ' + $(this).text() + '...');
+        
+        // Allow normal link navigation
+        return true;
     });
 
     // Sign out button handling

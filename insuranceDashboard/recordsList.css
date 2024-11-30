@@ -207,21 +207,25 @@ header {
 
 /* Main Controls */
 .main-controls {
-    background: white;
-    padding: 24px;
-    border-radius: 12px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-    margin-bottom: 30px;
-    width: 800px;
-    max-width: 100%;
     position: relative;
     top: 20px;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto 30px;
+    padding: 24px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
 }
 
 /* Search Container */
 .search-container {
     position: relative;
+    width: 100%;
     margin-bottom: 24px;
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 }
 
 .search-container .search-icon {
@@ -230,21 +234,44 @@ header {
     top: 50%;
     transform: translateY(-50%);
     color: #94a3b8;
+    font-size: 16px;
 }
 
 #searchQuote {
     width: 100%;
-    padding: 14px 14px 14px 45px;
+    padding: 14px 14px 14px 14px;
     border: 2px solid #e2e8f0;
     border-radius: 8px;
     font-size: 15px;
     transition: all 0.3s ease;
+    background-color: transparent;
 }
 
 #searchQuote:focus {
     border-color: #2c3e50;
     box-shadow: 0 0 0 3px rgba(44,62,80,0.1);
     outline: none;
+}
+
+#searchQuote::placeholder {
+    color: #94a3b8;
+    font-size: 14px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .search-container {
+        margin-bottom: 16px;
+    }
+
+    #searchQuote {
+        padding: 12px 12px 12px 40px;
+        font-size: 14px;
+    }
+
+    .search-container .search-icon {
+        font-size: 14px;
+    }
 }
 
 /* Filter Controls */
@@ -286,8 +313,8 @@ header {
 
 /* Quotations Container */
 .quotations-container {
-    width: 800px;
-    max-width: 100%;
+    width: 100%;
+    max-width: 800px;
 }
 
 /* Quote Card Styling */
@@ -1135,15 +1162,6 @@ label[for]::after {
     color: #94a3b8;
 }
 
-#searchQuote {
-    width: 100%;
-    padding: 12px 12px 12px 45px;
-    border: 2px solid #e2e8f0;
-    border-radius: 8px;
-    font-size: 15px;
-    transition: all 0.3s ease;
-}
-
 #searchQuote:focus {
     border-color: #2c3e50;
     box-shadow: 0 0 0 3px rgba(44,62,80,0.1);
@@ -1168,16 +1186,18 @@ label[for]::after {
 
 /* Controls Container */
 .controls-container {
+    width: 100%;
     display: flex;
     flex-direction: column;
     gap: 20px;
-    width: 100%;
 }
 
 /* Button Container */
 .button-container {
+    width: 100%;
     display: flex;
     justify-content: flex-end;
+    margin-bottom: 20px;
 }
 
 /* New Quote Button */
@@ -1218,21 +1238,6 @@ label[for]::after {
     color: #94a3b8;
 }
 
-#searchQuote {
-    width: 100%;
-    padding: 12px 12px 12px 45px;
-    border: 2px solid #e2e8f0;
-    border-radius: 8px;
-    font-size: 15px;
-    transition: all 0.3s ease;
-}
-
-#searchQuote:focus {
-    border-color: #2c3e50;
-    box-shadow: 0 0 0 3px rgba(44,62,80,0.1);
-    outline: none;
-}
-
 /* Responsive Design */
 @media (max-width: 768px) {
     .button-container {
@@ -1258,30 +1263,11 @@ label[for]::after {
     margin-top: 70px; /* Match header height */
 }
 
-/* Main Controls Container */
-.main-controls {
-    background: white;
-    padding: 24px;
-    border-radius: 12px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-    margin-bottom: 30px;
-    width: 800px;
-    max-width: 100%;
-    position: relative;
-    top: 20px; /* Add some space below header */
-}
-
-/* Quotations Container */
-.quotations-container {
-    width: 800px;
-    max-width: 100%;
-}
-
 /* Responsive Design */
 @media (max-width: 1024px) {
     .main-controls,
     .quotations-container {
-        width: 700px;
+        max-width: 700px;
     }
 }
 
@@ -1289,16 +1275,17 @@ label[for]::after {
     .content-wrapper {
         margin-left: 0;
         padding: 16px;
-        margin-top: 60px; /* Adjust for smaller header on mobile */
+        margin-top: 60px;
     }
 
     .main-controls {
-        top: 10px; /* Less space on mobile */
+        top: 10px;
     }
 
     .main-controls,
     .quotations-container {
         width: 100%;
         padding: 16px;
+        max-width: 100%;
     }
 }

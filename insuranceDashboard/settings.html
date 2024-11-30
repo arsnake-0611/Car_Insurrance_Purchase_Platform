@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - Insurance Management</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="settings.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="notification" id="notification"></div>
+    
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <img src="../icon/lm.png" alt="Insurance Logo" width="45" height="45">
+            <h3>Staff Portal</h3>
+        </div>
+        <ul class="sidebar-menu">
+            <li><a href="staffDashboard.html">Dashboard</a></li>
+            <li><a href="recordsList.html">Records</a></li>
+            <li><a href="reports.html">Reports</a></li>
+            <li><a href="settings.html" class="active">Settings</a></li>
+        </ul>
+        <div class="sidebar-footer">
+            <button class="sign-out-btn">Sign Out</button>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <header>
+            <div class="header-content">
+                <h2>Settings</h2>
+                <div class="user-info">
+                    <span>Welcome, Admin</span>
+                </div>
+            </div>
+        </header>
+
+        <div class="content-wrapper">
+            <div class="settings-container">
+                <!-- Profile Settings -->
+                <div class="settings-section">
+                    <h3><i class="fas fa-user"></i> Profile Settings</h3>
+                    <div class="settings-content">
+                        <form id="profileForm">
+                            <div class="form-group">
+                                <label for="fullName">Full Name</label>
+                                <input type="text" id="fullName" value="Admin User" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input type="email" id="email" value="admin@example.com" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone Number</label>
+                                <input type="tel" id="phone" value="12345678" pattern="[0-9]{8}" class="form-control">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Update Profile</button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Security Settings -->
+                <div class="settings-section">
+                    <h3><i class="fas fa-lock"></i> Security Settings</h3>
+                    <div class="settings-content">
+                        <form id="securityForm">
+                            <div class="form-group">
+                                <label for="currentPassword">Current Password</label>
+                                <input type="password" id="currentPassword" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="newPassword">New Password</label>
+                                <input type="password" id="newPassword" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="confirmPassword">Confirm New Password</label>
+                                <input type="password" id="confirmPassword" class="form-control">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Change Password</button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Notification Settings -->
+                <div class="settings-section">
+                    <h3><i class="fas fa-bell"></i> Notification Settings</h3>
+                    <div class="settings-content">
+                        <div class="notification-option">
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                            <div class="notification-text">
+                                <h4>Email Notifications</h4>
+                                <p>Receive email notifications for new quotes and status changes</p>
+                            </div>
+                        </div>
+                        <div class="notification-option">
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                            <div class="notification-text">
+                                <h4>Browser Notifications</h4>
+                                <p>Show desktop notifications when new quotes arrive</p>
+                            </div>
+                        </div>
+                        <div class="notification-option">
+                            <label class="toggle-switch">
+                                <input type="checkbox">
+                                <span class="toggle-slider"></span>
+                            </label>
+                            <div class="notification-text">
+                                <h4>SMS Notifications</h4>
+                                <p>Receive SMS alerts for urgent updates</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- System Settings -->
+                <div class="settings-section">
+                    <h3><i class="fas fa-cog"></i> System Settings</h3>
+                    <div class="settings-content">
+                        <div class="notification-option">
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="themeToggle">
+                                <span class="toggle-slider"></span>
+                            </label>
+                            <div class="notification-text">
+                                <h4>Dark Mode</h4>
+                                <p>Switch between light and dark theme</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="language">Language</label>
+                            <select id="language" class="form-control">
+                                <option value="en">English</option>
+                                <option value="zh">中文</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="timezone">Timezone</label>
+                            <select id="timezone" class="form-control">
+                                <option value="HKT">Hong Kong Time (HKT)</option>
+                                <option value="UTC">UTC</option>
+                            </select>
+                        </div>
+                        <button type="button" class="btn btn-primary">Save Changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="settings.js"></script>
+</body>
+</html>
