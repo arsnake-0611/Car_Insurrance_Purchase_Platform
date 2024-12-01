@@ -1509,3 +1509,178 @@ body.dark-mode .filter-btn[data-sort].active {
     background-color: #1a4f72;
     color: #ffffff;
 }
+
+/* Dark Mode Styles */
+body.dark-mode {
+    background-color: #1a1a1a;
+    color: #e5e7eb;
+}
+
+/* Header Dark Mode */
+body.dark-mode header {
+    background-color: #2d2d2d;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .header-content h2 {
+    color: #e5e7eb;
+}
+
+/* Policy Cards Dark Mode */
+body.dark-mode .policy-card {
+    background: #2d2d2d;
+    border-color: #3d3d3d;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+body.dark-mode .vehicle-specs .spec {
+    background: #3d3d3d;
+    color: #e5e7eb;
+}
+
+body.dark-mode .metric-circle::before {
+    background: conic-gradient(
+        #60a5fa calc(var(--percentage) * 1%),
+        #374151 0
+    );
+}
+
+body.dark-mode .metric-value {
+    color: #e5e7eb;
+}
+
+body.dark-mode .metric-label {
+    color: #9ca3af;
+}
+
+body.dark-mode .coverage-info {
+    background: #3d3d3d;
+}
+
+body.dark-mode .feature {
+    background: #2d2d2d;
+    color: #e5e7eb;
+}
+
+body.dark-mode .timeline-progress {
+    background: #4b5563;
+}
+
+body.dark-mode .timeline-progress .progress-bar {
+    background: #60a5fa;
+}
+
+body.dark-mode .premium-amount {
+    color: #e5e7eb;
+}
+
+/* Filter Section Dark Mode */
+body.dark-mode .filter-section {
+    background: #2d2d2d;
+}
+
+body.dark-mode .filter-group h3 {
+    color: #e5e7eb;
+}
+
+body.dark-mode .filter-btn {
+    background: #3d3d3d;
+    border-color: #4b5563;
+    color: #e5e7eb;
+}
+
+body.dark-mode .filter-btn:hover {
+    background: #4b5563;
+}
+
+body.dark-mode .filter-btn.active {
+    background: #60a5fa;
+    border-color: #60a5fa;
+}
+
+body.dark-mode .shortlist-info {
+    background: #3d3d3d;
+    color: #e5e7eb;
+}
+
+/* Statistics Cards Dark Mode */
+body.dark-mode .stat-card {
+    background: #2d2d2d;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+body.dark-mode .stat-icon {
+    background: #3d3d3d;
+}
+
+body.dark-mode .stat-title {
+    color: #e5e7eb;
+}
+
+body.dark-mode .stat-value {
+    color: #e5e7eb;
+}
+
+body.dark-mode .item-label {
+    color: #9ca3af;
+}
+
+body.dark-mode .item-value {
+    color: #e5e7eb;
+}
+
+.theme-toggle {
+    padding: 15px 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.theme-toggle-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.theme-toggle-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.theme-icon {
+    font-size: 16px;
+}
+
+.theme-icon.dark {
+    display: none;
+}
+
+/* Status Badge Dark Mode Colors */
+body.dark-mode .policy-status-badge.active {
+    background: rgba(16, 185, 129, 0.2);
+    color: #34d399;
+}
+
+body.dark-mode .policy-status-badge.pending {
+    background: rgba(245, 158, 11, 0.2);
+    color: #fbbf24;
+}
+
+body.dark-mode .policy-status-badge.expired {
+    background: rgba(239, 68, 68, 0.2);
+    color: #f87171;
+}
+
+/* Premium Trend Dark Mode */
+body.dark-mode .premium-trend.positive {
+    color: #34d399;
+}
+
+body.dark-mode .premium-trend.negative {
+    color: #f87171;
+}

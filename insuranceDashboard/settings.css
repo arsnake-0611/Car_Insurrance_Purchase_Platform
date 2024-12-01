@@ -1,14 +1,148 @@
-/* Import base styles from existing CSS */
-@import url('recordsList.css');
+/* Base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-/* Settings specific styles */
-.settings-container {
-    max-width: 800px;
+body {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    background: #f5f7fa;
+    min-height: 100vh;
+}
+
+/* Sidebar styles */
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 250px;
+    height: 100vh;
+    background: linear-gradient(180deg, #2c3e50 0%, #3498db 100%);
+    color: #FAF9F6;
+    padding: 20px;
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+.sidebar-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-header h3 {
+    margin: 0;
+    font-size: 25px;
+    color: #FAF9F6;
+}
+
+.sidebar-menu {
+    list-style: none;
+    padding: 0;
+    margin-top: 30px;
+}
+
+.sidebar-menu li {
+    margin-bottom: 15px;
+}
+
+.sidebar-menu a {
+    color: #FAF9F6;
+    text-decoration: none;
+    display: block;
+    padding: 12px 15px;
+    margin: 5px 0;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.sidebar-menu a:hover,
+.sidebar-menu a.active {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateX(5px);
+    font-size: 20px;
+}
+
+/* Theme toggle styles */
+.theme-toggle {
+    margin-top: auto;
+    padding: 15px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.theme-toggle-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
     width: 100%;
-    margin: 0 auto;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.theme-toggle-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Sign Out Button */
+.sidebar-footer {
+    position: absolute;
+    bottom: 20px;
+    width: calc(100% - 40px);
+}
+
+.sign-out-btn {
+    width: 100%;
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.sign-out-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Main content styles */
+.main-content {
+    margin-left: 250px;
     padding: 20px;
 }
 
+header {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    margin-bottom: 30px;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-content h2 {
+    color: #2c3e50;
+    margin: 0;
+}
+
+.user-info {
+    color: #666;
+}
+
+/* Settings specific styles */
 .settings-section {
     background: white;
     border-radius: 12px;
@@ -26,50 +160,11 @@
     gap: 10px;
 }
 
-.settings-section h3 i {
-    color: #3498db;
-}
-
-.settings-content {
-    padding: 10px 0;
-}
-
-.form-group {
-    margin-bottom: 20px;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 8px;
-    color: #2c3e50;
-    font-weight: 500;
-}
-
-.form-control {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #e1e8ed;
-    border-radius: 6px;
-    font-size: 14px;
-    transition: all 0.3s ease;
-}
-
-.form-control:focus {
-    border-color: #3498db;
-    box-shadow: 0 0 0 2px rgba(52,152,219,0.2);
-    outline: none;
-}
-
-/* Notification options */
 .notification-option {
     display: flex;
     align-items: center;
     padding: 15px 0;
     border-bottom: 1px solid #e1e8ed;
-}
-
-.notification-option:last-child {
-    border-bottom: none;
 }
 
 .notification-text {
@@ -79,7 +174,6 @@
 .notification-text h4 {
     margin: 0;
     color: #2c3e50;
-    font-size: 1em;
 }
 
 .notification-text p {
@@ -134,84 +228,10 @@ input:checked + .toggle-slider:before {
     transform: translateX(26px);
 }
 
-/* Buttons */
-.btn {
-    padding: 10px 20px;
-    border-radius: 6px;
-    font-size: 14px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.btn-primary {
-    background: #3498db;
-    color: white;
-    border: none;
-}
-
-.btn-primary:hover {
-    background: #2980b9;
-    transform: translateY(-2px);
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .settings-container {
-        padding: 10px;
-    }
-
-    .settings-section {
-        padding: 16px;
-    }
-
-    .notification-option {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .notification-text {
-        margin: 10px 0 0;
-    }
-}
-
-/* Dark Mode Styles */
+/* Dark mode styles */
 body.dark-mode {
     background: #1a1a1a;
     color: #ffffff;
-}
-
-/* Dark mode overrides */
-body.dark-mode .settings-section {
-    background: #2d2d2d;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.2);
-}
-
-body.dark-mode .settings-section h3 {
-    color: #ffffff;
-}
-
-body.dark-mode .form-control {
-    background: #3d3d3d;
-    border-color: #4d4d4d;
-    color: #ffffff;
-}
-
-body.dark-mode .form-control:focus {
-    border-color: #3498db;
-    box-shadow: 0 0 0 2px rgba(52,152,219,0.2);
-}
-
-body.dark-mode .notification-text h4 {
-    color: #ffffff;
-}
-
-body.dark-mode .notification-text p {
-    color: #bbbbbb;
-}
-
-body.dark-mode .notification-option {
-    border-bottom-color: #3d3d3d;
 }
 
 body.dark-mode .sidebar {
@@ -230,17 +250,61 @@ body.dark-mode .user-info {
     color: #bbbbbb;
 }
 
-/* Dark mode form styles */
-body.dark-mode label {
+body.dark-mode .settings-section {
+    background: #2d2d2d;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+}
+
+body.dark-mode .settings-section h3 {
     color: #ffffff;
 }
 
-body.dark-mode select option {
+body.dark-mode .notification-text h4 {
+    color: #ffffff;
+}
+
+body.dark-mode .notification-text p {
+    color: #bbbbbb;
+}
+
+body.dark-mode .notification-option {
+    border-bottom-color: #3d3d3d;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .sidebar {
+        transform: translateX(-100%);
+    }
+    
+    .sidebar.active {
+        transform: translateX(0);
+    }
+    
+    .main-content {
+        margin-left: 0;
+    }
+
+    .settings-section {
+        padding: 16px;
+    }
+}
+
+/* Notification styles */
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 15px 25px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    z-index: 1000;
+    display: none;
+}
+
+body.dark-mode .notification {
     background: #2d2d2d;
     color: #ffffff;
-}
-
-/* Transition styles for smooth theme switching */
-body, .settings-section, .form-control, header, .sidebar {
-    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
 }

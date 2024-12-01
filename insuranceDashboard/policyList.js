@@ -28,6 +28,7 @@ class FilterManager {
         this.initializeEventListeners();
         this.updateUI();
         this.updateTotalPolicies();
+        this.initializeThemeToggle();
     }
 
     initializeEventListeners() {
@@ -183,6 +184,45 @@ class FilterManager {
             } else if (label === 'expired') {
                 item.querySelector('.item-value').textContent = expiredPolicies;
             }
+        });
+    }
+
+    initializeThemeToggle() {
+        const themeToggleBtn = $('#themeToggleBtn');
+        const body = $('body');
+        const themeText = $('.theme-text');
+        const lightIcon = $('.theme-icon.light');
+        const darkIcon = $('.theme-icon.dark');
+        
+        // Check for saved theme preference
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            body.addClass('dark-mode');
+            themeText.text('Light Mode');
+            lightIcon.hide();
+            darkIcon.show();
+        } else {
+            lightIcon.show();
+            darkIcon.hide();
+        }
+        
+        // Theme toggle click handler
+        themeToggleBtn.on('click', function() {
+            const isDarkMode = body.hasClass('dark-mode');
+            body.toggleClass('dark-mode');
+            localStorage.setItem('theme', isDarkMode ? 'light' : 'dark');
+            
+            // Update text and icons
+            themeText.text(isDarkMode ? 'Dark Mode' : 'Light Mode');
+            if (isDarkMode) {
+                lightIcon.show();
+                darkIcon.hide();
+            } else {
+                lightIcon.hide();
+                darkIcon.show();
+            }
+            
+            showNotification(`Switched to ${isDarkMode ? 'light' : 'dark'} mode`);
         });
     }
 }

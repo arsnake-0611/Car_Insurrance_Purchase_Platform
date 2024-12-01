@@ -18,52 +18,6 @@ $(document).ready(function() {
             showNotification('Light mode enabled');
         }
     });
-
-    // Handle profile form submission
-    $('#profileForm').on('submit', function(e) {
-        e.preventDefault();
-        showNotification('Profile updated successfully!');
-    });
-
-    // Handle security form submission
-    $('#securityForm').on('submit', function(e) {
-        e.preventDefault();
-        const currentPassword = $('#currentPassword').val();
-        const newPassword = $('#newPassword').val();
-        const confirmPassword = $('#confirmPassword').val();
-
-        if (!currentPassword) {
-            showNotification('Please enter your current password');
-            return;
-        }
-
-        if (newPassword !== confirmPassword) {
-            showNotification('New passwords do not match!');
-            return;
-        }
-
-        if (newPassword.length < 8) {
-            showNotification('Password must be at least 8 characters long');
-            return;
-        }
-
-        // Simulate password change
-        showNotification('Password changed successfully!');
-        this.reset();
-    });
-
-    // Handle system settings save
-    $('.btn-primary').on('click', function() {
-        const language = $('#language').val();
-        const timezone = $('#timezone').val();
-        
-        // Save settings to localStorage
-        localStorage.setItem('language', language);
-        localStorage.setItem('timezone', timezone);
-        
-        showNotification('System settings saved successfully!');
-    });
-
     // Enhanced notification function
     function showNotification(message) {
         const notification = $('#notification');
@@ -78,20 +32,4 @@ $(document).ready(function() {
 
         setTimeout(() => notification.fadeOut(), 3000);
     }
-
-    // Load saved settings on page load
-    function loadSavedSettings() {
-        const savedLanguage = localStorage.getItem('language');
-        const savedTimezone = localStorage.getItem('timezone');
-        
-        if (savedLanguage) {
-            $('#language').val(savedLanguage);
-        }
-        if (savedTimezone) {
-            $('#timezone').val(savedTimezone);
-        }
-    }
-
-    // Initialize saved settings
-    loadSavedSettings();
 });
