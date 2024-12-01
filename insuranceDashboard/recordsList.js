@@ -83,7 +83,7 @@ $(document).ready(function() {
     let quotes = [
         {
             id: 1,
-            referenceNumber: 'QT2023001',
+            referenceNumber: 'QT2024001',
             vehicleMake: "Toyota",
             vehicleModel: "Camry",
             vehicleYear: 2020,
@@ -102,7 +102,7 @@ $(document).ready(function() {
         },
         {
             id: 2,
-            referenceNumber: 'QT2023002',
+            referenceNumber: 'QT2024002',
             vehicleMake: "Honda",
             vehicleModel: "Civic",
             vehicleYear: 2019,
@@ -122,7 +122,7 @@ $(document).ready(function() {
         },
         {
             id: 3,
-            referenceNumber: 'QT2023003',
+            referenceNumber: 'QT2024001',
             vehicleMake: "Ford",
             vehicleModel: "Focus",
             vehicleYear: 2018,
@@ -142,7 +142,7 @@ $(document).ready(function() {
         },
         {
             id: 4,
-            referenceNumber: 'QT2023004',
+            referenceNumber: 'QT2024001',
             vehicleMake: "BMW",
             vehicleModel: "X5",
             vehicleYear: 2021,
