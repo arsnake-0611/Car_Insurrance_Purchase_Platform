@@ -113,14 +113,18 @@ function handleLogin(event) {
         break;
 
       case 'insurance-sales':
-        if (usernameEmail === 'Chris Wong' && password === 'Chris Wong') {
+        if (usernameEmail === 's101424@gmail.com' && password === 'chrisWong!A1') {
           isValidLogin = true;
         }
         break;
     }
 
-    if (isValidLogin) {
+    if (isValidLogin && loginType === 'customer') {
       window.location.href = '../option.html';
+    } else if (isValidLogin && loginType === 'vehicle-sales') {
+      window.location.href = '../vehicleSalesHandling/Dashboard.html';
+    } else if (isValidLogin && loginType === 'insurance-sales') {
+      window.location.href = '../insuranceDashboard/staffDashboard.html';
     } else {
       alert('Invalid Email or Password. Please try again.');
     }
