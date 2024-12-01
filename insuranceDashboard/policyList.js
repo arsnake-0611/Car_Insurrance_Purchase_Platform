@@ -27,6 +27,7 @@ class FilterManager {
         
         this.initializeEventListeners();
         this.updateUI();
+        this.updateTotalPolicies();
     }
 
     initializeEventListeners() {
@@ -90,6 +91,7 @@ class FilterManager {
         this.updateFilterCounts(filteredPolicies);
         this.updatePolicyList(filteredPolicies);
         this.updateShortlistInfo(filteredPolicies.length);
+        this.updateTotalPolicies();
     }
 
     updateFilterCounts(filteredPolicies) {
@@ -159,6 +161,29 @@ class FilterManager {
         if (shortlistInfo) {
             shortlistInfo.textContent = `Showing ${totalItems} of ${document.querySelectorAll('.policy-card').length} policies`;
         }
+    }
+
+    updateTotalPolicies() {
+        const totalPolicies = document.querySelectorAll('.policy-card').length;
+        const activePolicies = document.querySelectorAll('.policy-card[data-status="active"]').length;
+        const pendingPolicies = document.querySelectorAll('.policy-card[data-status="pending"]').length;
+        const expiredPolicies = document.querySelectorAll('.policy-card[data-status="expired"]').length;
+
+        // Update total policies count
+        document.querySelector('.total-policies .stat-value').textContent = totalPolicies;
+
+        // Update breakdown counts
+        const breakdownItems = document.querySelectorAll('.total-policies .breakdown-item');
+        breakdownItems.forEach(item => {
+            const label = item.querySelector('.item-label').textContent.toLowerCase();
+            if (label === 'active') {
+                item.querySelector('.item-value').textContent = activePolicies;
+            } else if (label === 'pending') {
+                item.querySelector('.item-value').textContent = pendingPolicies;
+            } else if (label === 'expired') {
+                item.querySelector('.item-value').textContent = expiredPolicies;
+            }
+        });
     }
 }
 
