@@ -6,46 +6,136 @@
 }
 
 .header {
-    background: linear-gradient(135deg, #1a1a1a, #333);
+    background: linear-gradient(135deg, #001f3f, #034694);
     color: white;
     display: flex;
     justify-content: space-between;
-    align-items: baseline;
-    animation: headerFade 1s ease-in;
-    padding: 0 24px;
+    align-items: center;
+    padding: 15px 40px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 31, 63, 0.2);
 }
 
 .text{
     padding: 20px;
 }
-.coverage-table {
-  border-collapse: collapse;
-  margin-bottom: 20px;
-  margin: 20px auto;
-  padding: 20px;
-}
-
-.coverage-table th, tr :first-of-type{
-  background-color: #a8ff00;
-
-}
-
-.coverage-tabl tr,td:hover{
-    background-color: #ffd700;
-}
-
-.coverage-table th,
-.coverage-table td {
-  padding: 20px 30px; 
-  text-align: left;
-  line-height: 1.5; 
-}
-
-.coverage-table tr:first {
-  background-color: #ff5700;
-  font-size: 16px; 
-  font-weight: 500;
-}
+.plans {
+    padding: 64px 32px;
+    background-color: #f8f9fa;
+  }
+  
+  .plans-title {
+    text-align: center;
+    margin-bottom: 48px;
+    color: #001f3f;
+  }
+  
+  .comparison-table {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .comparison-header {
+    display: grid;
+    grid-template-columns: 1fr 2fr 2fr;
+    background: #001f3f;
+    color: white;
+  }
+  
+  .plan-header {
+    padding: 24px;
+    text-align: center;
+    font-size: 19px;
+    font-weight: bold;
+  }
+  
+  .plan-header.featured {
+    background: #0056b3;
+  }
+  
+  .comparison-row {
+    display: grid;
+    grid-template-columns: 1fr 2fr 2fr;
+    border-bottom: 1px solid #eee;
+    transition: all 0.3s ease;
+  }
+  
+  .comparison-row:last-child {
+    border-bottom: none;
+  }
+  
+  .comparison-row:hover {
+    background-color: #f0f8ff;
+    transform: translateX(5px);
+    box-shadow: -5px 0 10px rgba(0, 31, 63, 0.1);
+  }
+  
+  .feature-name {
+    padding: 24px;
+    background: #f8f9fa;
+    font-weight: bold;
+    color: #001f3f;
+    display: flex;
+    align-items: center;
+  }
+  
+  .plan-feature {
+    padding: 24px;
+    color: #445566;
+    line-height: 1.4;
+    transition: all 0.3s ease;
+  }
+  
+  .comparison-row:hover .plan-feature {
+    color: #001f3f;
+  }
+  
+  .comparison-row:hover .feature-name {
+    color: #0056b3;
+  }
+  
+  @media (max-width: 768px) {
+    .plans {
+      padding: 32px 16px;
+    }
+  
+    .plans-title {
+      margin-bottom: 32px;
+    }
+  
+    .comparison-header, .comparison-row {
+      grid-template-columns: 1fr;
+    }
+  
+    .feature-name {
+      background: #001f3f;
+      color: white;
+    }
+  
+    .plan-header {
+      border-top: 1px solid #445566;
+    }
+  
+    .plan-feature {
+      border-bottom: 1px solid #eee;
+      text-align: center;
+    }
+  
+    .comparison-row:last-child .plan-feature:last-child {
+      border-bottom: none;
+    }
+  
+    .comparison-row:hover {
+      transform: translateY(5px);
+      box-shadow: 0 -5px 10px rgba(0, 31, 63, 0.1);
+    }
+  }
 
 
 
@@ -61,29 +151,80 @@
 }
 
 .logo {
-    font-size: 2rem;
+    font-size: 24px;
     font-weight: bold;
-    color: #ffcc00;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: transform 0.3s ease;
+}
+
+.logo:hover {
+    transform: scale(1.05);
+}
+
+.logo img {
+    vertical-align: middle;
 }
 
 .nav-links {
     display: flex;
-    gap: 2rem;
+    gap: 30px;
+    align-items: center;
 }
 
-.nav-links a {
-    color: white;
+.nav-link {
+    color: #ffffff;
     text-decoration: none;
-    transition: color 0.3s;
+    font-size: 16px;
+    padding: 8px 16px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    position: relative;
 }
 
-.nav-links a:hover {
-    color: #ffcc00;
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background-color: #cce0ff;
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover {
+    color: #cce0ff;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.nav-link:hover::after {
+    width: 80%;
+}
+
+@media screen and (max-width: 768px) {
+    .header {
+        padding: 10px 20px;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .nav-links {
+        gap: 15px;
+    }
+
+    .nav-link {
+        padding: 6px 12px;
+        font-size: 14px;
+    }
 }
 
 .hero {
     height: 80vh;
-   background: linear-gradient(#00000080, #00000080), url('/icon/background.jpg');
+   background: linear-gradient(#001f3f80, #001f3f80), url('/icon/background.jpg');
     background-size: cover;
     display: flex;
     align-items: center;
@@ -117,10 +258,10 @@
 .cta-button {
     padding: 1rem 2rem;
     font-size: 20px;
-    background-color: #ffcc00;
+    background-color: #0056b3;
     border: none;
     border-radius: 5px;
-    color: #333;
+    color: white;
     cursor: pointer;
     transition: transform 0.3s, box-shadow 0.3s;
     text-decoration: none;
@@ -128,7 +269,7 @@
 
 .cta-button:hover {
     transform: translateY(-3px);
-    box-shadow: 0 5px 15px #ffcc004d;
+    box-shadow: 0 5px 15px #0056b380;
 }
 
 .features {
@@ -154,7 +295,7 @@
     margin: 20px 20px 20px;
     border-radius: 10px;
     text-align: center;
-    box-shadow: 5px 5px 15px #6e8bff;
+    box-shadow: 5px 5px 15px #0056b340;
     transition: transform 0.3s;
     position: relative;
     z-index: 2;
@@ -166,7 +307,7 @@
 
 .feature-card:hover {
     transform: translateY(-10px);
-    box-shadow: 5px 5px 5px #ffe26e;
+    box-shadow: 5px 5px 5px #0056b360;
     font-size: 25px;
     text-align: justify;
 }
@@ -186,17 +327,17 @@
 .testimonial-text {
     font-size: 1.2rem;
     font-style: italic;
-    color: #666;
+    color: #445566;
     margin-bottom: 1rem;
 }
 
 .testimonial-author {
     font-weight: bold;
-    color: #333;
+    color: #001f3f;
 }
 
 footer {
-    background: #333;
+    background: #001f3f;
     color: white;
     padding: 2rem;
     text-align: center;
