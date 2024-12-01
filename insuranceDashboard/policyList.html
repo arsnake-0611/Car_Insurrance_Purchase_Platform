@@ -44,97 +44,181 @@
     <!-- Main Content -->
     <div class="content-wrapper">
         <div class="main-controls">
-            <div class="dashboard-metrics">
-                <div class="metric-card total-policies">
-                    <div class="metric-icon">📊</div>
-                    <div class="metric-content">
-                        <h3>Total Policies</h3>
-                        <div class="metric-value">150</div>
-                        <div class="metric-chart">
-                            <div class="chart-bar">
-                                <div class="bar-fill" style="width: 75%"></div>
+            <!-- Summary Statistics -->
+            <div class="statistics-grid">
+                <div class="stat-card total-policies">
+                    <div class="stat-header">
+                        <div class="stat-icon">📊</div>
+                        <div class="stat-title">Total Policies</div>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-value">248</div>
+                        <div class="stat-breakdown">
+                            <div class="breakdown-item">
+                                <span class="item-label">Active</span>
+                                <span class="item-value">185</span>
                             </div>
-                            <span class="trend positive">↑ 12% from last month</span>
+                            <div class="breakdown-item">
+                                <span class="item-label">Pending</span>
+                                <span class="item-value">42</span>
+                            </div>
+                            <div class="breakdown-item">
+                                <span class="item-label">Expired</span>
+                                <span class="item-value">21</span>
+                            </div>
                         </div>
+                        <div class="stat-trend positive">↑ 15% from last month</div>
                     </div>
                 </div>
-                <div class="metric-card active-policies">
-                    <div class="metric-icon">✅</div>
-                    <div class="metric-content">
-                        <h3>Active Policies</h3>
-                        <div class="metric-value">120</div>
-                        <div class="metric-chart">
-                            <div class="chart-bar">
-                                <div class="bar-fill" style="width: 80%"></div>
+
+                <div class="stat-card premium-overview">
+                    <div class="stat-header">
+                        <div class="stat-icon">💰</div>
+                        <div class="stat-title">Premium Overview</div>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-value">$2.8M</div>
+                        <div class="stat-breakdown">
+                            <div class="breakdown-item">
+                                <span class="item-label">Comprehensive</span>
+                                <span class="item-value">$1.9M</span>
                             </div>
-                            <span class="trend positive">↑ 8% from last month</span>
+                            <div class="breakdown-item">
+                                <span class="item-label">Third Party</span>
+                                <span class="item-value">$0.9M</span>
+                            </div>
                         </div>
+                        <div class="stat-trend positive">↑ 8% from last month</div>
                     </div>
                 </div>
-                <div class="metric-card total-premium">
-                    <div class="metric-icon">💰</div>
-                    <div class="metric-content">
-                        <h3>Total Premium</h3>
-                        <div class="metric-value">$1.8M</div>
-                        <div class="metric-chart">
-                            <div class="chart-bar">
-                                <div class="bar-fill" style="width: 65%"></div>
+
+                <div class="stat-card risk-analysis">
+                    <div class="stat-header">
+                        <div class="stat-icon">⚠️</div>
+                        <div class="stat-title">Risk Analysis</div>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-value">85</div>
+                        <div class="stat-breakdown">
+                            <div class="breakdown-item">
+                                <span class="item-label">High Risk</span>
+                                <span class="item-value">45</span>
                             </div>
-                            <span class="trend positive">↑ 15% from last month</span>
+                            <div class="breakdown-item">
+                                <span class="item-label">Medium Risk</span>
+                                <span class="item-value">128</span>
+                            </div>
+                            <div class="breakdown-item">
+                                <span class="item-label">Low Risk</span>
+                                <span class="item-value">75</span>
+                            </div>
                         </div>
+                        <div class="stat-trend negative">↓ 5% risk level</div>
                     </div>
                 </div>
             </div>
 
-            <div class="filter-controls">
-                <div class="search-section">
-                    <div class="search-bar">
-                        <input type="text" placeholder="Search policies, vehicles, or customers...">
-                        <div class="search-icon">🔍</div>
+            <!-- Advanced Filtering Controls -->
+            <div class="filter-section">
+                <div class="search-container">
+                    <input type="text" 
+                           id="policySearch" 
+                           placeholder="Search by policy number, customer name, or vehicle..."
+                           class="search-input">
+                </div>
+
+                <div class="filter-groups">
+                    <!-- Status Filter -->
+                    <div class="filter-group">
+                        <h3>Policy Status</h3>
+                        <div class="filter-buttons" id="statusFilters">
+                            <button class="filter-btn active" data-filter="status" data-value="all">
+                                All
+                                <span class="count">0</span>
+                            </button>
+                            <button class="filter-btn" data-filter="status" data-value="active">
+                                Active
+                                <span class="count">0</span>
+                            </button>
+                            <button class="filter-btn" data-filter="status" data-value="pending">
+                                Pending
+                                <span class="count">0</span>
+                            </button>
+                            <button class="filter-btn" data-filter="status" data-value="expired">
+                                Expired
+                                <span class="count">0</span>
+                            </button>
+                        </div>
                     </div>
-                    <div class="quick-filters">
-                        <button class="quick-filter" data-filter="high-risk">
-                            <span class="filter-icon">⚠️</span>
-                            High Risk
-                        </button>
-                        <button class="quick-filter" data-filter="expiring">
-                            <span class="filter-icon">⏳</span>
-                            Expiring Soon
-                        </button>
-                        <button class="quick-filter" data-filter="claims">
-                            <span class="filter-icon">📝</span>
-                            Recent Claims
-                        </button>
+
+                    <!-- Coverage Filter -->
+                    <div class="filter-group">
+                        <h3>Coverage Type</h3>
+                        <div class="filter-buttons" id="coverageFilters">
+                            <button class="filter-btn active" data-filter="coverage" data-value="all">
+                                All Types
+                                <span class="count">0</span>
+                            </button>
+                            <button class="filter-btn" data-filter="coverage" data-value="comprehensive">
+                                Comprehensive
+                                <span class="count">0</span>
+                            </button>
+                            <button class="filter-btn" data-filter="coverage" data-value="third-party">
+                                Third Party
+                                <span class="count">0</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Vehicle Filter -->
+                    <div class="filter-group">
+                        <h3>Vehicle Category</h3>
+                        <div class="filter-buttons" id="vehicleFilters">
+                            <button class="filter-btn active" data-filter="vehicle" data-value="all">
+                                All Vehicles
+                                <span class="count">0</span>
+                            </button>
+                            <button class="filter-btn" data-filter="vehicle" data-value="sedan">
+                                Sedan
+                                <span class="count">0</span>
+                            </button>
+                            <button class="filter-btn" data-filter="vehicle" data-value="suv">
+                                SUV
+                                <span class="count">0</span>
+                            </button>
+                            <button class="filter-btn" data-filter="vehicle" data-value="luxury">
+                                Luxury
+                                <span class="count">0</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Sort Controls -->
+                    <div class="filter-group">
+                        <h3>Sort By</h3>
+                        <div class="filter-buttons" id="sortControls">
+                            <button class="filter-btn active" data-sort="policyNumber">
+                                Policy Number
+                                <span class="sort-icon">↓</span>
+                            </button>
+                            <button class="filter-btn" data-sort="premium">
+                                Premium
+                                <span class="sort-icon">↓</span>
+                            </button>
+                            <button class="filter-btn" data-sort="riskScore">
+                                Risk Score
+                                <span class="sort-icon">↓</span>
+                            </button>
+                            <button class="filter-btn" data-sort="endDate">
+                                End Date
+                                <span class="sort-icon">↓</span>
+                            </button>
+                        </div>
                     </div>
                 </div>
 
-                <div class="advanced-filters">
-                    <div class="filter-group">
-                        <label>Coverage Type</label>
-                        <div class="button-group">
-                            <button class="filter-btn active" data-coverage="all">All</button>
-                            <button class="filter-btn" data-coverage="comprehensive">Comprehensive</button>
-                            <button class="filter-btn" data-coverage="third-party">Third Party</button>
-                        </div>
-                    </div>
-
-                    <div class="filter-group">
-                        <label>Vehicle Type</label>
-                        <div class="button-group">
-                            <button class="filter-btn active" data-vehicle="all">All</button>
-                            <button class="filter-btn" data-vehicle="sedan">Sedan</button>
-                            <button class="filter-btn" data-vehicle="suv">SUV</button>
-                            <button class="filter-btn" data-vehicle="luxury">Luxury</button>
-                        </div>
-                    </div>
-
-                    <div class="filter-group">
-                        <label>Premium Range</label>
-                        <div class="range-slider">
-                            <input type="range" min="0" max="50000" step="1000" value="25000">
-                            <div class="range-value">$25,000</div>
-                        </div>
-                    </div>
+                <div class="shortlist-info-container">
+                    <div id="shortlistInfo" class="shortlist-info"></div>
                 </div>
             </div>
         </div>
@@ -157,6 +241,10 @@
                             <div class="vehicle-icon">🚙</div>
                             <div class="vehicle-details">
                                 <h3>BMW X5</h3>
+                                <div class="policyholder-info">
+                                    <span class="policyholder-icon">👤</span>
+                                    <span class="policyholder-name">Michael Chen</span>
+                                </div>
                                 <div class="vehicle-specs">
                                     <span class="spec">2023</span>
                                     <span class="spec">Luxury SUV</span>
@@ -220,6 +308,89 @@
                             </div>
                         </div>
                     </div>
+                    </div>
+                </div>
+
+                <!-- Toyota Camry Policy Card -->
+                <div class="policy-card" data-status="active" data-coverage="third-party" data-vehicle="sedan" data-premium="8900" data-risk="45">
+                    <div class="policy-header">
+                        <div class="policy-status-badge active">
+                            <span class="status-icon">●</span>
+                            Active
+                        </div>
+                        <div class="policy-number">MOT-24-1005</div>
+                    </div>
+
+                    <div class="policy-body">
+                        <div class="vehicle-info">
+                            <div class="vehicle-icon">🚗</div>
+                            <div class="vehicle-details">
+                                <h3>Toyota Camry</h3>
+                                <div class="policyholder-info">
+                                    <span class="policyholder-icon">👤</span>
+                                    <span class="policyholder-name">Sarah Wong</span>
+                                </div>
+                                <div class="vehicle-specs">
+                                    <span class="spec">2022</span>
+                                    <span class="spec">Sedan</span>
+                                    <span class="spec">$280,000</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="metrics-row">
+                            <div class="metric-circle" style="--percentage: 45">
+                                <div class="metric-value">45</div>
+                                <div class="metric-label">Risk Score</div>
+                            </div>
+                            <div class="metric-circle" style="--percentage: 60">
+                                <div class="metric-value">60%</div>
+                                <div class="metric-label">Coverage</div>
+                            </div>
+                            <div class="metric-circle" style="--percentage: 20">
+                                <div class="metric-value">1</div>
+                                <div class="metric-label">Claims</div>
+                            </div>
+                        </div>
+
+                        <div class="coverage-info">
+                            <div class="coverage-type third-party">
+                                <span class="coverage-icon">⚡</span>
+                                <span>Third Party</span>
+                            </div>
+                            <div class="coverage-features">
+                                <span class="feature">🚑 Personal Accident</span>
+                                <span class="feature">🚗 Roadside Assist</span>
+                            </div>
+                        </div>
+
+                        <div class="policy-timeline">
+                            <div class="timeline-marker start">
+                                <div class="date">Jan 15, 2024</div>
+                                <div class="label">Start</div>
+                            </div>
+                            <div class="timeline-progress">
+                                <div class="progress-bar" style="--progress: 10%"></div>
+                            </div>
+                            <div class="timeline-marker end">
+                                <div class="date">Jan 14, 2025</div>
+                                <div class="label">End</div>
+                            </div>
+                        </div>
+
+                        <div class="premium-info">
+                            <div class="premium-amount">
+                                <span class="currency">$</span>
+                                <span class="amount">8,900</span>
+                                <span class="period">/year</span>
+                            </div>
+                            <div class="premium-trend negative">
+                                <span class="trend-icon">↘</span>
+                                <span class="trend-value">-2%</span>
+                                <span class="trend-label">from last year</span>
+                            </div>
+                        </div>
+                    </div>
 
                     <div class="policy-footer">
                         <button class="action-btn primary">
@@ -237,7 +408,104 @@
                     </div>
                 </div>
 
-                <!-- Add more policy cards with different data... -->
+                <!-- Mercedes S-Class Policy Card -->
+                <div class="policy-card" data-status="pending" data-coverage="comprehensive" data-vehicle="luxury" data-premium="35600" data-risk="75">
+                    <div class="policy-header">
+                        <div class="policy-status-badge pending">
+                            <span class="status-icon">●</span>
+                            Pending
+                        </div>
+                        <div class="policy-number">MOT-24-1006</div>
+                    </div>
+
+                    <div class="policy-body">
+                        <div class="vehicle-info">
+                            <div class="vehicle-icon">✨</div>
+                            <div class="vehicle-details">
+                                <h3>Mercedes S-Class</h3>
+                                <div class="policyholder-info">
+                                    <span class="policyholder-icon">👤</span>
+                                    <span class="policyholder-name">David Lee</span>
+                                </div>
+                                <div class="vehicle-specs">
+                                    <span class="spec">2024</span>
+                                    <span class="spec">Luxury Sedan</span>
+                                    <span class="spec">$980,000</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="metrics-row">
+                            <div class="metric-circle" style="--percentage: 75">
+                                <div class="metric-value">75</div>
+                                <div class="metric-label">Risk Score</div>
+                            </div>
+                            <div class="metric-circle" style="--percentage: 90">
+                                <div class="metric-value">90%</div>
+                                <div class="metric-label">Coverage</div>
+                            </div>
+                            <div class="metric-circle" style="--percentage: 0">
+                                <div class="metric-value">0</div>
+                                <div class="metric-label">Claims</div>
+                            </div>
+                        </div>
+
+                        <div class="coverage-info">
+                            <div class="coverage-type comprehensive">
+                                <span class="coverage-icon">🛡️</span>
+                                <span>Comprehensive</span>
+                            </div>
+                            <div class="coverage-features">
+                                <span class="feature">✨ Premium Package</span>
+                                <span class="feature">🔧 Zero Depreciation</span>
+                                <span class="feature">🚑 Personal Accident</span>
+                                <span class="feature">🚗 Premium Roadside Assist</span>
+                            </div>
+                        </div>
+
+                        <div class="policy-timeline">
+                            <div class="timeline-marker start">
+                                <div class="date">Mar 1, 2024</div>
+                                <div class="label">Start</div>
+                            </div>
+                            <div class="timeline-progress">
+                                <div class="progress-bar" style="--progress: 0%"></div>
+                            </div>
+                            <div class="timeline-marker end">
+                                <div class="date">Feb 28, 2025</div>
+                                <div class="label">End</div>
+                            </div>
+                        </div>
+
+                        <div class="premium-info">
+                            <div class="premium-amount">
+                                <span class="currency">$</span>
+                                <span class="amount">35,600</span>
+                                <span class="period">/year</span>
+                            </div>
+                            <div class="premium-trend positive">
+                                <span class="trend-icon">↗</span>
+                                <span class="trend-value">+8%</span>
+                                <span class="trend-label">from last year</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="policy-footer">
+                        <button class="action-btn primary">
+                            <span class="btn-icon">📋</span>
+                            View Details
+                        </button>
+                        <button class="action-btn secondary">
+                            <span class="btn-icon">📊</span>
+                            Analytics
+                        </button>
+                        <button class="action-btn tertiary">
+                            <span class="btn-icon">💬</span>
+                            Support
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

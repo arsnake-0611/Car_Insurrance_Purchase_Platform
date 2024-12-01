@@ -1,139 +1,3 @@
-console.log('Policies:', policies);
-
-// Sample data for insurance policies
-const policies = [
-    {
-        id: "POL-2024-001",
-        policyNumber: "MOT-24-1001",
-        status: "active",
-        policyholder: {
-            name: "John Smith",
-            phone: "+852 9123 4567",
-            email: "john.smith@email.com"
-        },
-        vehicle: {
-            make: "Toyota",
-            model: "Camry",
-            year: 2022,
-            type: "sedan",
-            value: 280000,
-            bodyType: "Sedan"
-        },
-        coverageType: "comprehensive",
-        premium: 12800,
-        startDate: "2024-01-01",
-        endDate: "2024-12-31",
-        riskScore: 85,
-        claimsCount: 0,
-        lastClaim: null,
-        additionalCoverage: ["windscreen", "floodDamage", "personalAccident"]
-    },
-    {
-        id: "POL-2024-002",
-        policyNumber: "MOT-24-1002",
-        status: "pending",
-        policyholder: {
-            name: "Sarah Wong",
-            phone: "+852 9876 5432",
-            email: "sarah.w@email.com"
-        },
-        vehicle: {
-            make: "Tesla",
-            model: "Model 3",
-            year: 2023,
-            type: "sedan",
-            value: 420000,
-            bodyType: "Electric Sedan"
-        },
-        coverageType: "comprehensive",
-        premium: 15600,
-        startDate: "2024-02-15",
-        endDate: "2025-02-14",
-        riskScore: 92,
-        claimsCount: 0,
-        lastClaim: null,
-        additionalCoverage: ["electricVehicle", "zeroDep", "roadside"]
-    },
-    {
-        id: "POL-2024-003",
-        policyNumber: "MOT-24-1003",
-        status: "expired",
-        policyholder: {
-            name: "Michael Chan",
-            phone: "+852 9234 5678",
-            email: "mchan@email.com"
-        },
-        vehicle: {
-            make: "Honda",
-            model: "CR-V",
-            year: 2021,
-            type: "suv",
-            value: 320000,
-            bodyType: "SUV"
-        },
-        coverageType: "thirdPartyFire",
-        premium: 8900,
-        startDate: "2023-01-15",
-        endDate: "2024-01-14",
-        riskScore: 78,
-        claimsCount: 1,
-        lastClaim: "2023-08-22",
-        additionalCoverage: ["floodDamage", "roadside"]
-    },
-    {
-        id: "POL-2024-004",
-        policyNumber: "MOT-24-1004",
-        status: "active",
-        policyholder: {
-            name: "Emily Lau",
-            phone: "+852 9345 6789",
-            email: "emily.l@email.com"
-        },
-        vehicle: {
-            make: "BMW",
-            model: "X5",
-            year: 2023,
-            type: "suv",
-            value: 680000,
-            bodyType: "Luxury SUV"
-        },
-        coverageType: "comprehensive",
-        premium: 22400,
-        startDate: "2023-12-01",
-        endDate: "2024-11-30",
-        riskScore: 95,
-        claimsCount: 0,
-        lastClaim: null,
-        additionalCoverage: ["luxuryCar", "zeroDep", "personalAccident", "roadside"]
-    },
-    {
-        id: "POL-2024-005",
-        policyNumber: "MOT-24-1005",
-        status: "pending",
-        policyholder: {
-            name: "David Lee",
-            phone: "+852 9456 7890",
-            email: "david.lee@email.com"
-        },
-        vehicle: {
-            make: "Yamaha",
-            model: "MT-07",
-            year: 2022,
-            type: "motorcycle",
-            value: 120000,
-            bodyType: "Motorcycle"
-        },
-        coverageType: "thirdParty",
-        premium: 5600,
-        startDate: "2024-03-01",
-        endDate: "2025-02-28",
-        riskScore: 82,
-        claimsCount: 0,
-        lastClaim: null,
-        additionalCoverage: ["personalAccident", "roadside"]
-    }
-];
-
 // Premium ranges for different coverage types
 const premiumRanges = {
     basic: {
@@ -152,170 +16,234 @@ const premiumRanges = {
     }
 };
 
-document.addEventListener('DOMContentLoaded', function() {
-    initializeMetrics();
-    initializeFilters();
-    updateTimelines();
-    addCardInteractions();
-});
-
-// Initialize metric circles animation
-function initializeMetrics() {
-    document.querySelectorAll('.metric-circle').forEach(metric => {
-        const percentage = parseInt(metric.style.getPropertyValue('--percentage'));
-        animateMetric(metric, percentage);
-    });
-}
-
-// Animate metric circles
-function animateMetric(element, targetPercentage) {
-    let current = 0;
-    const duration = 1500;
-    const steps = 60;
-    const increment = targetPercentage / steps;
-    const interval = duration / steps;
-
-    const animation = setInterval(() => {
-        current += increment;
-        if (current >= targetPercentage) {
-            current = targetPercentage;
-            clearInterval(animation);
-        }
-        element.style.setProperty('--percentage', current);
-    }, interval);
-}
-
-// Initialize filter functionality
-function initializeFilters() {
-    // Quick filters
-    document.querySelectorAll('.quick-filter').forEach(filter => {
-        filter.addEventListener('click', function() {
-            const filterType = this.dataset.filter;
-            applyQuickFilter(filterType);
-        });
-    });
-
-    // Coverage type filters
-    document.querySelectorAll('[data-coverage]').forEach(btn => {
-        btn.addEventListener('click', function() {
-            const coverage = this.dataset.coverage;
-            filterByCoverage(coverage);
-        });
-    });
-
-    // Vehicle type filters
-    document.querySelectorAll('[data-vehicle]').forEach(btn => {
-        btn.addEventListener('click', function() {
-            const vehicle = this.dataset.vehicle;
-            filterByVehicle(vehicle);
-        });
-    });
-
-    // Premium range slider
-    const rangeSlider = document.querySelector('.range-slider input');
-    if (rangeSlider) {
-        rangeSlider.addEventListener('input', function() {
-            updatePremiumFilter(this.value);
-        });
-    }
-}
-
-// Update policy timelines
-function updateTimelines() {
-    document.querySelectorAll('.policy-timeline').forEach(timeline => {
-        const progress = calculateTimelineProgress(
-            timeline.querySelector('.start .date').textContent,
-            timeline.querySelector('.end .date').textContent
-        );
-        timeline.querySelector('.progress-bar').style.setProperty('--progress', `${progress}%`);
-    });
-}
-
-// Calculate timeline progress
-function calculateTimelineProgress(startDate, endDate) {
-    const start = new Date(startDate);
-    const end = new Date(endDate);
-    const today = new Date();
-    const total = end - start;
-    const elapsed = today - start;
-    return Math.max(0, Math.min(100, (elapsed / total) * 100));
-}
-
-// Filter functions
-function applyQuickFilter(filterType) {
-    const cards = document.querySelectorAll('.policy-card');
-    cards.forEach(card => {
-        switch(filterType) {
-            case 'high-risk':
-                const riskScore = parseInt(card.dataset.risk);
-                card.style.display = riskScore > 80 ? 'block' : 'none';
-                break;
-            case 'expiring':
-                const progress = calculateTimelineProgress(
-                    card.querySelector('.start .date').textContent,
-                    card.querySelector('.end .date').textContent
-                );
-                card.style.display = progress > 80 ? 'block' : 'none';
-                break;
-            case 'claims':
-                const claims = parseInt(card.querySelector('.metric-circle:nth-child(3) .metric-value').textContent);
-                card.style.display = claims > 0 ? 'block' : 'none';
-                break;
-        }
-    });
-}
-
-// Add card interactions
-function addCardInteractions() {
-    document.querySelectorAll('.policy-card').forEach(card => {
-        // Hover effects
-        card.addEventListener('mouseenter', () => {
-            card.style.transform = 'translateY(-5px)';
-        });
+// Enhanced filter management
+class FilterManager {
+    constructor() {
+        this.state = {
+            status: 'all',
+            coverage: 'all',
+            vehicle: 'all',
+            search: '',
+            sort: {
+                field: 'policyNumber',
+                direction: 'desc'
+            }
+        };
         
-        card.addEventListener('mouseleave', () => {
-            card.style.transform = 'translateY(0)';
+        this.initializeEventListeners();
+        this.updateUI();
+    }
+
+    initializeEventListeners() {
+        // Filter button clicks
+        document.querySelectorAll('[data-filter]').forEach(btn => {
+            btn.addEventListener('click', (e) => this.handleFilterClick(e));
         });
 
-        // Button clicks
-        card.querySelectorAll('.action-btn').forEach(btn => {
-            btn.addEventListener('click', function(e) {
-                handleButtonClick(this, card);
-            });
+        // Sort button clicks
+        document.querySelectorAll('[data-sort]').forEach(btn => {
+            btn.addEventListener('click', (e) => this.handleSortClick(e));
         });
-    });
-}
 
-// Handle button clicks
-function handleButtonClick(button, card) {
-    const action = button.classList.contains('primary') ? 'details' :
-                  button.classList.contains('secondary') ? 'analytics' : 'support';
-    
-    switch(action) {
-        case 'details':
-            showPolicyDetails(card.querySelector('.policy-number').textContent);
-            break;
-        case 'analytics':
-            showPolicyAnalytics(card.querySelector('.policy-number').textContent);
-            break;
-        case 'support':
-            openSupportChat(card.querySelector('.policy-number').textContent);
-            break;
+        // Search input
+        const searchInput = document.getElementById('policySearch');
+        if (searchInput) {
+            searchInput.addEventListener('input', (e) => this.handleSearch(e));
+        }
+    }
+
+    handleFilterClick(event) {
+        const button = event.currentTarget;
+        const filterType = button.dataset.filter;
+        const value = button.dataset.value;
+
+        // Update active state in button group
+        const buttonGroup = button.closest('.filter-buttons');
+        buttonGroup.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.classList.remove('active');
+        });
+        button.classList.add('active');
+
+        // Update filter state
+        this.state[filterType] = value;
+        this.updateUI();
+    }
+
+    handleSortClick(event) {
+        const button = event.currentTarget;
+        const sortField = button.dataset.sort;
+        
+        // Toggle sort direction if clicking same field
+        if (this.state.sort.field === sortField) {
+            this.state.sort.direction = this.state.sort.direction === 'asc' ? 'desc' : 'asc';
+        } else {
+            this.state.sort.field = sortField;
+            this.state.sort.direction = 'desc';
+        }
+
+        // Update sort button states
+        document.querySelectorAll('[data-sort]').forEach(btn => {
+            btn.classList.remove('active');
+            const icon = btn.querySelector('.sort-icon');
+            icon.textContent = '↓';
+        });
+
+        button.classList.add('active');
+        const icon = button.querySelector('.sort-icon');
+        icon.textContent = this.state.sort.direction === 'asc' ? '↑' : '↓';
+
+        this.updateUI();
+    }
+
+    handleSearch(event) {
+        this.state.search = event.target.value;
+        this.updateUI();
+    }
+
+    applyFilters(policies) {
+        // Get all policy cards from the DOM
+        const policyCards = document.querySelectorAll('.policy-card');
+        let visiblePolicies = Array.from(policyCards);
+
+        // Apply each filter
+        visiblePolicies = visiblePolicies.filter(card => {
+            // Status filter
+            if (this.state.status !== 'all') {
+                const cardStatus = card.dataset.status;
+                if (cardStatus !== this.state.status) return false;
+            }
+
+            // Coverage filter
+            if (this.state.coverage !== 'all') {
+                const cardCoverage = card.dataset.coverage;
+                if (cardCoverage !== this.state.coverage) return false;
+            }
+
+            // Vehicle filter
+            if (this.state.vehicle !== 'all') {
+                const cardVehicle = card.dataset.vehicle;
+                if (cardVehicle !== this.state.vehicle) return false;
+            }
+
+            // Search filter
+            if (this.state.search) {
+                const searchText = card.textContent.toLowerCase();
+                if (!searchText.includes(this.state.search.toLowerCase())) return false;
+            }
+
+            return true;
+        });
+
+        return visiblePolicies;
+    }
+
+    applySorting(policyCards) {
+        const { field, direction } = this.state.sort;
+        
+        return Array.from(policyCards).sort((a, b) => {
+            let valueA = this.getSortValue(a, field);
+            let valueB = this.getSortValue(b, field);
+            
+            const sortOrder = direction === 'asc' ? 1 : -1;
+            return (valueA > valueB ? 1 : valueA < valueB ? -1 : 0) * sortOrder;
+        });
+    }
+
+    getSortValue(card, field) {
+        switch (field) {
+            case 'premium':
+                return parseFloat(card.dataset.premium) || 0;
+            case 'riskScore':
+                return parseFloat(card.dataset.risk) || 0;
+            case 'endDate':
+                const endDateElement = card.querySelector('.timeline-marker.end .date');
+                return endDateElement ? new Date(endDateElement.textContent) : new Date(0);
+            default:
+                const policyNumber = card.querySelector('.policy-number');
+                return policyNumber ? policyNumber.textContent : '';
+        }
+    }
+
+    updateUI() {
+        const filteredPolicies = this.applyFilters();
+        const sortedPolicies = this.applySorting(filteredPolicies);
+        
+        this.updateFilterCounts(filteredPolicies);
+        this.updatePolicyList(sortedPolicies);
+        this.updateShortlistInfo(sortedPolicies.length);
+    }
+
+    updateFilterCounts(filteredPolicies) {
+        // Status counts
+        const statusCounts = {
+            all: filteredPolicies.length,
+            active: 0,
+            pending: 0,
+            expired: 0
+        };
+
+        // Coverage counts
+        const coverageCounts = {
+            all: filteredPolicies.length,
+            comprehensive: 0,
+            'third-party': 0
+        };
+
+        // Vehicle counts
+        const vehicleCounts = {
+            all: filteredPolicies.length,
+            sedan: 0,
+            suv: 0,
+            luxury: 0
+        };
+
+        // Count each type
+        filteredPolicies.forEach(card => {
+            statusCounts[card.dataset.status]++;
+            coverageCounts[card.dataset.coverage]++;
+            vehicleCounts[card.dataset.vehicle]++;
+        });
+
+        // Update status filter counts
+        document.querySelectorAll('#statusFilters .filter-btn').forEach(btn => {
+            const value = btn.dataset.value;
+            btn.querySelector('.count').textContent = statusCounts[value] || 0;
+        });
+
+        // Update coverage filter counts
+        document.querySelectorAll('#coverageFilters .filter-btn').forEach(btn => {
+            const value = btn.dataset.value;
+            btn.querySelector('.count').textContent = coverageCounts[value] || 0;
+        });
+
+        // Update vehicle filter counts
+        document.querySelectorAll('#vehicleFilters .filter-btn').forEach(btn => {
+            const value = btn.dataset.value;
+            btn.querySelector('.count').textContent = vehicleCounts[value] || 0;
+        });
+    }
+
+    updatePolicyList(visiblePolicies) {
+        // Hide all policy cards first
+        document.querySelectorAll('.policy-card').forEach(card => {
+            card.style.display = 'none';
+        });
+
+        // Show only filtered and sorted cards
+        visiblePolicies.forEach(card => {
+            card.style.display = 'block';
+        });
+    }
+
+    updateShortlistInfo(totalItems) {
+        const shortlistInfo = document.getElementById('shortlistInfo');
+        if (shortlistInfo) {
+            shortlistInfo.textContent = `Showing ${totalItems} of ${document.querySelectorAll('.policy-card').length} policies`;
+        }
     }
 }
 
-// Utility functions for actions
-function showPolicyDetails(policyNumber) {
-    console.log(`Showing details for policy ${policyNumber}`);
-    // Implement your details view logic
-}
-
-function showPolicyAnalytics(policyNumber) {
-    console.log(`Showing analytics for policy ${policyNumber}`);
-    // Implement your analytics view logic
-}
-
-function openSupportChat(policyNumber) {
-    console.log(`Opening support chat for policy ${policyNumber}`);
-    // Implement your support chat logic
-}
+// Initialize filter manager when document is ready
+document.addEventListener('DOMContentLoaded', () => {
+    window.filterManager = new FilterManager();
+});

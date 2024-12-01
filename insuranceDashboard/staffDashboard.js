@@ -340,15 +340,6 @@ function setupEventListeners() {
     });
 
     // Quick action buttons
-    $('#newQuoteBtn').on('click', function() {
-        showNotification('Opening new quote form...');
-        // Add your new quote form logic here
-    });
-
-    $('#pendingReviewBtn').on('click', function() {
-        showNotification('Loading pending reviews...');
-        // Add your pending review logic here
-    });
 
     $('#exportDataBtn').on('click', function() {
         showNotification('Preparing data export...');
