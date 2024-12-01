@@ -2,30 +2,39 @@
 let quotes = [
     {
         id: 1,
-        referenceNumber: 'QT2023001',
+        referenceNumber: 'QT2024001',
         customerName: 'John Doe',
-        date: '2024-01-15',
+        date: '2024-10-15',
         status: 'pending',
         vehicleDetails: 'Toyota Camry 2020',
         coverageType: 'Comprehensive'
     },
     {
         id: 2,
-        referenceNumber: 'QT2023002',
+        referenceNumber: 'QT2024002',
         customerName: 'Jane Smith',
-        date: '2024-01-14',
+        date: '2024-11-18',
         status: 'approved',
         vehicleDetails: 'Honda Civic 2021',
         coverageType: 'Third Party'
     },
     {
         id: 3,
-        referenceNumber: 'QT2023003',
+        referenceNumber: 'QT2024003',
         customerName: 'Mike Johnson',
-        date: '2024-01-13',
+        date: '2024-11-20',
         status: 'rejected',
         vehicleDetails: 'BMW X5 2019',
         coverageType: 'Comprehensive'
+    },
+    {
+        id: 4,
+        referenceNumber: 'QT2024004',
+        customerName: 'Sarah Wilson',
+        date: '2024-11-30',
+        status: 'rejected',
+        vehicleDetails: 'Ford Focus 2022',
+        coverageType: 'Third Party'
     }
 ];
 
@@ -46,8 +55,8 @@ let activities = [
             vehicleValue: 'HK$ 750,000'
         },
         status: 'pending',
-        reference: 'QT2023001',
-        timestamp: '2024-01-15 09:30:00',
+        reference: 'QT2024001',
+        timestamp: '2024-10-15 09:30:00',
         priority: 'high'
     },
     {
@@ -65,8 +74,8 @@ let activities = [
             vehicleValue: 'HK$ 280,000'
         },
         status: 'approved',
-        reference: 'QT2023002',
-        timestamp: '2024-01-14 15:45:00',
+        reference: 'QT2024002',
+        timestamp: '2024-11-18 15:45:00',
         priority: 'medium'
     },
     {
@@ -84,8 +93,8 @@ let activities = [
             vehicleValue: 'HK$ 1,200,000'
         },
         status: 'pending',
-        reference: 'QT2023003',
-        timestamp: '2024-01-13 11:20:00',
+        reference: 'QT2024003',
+        timestamp: '2024-11-20 11:20:00',
         priority: 'high'
     },
     {
@@ -103,8 +112,8 @@ let activities = [
             vehicleValue: 'HK$ 180,000'
         },
         status: 'rejected',
-        reference: 'QT2023004',
-        timestamp: '2024-01-12 14:15:00',
+        reference: 'QT2024004',
+        timestamp: '2024-11-30 14:15:00',
         priority: 'low'
     }
 ];
