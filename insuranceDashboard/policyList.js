@@ -16,6 +16,30 @@ const premiumRanges = {
     }
 };
 
+// Add this function at the top level of the file
+function showNotification(message) {
+    // Create notification element
+    const notification = document.createElement('div');
+    notification.className = 'notification';
+    notification.textContent = message;
+
+    // Add to document
+    document.body.appendChild(notification);
+
+    // Show notification
+    setTimeout(() => {
+        notification.classList.add('show');
+    }, 100);
+
+    // Remove after delay
+    setTimeout(() => {
+        notification.classList.remove('show');
+        setTimeout(() => {
+            notification.remove();
+        }, 300);
+    }, 3000);
+}
+
 // Enhanced filter management
 class FilterManager {
     constructor() {
@@ -29,6 +53,7 @@ class FilterManager {
         this.updateUI();
         this.updateTotalPolicies();
         this.initializeThemeToggle();
+        this.initializeSignOut();
     }
 
     initializeEventListeners() {
@@ -223,6 +248,15 @@ class FilterManager {
             }
             
             showNotification(`Switched to ${isDarkMode ? 'light' : 'dark'} mode`);
+        });
+    }
+
+    initializeSignOut() {
+        $('.sign-out-btn').on('click', function() {
+            if(confirm('Are you sure you want to sign out?')) {
+                showNotification('Signing out...');
+                window.location.href = '../signin/signin.html';
+            }
         });
     }
 }

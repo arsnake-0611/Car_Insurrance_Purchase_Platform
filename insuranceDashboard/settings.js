@@ -6,6 +6,13 @@ $(document).ready(function() {
         $('#themeToggle').prop('checked', true);
     }
 
+    $('.sign-out-btn').on('click', function() {
+        if(confirm('Are you sure you want to sign out?')) {
+            showNotification('Signing out...');
+            window.location.href = '../signin/signin.html';
+        }
+    });
+
     // Theme toggle handler
     $('#themeToggle').on('change', function() {
         if (this.checked) {

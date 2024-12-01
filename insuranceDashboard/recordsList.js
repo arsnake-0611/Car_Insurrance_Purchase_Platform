@@ -794,7 +794,8 @@ $(document).ready(function() {
 
     $('.sign-out-btn').on('click', function() {
         if(confirm('Are you sure you want to sign out?')) {
-            window.location.href = "/signin/signin.html"
+            showNotification('Signing out...');
+            window.location.href = '../signin/signin.html';
         }
     });
 

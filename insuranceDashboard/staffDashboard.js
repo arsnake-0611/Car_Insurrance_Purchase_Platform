@@ -359,7 +359,7 @@ function setupEventListeners() {
     $('.sign-out-btn').on('click', function() {
         if(confirm('Are you sure you want to sign out?')) {
             showNotification('Signing out...');
-            window.location.href = '/signin/signin.html';
+            window.location.href = '../signin/signin.html';
         }
     });
 
