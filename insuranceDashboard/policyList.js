@@ -22,12 +22,7 @@ class FilterManager {
         this.state = {
             status: 'all',
             coverage: 'all',
-            vehicle: 'all',
-            search: '',
-            sort: {
-                field: 'policyNumber',
-                direction: 'desc'
-            }
+            vehicle: 'all'
         };
         
         this.initializeEventListeners();
@@ -39,17 +34,6 @@ class FilterManager {
         document.querySelectorAll('[data-filter]').forEach(btn => {
             btn.addEventListener('click', (e) => this.handleFilterClick(e));
         });
-
-        // Sort button clicks
-        document.querySelectorAll('[data-sort]').forEach(btn => {
-            btn.addEventListener('click', (e) => this.handleSortClick(e));
-        });
-
-        // Search input
-        const searchInput = document.getElementById('policySearch');
-        if (searchInput) {
-            searchInput.addEventListener('input', (e) => this.handleSearch(e));
-        }
     }
 
     handleFilterClick(event) {
@@ -66,37 +50,6 @@ class FilterManager {
 
         // Update filter state
         this.state[filterType] = value;
-        this.updateUI();
-    }
-
-    handleSortClick(event) {
-        const button = event.currentTarget;
-        const sortField = button.dataset.sort;
-        
-        // Toggle sort direction if clicking same field
-        if (this.state.sort.field === sortField) {
-            this.state.sort.direction = this.state.sort.direction === 'asc' ? 'desc' : 'asc';
-        } else {
-            this.state.sort.field = sortField;
-            this.state.sort.direction = 'desc';
-        }
-
-        // Update sort button states
-        document.querySelectorAll('[data-sort]').forEach(btn => {
-            btn.classList.remove('active');
-            const icon = btn.querySelector('.sort-icon');
-            icon.textContent = '↓';
-        });
-
-        button.classList.add('active');
-        const icon = button.querySelector('.sort-icon');
-        icon.textContent = this.state.sort.direction === 'asc' ? '↑' : '↓';
-
-        this.updateUI();
-    }
-
-    handleSearch(event) {
-        this.state.search = event.target.value;
         this.updateUI();
     }
 
@@ -125,52 +78,18 @@ class FilterManager {
                 if (cardVehicle !== this.state.vehicle) return false;
             }
 
-            // Search filter
-            if (this.state.search) {
-                const searchText = card.textContent.toLowerCase();
-                if (!searchText.includes(this.state.search.toLowerCase())) return false;
-            }
-
             return true;
         });
 
         return visiblePolicies;
     }
 
-    applySorting(policyCards) {
-        const { field, direction } = this.state.sort;
-        
-        return Array.from(policyCards).sort((a, b) => {
-            let valueA = this.getSortValue(a, field);
-            let valueB = this.getSortValue(b, field);
-            
-            const sortOrder = direction === 'asc' ? 1 : -1;
-            return (valueA > valueB ? 1 : valueA < valueB ? -1 : 0) * sortOrder;
-        });
-    }
-
-    getSortValue(card, field) {
-        switch (field) {
-            case 'premium':
-                return parseFloat(card.dataset.premium) || 0;
-            case 'riskScore':
-                return parseFloat(card.dataset.risk) || 0;
-            case 'endDate':
-                const endDateElement = card.querySelector('.timeline-marker.end .date');
-                return endDateElement ? new Date(endDateElement.textContent) : new Date(0);
-            default:
-                const policyNumber = card.querySelector('.policy-number');
-                return policyNumber ? policyNumber.textContent : '';
-        }
-    }
-
     updateUI() {
         const filteredPolicies = this.applyFilters();
-        const sortedPolicies = this.applySorting(filteredPolicies);
         
         this.updateFilterCounts(filteredPolicies);
-        this.updatePolicyList(sortedPolicies);
-        this.updateShortlistInfo(sortedPolicies.length);
+        this.updatePolicyList(filteredPolicies);
+        this.updateShortlistInfo(filteredPolicies.length);
     }
 
     updateFilterCounts(filteredPolicies) {
@@ -229,7 +148,7 @@ class FilterManager {
             card.style.display = 'none';
         });
 
-        // Show only filtered and sorted cards
+        // Show only filtered cards
         visiblePolicies.forEach(card => {
             card.style.display = 'block';
         });

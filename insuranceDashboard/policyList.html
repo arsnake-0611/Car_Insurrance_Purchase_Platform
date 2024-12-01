@@ -120,13 +120,6 @@
 
             <!-- Advanced Filtering Controls -->
             <div class="filter-section">
-                <div class="search-container">
-                    <input type="text" 
-                           id="policySearch" 
-                           placeholder="Search by policy number, customer name, or vehicle..."
-                           class="search-input">
-                </div>
-
                 <div class="filter-groups">
                     <!-- Status Filter -->
                     <div class="filter-group">
@@ -189,29 +182,6 @@
                             <button class="filter-btn" data-filter="vehicle" data-value="luxury">
                                 Luxury
                                 <span class="count">0</span>
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Sort Controls -->
-                    <div class="filter-group">
-                        <h3>Sort By</h3>
-                        <div class="filter-buttons" id="sortControls">
-                            <button class="filter-btn active" data-sort="policyNumber">
-                                Policy Number
-                                <span class="sort-icon">↓</span>
-                            </button>
-                            <button class="filter-btn" data-sort="premium">
-                                Premium
-                                <span class="sort-icon">↓</span>
-                            </button>
-                            <button class="filter-btn" data-sort="riskScore">
-                                Risk Score
-                                <span class="sort-icon">↓</span>
-                            </button>
-                            <button class="filter-btn" data-sort="endDate">
-                                End Date
-                                <span class="sort-icon">↓</span>
                             </button>
                         </div>
                     </div>
@@ -391,21 +361,6 @@
                             </div>
                         </div>
                     </div>
-
-                    <div class="policy-footer">
-                        <button class="action-btn primary">
-                            <span class="btn-icon">📋</span>
-                            View Details
-                        </button>
-                        <button class="action-btn secondary">
-                            <span class="btn-icon">📊</span>
-                            Analytics
-                        </button>
-                        <button class="action-btn tertiary">
-                            <span class="btn-icon">💬</span>
-                            Support
-                        </button>
-                    </div>
                 </div>
 
                 <!-- Mercedes S-Class Policy Card -->
@@ -490,20 +445,254 @@
                             </div>
                         </div>
                     </div>
+                </div>
 
-                    <div class="policy-footer">
-                        <button class="action-btn primary">
-                            <span class="btn-icon">📋</span>
-                            View Details
-                        </button>
-                        <button class="action-btn secondary">
-                            <span class="btn-icon">📊</span>
-                            Analytics
-                        </button>
-                        <button class="action-btn tertiary">
-                            <span class="btn-icon">💬</span>
-                            Support
-                        </button>
+                <!-- Honda CR-V Policy Card -->
+                <div class="policy-card" data-status="active" data-coverage="comprehensive" data-vehicle="suv" data-premium="15800" data-risk="65">
+                    <div class="policy-header">
+                        <div class="policy-status-badge active">
+                            <span class="status-icon">●</span>
+                            Active
+                        </div>
+                        <div class="policy-number">MOT-24-1007</div>
+                    </div>
+
+                    <div class="policy-body">
+                        <div class="vehicle-info">
+                            <div class="vehicle-icon">🚙</div>
+                            <div class="vehicle-details">
+                                <h3>Honda CR-V</h3>
+                                <div class="policyholder-info">
+                                    <span class="policyholder-icon">👤</span>
+                                    <span class="policyholder-name">Emily Tan</span>
+                                </div>
+                                <div class="vehicle-specs">
+                                    <span class="spec">2023</span>
+                                    <span class="spec">SUV</span>
+                                    <span class="spec">$420,000</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="metrics-row">
+                            <div class="metric-circle" style="--percentage: 65">
+                                <div class="metric-value">65</div>
+                                <div class="metric-label">Risk Score</div>
+                            </div>
+                            <div class="metric-circle" style="--percentage: 75">
+                                <div class="metric-value">75%</div>
+                                <div class="metric-label">Coverage</div>
+                            </div>
+                            <div class="metric-circle" style="--percentage: 0">
+                                <div class="metric-value">0</div>
+                                <div class="metric-label">Claims</div>
+                            </div>
+                        </div>
+
+                        <div class="coverage-info">
+                            <div class="coverage-type comprehensive">
+                                <span class="coverage-icon">🛡️</span>
+                                <span>Comprehensive</span>
+                            </div>
+                            <div class="coverage-features">
+                                <span class="feature">🔧 Zero Depreciation</span>
+                                <span class="feature">🚑 Personal Accident</span>
+                                <span class="feature">🚗 Roadside Assist</span>
+                            </div>
+                        </div>
+
+                        <div class="policy-timeline">
+                            <div class="timeline-marker start">
+                                <div class="date">Feb 15, 2024</div>
+                                <div class="label">Start</div>
+                            </div>
+                            <div class="timeline-progress">
+                                <div class="progress-bar" style="--progress: 5%"></div>
+                            </div>
+                            <div class="timeline-marker end">
+                                <div class="date">Feb 14, 2025</div>
+                                <div class="label">End</div>
+                            </div>
+                        </div>
+
+                        <div class="premium-info">
+                            <div class="premium-amount">
+                                <span class="currency">$</span>
+                                <span class="amount">15,800</span>
+                                <span class="period">/year</span>
+                            </div>
+                            <div class="premium-trend positive">
+                                <span class="trend-icon">↗</span>
+                                <span class="trend-value">+3%</span>
+                                <span class="trend-label">from last year</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lexus ES Policy Card -->
+                <div class="policy-card" data-status="expired" data-coverage="third-party" data-vehicle="luxury" data-premium="18900" data-risk="55">
+                    <div class="policy-header">
+                        <div class="policy-status-badge expired">
+                            <span class="status-icon">●</span>
+                            Expired
+                        </div>
+                        <div class="policy-number">MOT-24-1008</div>
+                    </div>
+
+                    <div class="policy-body">
+                        <div class="vehicle-info">
+                            <div class="vehicle-icon">✨</div>
+                            <div class="vehicle-details">
+                                <h3>Lexus ES</h3>
+                                <div class="policyholder-info">
+                                    <span class="policyholder-icon">👤</span>
+                                    <span class="policyholder-name">Robert Zhang</span>
+                                </div>
+                                <div class="vehicle-specs">
+                                    <span class="spec">2022</span>
+                                    <span class="spec">Luxury Sedan</span>
+                                    <span class="spec">$520,000</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="metrics-row">
+                            <div class="metric-circle" style="--percentage: 55">
+                                <div class="metric-value">55</div>
+                                <div class="metric-label">Risk Score</div>
+                            </div>
+                            <div class="metric-circle" style="--percentage: 65">
+                                <div class="metric-value">65%</div>
+                                <div class="metric-label">Coverage</div>
+                            </div>
+                            <div class="metric-circle" style="--percentage: 20">
+                                <div class="metric-value">1</div>
+                                <div class="metric-label">Claims</div>
+                            </div>
+                        </div>
+
+                        <div class="coverage-info">
+                            <div class="coverage-type third-party">
+                                <span class="coverage-icon">⚡</span>
+                                <span>Third Party</span>
+                            </div>
+                            <div class="coverage-features">
+                                <span class="feature">🚑 Personal Accident</span>
+                                <span class="feature">🚗 Basic Roadside Assist</span>
+                            </div>
+                        </div>
+
+                        <div class="policy-timeline">
+                            <div class="timeline-marker start">
+                                <div class="date">Jan 1, 2023</div>
+                                <div class="label">Start</div>
+                            </div>
+                            <div class="timeline-progress">
+                                <div class="progress-bar" style="--progress: 100%"></div>
+                            </div>
+                            <div class="timeline-marker end">
+                                <div class="date">Dec 31, 2023</div>
+                                <div class="label">End</div>
+                            </div>
+                        </div>
+
+                        <div class="premium-info">
+                            <div class="premium-amount">
+                                <span class="currency">$</span>
+                                <span class="amount">18,900</span>
+                                <span class="period">/year</span>
+                            </div>
+                            <div class="premium-trend negative">
+                                <span class="trend-icon">↘</span>
+                                <span class="trend-value">-1%</span>
+                                <span class="trend-label">from last year</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hyundai Tucson Policy Card -->
+                <div class="policy-card" data-status="pending" data-coverage="comprehensive" data-vehicle="suv" data-premium="12400" data-risk="35">
+                    <div class="policy-header">
+                        <div class="policy-status-badge pending">
+                            <span class="status-icon">●</span>
+                            Pending
+                        </div>
+                        <div class="policy-number">MOT-24-1009</div>
+                    </div>
+
+                    <div class="policy-body">
+                        <div class="vehicle-info">
+                            <div class="vehicle-icon">🚙</div>
+                            <div class="vehicle-details">
+                                <h3>Hyundai Tucson</h3>
+                                <div class="policyholder-info">
+                                    <span class="policyholder-icon">👤</span>
+                                    <span class="policyholder-name">Lisa Wang</span>
+                                </div>
+                                <div class="vehicle-specs">
+                                    <span class="spec">2024</span>
+                                    <span class="spec">SUV</span>
+                                    <span class="spec">$320,000</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="metrics-row">
+                            <div class="metric-circle" style="--percentage: 35">
+                                <div class="metric-value">35</div>
+                                <div class="metric-label">Risk Score</div>
+                            </div>
+                            <div class="metric-circle" style="--percentage: 85">
+                                <div class="metric-value">85%</div>
+                                <div class="metric-label">Coverage</div>
+                            </div>
+                            <div class="metric-circle" style="--percentage: 0">
+                                <div class="metric-value">0</div>
+                                <div class="metric-label">Claims</div>
+                            </div>
+                        </div>
+
+                        <div class="coverage-info">
+                            <div class="coverage-type comprehensive">
+                                <span class="coverage-icon">🛡️</span>
+                                <span>Comprehensive</span>
+                            </div>
+                            <div class="coverage-features">
+                                <span class="feature">🔧 Zero Depreciation</span>
+                                <span class="feature">🚑 Personal Accident</span>
+                                <span class="feature">🚗 Roadside Assist</span>
+                                <span class="feature">💧 Flood Coverage</span>
+                            </div>
+                        </div>
+
+                        <div class="policy-timeline">
+                            <div class="timeline-marker start">
+                                <div class="date">Apr 1, 2024</div>
+                                <div class="label">Start</div>
+                            </div>
+                            <div class="timeline-progress">
+                                <div class="progress-bar" style="--progress: 0%"></div>
+                            </div>
+                            <div class="timeline-marker end">
+                                <div class="date">Mar 31, 2025</div>
+                                <div class="label">End</div>
+                            </div>
+                        </div>
+
+                        <div class="premium-info">
+                            <div class="premium-amount">
+                                <span class="currency">$</span>
+                                <span class="amount">12,400</span>
+                                <span class="period">/year</span>
+                            </div>
+                            <div class="premium-trend positive">
+                                <span class="trend-icon">↗</span>
+                                <span class="trend-value">+2%</span>
+                                <span class="trend-label">from last year</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
