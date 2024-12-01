@@ -1,0 +1,130 @@
+/* Base styles */
+body {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, sans-serif;
+    background-color: #f5f8fa;
+    margin: 0;
+    padding: 0;
+}
+
+/* Sidebar styles */
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 250px;
+    height: 100vh;
+    background: linear-gradient(180deg, #2c3e50 0%, #3498db 100%);
+    color: #FAF9F6;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.sidebar-menu {
+    list-style: none;
+    padding: 0;
+    margin-top: 30px;
+}
+
+.sidebar-menu a {
+    color: #FAF9F6;
+    text-decoration: none;
+    display: block;
+    padding: 12px 15px;
+    margin: 5px 0;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.sidebar-menu a:hover,
+.sidebar-menu a.active {
+    background: #ffffff1a;
+    transform: translateX(5px);
+}
+
+/* Main content styles */
+.main-content {
+    margin-left: 250px;
+    padding: 20px;
+}
+
+/* Client card styles */
+.client-card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.client-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.vehicle-info {
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 15px;
+    margin: 15px 0;
+}
+
+.policy-details {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin: 15px 0;
+}
+
+.policy-item {
+    background: #f0f7ff;
+    padding: 10px;
+    border-radius: 6px;
+    text-align: center;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.action-btn {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.view-btn {
+    background: #e3f2fd;
+    color: #1976d2;
+}
+
+.chat-btn {
+    background: #e8f5e9;
+    color: #2e7d32;
+}
+
+.renew-btn {
+    background: #fff3e0;
+    color: #f57c00;
+}
+
+/* Dark mode styles */
+body.dark-mode .client-card {
+    background: #2c2c2c;
+    color: #ffffff;
+}
+
+body.dark-mode .vehicle-info {
+    background: #3d3d3d;
+}
+
+body.dark-mode .policy-item {
+    background: #404040;
+}

@@ -898,7 +898,7 @@ header {
 }
 
 body.dark-mode {
-    background: #09003f;
+    background: #2c2c2c;
     color: #5d5d72;
 }
 
@@ -907,7 +907,7 @@ body.dark-mode {
 .dark-mode .quotations-container,
 .dark-mode header,
 .dark-mode .quotation-card {
-    background: #010028;
+    background: #232323;
     color: #5d5d72;
     border-color: #3d3d3d;
 }
@@ -916,14 +916,14 @@ body.dark-mode {
 .dark-mode .details-table * ,
 .dark-mode .details-section {
     border-color: #3d3d3d;  
-    background: #010028;
+    background: #232323;
     color: #5d5d72;
 }
 
 .dark-mode .filter-controls select,
 .dark-mode .search-container input,
 .dark-mode #searchQuote {
-    background: #182567;
+    background: #2c2c2c;
     color: #ffffff;
     border-color: #3d3d3d;
 }
