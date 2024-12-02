@@ -224,7 +224,7 @@
 
 .hero {
     height: 80vh;
-   background: linear-gradient(#001f3f80, #001f3f80), url('/icon/background.jpg');
+   background: linear-gradient(#001f3f80, #001f3f80), url('../icon/background.jpg');
     background-size: cover;
     display: flex;
     align-items: center;
