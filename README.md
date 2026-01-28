@@ -25,7 +25,7 @@ Key folders and files in this repository:[page:0]
 - `option.html`, `option.css`, `option.js` – Main option/landing page and its styles and scripts.
 - `info.css` – Global or shared styling for information pages.
 - `USERS.txt`, `errorInput.txt` – Sample user data and error-input examples for testing.
-- `Hong Kong Institute of Vocational Education.docx`, `Project AY2425v2.docx` – Project guideline and documentation files.
+- `ITP4506_System_Documentation_YEUNGLokHim_SAIRPuiFung_230022178_230066949.pdf`, `Project AY2425v2.docx` – Project guideline and documentation files.
 
 ## Getting Started
 
